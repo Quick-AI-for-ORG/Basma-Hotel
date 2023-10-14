@@ -31,7 +31,7 @@ const reservationSchema = new Schema({
   specialRequest: {
     type: String,
   },
-});
+}, {timestamps:true});
 
 const Reservation = mongoose.model("Reservation", reservationSchema);
 export default Reservation;

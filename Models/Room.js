@@ -11,7 +11,7 @@ const roomSchema = new Schema({
     required: true,
   },
   characteristics: {
-    type: Boolean,
+    type: [Boolean],
     required: true,
   },
   capacity: {
@@ -26,7 +26,7 @@ const roomSchema = new Schema({
     type: Boolean,
     required: true,
   },
-});
+}, {timestamps:true});
 
 const Room = mongoose.model("Room", roomSchema);
 export default Room;
