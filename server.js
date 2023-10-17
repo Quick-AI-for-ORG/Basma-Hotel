@@ -2,7 +2,8 @@ const express = require("express");
 const app = express();
 const session = require("express-session");
 const bodyParser = require("body-parser");
-
+const indexRouter = require("./Routes/index")
+const guestRouter= require("./Routes/guest")
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: "Your_Secret_Key", saveUninitialized: true }));
 app.use(express.urlencoded({ extended: true }));
