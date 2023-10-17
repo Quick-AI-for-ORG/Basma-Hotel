@@ -1,32 +1,20 @@
-import mongoose from "mongoose";
-const { Schema } = mongoose;
+const createRoomTableQuery = `
+  CREATE TABLE IF NOT EXISTS rooms (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    type VARCHAR(255) NOT NULL,
+    startingPrice DECIMAL(10, 2) NOT NULL,
+    characteristics JSON NOT NULL,
+    capacity INT NOT NULL,
+    description TEXT NOT NULL,
+    executive TINYINT(1) NOT NULL,
+    imageURL VARCHAR(255) NOT NULL
+  );
+`;
 
-const roomSchema = new Schema({
-  type: {
-    type: String,
-    required: true,
-  },
-  startingPrice: {
-    type: Number,
-    required: true,
-  },
-  characteristics: {
-    type: [Boolean],
-    required: true,
-  },
-  capacity: {
-    type: Number,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  executive: {
-    type: Boolean,
-    required: true,
-  },
-}, {timestamps:true});
-
-const Room = mongoose.model("Room", roomSchema);
-export default Room;
+connection.query(createRoomTableQuery, (error, results) => {
+  if (error) {
+    console.error("Error creating table: " + error);
+    return;
+  }
+  console.log("Table created successfully.");
+});

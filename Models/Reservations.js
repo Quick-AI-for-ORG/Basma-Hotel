@@ -1,37 +1,20 @@
-import mongoose from "mongoose";
-const { Schema } = mongoose;
+const createReservationTableQuery = `
+  CREATE TABLE IF NOT EXISTS reservations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    room_id INT NOT NULL,
+    guest_id INT NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    number_of_people INT NOT NULL,
+    special_request TEXT
+  );
+`;
 
-const reservationSchema = new Schema({
-  room: {
-    type: Schema.Types.ObjectId,
-    ref: "Room",
-    required: true,
-  },
-  guest: {
-    type: Schema.Types.ObjectId,
-    ref: "Guest",
-    required: true,
-  },
-  startDate: {
-    type: Date,
-    required: true,
-  },
-  endDate: {
-    type: Date,
-    required: true,
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
-  numberOfPeople: {
-    type: Number,
-    required: true,
-  },
-  specialRequest: {
-    type: String,
-  },
-}, {timestamps:true});
-
-const Reservation = mongoose.model("Reservation", reservationSchema);
-export default Reservation;
+connection.query(createReservationTableQuery, (error, results) => {
+  if (error) {
+    console.error("Error creating table: " + error);
+    return;
+  }
+  console.log("Table created successfully.");
+});
