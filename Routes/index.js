@@ -1,8 +1,8 @@
 const express = require('express');
 const router=  express.Router();
-const page = require('../Controllers/Pages')
+const pages = require('../Controllers/Pages')
 
-router.get('/', page.basma.basma)
-router.get('/about us', page.basma.about)
-router.get('/facilities',page.basma.facilities)
-router.get('/privacyPolicy',page.basma.privacy)
+router.get('/', pages.root.basma)
+router.get('/about us', pages.root.about)
+router.get('/facilities',pages.root.facilities)
+router.get('/privacyPolicy',pages.root.privacy)

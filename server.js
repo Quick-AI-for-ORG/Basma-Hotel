@@ -3,16 +3,17 @@ const app = express();
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const expressLayouts= require("express-ejs-layouts")
-const indexRouter= require('./Routes/index')
-const guestRouter = require('./Routes/guest')
+const indexRouter= require("./Routes/index")
+const guestRouter = require("./Routes/guest")
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: "Your_Secret_Key", saveUninitialized: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(expressLayouts);
+app.use(express.static("Public"));
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
-app.use(express.static("Public"));
 app.set("layout", "layouts/layout");
 
 
