@@ -3,7 +3,8 @@ const app = express();
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const expressLayouts= require("express-ejs-layouts")
-
+const indexRouter= require('./Routes/index')
+const guestRouter = require('./Routes/guest')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: "Your_Secret_Key", saveUninitialized: true }));
@@ -38,3 +39,5 @@ connection.connect((err) => {
   }
   console.log("Connected to MySQL as id " + connection.threadId);
 });
+app.use('/',indexRouter)
+app.use('/guest',guestRouter)
