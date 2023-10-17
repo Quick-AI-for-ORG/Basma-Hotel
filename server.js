@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const session = require("express-session");
 const bodyParser = require("body-parser");
+const expressLayouts= require("express-ejs-layouts")
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: "Your_Secret_Key", saveUninitialized: true }));
@@ -10,6 +12,8 @@ app.use(express.json());
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 app.use(express.static("Public"));
+app.set("layout", "layouts/layout");
+
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
