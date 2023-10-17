@@ -40,5 +40,6 @@ connection.connect((err) => {
   }
   console.log("Connected to MySQL as id " + connection.threadId);
 });
+//routers
 app.use('/',indexRouter)
 app.use('/guest',guestRouter)
