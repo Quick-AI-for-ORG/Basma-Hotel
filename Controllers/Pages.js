@@ -1,8 +1,8 @@
 const login = (req, res) => {
-    res.render('login')
+    res.render('login', {layout:false})
 }
 const signup = (req, res) => {
-    res.render('signup')
+    res.render('signup',{layout:false})
 }
 const bookings = (req, res) => {
     res.render('myBookings')

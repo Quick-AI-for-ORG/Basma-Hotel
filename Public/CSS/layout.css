@@ -1,3 +1,6 @@
 .navbar-light .navbar-nav .nav-link {
     color: #000;
   }
+  span{
+    margin-left:10%;
+  }
