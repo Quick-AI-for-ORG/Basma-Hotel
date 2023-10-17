@@ -2,5 +2,8 @@
     color: #000;
   }
   span{
-    margin-left:10%;
+    margin-right:10%;
+    color:#86807A;
+    font-size:medium;
+    vertical-align: middle;
   }

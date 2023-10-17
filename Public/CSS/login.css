@@ -56,3 +56,17 @@
 .signUp:hover {
   background-color: #3c0266;
 }
+.cancel:hover{
+  color:#3c0266;
+}
+.cancel{
+  color:#8213c2;
+  vertical-align: bottom;
+  cursor: pointer; 
+  border:0 none;
+ background-color: transparent; 
+  font-size: 1.5em; 
+  margin-left: 85%;
+  margin-top:3%;
+  margin-bottom:0%;
+}
