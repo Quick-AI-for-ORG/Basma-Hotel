@@ -1,0 +1,24 @@
+.cascading-right {
+  margin-right: -50px;
+}
+
+@media (max-width: 991.98px) {
+  .cascading-right {
+    margin-right: 0;
+  }
+}
+
+.signUp {
+  width: 100%;
+  background-color: #8213c2;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 18px;
+  transition: background-color 0.5s;
+}
+
+.signUp:hover {
+  background-color: #3c0266;
+}
