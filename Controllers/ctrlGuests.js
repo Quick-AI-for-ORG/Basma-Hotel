@@ -36,7 +36,7 @@ const register = async (req, res) => {
     })
 
     console.log(req.body);
-    sql = `INSERT INTO guests (firstName, lastName, email, password, phoneNumber, address) VALUES ('${req.body.fname}', '${req.body.lname}', '${req.body.email}', '${req.body.password}', '${req.body.phoneNumber}', ${req.body.address})`;    // let encryptedPassword = await bcrypt.hash(req.body.password, { saltRounds: 12 })
+    sql = `INSERT INTO guests (firstName, lastName, email, password, phoneNumber, address) VALUES ('${req.body.fname}', '${req.body.lname}', '${req.body.email}', '${req.body.password}', '${req.body.phoneNumber}', '${req.body.address}')`;    // let encryptedPassword = await bcrypt.hash(req.body.password, { saltRounds: 12 })
 
 
 
