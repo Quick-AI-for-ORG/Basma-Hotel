@@ -19,8 +19,11 @@ const facilities = (req,res) =>{
 const privacy = (req,res) =>{
     res.render('privacyPolicy')
 }
+const myProfile =(req,res)=>{
+    res.render('myProfile',{layout:false})
+}
 module.exports = { 
     root:{basma,about,facilities,privacy},
-    guest:{login,signup,bookings}
+    guest:{login,signup,bookings,myProfile}
    
 }
