@@ -1,0 +1,37 @@
+.buttonContainer {
+  display: flex;
+  justify-content: space-between; /* This will place the buttons at each end of the container */
+  width: 100%;
+}
+
+.editBtn,
+.deleteBtn {
+  /* Adjust the width as needed, leave some space for spacing */
+  background-color: #8213c2;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  margin: 10px 0 20px 0;
+  transition: background-color 0.5s;
+  text-align: center;
+  line-height: 2.5;
+}
+.editBtn {
+  width: 50%;
+  margin-left: 5%;
+}
+.editBtn:hover {
+  background-color: #3c0266;
+}
+.deleteBtn {
+  width: 30%;
+  margin-right: 10%;
+  background-color: #c21313;
+  color: #ffffff;
+}
+.deleteBtn:hover {
+  background-color: #940303;
+}
+
+/* Add this class to the parent container of the buttons in your HTML */
