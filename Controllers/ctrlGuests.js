@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt') // for password hashing
-const Guests = require('../Models/Guest') //guest schema
 const mysql = require("mysql");
 
 
