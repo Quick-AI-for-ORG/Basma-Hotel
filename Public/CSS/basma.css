@@ -1,0 +1,38 @@
+.slideshow-container {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.mySlides {
+  display: none;
+  animation: fadeIn 1s;
+}
+
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  padding: 16px;
+  cursor: pointer;
+}
+
+.prev {
+  left: 0;
+}
+
+.next {
+  right: 0;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.smooth-transition {
+  transition: transform 0.5s ease-in-out;
+}
