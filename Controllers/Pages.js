@@ -19,8 +19,8 @@ const facilities = (req,res) =>{
 const privacy = (req,res) =>{
     res.render('privacyPolicy')
 }
-const myProfile =(req,res)=>{
-    res.render('myProfile',{layout:false})
+const myProfile = (req,res)=>{
+    res.render('myProfile',{layout:false, user: (req.session.user === undefined ? "" : req.session.user)})
 }
 module.exports = { 
     root:{basma,about,facilities,privacy},
