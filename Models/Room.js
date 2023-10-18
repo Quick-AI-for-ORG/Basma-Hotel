@@ -10,7 +10,13 @@ const createRoomTableQuery = `
     imageURL VARCHAR(255) NOT NULL
   );
 `;
-
+const mysql = require("mysql");
+const connection = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "SWEProject",
+});
 connection.query(createRoomTableQuery, (error, results) => {
   if (error) {
     console.error("Error creating table: " + error);

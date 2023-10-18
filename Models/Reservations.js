@@ -10,7 +10,13 @@ const createReservationTableQuery = `
     special_request TEXT
   );
 `;
-
+const mysql = require("mysql");
+const connection = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "SWEProject",
+});
 connection.query(createReservationTableQuery, (error, results) => {
   if (error) {
     console.error("Error creating table: " + error);

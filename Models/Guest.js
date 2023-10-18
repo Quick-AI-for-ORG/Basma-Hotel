@@ -12,7 +12,13 @@ const createTableQuery = `
     cvv VARCHAR(5) NOT NULL DEFAULT '000'
   );
 `;
-
+const mysql = require("mysql");
+const connection = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "SWEProject",
+});
 connection.query(createTableQuery, (error, results) => {
   if (error) {
     console.error("Error creating table: " + error);
