@@ -6,7 +6,7 @@ sup.addEventListener('mouseover', function() {
     sup.classList.add('btn-dark');
   });
   
-sin.addEventListener('mouseout', function() {
+sin.addEventListener('mouseover', function() {
     sup.classList.remove('btn-dark');
     sin.classList.add('btn-dark');
   });
