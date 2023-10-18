@@ -32,19 +32,21 @@
 
                     <div class="card bg-glass">
                         <button type="button" class="cancel" onclick="location.replace('/')">
-                            <i class="fa-solid fa-circle-xmark"></i></button>
+                            <i title="Exit" class="fa-solid fa-circle-xmark"></i></button>
                         <div class="card-body px-4 py-5 px-md-5">
                             <form>
 
                                 <!-- Email input -->
                                 <div class="form-outline mb-5">
-                                    <input type="email" id="form3Example3" class="form-control" />
+                                    <input type="email" id="form3Example3" class="form-control"
+                                        placeholder="e.g, example@gmail.com" />
                                     <label class="form-label" for="form3Example3">Email address</label>
                                 </div>
 
                                 <!-- Password input -->
                                 <div class="form-outline mb-3">
-                                    <input type="password" id="form3Example4" class="form-control" />
+                                    <input type="password" id="form3Example4" class="form-control"
+                                        placeholder="e.g, ●●●●●●●●●●" />
                                     <label class="form-label" for="form3Example4">Password</label>
                                 </div>
 
@@ -59,7 +61,7 @@
 
                                 <!-- Submit button -->
                                 <button type="submit" class="signUp btn-block mb-4" style="width: 100%;">
-                                    Sign up
+                                    Sign in
                                 </button>
 
 
@@ -80,6 +82,11 @@
                                     <button type="button" class="btn btn-link btn-floating mx-1">
                                         <i class="fab fa-github"></i>
                                     </button>
+
+                                    <div class="member">
+                                        <span>Don't have an account? <a class="signup" href="/guest/signup">Sign
+                                                up</a></span>
+                                    </div>
                                 </div>
                             </form>
                         </div>
