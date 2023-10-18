@@ -22,3 +22,25 @@
 .signUp:hover {
   background-color: #3c0266;
 }
+
+.cancel {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  border: transparent;
+  font-size: 25px;
+  background-color: transparent;
+}
+
+.member {
+  margin-top: 10px;
+}
+
+.login {
+  color: #8213c2;
+  transition: background-color 0.5s;
+}
+
+.login:hover {
+  color: #551dff;
+}

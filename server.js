@@ -3,11 +3,10 @@ const app = express();
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
-const expressLayouts= require("express-ejs-layouts")
+const expressLayouts = require("express-ejs-layouts");
 
-const indexRouter = require("./Routes/index")
-const guestRouter= require("./Routes/guest")
-
+const indexRouter = require("./Routes/index");
+const guestRouter = require("./Routes/guest");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: "Your_Secret_Key", saveUninitialized: true }));
@@ -18,7 +17,6 @@ app.use(express.static("Public"));
 app.set("layout", "layouts/layout");
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
-
 
 // Create a MySQL connection
 const connection = mysql.createConnection({
@@ -37,11 +35,9 @@ connection.connect((err) => {
   console.log("Connected to MySQL as id " + connection.threadId);
 });
 
-
 //routers
-app.use('/',indexRouter)
-app.use('/guest',guestRouter)
-
+app.use("/", indexRouter);
+app.use("/guest", guestRouter);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
