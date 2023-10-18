@@ -53,10 +53,16 @@ const register = async (req, res) => {
     req.session.user = {
         firstName: req.body.fname,
         lastName: req.body.lname,
-
         email: req.body.email,
-        phoneNumber: req.body.phoneNumber,
-        password: req.body.password
+        phone: req.body.phoneNumber,
+        password: req.body.password,
+        address: req.body.address,
+        twitter:"",
+        facebook:"",
+        instagram:"",
+        google:"",
+        bio:"",
+        role:"Guest",
 
     }
 
