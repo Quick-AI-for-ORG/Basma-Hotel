@@ -72,11 +72,7 @@ const register = async (req, res) => {
 
 
 const login = async (req, res) => {
-    //check if user is already registered
-    // let found = await Guests.findOne({ email: req.body.email })
-    // if (!found) {
-    //     return res.status(400).json({ message: "Email not found" })
-    // }
+
     const sql = `SELECT * FROM guests WHERE email = '${req.body.email}'`
     connection.query(sql, async (err, result) => {
         console.log(result)
@@ -91,21 +87,24 @@ const login = async (req, res) => {
             if (!isMatch) {
                 return res.status(400).json({ message: "Password incorrect" });
             }
-            req.session.user = {
-                firstName: result[0].firstName,
-                lastName: result[0].lastName,
-                email: result[0].email,
-                phone: result[0].phoneNumber,
-                password: result[0].password,
-                address: result[0].address,
-                twitter: result[0].twitterLink,
-                facebook: result[0].facebookLink,
-                instagram: result[0].instagramLink,
-                google: "",
-                bio: result[0].bio,
-                role: "Guest",
+            else {
+                req.session.user = {
+                    firstName: result[0].firstName,
+                    lastName: result[0].lastName,
+                    email: result[0].email,
+                    phone: result[0].phoneNumber,
+                    password: result[0].password,
+                    address: result[0].address,
+                    twitter: result[0].twitterLink,
+                    facebook: result[0].facebookLink,
+                    instagram: result[0].instagramLink,
+                    google: "",
+                    bio: result[0].bio,
+                    role: "Guest",
+                }
+                res.redirect('/guest');
             }
-            res.redirect('/guest');
+
         }
 
 
