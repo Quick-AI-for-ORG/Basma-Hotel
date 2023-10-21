@@ -1,7 +1,7 @@
 const createRoomTableQuery = `
   CREATE TABLE IF NOT EXISTS rooms (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    type VARCHAR(255) NOT NULL,
+    Title VARCHAR(255) PRIMARY KEY,
+    quantity int NOT NULL,
     startingPrice DECIMAL(10, 2) NOT NULL,
     characteristics JSON NOT NULL,
     capacity INT NOT NULL,
