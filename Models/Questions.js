@@ -1,13 +1,7 @@
 const createRoomTableQuery = `
-  CREATE TABLE IF NOT EXISTS rooms (
-    Title VARCHAR(255) PRIMARY KEY,
-    quantity int NOT NULL,
-    startingPrice DECIMAL(10, 2) NOT NULL,
-    characteristics JSON NOT NULL,
-    capacity INT NOT NULL,
-    description TEXT NOT NULL,
-    executive TINYINT(1) NOT NULL,
-    imageURL VARCHAR(255) NOT NULL
+  CREATE TABLE IF NOT EXISTS questions (
+    email varchar(255) NOT NULL,
+    message varchar(255) NOT NULL
   );
 `;
 const mysql = require("mysql");

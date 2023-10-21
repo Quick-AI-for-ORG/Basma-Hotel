@@ -1,7 +1,8 @@
-.slideshow-container {
+/* First SlideShow */
+.container {
   position: relative;
   max-width: 600px;
-  margin: 0 auto;
+  margin: 20px auto 0 auto;
 }
 
 .mySlides {
@@ -35,4 +36,231 @@
 }
 .smooth-transition {
   transition: transform 0.5s ease-in-out;
+}
+
+.slideshow-container {
+  position: relative;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.mySlides {
+  display: none;
+}
+
+.carousel {
+  background-color: #f0f0f0;
+}
+
+.carousel-item {
+  padding: 20px;
+}
+
+.carousel-indicators li {
+  border: 2px solid #fff;
+}
+
+.carousel-indicators .active {
+  background-color: #fff;
+}
+
+/* main text */
+.centered-text {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  position: relative;
+}
+
+.centered-text h1 {
+  font-size: 36px;
+  background-image: linear-gradient(to right, #133cc2, #8213c2);
+  -webkit-background-clip: text;
+  color: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+.centered-text p:first-of-type {
+  font-size: 24px;
+  -webkit-background-clip: text;
+  color: #333;
+  text-align: center;
+  position: relative;
+}
+
+.centered-text p:last-of-type {
+  font-size: 20px;
+  text-align: center;
+}
+
+.centered-text::before {
+  content: "";
+  position: absolute;
+  top: 44%;
+  height: 2px;
+  background-color: #0c008c;
+  width: 50px;
+  left: 30%;
+  transform: translate(0, -50%);
+}
+.centered-text::after {
+  content: "";
+  position: absolute;
+  top: 44%;
+  height: 2px;
+  background-color: #0c008c;
+  width: 50px;
+  right: 30%;
+  transform: translate(0, -50%);
+}
+
+/* Second SlideShow */
+.slideContainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: 50%;
+  padding: 0;
+  background: radial-gradient(
+      650px circle at 50% 50%,
+      hsl(218, 41%, 35%) 15%,
+      hsl(218, 41%, 30%) 35%,
+      hsl(218, 41%, 20%) 75%,
+      hsl(218, 41%, 19%) 80%,
+      transparent 100%
+    ),
+    radial-gradient(
+      1250px circle at 50% 50%,
+      hsl(218, 41%, 45%) 15%,
+      hsl(218, 41%, 30%) 35%,
+      hsl(218, 41%, 20%) 75%,
+      hsl(218, 41%, 19%) 80%,
+      transparent 100%
+    );
+  position: relative;
+}
+
+.secondslide {
+  margin-top: 20px;
+  width: 60%;
+  height: 90%; /* Adjust the height as needed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  border-radius: 15px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.secondslide > div {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  position: absolute;
+  animation: slide 25s infinite;
+  opacity: 0;
+}
+
+.secondslide > div:nth-child(2) {
+  animation-delay: 5s;
+}
+
+.secondslide > div:nth-child(3) {
+  animation-delay: 10s;
+}
+
+.secondslide > div:nth-child(4) {
+  animation-delay: 15s;
+}
+
+.secondslide > div:nth-child(5) {
+  animation-delay: 20s;
+}
+
+.slideTitle div {
+  position: absolute;
+  text-align: right;
+  top: 350px; /* Adjust the distance from the bottom as needed */
+  right: 350px; /* Adjust the distance from the right as needed */
+  z-index: 100;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+}
+.slideTitle p {
+  margin-top: 25px;
+  line-height: 0;
+}
+
+.slideTitle {
+  position: absolute;
+  text-align: center;
+  font-weight: 500;
+  top: 30%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  padding: 20px;
+  z-index: 100;
+  color: rgb(255, 255, 255);
+}
+.slideTitle::before {
+  content: "";
+  position: absolute;
+  top: 28%;
+  height: 2px;
+  background-color: #1b0db3;
+  width: 50px;
+  left: 28%;
+  transform: translate(0, -50%);
+}
+.slideTitle::after {
+  content: "";
+  position: absolute;
+  top: 28%;
+  height: 2px;
+  background-color: #1b0db3;
+  width: 50px;
+  right: 28%;
+  transform: translate(0, -50%);
+}
+
+@keyframes slide {
+  10% {
+    opacity: 1;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  30% {
+    opacity: 0;
+  }
+
+  40% {
+    transform: scale(1.2);
+  }
+}
+
+.ViewBtn {
+  margin-top: 20px;
+  width: 60%;
+  background-color: #8213c2;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 18px;
+  transition: background-color 0.5s;
+}
+.ViewBtn:hover {
+  background-color: #3c0266;
 }
