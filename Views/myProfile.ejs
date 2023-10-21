@@ -41,7 +41,7 @@
         <div class="col-lg-4">
           <div class="card mb-4">
             <div class="card-body text-center">
-              <img src="IMAGES/user.png" alt="avatar"
+              <img src="/IMAGES/user.png" alt="avatar"
                 class="rounded-circle img-fluid" style="width: 150px;">
               <h5 class="my-3"><%=user.name%></h5>
               <p class="text-muted mb-1"><%=user.bio%></p>
@@ -80,7 +80,29 @@
                   <p class="mb-0">Full Name</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0"><%=user.name%></p>
+                  <div>
+                  <p id="fullName"  style="display: inline;" class="text-muted mb-0"><%=user.name%> </p>
+                  <img src= "/IMAGES/edit.png" class="editLogo" alt="edit button" onclick="
+                  
+                  var array = document.getElementsByClassName('name');
+                  for (let i = 0; i < array.length; i++) {
+                    array[i].style.visibility = 'visible';
+                    
+                  }">
+                  </div>
+                  <label class="name " style="visibility:hidden;">first name</label >
+                  <input id="firstName" type="text" style="visibility:hidden;"  class="edited name">
+                  <br>
+                  <label class="name" style="visibility:hidden;">last name</label>
+                  <input id="lastName" type="text" style="visibility:hidden; "  class="edited name">
+                  <button style="visibility: hidden;" class="name" onclick="
+                    const firstNameElement = document.getElementById('firstName');
+                    const lastNameElement = document.getElementById('lastName');
+                    const fullNameElement = document.getElementById('fullName');
+                    fullNameElement.innerText = firstNameElement.value + ' ' + lastNameElement.value;
+                  
+                  ">EDIT</button>
+
                 </div>
               </div>
               <hr>
@@ -89,25 +111,70 @@
                   <p class="mb-0">Email</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0"><%=user.email%></p>
+                  <div>
+                  <p id="email" style="display: inline;" class="text-muted mb-0"><%=user.email%> </p> 
+                  <img src="/IMAGES/edit.png" class="editLogo" alt="edit button" onclick = "var array = document.getElementsByClassName('emailEdit');
+                    for (let i = 0; i < array.length; i++) {
+                      array[i].style.visibility = 'visible';
+                      
+                    }">
+                  </div>
+
+                  <input id="emailEdit" type="email" style="visibility:hidden; " class="edited emailEdit">
+                  <button style="visibility: hidden;" class="emailEdit" onclick="
+                    const emailElement = document.getElementById('email');
+                    const emailEditElement = document.getElementById('emailEdit');
+                    emailElement.innerText = emailEditElement.value;
+                  
+                  ">EIDT</button>
                 </div>
               </div>
               <hr>
               <div class="row">
                 <div class="col-sm-3">
                   <p class="mb-0">Phone Number</p>
+                  
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0"><%=user.phone%>>/p>
+                  <div>
+                  <p id="phoneNumber" style="display: inline;" class="text-muted mb-0"><%=user.phone%> </p>
+                  <img src="/IMAGES/edit.png" class="editLogo" alt="edit button" onclick = "var array = document.getElementsByClassName('phoneEdit');
+                    for (let i = 0; i < array.length; i++) {
+                      array[i].style.visibility = 'visible';
+                      
+                    }">
+                    </div>
+                    <input id="phoneEdit" type="text" style="visibility: hidden; " class="edited phoneEdit">
+                  <button style="visibility: hidden;" class="phoneEdit centre" onclick="
+                    const phoneElement = document.getElementById('phoneNumber');
+                    const phoneEditElement = document.getElementById('phoneEdit');
+                    phoneElement.innerText = phoneEditElement.value;
+
+                  ">EDIT3</button>
+                  
                 </div>
               </div>
               <hr>
               <div class="row">
                 <div class="col-sm-3">
                   <p class="mb-0">Address</p>
+                  
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0"><%=user.address%>></p>
+                  <div>
+                  <p style="display: inline;" id="address"text-muted mb-0"><%=user.address%></p>
+                  <img src="/IMAGES/edit.png" class="editLogo" alt="edit button" onclick = "var array = document.getElementsByClassName('editAddress');
+                    for (let i = 0; i < array.length; i++) {
+                      array[i].style.visibility = 'visible';
+                      
+                    }">
+                  </div>
+                  <input type="text" style="visibility: hidden;" id="editAddress" class="edited editAddress">
+                  <button style="visibility: hidden;" onclick=" const addressElement = document.getElementById('address');
+                  const editAddressElement = document.getElementById('editAddress');
+                  addressElement.innerText = editAddressElement.value; 
+                  console.log(addressElement.value);" id="editAddress
+                  " class="editAddress">EsDIT</button>
                 </div>
               </div>
             </div>
@@ -151,5 +218,13 @@
           </div>
         </div>
       </div>
+      <form action="" style="visibility: hidden;">
+        <input type="text" style="visibility: hidden;" name="firstName" class="hidden">
+        <input type="text" style="visibility: hidden;" name="lastName" class="hidden">
+        <input type="email" style="visibility: hidden;" name="email" class="hidden">
+        <input type="text" style="visibility: hidden;" name="phoneNumber" class="hidden">
+        <input type="text" style="visibility: hidden;" name="address" class="hidden">
+      
+      </form>
     </div>
   </section>

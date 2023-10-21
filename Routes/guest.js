@@ -10,6 +10,7 @@ router.get('/bookings', pages.guest.bookings)
 router.post('/register', ctrlGuests.register)
 router.post('/login', ctrlGuests.login)
 router.post('/delete', ctrlGuests.deleteGuest)
+router.post('/update', ctrlGuests.updateGuest)
 
 
 module.exports = router
