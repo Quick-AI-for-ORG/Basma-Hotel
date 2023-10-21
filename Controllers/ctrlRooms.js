@@ -18,18 +18,18 @@ connection.connect((err) => {
 });
 
 const addRoom = async(req,res)=>{      
-    let sql = `SELECT * FROM rooms WHERE title = ${req.body.title} `
+    let sql = `SELECT * FROM rooms WHERE title = '${req.body.title}' `
     connection.query(sql, (error, results) => {
         if (error) {
             console.error("Error: " + error)
+            if(error=="ER_DUP_ENTRY: Duplicate entry 'r' for key 'PRIMARY'")
+            res.status(400).json({message:"room already exists"})
 
         }
-        if(results){        //check if room already exists
-            return res.status(400).json( {message: "room already registered"})
-        }
+
 })
 sql = `INSERT INTO rooms (title,quantity,startingPrice,characteristics,capacity,description,executive,imageUrl) 
-VALUES ('${req.body.title}','${req.body.quantity}','${req.body.startingPrice}','${req.body.characteristics}','${req.body.capacity}','${req.body.description}','${req.body.executive}','${req.body.imageUrl}')`
+VALUES ('${req.body.title}','${req.body.quantity}','${req.body.startingPrice}',"${req.body.characteristics}",'${req.body.capacity}','${req.body.description}','${req.body.executive}','${req.body.imageUrl}')`
 
 connection.query(sql, (error, results) => {
     if (error) {
@@ -38,19 +38,18 @@ connection.query(sql, (error, results) => {
     } else {
         res.status(201).json({ message: "Room added" });
     }
-console.log("room added")
 })
 }
 ////////////////////////////////
 const removeRoom = async(req,res)=>{
-    let sql = `DELETE FROM rooms WHERE title = ${req.body.title} `
+    let sql = `DELETE FROM rooms WHERE title = '${req.body.title}' `
     connection.query(sql,(error,results)=>{
         if (error) {
             console.error("Error: " + error)
         }
 
         if(results){
-            console.log("room removed successfully")
+            res.status(201).json({ message: "room removed successfully" });
         }
     })
     
@@ -72,7 +71,7 @@ const getRooms = async(req,res)=>{
 const modifyRoom = async(req,res)=>{
     sql=`UPDATE rooms SET  (title,quantity,startingPrice,characteristics,capacity,description,executive,imageUrl) 
     VALUES ('${req.body.title}','${req.body.quantity}','${req.body.startingPrice}','${req.body.characteristics}','${req.body.capacity}','${req.body.description}','${req.body.executive}','${req.body.imageUrl}')
-    where title =${req.body.title}`
+    where title ='${req.body.title}'`
     connection.query(sql,(error,results)=>{
         if (error) {
             console.error("Error: " + error)

@@ -7,6 +7,7 @@ const expressLayouts = require("express-ejs-layouts");
 
 const indexRouter = require("./Routes/index");
 const guestRouter = require("./Routes/guest");
+const roomRouter = require("./Routes/room");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: "Your_Secret_Key", saveUninitialized: true }));
@@ -38,6 +39,7 @@ connection.connect((err) => {
 //routers
 app.use("/", indexRouter);
 app.use("/guest", guestRouter);
+app.use("/room", roomRouter);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
