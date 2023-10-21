@@ -34,18 +34,19 @@ const register = async (req, res) => {
 
 
     })
-
-    console.log(req.body);
-    sql = `INSERT INTO guests (firstName, lastName, email, password, phoneNumber, address) VALUES ('${req.body.fname}', '${req.body.lname}', '${req.body.email}', '${req.body.password}', '${req.body.phoneNumber}', '${req.body.address}')`;    // let encryptedPassword = await bcrypt.hash(req.body.password, { saltRounds: 12 })
-
+    let hashed = await bcrypt.hash(req.body.password,12);
+    sql = `INSERT INTO guests (firstName, lastName, email, password, phoneNumber, address) VALUES ('${req.body.fname}', '${req.body.lname}', '${req.body.email}', '${hashed}', '${req.body.phoneNumber}', '${req.body.address}')`;    // let encryptedPassword = await bcrypt.hash(req.body.password, { saltRounds: 12 })
 
 
+
+  let r 
     connection.query(sql, (error, results, fields) => {
         if (error) {
             console.error("Error: " + error);
             res.status(400).json({ message: error.message });
         } else {
             res.status(201).json({ message: "User created" });
+            r = results;
 
         }
     });
@@ -68,8 +69,6 @@ const register = async (req, res) => {
 
 
     //create
-
-
     //save
 
 
@@ -83,6 +82,8 @@ const login = async (req, res) => {
     //     return res.status(400).json({ message: "Email not found" })
     // }
     const sql = `SELECT * FROM guests WHERE email = ${req.body.email}`
+    connection.query(sql, (err, result) => {
+    })
 
     //check if password is correct
     const isMatch = await bcrypt.compare(req.body.password, found.password)
