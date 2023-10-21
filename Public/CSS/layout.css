@@ -7,3 +7,100 @@ span {
   font-size: medium;
   vertical-align: middle;
 }
+/* Start Footer */
+/* Style for the entire footer */
+footer {
+  background-color: #28013e;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+}
+
+/* Style for footer content */
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1300px;
+  margin: 0 auto;
+  flex-wrap: wrap; /* Allow flex items to wrap to the next line */
+}
+
+/* Style for the contact details */
+.contact-details {
+  text-align: left;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.contact-details h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.contact-details p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+/* Style for the contact form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  max-width: 400px; /* Limit the width to keep it smaller */
+  margin: 0 auto;
+}
+
+.contact-form h3 {
+  font-size: 16px; /* Slightly smaller font size for the heading */
+  margin-bottom: 8px;
+  color: #ffffff; /* Purple color for headings */
+}
+
+.contact-form label {
+  display: block;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 6px; /* Slightly smaller padding */
+  margin-top: 4px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.contact-form button {
+  background-color: #44006b;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 15px; /* Slightly smaller padding */
+  margin-top: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Style for the "We Proudly Accept" section */
+/* Style for the "We Proudly Accept" section */
+.accept {
+  max-width: 150px; /* Adjust the max-width as per your design */
+  text-align: center;
+}
+
+.accept p {
+  font-size: 14px;
+  color: #fff;
+}
+
+.accept img {
+  max-width: 100%; /* Ensure the images fit within the section */
+  height: auto;
+  margin-top: 8px;
+}
+
+/* End Footer */
