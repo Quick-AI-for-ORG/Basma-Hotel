@@ -14,7 +14,7 @@ const createTableQuery = `
     address VARCHAR(255) NOT NULL DEFAULT 'No address yet',
     instagramLink VARCHAR(255),
     facebookLink VARCHAR(255),
-    twitterLink VARCHAR(255)
+    twitterLink VARCHAR(255),
     googleLink VARCHAR(255)
   );
 `;
