@@ -124,3 +124,50 @@
 .txt3{
     color: white;
 }
+.centered-text {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    position: relative;
+    margin-bottom: -3%;
+  }
+  
+  .centered-text h1 {
+    font-size: 36px;
+    background-image: linear-gradient(to right, #133cc2, #8213c2);
+    -webkit-background-clip: text;
+    color: transparent;
+    position: relative;
+    z-index: 1;
+  }
+  .centered-text p:first-of-type {
+    font-size: 24px;
+    -webkit-background-clip: text;
+    color: #333;
+    text-align: center;
+    position: relative;
+  }
+  
+  .centered-text::before {
+    content: "";
+    position: absolute;
+    top: 44%;
+    height: 2px;
+    background-color: #0c008c;
+    width: 50px;
+    left: 30%;
+    transform: translate(0, -50%);
+  }
+  .centered-text::after {
+    content: "";
+    position: absolute;
+    top: 44%;
+    height: 2px;
+    background-color: #0c008c;
+    width: 50px;
+    right: 30%;
+    transform: translate(0, -50%);
+  }
