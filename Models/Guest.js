@@ -15,6 +15,7 @@ const createTableQuery = `
     instagramLink VARCHAR(255),
     facebookLink VARCHAR(255),
     twitterLink VARCHAR(255)
+    googleLink VARCHAR(255)
   );
 `;
 const mysql = require("mysql");
@@ -24,6 +25,8 @@ const connection = mysql.createConnection({
   password: "",
   database: "SWEProject",
 });
+
+
 connection.query(createTableQuery, (error, results) => {
   if (error) {
     console.error("Error creating table: " + error);
@@ -31,3 +34,5 @@ connection.query(createTableQuery, (error, results) => {
   }
   console.log("Table created successfully.");
 });
+
+module.exports = connection;
