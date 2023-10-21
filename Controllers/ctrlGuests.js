@@ -130,4 +130,34 @@ const deleteGuest = (req, res) => {
     });
 }
 
-module.exports = { register, login, deleteGuest }
+const updateGuest = (req, res) => {
+    sql = `UPDATE guests SET firstName = '${req.body.fname}', lastName = '${req.body.lname}', email = '${req.body.email}', phoneNumber = '${req.body.phoneNumber}', address = '${req.body.address}', ' WHERE email = '${req.session.user.email}'`;
+    connection.query(sql, (error, results, fields) => {
+        if (error) {
+            console.error("Error: " + error);
+            res.status(400).json({ message: error.message });
+        } else {
+            req.session.user = {
+                firstName: req.body.fname,
+                lastName: req.body.lname,
+                email: req.body.email,
+                phone: req.body.phoneNumber,
+                password: req.body.password,
+                address: req.body.address,
+                twitter: "",
+                facebook: "",
+                instagram: "",
+                google: "",
+                bio: "",
+                role: "Guest",
+
+            }
+            res.redirect('/guest');
+            r = results;
+
+        }
+    });
+}
+
+
+module.exports = { register, login, deleteGuest, updateGuest }
