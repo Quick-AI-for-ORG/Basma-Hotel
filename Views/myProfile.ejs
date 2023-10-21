@@ -113,7 +113,9 @@
             </div>
             <div class="buttonContainer">
               <button class="editBtn"  title="Edit" ><i class="fa-solid fa-user-pen"style="margin-right: 5px;"></i> Edit Profile</button>
-              <button class="deleteBtn" title="Delete"> Delete Profile <i class="fa-solid fa-trash" style="margin-left: 5px;"></i></button>   
+              <button class="deleteBtn" title="Delete" onclick="document.getElementById('del').submit()"> Delete Profile <i class="fa-solid fa-trash" style="margin-left: 5px;"></i></button>
+              <form method="POST" action="/guest/delete" id='del' style="visibility:hidden">
+              </form>
             </div>
           </div>
           <div class="row">

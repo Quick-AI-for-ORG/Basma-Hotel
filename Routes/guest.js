@@ -8,6 +8,8 @@ router.get('/login', pages.guest.login)
 router.get('/signup', pages.guest.signup)
 router.get('/bookings', pages.guest.bookings)
 router.post('/register', ctrlGuests.register)
+router.post('/login', ctrlGuests.login)
+router.post('/delete', ctrlGuests.deleteGuest)
 
 
 module.exports = router
