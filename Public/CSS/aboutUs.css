@@ -1,0 +1,126 @@
+.social-link {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    border-radius: 50%;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+  }
+  
+  .social-link:hover,
+  .social-link:focus {
+    background: #ddd;
+    text-decoration: none;
+    color: #555;
+  }
+
+  .txt{
+    color: white;
+    font-size: x-large;
+    text-align: center;
+    padding:5%;
+    margin-bottom: 2%;
+  }
+  .txt2,.txt3{
+    margin-top:-10%;
+    color:#00000090;
+    font-size: medium;
+    text-align: center;
+    padding:5%;
+  }
+  .title{
+    margin-top: 15%;
+    color:white;
+    text-align: center;
+    margin-bottom: 3%;
+  }
+  body{
+
+	background-color: #f7f6f6;
+}
+#martina{
+    margin-top:-2.5%
+}
+.card{
+
+	width: 400px;
+	border: none;
+	box-shadow: 5px 6px 6px 2px #e9ecef;
+	border-radius: 12px;
+    margin:2%
+}
+.name{
+    width:100%;
+    text-align: center;
+	font-size: 18px;
+    padding-top:5%;
+    font-weight: bold;
+}
+
+
+.fw-500{
+	font-weight: 500 !important;
+}
+.rating-color{
+    color:#fbc634 !important;
+}
+.ratings{
+    text-align: center;
+    width:100%;
+    margin-top:-10%;
+}
+.rating{
+    color:#6e6e6e
+}
+
+
+.progress{
+    margin-top: 1rem;
+    border-radius: 0; 
+}
+.progress-bar {
+    background-color: #ffca00;
+}
+.containera{
+    padding:4%;
+    padding-top: 0%;;
+    margin:5%;
+    margin-top:2%;
+    background-color: white;
+    border-radius: 5%;
+}
+.rat{
+    margin-top:1%
+}
+.containera img{
+    margin:0%;
+    margin-top: -1%;;
+    margin-left:85%;
+    width: 15%;
+}
+.titlea{
+    color:#38383890;
+    font-size: x-large;
+    position: absolute;
+    z-index: 100;
+    width:78%;
+    margin-top: -5%;;
+    text-align: center;
+    vertical-align: middle;
+}
+.dark{
+    background-color: #204978;
+    width:15%;
+    border-radius: 5%;
+    position: absolute;
+    z-index: 100;
+    padding:0%;
+    margin-top: 2%;
+}
+.txt3{
+    color: white;
+}
