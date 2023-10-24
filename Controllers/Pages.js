@@ -20,10 +20,15 @@ const privacy = (req, res) => {
   res.render("privacyPolicy");
 };
 const myProfile = (req, res) => {
+  if(req.session.user === undefined){
+    res.redirect('/guest/login')
+  }
+else{
   res.render("myProfile", {
     layout: false,
     user: req.session.user === undefined ? "" : req.session.user,
   });
+}
 };
 module.exports = {
   root: { basma, about, facilities, privacy },

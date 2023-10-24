@@ -97,10 +97,12 @@
                   <input id="lastName" type="text" style="visibility:hidden; "  class="edited name">
                   <button style="visibility: hidden;" class="name" onclick="
                     const firstNameElement = document.getElementById('firstName');
+                    document.getElementById('efn').value = firstNameElement.value;
                     const lastNameElement = document.getElementById('lastName');
+                    document.getElementById('eln').value = lastNameElement.value;
                     const fullNameElement = document.getElementById('fullName');
                     fullNameElement.innerText = firstNameElement.value + ' ' + lastNameElement.value;
-                  
+                    
                   ">EDIT</button>
 
                 </div>
@@ -124,9 +126,10 @@
                   <button style="visibility: hidden;" class="emailEdit" onclick="
                     const emailElement = document.getElementById('email');
                     const emailEditElement = document.getElementById('emailEdit');
+                    document.getElementById('ee').value = emailEditElement.value;
                     emailElement.innerText = emailEditElement.value;
                   
-                  ">EIDT</button>
+                  ">EDIT</button>
                 </div>
               </div>
               <hr>
@@ -148,9 +151,10 @@
                   <button style="visibility: hidden;" class="phoneEdit centre" onclick="
                     const phoneElement = document.getElementById('phoneNumber');
                     const phoneEditElement = document.getElementById('phoneEdit');
+                    document.getElementById('ep').value = phoneEditElement.value;
                     phoneElement.innerText = phoneEditElement.value;
 
-                  ">EDIT3</button>
+                  ">EDIT</button>
                   
                 </div>
               </div>
@@ -173,13 +177,13 @@
                   <button style="visibility: hidden;" onclick=" const addressElement = document.getElementById('address');
                   const editAddressElement = document.getElementById('editAddress');
                   addressElement.innerText = editAddressElement.value; 
-                  console.log(addressElement.value);" id="editAddress
-                  " class="editAddress">EsDIT</button>
+                  document.getElementById('ea').value = editAddressElement.value;" id="editAddress
+                  " class="editAddress">EDIT</button>
                 </div>
               </div>
             </div>
             <div class="buttonContainer">
-              <button class="editBtn"  title="Edit" ><i class="fa-solid fa-user-pen"style="margin-right: 5px;"></i> Edit Profile</button>
+              <button class="editBtn"  title="Edit" onclick=`ed(<%=user.firstName%>,<%=user.lastName%>,<%=user.email%>,<%=user.phoneNumber%>,<%=user.address%>)`><i class="fa-solid fa-user-pen"style="margin-right: 5px;"></i> Edit Profile</button>
               <button class="deleteBtn" title="Delete" onclick="document.getElementById('del').submit()"> Delete Profile <i class="fa-solid fa-trash" style="margin-left: 5px;"></i></button>
               <form method="POST" action="/guest/delete" id='del' style="visibility:hidden">
               </form>
@@ -218,13 +222,14 @@
           </div>
         </div>
       </div>
-      <form action="" style="visibility: hidden;">
-        <input type="text" style="visibility: hidden;" name="firstName" class="hidden">
-        <input type="text" style="visibility: hidden;" name="lastName" class="hidden">
-        <input type="email" style="visibility: hidden;" name="email" class="hidden">
-        <input type="text" style="visibility: hidden;" name="phoneNumber" class="hidden">
-        <input type="text" style="visibility: hidden;" name="address" class="hidden">
+      <form method="post" id="editor" action="/guest/update" style="visibility: hidden;">
+        <input type="text" style="visibility: hidden;" name="firstName" id="efn" class="hidden">
+        <input type="text" style="visibility: hidden;" name="lastName" id="eln" class="hidden">
+        <input type="email" style="visibility: hidden;" name="email" id="ee" class="hidden">
+        <input type="text" style="visibility: hidden;" name="phoneNumber" id="ep" class="hidden">
+        <input type="text" style="visibility: hidden;" name="address" id="ea" class="hidden">
       
       </form>
     </div>
   </section>
+  <script src="/JS/edit.js"></script>
