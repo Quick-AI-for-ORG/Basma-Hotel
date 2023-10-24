@@ -1,37 +1,76 @@
-const createTableQuery = `
-  CREATE TABLE IF NOT EXISTS guests (
-    id INT AUTO_INCREMENT NOT NULL UNIQUE,
-    firstName VARCHAR(255) NOT NULL,
-    lastName VARCHAR(255) NOT NULL,
-    email VARCHAR(255) PRIMARY KEY,
-    password VARCHAR(255) NOT NULL,
-    phoneNumber VARCHAR(20) NOT NULL,
-    cardNumber VARCHAR(20) NOT NULL DEFAULT '0000 0000 0000 0000',
-    expirationDate VARCHAR(10) NOT NULL DEFAULT '01/25',
-    cvv VARCHAR(5) NOT NULL DEFAULT '000',
-    role VARCHAR(10) NOT NULL DEFAULT 'Guest',
-    bio VARCHAR(255) NOT NULL DEFAULT 'No bio yet',
-    address VARCHAR(255) NOT NULL DEFAULT 'No address yet',
-    instagramLink VARCHAR(255),
-    facebookLink VARCHAR(255),
-    twitterLink VARCHAR(255),
-    googleLink VARCHAR(255)
-  );
-`;
-const mysql = require("mysql");
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "SWEProject",
+const Sequelize = require('sequelize');
+
+const sequelize = new Sequelize('SWEProject', 'root', '', {
+  host: 'localhost',
+  dialect: 'mysql',
 });
 
-connection.query(createTableQuery, (error, results) => {
-  if (error) {
-    console.error("Error creating table: " + error);
-    return;
-  }
-  console.log("Table created successfully.");
+const Guest = sequelize.define('Guest', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    unique: true,
+  },
+  firstName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  lastName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  email: {
+    type: Sequelize.STRING,
+    primaryKey: true,
+    allowNull: false,
+  },
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  phoneNumber: {
+    type: Sequelize.STRING(20),
+    allowNull: false,
+  },
+  cardNumber: {
+    type: Sequelize.STRING(20),
+    allowNull: false,
+    defaultValue: '0000 0000 0000 0000',
+  },
+  expirationDate: {
+    type: Sequelize.STRING(10),
+    allowNull: false,
+    defaultValue: '01/25',
+  },
+  cvv: {
+    type: Sequelize.STRING(5),
+    allowNull: false,
+    defaultValue: '000',
+  },
+  role: {
+    type: Sequelize.STRING(10),
+    allowNull: false,
+    defaultValue: 'Guest',
+  },
+  bio: {
+    type: Sequelize.STRING(255),
+    allowNull: false,
+    defaultValue: 'No bio yet',
+  },
+  address: {
+    type: Sequelize.STRING(255),
+    allowNull: false,
+    defaultValue: 'No address yet',
+  },
+  instagramLink: Sequelize.STRING(255),
+  facebookLink: Sequelize.STRING(255),
+  twitterLink: Sequelize.STRING(255),
+  googleLink: Sequelize.STRING(255),
 });
 
-module.exports = connection;
+async function createTable() {
+  await Guest.sync();
+}
+
+module.exports = {createTable, Guest};

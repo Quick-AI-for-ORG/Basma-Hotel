@@ -1,26 +1,48 @@
-const createRoomTableQuery = `
-  CREATE TABLE IF NOT EXISTS rooms (
-    Title VARCHAR(255) PRIMARY KEY,
-    quantity int NOT NULL,
-    startingPrice DECIMAL(10, 2) NOT NULL,
-    characteristics JSON NOT NULL,
-    capacity INT NOT NULL,
-    description TEXT NOT NULL,
-    executive TINYINT(1) NOT NULL,
-    imageURL VARCHAR(255) NOT NULL
-  );
-`;
-const mysql = require("mysql");
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "SWEProject",
+const Sequelize = require('sequelize');
+
+const sequelize = new Sequelize('SWEProject', 'root', '', {
+  host: 'localhost',
+  dialect: 'mysql',
 });
-connection.query(createRoomTableQuery, (error, results) => {
-  if (error) {
-    console.error("Error creating table: " + error);
-    return;
-  }
-  console.log("Table created successfully.");
+
+const Room = sequelize.define('Room', {
+  Title: {
+    type: Sequelize.STRING(255),
+    primaryKey: true,
+  },
+  quantity: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
+  startingPrice: {
+    type: Sequelize.DECIMAL(10, 2),
+    allowNull: false,
+  },
+  characteristics: {
+    type: Sequelize.JSON,
+    allowNull: false,
+  },
+  capacity: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
+  description: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+  },
+  executive: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+  },
+  imageURL: {
+    type: Sequelize.STRING(255),
+    allowNull: false,
+  },
 });
+
+// Create the table if it does not exist
+async function createTable() {
+  await Room.sync();
+}
+
+module.exports = { createTable, Room };

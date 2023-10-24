@@ -1,28 +1,56 @@
-const createReservationTableQuery = `
-  CREATE TABLE IF NOT EXISTS reservations (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    room_Title VARCHAR(255) NOT NULL,
-    guest_email STRING NOT NULL,
-    start_date DATE NOT NULL,
-    end_date DATE NOT NULL,
-    price DECIMAL(10, 2) NOT NULL,
-    number_of_people INT NOT NULL,
-    special_request TEXT
-    FOREIGN KEY (id) REFERENCES guests (id) ON DELETE CASCADE
-    FOREIGN KEY (Title) REFERENCES rooms (Title) ON DELETE CASCADE
-  );
-`;
-const mysql = require("mysql");
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "SWEProject",
+const Sequelize = require('sequelize');
+const { Room } = require('./Room');
+const { Guest } = require('./Guest');
+const sequelize = new Sequelize('SWEProject', 'root', '', {
+  host: 'localhost',
+  dialect: 'mysql',
 });
-connection.query(createReservationTableQuery, (error, results) => {
-  if (error) {
-    console.error("Error creating table: " + error);
-    return;
-  }
-  console.log("Table created successfully.");
+
+const Reservation = sequelize.define('Reservation', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  room_Title: {
+    type: Sequelize.STRING(255),
+    allowNull: false,
+  },
+  guest_email: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  start_date: {
+    type: Sequelize.DATE,
+    allowNull: false,
+  },
+  end_date: {
+    type: Sequelize.DATE,
+    allowNull: false,
+  },
+  price: {
+    type: Sequelize.DECIMAL(10, 2),
+    allowNull: false,
+  },
+  number_of_people: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
+  special_request: Sequelize.TEXT,
 });
+
+// Define the foreign key constraints
+Reservation.belongsTo(Room, {
+  foreignKey: 'room_Title',
+});
+
+Reservation.belongsTo(Guest, {
+  foreignKey: 'guest_email',
+});
+
+// Create the table if it does not exist
+async function createTable() {
+  await Reservation.sync();
+}
+
+module.exports = { createTable , Reservation};

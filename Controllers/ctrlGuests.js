@@ -1,64 +1,33 @@
 const bcrypt = require('bcrypt') // for password hashing
-const mysql = require("mysql");
-const connection = require('../Models/Guest')
-
+const { Guest } = require('../Models/Guest.js');
 
 const register = async (req, res) => {
 
-
-
-    // Connect to the MySQL database
-    connection.connect((err) => {
-        if (err) {
-            console.error("Error connecting to MySQL: " + err.stack);
-            return;
-        }
-        console.log("Connected to MySQL as id " + connection.threadId);
-    });
     //check if user is already registered
-
-    let sql = `SELECT * FROM guests WHERE email = ${req.body.email} `
-    connection.query(sql, (error, results) => {
-        if (error) {
-            console.error("Error: " + error)
-
+    Guest.findOne({ where: { email: req.body.email } }).then(async (user) => {
+        if (user) {
+            return res.status(400).json({ message: "Email already exists" });
         }
-        if (results) {
-            return res.status(400).json({ message: "Email already in use" })
-        }
-
-
     })
     let hashed = await bcrypt.hash(req.body.password, 12);
-    sql = `INSERT INTO guests (firstName, lastName, email, password, phoneNumber, address) VALUES ('${req.body.fname}', '${req.body.lname}', '${req.body.email}', '${hashed}', '${req.body.phoneNumber}', '${req.body.address}')`;    // let encryptedPassword = await bcrypt.hash(req.body.password, { saltRounds: 12 })
+    let user = Guest.create({
+        firstName: req.body.fname,
+        lastName: req.body.lname,
+        email: req.body.email,
+        phoneNumber: req.body.phoneNumber,
+        password: hashed,
+        address: req.body.address,
+        twitterLink: "",
+        facebookLink: "",
+        instagramLink: "",
+        googleLink: "",
+        bio: "",
+        role: "Guest",
+    }).then((user) => {
+        req.session.user = user
 
-
-
-
-    connection.query(sql, (error, results, fields) => {
-        if (error) {
-            console.error("Error: " + error);
-            res.status(400).json({ message: error.message });
-        } else {
-            req.session.user = {
-                firstName: req.body.fname,
-                lastName: req.body.lname,
-                email: req.body.email,
-                phone: req.body.phoneNumber,
-                password: req.body.password,
-                address: req.body.address,
-                twitter: "",
-                facebook: "",
-                instagram: "",
-                google: "",
-                bio: "",
-                role: "Guest",
-
-            }
             res.redirect('/guest');
-            r = results;
 
-        }
     });
 
 
@@ -73,70 +42,66 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
 
-    const sql = `SELECT * FROM guests WHERE email = '${req.body.email}'`
-    connection.query(sql, async (err, result) => {
-        console.log(result)
-        if (err) {
-            console.error("Error: " + err);
-            res.status(400).json({ message: err.message });
-        } else {
-            if (result.length === 0) {
-                return res.status(400).json({ message: "Email not found" });
-            }
-            const isMatch = await bcrypt.compare(req.body.password, result[0].password);
+    const guestRecord = await Guest.findOne({
+        where: {
+          email: req.body.email,
+        },
+      });
+    
+      // If the guest record does not exist, return an error
+      if (!guestRecord) {
+         let err = new Error('Email not found');
+         res.status(400).json({ message: err.message })
+      }
+        else{  const isMatch = await bcrypt.compare(req.body.password, guestRecord.password);
             if (!isMatch) {
                 return res.status(400).json({ message: "Password incorrect" });
             }
             else {
-                req.session.user = {
-                    firstName: result[0].firstName,
-                    lastName: result[0].lastName,
-                    email: result[0].email,
-                    phone: result[0].phoneNumber,
-                    password: result[0].password,
-                    address: result[0].address,
-                    twitter: result[0].twitterLink,
-                    facebook: result[0].facebookLink,
-                    instagram: result[0].instagramLink,
-                    google: "",
-                    bio: result[0].bio,
-                    role: "Guest",
-                }
+                req.session.user = guestRecord
                 res.redirect('/guest');
             }
 
-        }
+        }}
 
 
-    })
 
+const deleteGuest =async (req, res) => {
 
-}
-
-const deleteGuest = (req, res) => {
-
-
-    sql = `DELETE FROM guests WHERE email = '${req.session.user.email}'`;
-    connection.query(sql, (error, results, fields) => {
-        if (error) {
-            console.error("Error: " + error);
-            res.status(400).json({ message: error.message });
-        } else {
+   try { await Guest.destroy({
+        where: {
+          email: req.session.user.email,
+        },
+      }) }
+      catch(err) {
+        console.error("Error: " + err);
+        res.status(400).json({ message: err.message });
+      }
             req.session.destroy();
             res.redirect('/');
 
 
-        }
-    });
-}
+    }
 
-const updateGuest = (req, res) => {
-    sql = `UPDATE guests SET firstName = '${req.body.fname}', lastName = '${req.body.lname}', email = '${req.body.email}', phoneNumber = '${req.body.phoneNumber}', address = '${req.body.address}', ' WHERE email = '${req.session.user.email}'`;
-    connection.query(sql, (error, results, fields) => {
-        if (error) {
-            console.error("Error: " + error);
-            res.status(400).json({ message: error.message });
-        } else {
+const updateGuest = async (req, res) => {
+    try{
+    await Guest.update({
+        firstName: req.body.fname,
+        lastName: req.body.lname,
+        email: req.body.email,
+        phoneNumber: req.body.phoneNumber,
+        password: req.body.password,
+        address: req.body.address,
+    }, {
+        where: {
+            email: req.session.user.email,
+        }
+    
+    })
+} catch(err){
+    console.error("Error: " + err);
+    res.status(400).json({ message: err.message });
+}
             req.session.user = {
                 firstName: req.body.fname,
                 lastName: req.body.lname,
@@ -153,11 +118,9 @@ const updateGuest = (req, res) => {
 
             }
             res.redirect('/guest');
-            r = results;
 
         }
-    });
-}
+
 
 
 module.exports = { register, login, deleteGuest, updateGuest }
