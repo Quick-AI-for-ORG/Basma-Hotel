@@ -1,9 +1,9 @@
 const createTableQuery = `
   CREATE TABLE IF NOT EXISTS guests (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT NOT NULL UNIQUE,
     firstName VARCHAR(255) NOT NULL,
     lastName VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
+    email VARCHAR(255) PRIMARY KEY,
     password VARCHAR(255) NOT NULL,
     phoneNumber VARCHAR(20) NOT NULL,
     cardNumber VARCHAR(20) NOT NULL DEFAULT '0000 0000 0000 0000',
@@ -25,7 +25,6 @@ const connection = mysql.createConnection({
   password: "",
   database: "SWEProject",
 });
-
 
 connection.query(createTableQuery, (error, results) => {
   if (error) {
