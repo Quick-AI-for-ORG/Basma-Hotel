@@ -87,7 +87,6 @@ const updateGuest = async (req, res) => {
     console.log(req.body);
     try{
     await Guest.update({
-        
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
@@ -101,22 +100,6 @@ const updateGuest = async (req, res) => {
     
     })
 
-    req.session.user = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        phone: req.body.phoneNumber,
-        password: req.body.password,
-        address: req.body.address,
-        twitter: "",
-        facebook: "",
-        instagram: "",
-        google: "",
-        bio: "",
-        role: "Guest",
-
-    }
-
 
 } catch(err){
     console.error("Error: " + err);
@@ -126,23 +109,21 @@ const updateGuest = async (req, res) => {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 email: req.body.email,
-                phone: req.body.phoneNumber,
+                phoneNumber: req.body.phoneNumber,
                 password: req.body.password,
                 address: req.body.address,
-                twitter: "",
-                facebook: "",
-                instagram: "",
-                google: "",
+                twitterLink: "",
+                facebookLink: "",
+                instagramLink: "",
+                googleLink: "",
                 bio: "",
                 role: "Guest",
 
             }
-
             res.redirect('/guest');
-            
 
         }
 
-        
+
 
 module.exports = { register, login, deleteGuest, updateGuest }
