@@ -44,7 +44,24 @@
               <img src="/IMAGES/user.png" alt="avatar"
                 class="rounded-circle img-fluid" style="width: 150px;">
               <h5 class="my-3"><%=user.name%></h5>
-              <p class="text-muted mb-1"><%=user.bio%></p>
+              <div>
+                <p style="display: inline;"  class="text-muted mb-1"><%=user.bio%></p>
+                <img src="/IMAGES/edit.png" class="editLogo" alt="edit button" onclick = "var array = document.getElementsByClassName('bio');
+                for (let i = 0; i < array.length; i++) {
+                  array[i].style.visibility = 'visible';
+                  
+                }">
+
+                
+                  
+              </div>
+              <label style="visibility: hidden;" for="bio" class="bio"></label>
+              
+              <form action="/guest/updateBio" style="visibility: hidden;" method="post">
+                <textarea name='bio'id="bio" class="bio" type="textarea" style="visibility:hidden;"> </textarea>
+                <button class="bio" onclick="submit">save</button>
+            </form>
+              
             </div>
           </div>
           <div class="card mb-4 mb-lg-0">

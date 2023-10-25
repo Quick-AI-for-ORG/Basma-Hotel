@@ -126,4 +126,39 @@ const updateGuest = async (req, res) => {
 
 
 
-module.exports = { register, login, deleteGuest, updateGuest }
+
+const updateBio = async (req, res) => {
+    console.log(req.body);
+    try{
+    await Guest.update({
+        bio: req.body.bio,
+    }, {
+        where: {
+            email: req.session.user.email,
+        }
+    
+    })
+}
+catch(err){
+    console.error("Error: " + err);
+    res.status(400).json({ message: err.message });
+}
+            req.session.user = {
+                firstName: req.session.user.firstName,
+                lastName: req.session.user.lastName,
+                email: req.session.user.email,
+                phoneNumber: req.session.user.phoneNumber,
+                password: req.session.user.password,
+                address: req.session.user.address,
+                twitterLink: req.session.user.twitterLink,
+                facebookLink: req.session.user.facebookLink,
+                instagramLink: req.session.user.instagramLink,
+                googleLink: req.session.user.googleLink,
+                bio: req.body.bio,
+                role: req.session.user.role,
+
+            }
+            res.redirect('/guest');
+
+        }
+module.exports = { register, login, deleteGuest, updateGuest, updateBio }
