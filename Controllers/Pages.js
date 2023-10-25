@@ -48,12 +48,21 @@ const viewRooms = async (req, res) => {
   total_page: Math.ceil(result.length/6)})
 };
 
-const viewRoom = (req, res) => {
+const viewRoom = async (req, res) => {
+  let room = null
+  await ctrlRooms.getRoom().then((result)=>{
+    room = result
+    res.render('room', {  user: (req.session.user === undefined ? "" : req.session.user) ,
+    room: (room === null ? "" : room)})
+  })
+  }
 
-}
+  const covid = (req, res) => {
+    res.render("covid-19");
+  }
 
 module.exports = {
-  root: { basma, about, facilities, privacy },
+  root: { basma, about, facilities, privacy, covid },
   guest: { login, signup, bookings, myProfile },
   room:{viewRooms,viewRoom}
 };

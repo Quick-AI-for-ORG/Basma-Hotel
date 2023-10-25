@@ -7,7 +7,6 @@ router.get("/", pages.root.basma);
 router.get("/aboutus", pages.root.about);
 router.get("/facilities", pages.root.facilities);
 router.get("/privacyPolicy", pages.root.privacy);
-router.get("/rooms", pages.root.rooms);
 router.get("/covid-19", pages.root.covid);
 router.post("/askQuestion", questions.askQuestion);
 

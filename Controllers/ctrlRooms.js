@@ -50,7 +50,7 @@ const getRooms = async(req,res)=>{
 
 ////////////////////////////////////
 const getRoom = async(req,res)=>{
-    return await Room.findOne({Title: req.params[0]})
+    return await Room.findOne({Title: req.params[0].replace(/%20/g, ' ')})
 }
 ////////////////////////////////////
 
