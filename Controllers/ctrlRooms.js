@@ -1,86 +1,86 @@
-const bcrypt = require('bcrypt') // for password hashing
-const mysql = require("mysql");
+const {Room} = require('../Models/Room.js')
 
 
-const connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "SWEProject",
-});
 
-connection.connect((err) => {
-    if (err) {
-        console.error("Error connecting to MySQL: " + err.stack);
-        return;
-    }
-    console.log("Connected to MySQL as id " + connection.threadId);
-});
-
-const addRoom = async(req,res)=>{      
-    let sql = `SELECT * FROM rooms WHERE title = '${req.body.title}' `
-    connection.query(sql, (error, results) => {
-        if (error) {
-            console.error("Error: " + error)
-            if(error=="ER_DUP_ENTRY: Duplicate entry 'r' for key 'PRIMARY'")
-            res.status(400).json({message:"room already exists"})
-
-        }
-
-})
-sql = `INSERT INTO rooms (title,quantity,startingPrice,characteristics,capacity,description,executive,imageUrl) 
-VALUES ('${req.body.title}','${req.body.quantity}','${req.body.startingPrice}',"${req.body.characteristics}",'${req.body.capacity}','${req.body.description}','${req.body.executive}','${req.body.imageUrl}')`
-
-connection.query(sql, (error, results) => {
-    if (error) {
-        console.error("Error: " + error);
-        res.status(400).json({ message: error.message });
-    } else {
-        res.status(201).json({ message: "Room added" });
-    }
-})
+const addRoom = async(req,res)=>{     
+   let found = await Room.findOne({Title: req.body.title});
+   if(found){
+         return res.status(400).json({message:"room already exists"})
+   }
+   else{
+    try{
+    const room =  Room.create({
+        Title: req.body.Title,
+        quantity: req.body.quantity,
+        startingPrice: req.body.startingPrice,
+        characteristics: req.body.characteristics,
+        capacity: req.body.capacity,
+        description: req.body.description,
+        executive: req.body.executive,
+        imageURL: req.body.imageURL,
+    }).then((room) => {
+        res.status(201).json({ message: "room added successfully" }); 
+    });
+} catch(err){
+    res.status(400).json({message:err.message})
+}}
 }
+
 ////////////////////////////////
 const removeRoom = async(req,res)=>{
-    let sql = `DELETE FROM rooms WHERE title = '${req.body.title}' `
-    connection.query(sql,(error,results)=>{
-        if (error) {
-            console.error("Error: " + error)
-        }
+    try { await Room.destroy({
+        where: {
+          Title: req.body.Title,
+        },
+      }).then((room) =>{
+        res.status(201).json({ message: "room removed successfully" });
+      })
+    }
+      catch(err) {
+        console.error("Error: " + err);
+        res.status(400).json({ message: err.message });
+      }
+    }
 
-        if(results){
-            res.status(201).json({ message: "room removed successfully" });
-        }
-    })
-    
-}
 ///////////////////////////////
-const getRooms = async(req,res)=>{
-    let sql = `SELECT * FROM rooms `
-    connection.query(sql, (error, results) => {
-        if (error) {
-            console.error("Error: " + error)
 
-        }
-        if(results){ 
-            return res.json({results})
-        }
-})
+const getRooms = async(req,res)=>{
+    const rooms = await Room.findAll();
+    if(rooms.length>0)
+        res.status(200).json({rooms})
+    else 
+        res.status(400).json({message:"no rooms found"}) 
+}
+
+////////////////////////////////////
+const getRoom = async(req,res)=>{
+    const room = await Room.findOne({Title: req.body.Title});
+    if(room)
+        res.status(200).json({room})
+    else 
+        res.status(400).json({message:"room not found"})
 }
 ////////////////////////////////////
-const modifyRoom = async(req,res)=>{
-    sql=`UPDATE rooms SET  (title,quantity,startingPrice,characteristics,capacity,description,executive,imageUrl) 
-    VALUES ('${req.body.title}','${req.body.quantity}','${req.body.startingPrice}','${req.body.characteristics}','${req.body.capacity}','${req.body.description}','${req.body.executive}','${req.body.imageUrl}')
-    where title ='${req.body.title}'`
-    connection.query(sql,(error,results)=>{
-        if (error) {
-            console.error("Error: " + error)
-        }
 
-        if(results){
-            console.log("room edited successfully")
-        }
-    })
+const modifyRoom = async(req,res)=>{
+        await Room.update({
+            quantity: req.body.quantity,
+            startingPrice: req.body.startingPrice,
+            characteristics: req.body.characteristics,
+            capacity: req.body.capacity,
+            description: req.body.description,
+            executive: req.body.executive,
+            imageURL: req.body.imageURL,
+        }, {
+            where: {
+                Title: req.body.Title,
+            }
+        }).then((room) => {
+            if(room)
+            res.status(201).json({ message: "room modified successfully" });
+            else
+            res.status(400).json({ message: "room not found" });
+        })
 }
 
-module.exports ={addRoom,removeRoom,getRooms,modifyRoom}
+module.exports ={addRoom,removeRoom,getRooms,getRoom,modifyRoom}
