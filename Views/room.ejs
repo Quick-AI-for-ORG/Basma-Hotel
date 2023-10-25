@@ -7,7 +7,7 @@
     <title>
         <%= room.Title %>
     </title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/CSS/room.css">
 </head>
 
 <body>
@@ -19,29 +19,23 @@
 
     <div class="room-details">
         <div class="room-image">
-            <img src="<%= room.ImageURL %>" alt="<%= room.Title %>">
+            <% const newImagePath=room.imageURL.substring(15); %>
+                <img src="/IMAGES/ROOMS/<%=newImagePath%>" alt="<%= room.Title %>">
         </div>
         <div class="room-description">
             <h2>Description</h2>
             <p>
-                <%= room.Description %>
+                <%= room.description %>
             </p>
-            <h2>Room Characteristics</h2>
-            <ul>
-                <% room.Characteristics.forEach(function(characteristic) { %>
-                    <li>
-                        <%= characteristic %>
-                    </li>
-                    <% }); %>
-            </ul>
+
             <h2>Room Details</h2>
             <ul>
-                <li>Quantity: <%= room.Quantity %>
+                <li>Quantity: <%= room.quantity %>
                 </li>
-                <li>Capacity: <%= room.Capacity %> people</li>
-                <li>Starting Price: $<%= room.StartingPrice %> per night</li>
+                <li>Capacity: <%= room.capacity %> people</li>
+                <li>Starting Price: $<%= room.startingPrice %> per night</li>
                 <li>
-                    <%= room.Executive ? 'Executive Club Room' : 'Basma Hotel Room' %>
+                    <%= room.executive ? 'Executive Club Room' : 'Basma Hotel Room' %>
                 </li>
             </ul>
         </div>
