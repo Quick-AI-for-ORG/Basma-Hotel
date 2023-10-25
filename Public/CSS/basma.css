@@ -251,19 +251,31 @@
 }
 
 .ViewBtn {
-  margin-top: 20px;
+  display: inline-block;
+  margin-top: 10%;
   width: 60%;
   background-color: #8213c2;
-  color: #fff;
   border: none;
   border-radius: 5px;
   padding: 10px;
   font-size: 18px;
+  text-align: center;
   transition: background-color 0.5s;
+  text-decoration: none;
+  color: #fff;
 }
+
 .ViewBtn:hover {
   background-color: #3c0266;
+  color: #fff;
 }
+
+.ViewBtn a {
+  text-decoration: none;
+  color: #fff;
+  background-color: #8213c2;
+}
+
 /* End second slideShow */
 
 /* Start safe & sanitized */

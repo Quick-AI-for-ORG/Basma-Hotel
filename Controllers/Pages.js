@@ -20,17 +20,19 @@ const privacy = (req, res) => {
   res.render("privacyPolicy");
 };
 const myProfile = (req, res) => {
-  if(req.session.user === undefined){
-    res.redirect('/guest/login')
+  if (req.session.user === undefined) {
+    res.redirect("/guest/login");
+  } else {
+    res.render("myProfile", {
+      layout: false,
+      user: req.session.user === undefined ? "" : req.session.user,
+    });
   }
-else{
-  res.render("myProfile", {
-    layout: false,
-    user: req.session.user === undefined ? "" : req.session.user,
-  });
-}
+};
+const rooms = (req, res) => {
+  res.render("allRooms");
 };
 module.exports = {
-  root: { basma, about, facilities, privacy },
+  root: { basma, about, facilities, privacy, rooms },
   guest: { login, signup, bookings, myProfile },
 };
