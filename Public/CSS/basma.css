@@ -100,7 +100,7 @@
 .centered-text::before {
   content: "";
   position: absolute;
-  top: 44%;
+  top: 38%;
   height: 2px;
   background-color: #0c008c;
   width: 50px;
@@ -110,7 +110,7 @@
 .centered-text::after {
   content: "";
   position: absolute;
-  top: 44%;
+  top: 38%;
   height: 2px;
   background-color: #0c008c;
   width: 50px;

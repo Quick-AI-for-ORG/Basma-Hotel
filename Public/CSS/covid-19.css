@@ -8,11 +8,12 @@ header {
   text-align: center;
   padding: 20px;
   color: #fff;
-  margin-top: 50px;
+  margin-top: 60px;
 }
 
 header h1 {
   font-size: 36px;
+  margin-top: 40px;
 }
 
 header:after {
@@ -136,4 +137,7 @@ header:after {
   background-color: #3c0266;
   transition: background-color 0.3s;
   color: #fff;
+}
+::-webkit-scrollbar {
+  display: none;
 }
