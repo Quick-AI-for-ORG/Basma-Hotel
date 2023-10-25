@@ -4,10 +4,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=room.Title%></title>
+    <title>
+        <%= room.Title %>
+    </title>
+    <link rel="stylesheet" href="/CSS/room.css">
 </head>
 
 <body>
+    <header class="room-header">
+        <h1>
+            <%= room.Title %>
+        </h1>
+    </header>
+
+    <div class="room-details">
+        <div class="room-image">
+            <% const newImagePath=room.imageURL.substring(15); %>
+                <img src="/IMAGES/ROOMS/<%= newImagePath %>" alt="<%= room.Title %>">
+        </div>
+        <div class="room-description">
+            <h2>Description</h2>
+            <p>
+                <%= room.description %>
+            </p>
+            <hr>
+            <h2>Room Details</h2>
+            <ul>
+                <li>Quantity: <%= room.quantity %>
+                </li>
+                <li>Capacity: <%= room.capacity %> people</li>
+                <li>Starting Price: $<%= room.startingPrice %> per night</li>
+                <li>
+                    <%= room.executive ? 'Executive Club Room' : 'Basma Hotel Room' %>
+                </li>
+            </ul>
+            <hr>
+            <h2>Book Now!</h2>
+            <form action="/booking" method="POST">
+                <input type="hidden" name="roomTitle" value="<%= room.Title %>">
+                <label for="arrivalDate">Arrival Date:</label>
+                <input type="date" id="arrivalDate" name="arrivalDate" required>
+                <br>
+                <label for="departureDate">Departure Date:</label>
+                <input type="date" id="departureDate" name="departureDate" required>
+                <br>
+                <input type="submit" value="Book Now">
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>
