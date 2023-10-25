@@ -50,7 +50,7 @@ const viewRooms = async (req, res) => {
 
 const viewRoom = async (req, res) => {
   let room = null
-  await ctrlRooms.getRoom().then((result)=>{
+  await ctrlRooms.getRoom(req,res).then((result)=>{
     room = result
     res.render('room', {  user: (req.session.user === undefined ? "" : req.session.user) ,
     room: (room === null ? "" : room)})
