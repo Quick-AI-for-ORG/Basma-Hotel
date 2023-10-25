@@ -8,51 +8,51 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentPage = 1;
 
   // Function to show rooms for the current page
-  function showRooms() {
-    const startIndex = (currentPage - 1) * roomsPerPage;
-    const endIndex = startIndex + roomsPerPage;
-    rooms.forEach((room, index) => {
-      if (index >= startIndex && index < endIndex) {
-        room.style.display = "block";
-      } else {
-        room.style.display = "none";
-      }
-    });
-  }
+  // function showRooms() {
+  //   const startIndex = (currentPage - 1) * roomsPerPage;
+  //   const endIndex = startIndex + roomsPerPage;
+  //   rooms.forEach((room, index) => {
+  //     if (index >= startIndex && index < endIndex) {
+  //       room.style.display = "block";
+  //     } else {
+  //       room.style.display = "none";
+  //     }
+  //   });
+  // }
 
-  showRooms();
+  // showRooms();
 
-  function updatePagination() {
-    currentPageDisplay.innerText = currentPage;
+  // function updatePagination() {
+  //   currentPageDisplay.innerText = currentPage;
 
-    if (currentPage === 1) {
-      prevPageButton.disabled = true;
-    } else {
-      prevPageButton.disabled = false;
-    }
+  //   if (currentPage === 1) {
+  //     prevPageButton.disabled = true;
+  //   } else {
+  //     prevPageButton.disabled = false;
+  //   }
 
-    if (currentPage * roomsPerPage >= rooms.length) {
-      nextPageButton.disabled = true;
-    } else {
-      nextPageButton.disabled = false;
-    }
-  }
+  //   if (currentPage * roomsPerPage >= rooms.length) {
+  //     nextPageButton.disabled = true;
+  //   } else {
+  //     nextPageButton.disabled = false;
+  //   }
+  // }
 
-  prevPageButton.addEventListener("click", function () {
-    if (currentPage > 1) {
-      currentPage -= 1;
-      showRooms();
-      updatePagination();
-    }
-  });
+  // prevPageButton.addEventListener("click", function () {
+  //   if (currentPage > 1) {
+  //     currentPage -= 1;
+  //     showRooms();
+  //     updatePagination();
+  //   }
+  // });
 
-  nextPageButton.addEventListener("click", function () {
-    if (currentPage * roomsPerPage < rooms.length) {
-      currentPage += 1;
-      showRooms();
-      updatePagination();
-    }
-  });
+  // nextPageButton.addEventListener("click", function () {
+  //   if (currentPage * roomsPerPage < rooms.length) {
+  //     currentPage += 1;
+  //     showRooms();
+  //     updatePagination();
+  //   }
+  // });
 
-  updatePagination();
+ // updatePagination();
 });
