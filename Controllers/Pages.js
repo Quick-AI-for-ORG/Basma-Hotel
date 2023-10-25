@@ -32,8 +32,11 @@ const myProfile = (req, res) => {
 const rooms = (req, res) => {
   res.render("allRooms");
 };
+const covid = (req, res) => {
+  res.render("covid-19");
+};
 
 module.exports = {
-  root: { basma, about, facilities, privacy, rooms },
+  root: { basma, about, facilities, privacy, rooms,covid },
   guest: { login, signup, bookings, myProfile },
 };
