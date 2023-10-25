@@ -87,11 +87,12 @@ const updateGuest = async (req, res) => {
     console.log(req.body);
     try{
     await Guest.update({
-        firstName: req.body.fname,
-        lastName: req.body.lname,
+        
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         email: req.body.email,
         phoneNumber: req.body.phoneNumber,
-        password: req.body.password,
+        // password: req.body.password,
         address: req.body.address,
     }, {
         where: {
@@ -100,14 +101,30 @@ const updateGuest = async (req, res) => {
     
     })
 
+    req.session.user = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        phone: req.body.phoneNumber,
+        password: req.body.password,
+        address: req.body.address,
+        twitter: "",
+        facebook: "",
+        instagram: "",
+        google: "",
+        bio: "",
+        role: "Guest",
+
+    }
+
 
 } catch(err){
     console.error("Error: " + err);
     res.status(400).json({ message: err.message });
 }
             req.session.user = {
-                firstName: req.body.fname,
-                lastName: req.body.lname,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
                 email: req.body.email,
                 phone: req.body.phoneNumber,
                 password: req.body.password,
@@ -120,10 +137,12 @@ const updateGuest = async (req, res) => {
                 role: "Guest",
 
             }
-            // res.redirect('/guest');
+
+            res.redirect('/guest');
+            
 
         }
 
-
+        
 
 module.exports = { register, login, deleteGuest, updateGuest }

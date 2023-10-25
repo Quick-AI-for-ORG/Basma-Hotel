@@ -186,26 +186,26 @@
               <button class="editBtn"  title="Edit" onclick="
                 
                 
-                var fullName = document.getElementById('fullName').innerhtml;
+                var fullName = document.getElementById('fullName').innerHTML;
                 var firstName = fullName.split(' ')[0];
                 var lastName = fullName.split(' ')[1];
-                var email = document.getElementById('email').innerText;
-                var phoneNumber = document.getElementById('phoneNumber').innerText;
-                var address = document.getElementById('address').innerText;
+                var email = document.getElementById('email').innerHTML;
+                var phoneNumber = document.getElementById('phoneNumber').innerHTML;
+                var address = document.getElementById('address').innerHTML;
+    
                 console.error('check this out')
                 console.log(firstName);
                 console.log(lastName);
                 console.log(email);
                 console.log(phoneNumber);
                 console.log(address);
-                
-                
-                 document.getElementById('efn').innerText= firstName;
-                 document.getElementById('eln').innerText= lastName;
-                  document.getElementById('ee').innerText=  email
-                  document.getElementById('ep').innerText= phoneNumber
-                  document.getElementById('ea').innerText= address
-                  document.getElementById('editor').submit();
+    
+                document.getElementById('efn').value = firstName;
+                document.getElementById('eln').value = lastName;
+                document.getElementById('ee').value = email;
+                document.getElementById('ep').value = phoneNumber;
+                document.getElementById('ea').value = address;
+                document.getElementById('editor').submit();
                 
                 
                 " ><i class="fa-solid fa-user-pen"style="margin-right: 5px;"></i> Edit Profile</button>
