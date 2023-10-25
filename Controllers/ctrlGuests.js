@@ -84,6 +84,7 @@ const deleteGuest =async (req, res) => {
     }
 
 const updateGuest = async (req, res) => {
+    console.log(req.body);
     try{
     await Guest.update({
         firstName: req.body.fname,
@@ -98,6 +99,8 @@ const updateGuest = async (req, res) => {
         }
     
     })
+
+
 } catch(err){
     console.error("Error: " + err);
     res.status(400).json({ message: err.message });
@@ -117,7 +120,7 @@ const updateGuest = async (req, res) => {
                 role: "Guest",
 
             }
-            res.redirect('/guest');
+            // res.redirect('/guest');
 
         }
 

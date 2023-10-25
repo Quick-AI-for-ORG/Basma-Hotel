@@ -183,7 +183,32 @@
               </div>
             </div>
             <div class="buttonContainer">
-              <button class="editBtn"  title="Edit" onclick=`ed(<%=user.firstName%>,<%=user.lastName%>,<%=user.email%>,<%=user.phoneNumber%>,<%=user.address%>)`><i class="fa-solid fa-user-pen"style="margin-right: 5px;"></i> Edit Profile</button>
+              <button class="editBtn"  title="Edit" onclick="
+                
+                
+                var fullName = document.getElementById('fullName').innerhtml;
+                var firstName = fullName.split(' ')[0];
+                var lastName = fullName.split(' ')[1];
+                var email = document.getElementById('email').innerText;
+                var phoneNumber = document.getElementById('phoneNumber').innerText;
+                var address = document.getElementById('address').innerText;
+                console.error('check this out')
+                console.log(firstName);
+                console.log(lastName);
+                console.log(email);
+                console.log(phoneNumber);
+                console.log(address);
+                
+                
+                 document.getElementById('efn').innerText= firstName;
+                 document.getElementById('eln').innerText= lastName;
+                  document.getElementById('ee').innerText=  email
+                  document.getElementById('ep').innerText= phoneNumber
+                  document.getElementById('ea').innerText= address
+                  document.getElementById('editor').submit();
+                
+                
+                " ><i class="fa-solid fa-user-pen"style="margin-right: 5px;"></i> Edit Profile</button>
               <button class="deleteBtn" title="Delete" onclick="document.getElementById('del').submit()"> Delete Profile <i class="fa-solid fa-trash" style="margin-left: 5px;"></i></button>
               <form method="POST" action="/guest/delete" id='del' style="visibility:hidden">
               </form>
