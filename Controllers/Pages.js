@@ -1,4 +1,5 @@
 const {Room} = require('../Models/Room.js')
+const ctrlRooms = require('../Controllers/ctrlRooms')
 
 const login = (req, res) => {
   res.render("login", { layout: false });
@@ -33,22 +34,26 @@ const myProfile = (req, res) => {
 };
 
 
-const rooms = (req, res) => {
+const viewRooms = async (req, res) => {
   let pageNumber = parseInt(req.params.page);
   let rooms = null
-  Room.findAll().then(result =>{
+  let result = await ctrlRooms.getRooms()
   if(pageNumber>result.length/6) pageNumber = result.length/6;
   if(pageNumber<1) pageNumber = 1;
+  rooms = result
   rooms=result.slice((pageNumber-1)*6, ((pageNumber-1)*6)+6);
   res.render('allRooms', {  user: (req.session.user === undefined ? "" : req.session.user) ,
   rooms: (rooms === null ? "" : rooms),
-  current_page: pageNumber,
+  current_page: Math.ceil(pageNumber),
   total_page: Math.ceil(result.length/6)})
-  }
-  ).catch(err => {console.log(err)}).then()
 };
 
+const viewRoom = (req, res) => {
+
+}
+
 module.exports = {
-  root: { basma, about, facilities, privacy, rooms },
+  root: { basma, about, facilities, privacy },
   guest: { login, signup, bookings, myProfile },
+  room:{viewRooms,viewRoom}
 };

@@ -28,26 +28,34 @@
         <h1>All Rooms</h1>
     </header>
     <main>
-        <div class="room-card-container" id="roomList">
-            <div class="room-row">
-
-                <a href="#" class="room-card">
-                    <img src="/IMAGES/IMG-20231014-WA0028.jpg" width="300" height="300">
+        <div class="room-card-container mt-4" id="roomList">
+<%
+                for (let i = 0; i < rooms.length; i++) { 
+                    if(i==3)
+                   { %>
+                    <div class="room-row">
+                        <% } %>
+                <a href="/<%=rooms[i].Title%>" class="room-card">
+                    <%
+                    const newImagePath = rooms[i].imageURL.substring(15); 
+                    %>
+                    <img src="/IMAGES/ROOMS/<%=newImagePath%>" width="300" height="300">
                     <h2>
-                        Room title:
+                        <%=rooms[i].Title%>
                     </h2>
-                    <p>Price: $Per night
+                    <p>$ <%=rooms[i].startingPrice%> Per night
                     </p>
-                    <p>Capacity: guests</p>
-                    <p>Description:
+                    <p><%=rooms[i].capacity%> guests</p>
+                    <p><%=rooms[i].description%>
                     </p>
                 </a>
-            </div>
-        </div>
+           <%  if(i==5) {%> </div>
+        <%  }  }%> 
+    </div>
         <div class="pagination">
-            <button id="prevPage"><i class="fa-regular fa-circle-left"></i> Previous</button>
-            <span id="currentPage"><%=current_page%></span>
-            <button id="nextPage">Next <i class="fa-regular fa-circle-right"></i></button>
+            <button id="prevPage" onclick="location.replace('/room/<%=current_page-1%>')"><i class="fa-regular fa-circle-left"></i> Previous</button>
+            <span id="currentPage"><%=Math.ceil(current_page)%></span>
+            <button id="nextPage" onclick="location.replace('/room/<%=current_page+1%>')">Next <i class="fa-regular fa-circle-right"></i></button>
         </div>
 
     </main>

@@ -45,20 +45,12 @@ const removeRoom = async(req,res)=>{
 ///////////////////////////////
 
 const getRooms = async(req,res)=>{
-    const rooms = await Room.findAll();
-    if(rooms.length>0)
-        res.status(200).json({rooms})
-    else 
-        res.status(400).json({message:"no rooms found"}) 
+    return await Room.findAll();
 }
 
 ////////////////////////////////////
 const getRoom = async(req,res)=>{
-    const room = await Room.findOne({Title: req.body.Title});
-    if(room)
-        res.status(200).json({room})
-    else 
-        res.status(400).json({message:"room not found"})
+    return await Room.findOne({Title: req.params[0]})
 }
 ////////////////////////////////////
 
