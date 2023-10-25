@@ -4,11 +4,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=room.Title%></title>
+    <title>
+        <%= room.Title %>
+    </title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+    <header class="room-header">
+        <h1>
+            <%= room.Title %>
+        </h1>
+    </header>
 
+    <div class="room-details">
+        <div class="room-image">
+            <img src="<%= room.ImageURL %>" alt="<%= room.Title %>">
+        </div>
+        <div class="room-description">
+            <h2>Description</h2>
+            <p>
+                <%= room.Description %>
+            </p>
+            <h2>Room Characteristics</h2>
+            <ul>
+                <% room.Characteristics.forEach(function(characteristic) { %>
+                    <li>
+                        <%= characteristic %>
+                    </li>
+                    <% }); %>
+            </ul>
+            <h2>Room Details</h2>
+            <ul>
+                <li>Quantity: <%= room.Quantity %>
+                </li>
+                <li>Capacity: <%= room.Capacity %> people</li>
+                <li>Starting Price: $<%= room.StartingPrice %> per night</li>
+                <li>
+                    <%= room.Executive ? 'Executive Club Room' : 'Basma Hotel Room' %>
+                </li>
+            </ul>
+        </div>
+    </div>
 </body>
 
 </html>

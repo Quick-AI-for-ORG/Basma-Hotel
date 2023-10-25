@@ -22,7 +22,7 @@ Question.belongsTo(Guest, {
 });
 
 async function createTable() {
-  await Questions.sync();
+  await Question.sync();
 }
 
 module.exports = {createTable, Question}
