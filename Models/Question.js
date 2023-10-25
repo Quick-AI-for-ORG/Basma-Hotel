@@ -6,7 +6,7 @@ const sequelize = new Sequelize('SWEProject', 'root', '', {
   dialect: 'mysql',
 });
 
-const Questions = sequelize.define('Questions', {
+const Question = sequelize.define('Questions', {
   email: {
     type: Sequelize.STRING(255),
     allowNull: false,
@@ -17,7 +17,7 @@ const Questions = sequelize.define('Questions', {
   },
 });
 
-Questions.belongsTo(Guest, {
+Question.belongsTo(Guest, {
   foreignKey: 'email',
 });
 
@@ -25,4 +25,4 @@ async function createTable() {
   await Questions.sync();
 }
 
-module.exports = {createTable, Questions}
+module.exports = {createTable, Question}
