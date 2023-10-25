@@ -1,0 +1,91 @@
+/* start allrooms */
+/* Room Cards */
+.room-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.room-row {
+  display: flex;
+  margin: 20px 30px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.room-card {
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.room-card:hover {
+  transform: scale(1.05); /* Add a slight hover effect */
+}
+
+.room-card img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.room-card h2 {
+  font-size: 24px;
+  margin: 10px 0;
+}
+
+.room-card p {
+  font-size: 16px;
+}
+/* End all rooms */
+/* Pagination styling */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #3c0266;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 10px 10px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #8213c2;
+  transition: background-color 0.5s;
+}
+
+.pagination span {
+  font-size: 18px;
+  margin: 0 10px;
+}
+
+a {
+  color: #8213c2;
+  text-decoration: none;
+}
+
+#currentPage {
+  font-size: 20px;
+  background-color: #8213c2;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+/* end pagination   */
