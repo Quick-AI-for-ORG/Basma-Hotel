@@ -60,3 +60,35 @@
   transition: background-color 0.3s;
   color: #fff;
 }
+.centered-text {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
+  position: relative;
+}
+
+.centered-text h2 {
+  font-size: 36px;
+  background-image: linear-gradient(to right, #133cc2, #8213c2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+.centered-text h2::after {
+  content: "";
+  display: block;
+  width: 400px;
+  height: 4px;
+  background-color: #600396aa;
+  margin: 15px auto;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}

@@ -71,7 +71,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  height: 40vh;
   position: relative;
 }
 
@@ -388,4 +388,8 @@
   color: #fff;
   font-size: 18px;
   margin: 10px 0;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
