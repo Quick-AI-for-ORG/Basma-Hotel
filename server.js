@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const expressLayouts = require("express-ejs-layouts");
 const Guest = require("./Models/Guest");
 const Room = require("./Models/Room");
-const Reservation = require("./Models/Reservations");
+const Reservation = require("./Models/Reservation");
 const Question = require("./Models/Question");
 
 const indexRouter = require("./Routes/index");
