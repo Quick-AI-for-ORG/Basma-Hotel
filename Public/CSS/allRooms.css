@@ -89,3 +89,7 @@ a {
   border-radius: 5px;
 }
 /* end pagination   */
+
+::-webkit-scrollbar {
+  display: none;
+}

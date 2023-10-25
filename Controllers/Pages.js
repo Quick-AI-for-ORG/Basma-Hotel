@@ -32,6 +32,7 @@ const myProfile = (req, res) => {
 const rooms = (req, res) => {
   res.render("allRooms");
 };
+
 module.exports = {
   root: { basma, about, facilities, privacy, rooms },
   guest: { login, signup, bookings, myProfile },
