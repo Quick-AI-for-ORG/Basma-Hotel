@@ -1,12 +1,12 @@
-const Sequelize = require('sequelize');
-const { Room } = require('./Room');
-const { Guest } = require('./Guest');
-const sequelize = new Sequelize('SWEProject', 'root', '', {
-  host: 'localhost',
-  dialect: 'mysql',
+const Sequelize = require("sequelize");
+const { Room } = require("./Room");
+const { Guest } = require("./Guest");
+const sequelize = new Sequelize("SWEProject", "root", "", {
+  host: "localhost",
+  dialect: "mysql",
 });
 
-const Reservation = sequelize.define('Reservation', {
+const Reservation = sequelize.define("Reservation", {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -24,7 +24,7 @@ const Reservation = sequelize.define('Reservation', {
     type: Sequelize.DATE,
     allowNull: false,
   },
-  end_date: {
+  end_date: { 
     type: Sequelize.DATE,
     allowNull: false,
   },
@@ -41,11 +41,11 @@ const Reservation = sequelize.define('Reservation', {
 
 // Define the foreign key constraints
 Reservation.belongsTo(Room, {
-  foreignKey: 'room_Title',
+  foreignKey: "room_Title",
 });
 
 Reservation.belongsTo(Guest, {
-  foreignKey: 'guest_email',
+  foreignKey: "guest_email",
 });
 
 // Create the table if it does not exist
@@ -53,4 +53,4 @@ async function createTable() {
   await Reservation.sync();
 }
 
-module.exports = { createTable , Reservation};
+module.exports = { createTable, Reservation };
