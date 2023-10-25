@@ -20,14 +20,14 @@
     <div class="room-details">
         <div class="room-image">
             <% const newImagePath=room.imageURL.substring(15); %>
-                <img src="/IMAGES/ROOMS/<%=newImagePath%>" alt="<%= room.Title %>">
+                <img src="/IMAGES/ROOMS/<%= newImagePath %>" alt="<%= room.Title %>">
         </div>
         <div class="room-description">
             <h2>Description</h2>
             <p>
                 <%= room.description %>
             </p>
-
+            <hr>
             <h2>Room Details</h2>
             <ul>
                 <li>Quantity: <%= room.quantity %>
@@ -38,6 +38,18 @@
                     <%= room.executive ? 'Executive Club Room' : 'Basma Hotel Room' %>
                 </li>
             </ul>
+            <hr>
+            <h2>Book Now!</h2>
+            <form action="/booking" method="POST">
+                <input type="hidden" name="roomTitle" value="<%= room.Title %>">
+                <label for="arrivalDate">Arrival Date:</label>
+                <input type="date" id="arrivalDate" name="arrivalDate" required>
+                <br>
+                <label for="departureDate">Departure Date:</label>
+                <input type="date" id="departureDate" name="departureDate" required>
+                <br>
+                <input type="submit" value="Book Now">
+            </form>
         </div>
     </div>
 </body>

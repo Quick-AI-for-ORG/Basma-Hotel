@@ -15,14 +15,14 @@ body {
 
 .room-details {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-start;
   margin: 20px;
   padding: 20px;
 }
 
 .room-image {
-  width: 50%;
+  width: 45%;
   text-align: center;
 }
 
@@ -66,4 +66,41 @@ body {
 .room-description ul li:last-child {
   font-weight: bold;
   color: #8213c2;
+}
+
+form {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  color: #8213c2;
+}
+
+input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input[type="submit"] {
+  display: block;
+  margin: 20px auto;
+  width: 50%;
+  padding: 10px;
+  background-color: #8813c2;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+  background-color: #3c0266;
+  transition: background-color 0.3s;
 }
