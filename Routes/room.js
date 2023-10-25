@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     res.redirect('/room/1')
 })
 router.get('/:page', pages.room.viewRooms)
-router.get('/:roomTitle',pages.room.viewRoom)
+router.get('/details/:roomTitle',pages.room.viewRoom)
 router.post('/addRoom', ctrlRooms.addRoom)
 router.post('/removeRoom', ctrlRooms.removeRoom)
 router.post('/modifyRoom', ctrlRooms.modifyRoom)
