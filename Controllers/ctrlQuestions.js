@@ -1,13 +1,18 @@
 const { Question } = require('../Models/Question.js');
+const { Guest } = require('../Models/Guest.js');
 
 
-const ask = async (req, res) => {
+const askQuestion = async (req, res) => {
+Guest.findOne({where: {email: req.body.email}}).then(async (user) => {
+    if(user){
 Question.create({
     message: req.body.message,
     email: req.body.email,
 }).then((question) => {
-    res.status(201).json({ message: "Question added" });
+    console.log(question)
     res.redirect('/')
+})}
+else res.redirect('/guest')
 })}
 
 const getQuestions = async (req, res) => {
@@ -16,4 +21,4 @@ const getQuestions = async (req, res) => {
     });
 }
 
-module.exports = { ask, getQuestions }
+module.exports = { askQuestion, getQuestions }

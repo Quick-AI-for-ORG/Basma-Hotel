@@ -3,7 +3,7 @@ const {Room} = require('../Models/Room.js')
 
 
 const addRoom = async(req,res)=>{     
-   let found = await Room.findOne({Title: req.body.title});
+   let found = await Room.findOne({ where:{Title: req.body.Title}});
    if(found){
          return res.status(400).json({message:"room already exists"})
    }
