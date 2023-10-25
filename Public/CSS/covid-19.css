@@ -1,0 +1,139 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(45deg, #011760, #a02ce4);
+}
+
+header {
+  text-align: center;
+  padding: 20px;
+  color: #fff;
+  margin-top: 50px;
+}
+
+header h1 {
+  font-size: 36px;
+}
+
+header:after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #8213c2;
+}
+
+.centered-text {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
+  position: relative;
+}
+
+.centered-text h2 {
+  font-size: 36px;
+  background-image: linear-gradient(to right, #4262ce, #ac46e7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+.centered-text h2::after {
+  content: "";
+  display: block;
+  width: 400px;
+  height: 4px;
+  background-color: #ffffff;
+  margin: 15px auto;
+}
+
+header:after {
+  content: "";
+  display: block;
+  width: 20%;
+  height: 3px;
+  background-color: #fefefe;
+}
+
+.announcement {
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+  padding: 20px;
+  line-height: 1.5;
+}
+.safety-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 20px;
+  background-color: #850bcb8f;
+  color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 100%;
+}
+
+.safety-content {
+  text-align: center;
+}
+.cards-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 25px 10px;
+}
+
+.card {
+  width: calc(30% - 20px);
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  transition: transform 0.2s;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.facility-card:hover {
+  transform: scale(1.05);
+}
+/* CSS for the card icons */
+.card i {
+  font-size: 2rem;
+  color: #8213c2;
+  display: block;
+  margin: 15px auto;
+}
+
+.ViewBtn {
+  width: 30%;
+  display: block;
+  margin: 0 auto;
+  padding: 12px 20px;
+  color: #8213c2;
+  font-weight: 500;
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 30px;
+}
+
+.ViewBtn:hover {
+  background-color: #3c0266;
+  transition: background-color 0.3s;
+  color: #fff;
+}
