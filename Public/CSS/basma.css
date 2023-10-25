@@ -100,7 +100,7 @@
 .centered-text::before {
   content: "";
   position: absolute;
-  top: 44%;
+  top: 38%;
   height: 2px;
   background-color: #0c008c;
   width: 50px;
@@ -110,7 +110,7 @@
 .centered-text::after {
   content: "";
   position: absolute;
-  top: 44%;
+  top: 38%;
   height: 2px;
   background-color: #0c008c;
   width: 50px;
@@ -320,21 +320,24 @@
   margin-bottom: 20px;
 }
 
-.safe button {
+.safe a {
   background-color: #7f12be;
   color: #fff;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
+  text-decoration: none;
   font-size: 16px;
 }
-.safe button:hover {
+.safe a:hover {
   background-color: #44006b;
+  text-decoration: none;
+  color: white;
 }
 
 /* Style for the button icon */
-.safe button i {
+.safe a i {
   margin-left: 5px;
 }
 

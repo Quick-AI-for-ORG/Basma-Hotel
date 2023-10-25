@@ -84,13 +84,14 @@ const deleteGuest =async (req, res) => {
     }
 
 const updateGuest = async (req, res) => {
+    console.log(req.body);
     try{
     await Guest.update({
-        firstName: req.body.fname,
-        lastName: req.body.lname,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         email: req.body.email,
         phoneNumber: req.body.phoneNumber,
-        password: req.body.password,
+        // password: req.body.password,
         address: req.body.address,
     }, {
         where: {
@@ -98,21 +99,23 @@ const updateGuest = async (req, res) => {
         }
     
     })
+
+
 } catch(err){
     console.error("Error: " + err);
     res.status(400).json({ message: err.message });
 }
             req.session.user = {
-                firstName: req.body.fname,
-                lastName: req.body.lname,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
                 email: req.body.email,
-                phone: req.body.phoneNumber,
+                phoneNumber: req.body.phoneNumber,
                 password: req.body.password,
                 address: req.body.address,
-                twitter: "",
-                facebook: "",
-                instagram: "",
-                google: "",
+                twitterLink: "",
+                facebookLink: "",
+                instagramLink: "",
+                googleLink: "",
                 bio: "",
                 role: "Guest",
 
@@ -123,4 +126,39 @@ const updateGuest = async (req, res) => {
 
 
 
-module.exports = { register, login, deleteGuest, updateGuest }
+
+const updateBio = async (req, res) => {
+    console.log(req.body);
+    try{
+    await Guest.update({
+        bio: req.body.bio,
+    }, {
+        where: {
+            email: req.session.user.email,
+        }
+    
+    })
+}
+catch(err){
+    console.error("Error: " + err);
+    res.status(400).json({ message: err.message });
+}
+            req.session.user = {
+                firstName: req.session.user.firstName,
+                lastName: req.session.user.lastName,
+                email: req.session.user.email,
+                phoneNumber: req.session.user.phoneNumber,
+                password: req.session.user.password,
+                address: req.session.user.address,
+                twitterLink: req.session.user.twitterLink,
+                facebookLink: req.session.user.facebookLink,
+                instagramLink: req.session.user.instagramLink,
+                googleLink: req.session.user.googleLink,
+                bio: req.body.bio,
+                role: req.session.user.role,
+
+            }
+            res.redirect('/guest');
+
+        }
+module.exports = { register, login, deleteGuest, updateGuest, updateBio }

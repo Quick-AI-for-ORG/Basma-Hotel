@@ -44,7 +44,24 @@
               <img src="/IMAGES/user.png" alt="avatar"
                 class="rounded-circle img-fluid" style="width: 150px;">
               <h5 class="my-3"><%=user.name%></h5>
-              <p class="text-muted mb-1"><%=user.bio%></p>
+              <div>
+                <p style="display: inline;"  class="text-muted mb-1"><%=user.bio%></p>
+                <img src="/IMAGES/edit.png" class="editLogo" alt="edit button" onclick = "var array = document.getElementsByClassName('bio');
+                for (let i = 0; i < array.length; i++) {
+                  array[i].style.visibility = 'visible';
+                  
+                }">
+
+                
+                  
+              </div>
+              <label style="visibility: hidden;" for="bio" class="bio"></label>
+              
+              <form action="/guest/updateBio" style="visibility: hidden;" method="post">
+                <textarea name='bio'id="bio" class="bio" type="textarea" style="visibility:hidden;"> </textarea>
+                <button class="bio" onclick="submit">save</button>
+            </form>
+              
             </div>
           </div>
           <div class="card mb-4 mb-lg-0">
@@ -183,7 +200,32 @@
               </div>
             </div>
             <div class="buttonContainer">
-              <button class="editBtn"  title="Edit" onclick=`ed(<%=user.firstName%>,<%=user.lastName%>,<%=user.email%>,<%=user.phoneNumber%>,<%=user.address%>)`><i class="fa-solid fa-user-pen"style="margin-right: 5px;"></i> Edit Profile</button>
+              <button class="editBtn"  title="Edit" onclick="
+                
+                
+                var fullName = document.getElementById('fullName').innerHTML;
+                var firstName = fullName.split(' ')[0];
+                var lastName = fullName.split(' ')[1];
+                var email = document.getElementById('email').innerHTML;
+                var phoneNumber = document.getElementById('phoneNumber').innerHTML;
+                var address = document.getElementById('address').innerHTML;
+    
+                console.error('check this out')
+                console.log(firstName);
+                console.log(lastName);
+                console.log(email);
+                console.log(phoneNumber);
+                console.log(address);
+    
+                document.getElementById('efn').value = firstName;
+                document.getElementById('eln').value = lastName;
+                document.getElementById('ee').value = email;
+                document.getElementById('ep').value = phoneNumber;
+                document.getElementById('ea').value = address;
+                document.getElementById('editor').submit();
+                
+                
+                " ><i class="fa-solid fa-user-pen"style="margin-right: 5px;"></i> Edit Profile</button>
               <button class="deleteBtn" title="Delete" onclick="document.getElementById('del').submit()"> Delete Profile <i class="fa-solid fa-trash" style="margin-left: 5px;"></i></button>
               <form method="POST" action="/guest/delete" id='del' style="visibility:hidden">
               </form>
