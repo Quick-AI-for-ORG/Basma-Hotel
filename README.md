@@ -136,7 +136,7 @@ Booking a hotel room has become more and more of a struggle recently due to the 
 
 2. System Overview
 
-![](Public\IMAGES\README\SystemOverview.png)
+![](https://github.com/SWE-Project-23/Project/blob/main/Public/IMAGES/README/SystemOverview.png)
 
 Figure 1: System Overview
 
@@ -158,7 +158,7 @@ Out Of Scope:
 1. Financial transactions: all booking and service payments are handled at other gateways.
 4. System Context
 
-![](Public\IMAGES\README\SystemContext.png)
+![](https://github.com/SWE-Project-23/Project/blob/main/Public/IMAGES/README/SystemContext.png)
 
 Figure 2: System Context
 
@@ -192,7 +192,7 @@ The below use case diagram demonstrates the system’s functional requirements. 
 
 1. System Functions
 
-![](Public\IMAGES\README\thediagramforproject.png)
+![](https://github.com/SWE-Project-23/Project/blob/main/Public/IMAGES/README/thediagramforproject.png)
 
 Figure 3: Use Case Diagram
 
@@ -356,13 +356,13 @@ These tables are the foundation of our online hotel management system, securely 
 
 7\.1 Database
 
-![](APublic\IMAGES\README\ER.png)
+![](https://github.com/SWE-Project-23/Project/blob/main/Public/IMAGES/README/ER.png)
 
 Figure 4: database ERD diagram
 
 8 Preliminary Object-Oriented Domain Analysis
 
-![](Public\IMAGES\README\db.png)
+![](https://github.com/SWE-Project-23/Project/blob/main/Public/IMAGES/README/db.png)
 
 Figure 5: Initial class diagram for the database
 
