@@ -136,7 +136,7 @@ Booking a hotel room has become more and more of a struggle recently due to the 
 
 2. System Overview
 
-![](Aspose.Words.3d4eb29a-a094-4201-b352-06c2baffb4f0.001.jpeg)
+![](Public\IMAGES\README\SystemOverview.png)
 
 Figure 1: System Overview
 
@@ -158,7 +158,7 @@ Out Of Scope:
 1. Financial transactions: all booking and service payments are handled at other gateways.
 4. System Context
 
-![](Aspose.Words.3d4eb29a-a094-4201-b352-06c2baffb4f0.002.jpeg)
+![](Public\IMAGES\README\SystemContext.png)
 
 Figure 2: System Context
 
@@ -192,7 +192,7 @@ The below use case diagram demonstrates the system’s functional requirements. 
 
 1. System Functions
 
-![](Aspose.Words.3d4eb29a-a094-4201-b352-06c2baffb4f0.003.png)
+![](Public\IMAGES\README\thediagramforproject.png)
 
 Figure 3: Use Case Diagram
 
@@ -356,13 +356,13 @@ These tables are the foundation of our online hotel management system, securely 
 
 7\.1 Database
 
-![](Aspose.Words.3d4eb29a-a094-4201-b352-06c2baffb4f0.004.png)
+![](APublic\IMAGES\README\ER.png)
 
 Figure 4: database ERD diagram
 
 8 Preliminary Object-Oriented Domain Analysis
 
-![](Aspose.Words.3d4eb29a-a094-4201-b352-06c2baffb4f0.005.png)
+![](Public\IMAGES\README\db.png)
 
 Figure 5: Initial class diagram for the database
 
@@ -401,7 +401,7 @@ What could go wrong:
 
 10 Project Plan
 
-![](Aspose.Words.3d4eb29a-a094-4201-b352-06c2baffb4f0.006.png)
+![](Public\IMAGES\README\SWEPROJECT.PNG)
 
 Figure 6: Detailed plan from proposal to SDD
 
