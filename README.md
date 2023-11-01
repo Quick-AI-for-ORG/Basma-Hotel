@@ -401,7 +401,7 @@ What could go wrong:
 
 10 Project Plan
 
-![](Public\IMAGES\README\SWEPROJECT.PNG)
+![](https://github.com/SWE-Project-23/Project/blob/main/Public/IMAGES/README/SWEPROJECT.PNG)
 
 Figure 6: Detailed plan from proposal to SDD
 
