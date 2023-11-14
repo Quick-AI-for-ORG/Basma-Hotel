@@ -50,7 +50,8 @@ const getRooms = async(req,res)=>{
 
 ////////////////////////////////////
 const getRoom = async(req,res)=>{
-    return await Room.findOne({Title: req.params[0]})
+
+    return await Room.findOne({where:{Title: req.params.roomTitle}})
 }
 ////////////////////////////////////
 
@@ -75,4 +76,7 @@ const modifyRoom = async(req,res)=>{
         })
 }
 
-module.exports ={addRoom,removeRoom,getRooms,getRoom,modifyRoom}
+module.exports ={
+    public: {getRooms,getRoom},
+    admin: {addRoom,removeRoom,modifyRoom}
+}

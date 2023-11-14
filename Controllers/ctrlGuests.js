@@ -162,11 +162,19 @@ catch(err){
             res.redirect('/guest');
 
         }
-const checkMail = async (req, res) => {
-Guest.findOne({where:{email: req.body.mail}}).then(async result=>{
-    console.log(result)
-    if(result!=null) res.send({ result: 'found' })
-    else res.send({ result: 'not found' })
-    })
-}
-module.exports = { register, login, deleteGuest, updateGuest, updateBio, checkMail }
+        const checkMail = async (req, res) => {
+            Guest.findOne({where:{email: req.body.mail}}).then(async result=>{
+                console.log(result)
+                if(result!=null) res.send({ result: 'found' })
+                else res.send({ result: 'not found' })
+                })
+            }
+            const retriveGuests = async(req,res)=>{
+                return await Guest.findAll();
+            }
+            module.exports = {
+                public: {register, login,checkMail},
+                guest:{ updateGuest, updateBio},
+                admin: {retriveGuests, deleteGuest}
+            }
+               
