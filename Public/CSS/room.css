@@ -1,16 +1,16 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  font-family: "Poppins", sans-serif; /* Use a modern and elegant font */
+  background-color: #f8f8f8; /* Light gray background */
   margin: 0;
   padding: 0;
 }
 
 .room-header {
-  background-color: #8813c2;
+  background-color: #6c5ce7; /* Purple background color */
   color: #fff;
   text-align: center;
   padding: 20px;
-  font-size: 28px;
+  font-size: 32px;
 }
 
 .room-details {
@@ -29,28 +29,29 @@ body {
 .room-image img {
   max-width: 100%;
   height: auto;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 12px; /* Slightly increased border radius */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 .room-description {
   width: 50%;
   padding: 20px;
-  font-size: 18px;
-  line-height: 1.5;
+  font-size: 16px; /* Slightly reduced font size */
+  line-height: 1.8;
   background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .room-description h2 {
-  font-size: 24px;
+  font-size: 28px; /* Larger heading size */
   margin-top: 20px;
-  color: #8213c2;
+  color: #6c5ce7; /* Purple heading color */
 }
 
 .room-description p {
   margin-top: 20px;
+  color: #333; /* Darker text color */
 }
 
 .room-description ul {
@@ -61,46 +62,47 @@ body {
 
 .room-description ul li {
   margin-top: 10px;
+  color: #333; /* Darker text color */
 }
 
 .room-description ul li:last-child {
   font-weight: bold;
-  color: #8213c2;
+  color: #6c5ce7; /* Purple color for the last list item */
 }
 
 form {
   margin-top: 20px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 label {
   display: block;
   margin-top: 10px;
-  color: #8213c2;
+  color: #6c5ce7; /* Purple label color */
 }
 
 input[type="date"] {
   width: 100%;
-  padding: 10px;
-  margin-top: 5px;
+  padding: 12px; /* Increased padding for input elements */
+  margin-top: 8px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 8px;
 }
 
 input[type="submit"] {
   display: block;
   margin: 20px auto;
   width: 50%;
-  padding: 10px;
-  background-color: #8813c2;
+  padding: 14px; /* Increased padding for a more prominent button */
+  background-color: #6c5ce7;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 input[type="submit"]:hover {
-  background-color: #3c0266;
+  background-color: #4834d4; /* Darker purple on hover */
   transition: background-color 0.3s;
 }
