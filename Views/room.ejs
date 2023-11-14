@@ -41,10 +41,10 @@
                 <img src="/IMAGES/ROOMS/<%= newImagePath %>" alt="<%= room.Title %>">
                 <%
                 const exe = ".jpeg"
-                const more =  newImagePath.substring(0, newImagePath.length - exe.length);
+                const more =  newImagePath.substring(2, newImagePath.length - exe.length);
                 %>
-                <img src="/IMAGES/ROOMS/<%= more%>1" alt="<%= room.Title %>">
-                <img src="/IMAGES/ROOMS/<%= more%>2" alt="<%= room.Title %>">
+                <img src="/IMAGES/ROOMS/<%=more +'1'+exe%>" alt="<%= room.Title %>">
+                <img src="/IMAGES/ROOMS/<%=more+'2'+exe%>" alt="<%= room.Title %>">
         </div>
         <div class="room-description">
             <h2>Description</h2>
