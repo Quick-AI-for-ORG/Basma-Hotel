@@ -232,17 +232,21 @@
               </form>
             </div>
           </div>
+          <% if(reservations.length != 0)  {  %>
           <div class="row">
             <div class="col-md-6">
               <div class="card mb-4 mb-md-0">
                 <div class="card-body">
                   <p class="mb-4"><span class="text-primary font-italic me-1">Previous Bookings</span>
                   </p>
-                  <p class="mb-1" style="font-size: .77rem;">DATE 20/20/23</p>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">DATE 20/20/23</p>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">DATE 20/20/23</p>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">DATE 20/20/23</p>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">DATE 20/20/23</p>
+                  <% reservations.forEach(reservation => { %>
+                    <% const currentDate = new Date(); %>
+                    <% if (currentDate > reservation.end_date) { %>
+                      <% const date = reservation.end_date.toDateString().substring(0, 16); %>
+                      <p class="mb-1 mt-4" style="font-size: .77rem;">Date: <%= date %></p>
+                    <% } %>
+                  <% }); %>
+                
                   </div>
                 </div>
               </div>
@@ -252,17 +256,31 @@
                 <div class="card-body">
                   <p class="mb-4"><span class="text-primary font-italic me-1">Active Bookings</span>
                   </p>
-                  <p class="mb-1" style="font-size: .77rem;">DATE 20/20/23</p>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">DATE 20/20/23</p>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">DATE 20/20/23</p>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">DATE 20/20/23</p>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">DATE 20/20/23</p>
+
+
+                  <% reservations.forEach(reservation => { %>
+                    <% const currentDate = new Date(); %>
+                    <% if (currentDate < reservation.end_date) { %>
+                      <% const date = reservation.end_date.toDateString().substring(0, 16); %>
+                      <p class="mb-1 mt-4" style="font-size: .77rem;">Date: <%= date %></p>
+                    <% } %>
+                  <% }); %>
+
+
+                 
                   </div>
                 </div>
                 </div>
               </div>
             </div>
           </div>
+          <% } else { %>
+                <div class="text-center">
+                  <!-- <button class = "editBtn">Book now!</button> -->
+                  <a href="room/1" class="btn editBtn">Book now!</a>
+                </div>
+                
+            <% } %>
         </div>
       </div>
       <form method="post" id="editor" action="/guest/update" style="visibility: hidden;">

@@ -1,5 +1,6 @@
 const {Room} = require('../Models/Room.js')
 const ctrlRooms = require('../Controllers/ctrlRooms')
+const ctrlReservations = require('../Controllers/ctrlReservations')
 
 const login = (req, res) => {
   res.render("login", { layout: false });
@@ -29,6 +30,7 @@ const myProfile = async (req, res) => {
   if (req.session.user === undefined) {
     res.redirect("/guest/login");
   } else {
+    console.log(req.session.user)
     await ctrlReservations.guest.getUserReservations(req,res).then((result)=>{
       res.render("myProfile", {
         layout: false,
