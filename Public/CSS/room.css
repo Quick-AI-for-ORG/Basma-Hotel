@@ -1,107 +1,143 @@
+/* room.css */
+
 body {
-  font-family: "Poppins", sans-serif;
-  background-color: #f8f8f8;
+  font-family: "Arial", sans-serif;
   margin: 0;
   padding: 0;
-  color: #333;
+  background-color: #eaeaea;
+  color: #333; /* Updated text color */
 }
 
-header {
-  background-color: #6c5ce7;
+.room-header {
+  background-color: #6c5ce7; /* Updated color */
   color: #fff;
+  padding: 15px;
   text-align: center;
-  padding: 20px;
-  font-size: 32px;
+  font-size: 32px; /* Updated font size */
 }
 
-.room-details {
+.room-container {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: space-around;
   margin: 20px;
-  padding: 20px;
+}
+
+.card {
+  background-color: #fff; /* Updated color */
+  border-radius: 12px; /* Updated border-radius */
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.image-description {
+  width: 60%;
 }
 
 .room-image {
-  width: 45%;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
 }
 
 .room-image img {
+  margin-bottom: 10px;
+  border-radius: 10px;
   max-width: 100%;
   height: auto;
-  border-radius: 12px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 .room-description {
-  width: 50%;
   padding: 20px;
   font-size: 16px;
   line-height: 1.8;
-  background-color: #fff;
+  background-color: #f0e6f4; /* Updated color */
   border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .room-description h2 {
-  font-size: 28px;
-  margin-top: 20px;
   color: #6c5ce7;
 }
 
 .room-description p {
-  margin-top: 20px;
+  color: #8e7da0;
 }
 
-.room-description ul {
-  list-style-type: disc;
-  padding-left: 20px;
-  margin-top: 20px;
+.room-description i {
+  color: #ff4081;
+  font-size: 24px;
+  margin-right: 5px;
 }
 
-.room-description ul li {
-  margin-top: 10px;
+.booking-form {
+  width: 35%;
+  padding: 20px;
+  background-color: #6c5ce7; /* Updated color */
+  color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.room-description ul li:last-child {
-  font-weight: bold;
-  color: #6c5ce7;
+.booking-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 form {
-  margin-top: 20px;
-  font-size: 16px;
+  display: flex;
+  flex-direction: column;
 }
 
 label {
-  display: block;
-  margin-top: 10px;
+  margin-bottom: 5px;
   color: #6c5ce7;
 }
 
-input[type="date"] {
-  width: 100%;
-  padding: 12px;
-  margin-top: 8px;
-  border: 1px solid #ccc;
+input[type="date"],
+input[type="submit"] {
+  margin-bottom: 10px;
+  padding: 8px;
+  font-size: 16px;
   border-radius: 8px;
+  border: none;
 }
 
 input[type="submit"] {
-  display: block;
-  margin: 20px auto;
-  width: 50%;
-  padding: 14px;
-  background-color: #6c5ce7;
+  width: 100%;
+  background-color: #8213c2; /* Keeping the original background color */
   color: #fff;
   border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 18px;
+  transition: background-color 0.5s;
 }
 
 input[type="submit"]:hover {
-  background-color: #4834d4;
-  transition: background-color 0.3s;
+  background-color: #3c0266; /* Keeping the original hover color */
+  transition: background-color 0.5s;
+}
+
+.room-image {
+  display: flex;
+  width:100%;
+  padding: 20px;
+  margin-right: 50%;
+}
+
+
+ .down {
+  margin-bottom: 10px;
+  border-radius: 10px;
+  width:40%;
+  height: auto;
+  flex-direction: row;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  /* Hide images by default */
 }
