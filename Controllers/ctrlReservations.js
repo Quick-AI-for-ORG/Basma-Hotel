@@ -50,4 +50,7 @@ const cancelReservation = async(req,res)=>{
         res.status(400).json({ message: err.message });
       }
     }
-    module.exports = {reserve , getReservations , getUserReservations , cancelReservation}
+    module.exports = {
+        guest: {reserve  , getUserReservations , cancelReservation},
+        admin: {getReservations}
+    }
