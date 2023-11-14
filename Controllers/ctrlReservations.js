@@ -94,10 +94,9 @@ const cancelReservation = async(req,res)=>{
                 }
             
     
-        }   
-        
-    
+        }  
     }
-
-
-    module.exports = {reserve , getReservations , getUserReservations , cancelReservation, checkAvailability}
+    module.exports = {
+        guest: {reserve  , getUserReservations , cancelReservation ,checkAvailability },
+        admin: {getReservations}
+    }

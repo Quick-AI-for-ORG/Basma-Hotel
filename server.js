@@ -11,6 +11,7 @@ const Question = require("./Models/Question");
 const indexRouter = require("./Routes/index");
 const guestRouter = require("./Routes/guest");
 const roomRouter = require("./Routes/room");
+const adminRouter = require("./Routes/admin");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: "Your_Secret_Key", saveUninitialized: true , resave: false}));
@@ -32,6 +33,7 @@ app.set("views", __dirname + "/views");
 app.use("/", indexRouter);
 app.use("/guest", guestRouter);
 app.use("/room", roomRouter);
+app.use("/admin", adminRouter);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

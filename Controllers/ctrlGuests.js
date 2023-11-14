@@ -161,4 +161,13 @@ catch(err){
             res.redirect('/guest');
 
         }
-module.exports = { register, login, deleteGuest, updateGuest, updateBio }
+
+        const retriveGuests = async(req,res)=>{
+            return await Guest.findAll();
+        }
+module.exports = {
+    public: {register, login},
+    guest:{ updateGuest, updateBio},
+    admin: {retriveGuests, deleteGuest}
+}
+   
