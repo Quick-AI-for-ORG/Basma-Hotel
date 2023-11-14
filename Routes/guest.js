@@ -15,6 +15,6 @@ router.post('/update', ctrlGuests.updateGuest)
 router.post('/updateBio', ctrlGuests.updateBio)
 router.post('/reserve', ctrlReservations.reserve)
 router.post('/cancelReservation', ctrlReservations.cancelReservation)
-
+router.post("/checkMail",ctrlGuests.checkMail)
 
 module.exports = router

@@ -51,10 +51,11 @@
 
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
-                                    <input type="email" id="form3Example3" class="form-control" required
+                                    <input type="email" id="form3Example3" onkeyup="checkMail(this)" class="form-control" required
                                         placeholder="Enter your email e.g, example@gmail.com" name="email" />
                                     <label class="form-label" for="form3Example3">Email address</label>
                                 </div>
+                                <label class="cMail" style="display: none; color:red;">E-mail already in use</label>
 
                                 <!-- Password input -->
                                 <div class="form-outline mb-4">
@@ -96,7 +97,7 @@
                                 </div>
 
                                 <!-- Submit button -->
-                                <button type="submit" class="signUp btn-block mb-4">
+                                <button type ="button" onclick="submitable()" class="signUp btn-block mb-4">
                                     Sign up
                                 </button>
 
