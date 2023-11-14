@@ -7,8 +7,8 @@
 <i class="fa-solid fa-water-ladder" title="Pool View" id="PoolView"></i>
 <i class="fa-solid fa-wifi" title="WiFI" id="WiFI"></i>
 <i class="fa-solid fa-tv" title="TV" id="TV"></i>
-<i class="fa-solid fa-snowflake" title="Central Air Conditioning" id="CentralAirConditioning"></i>
 <i class="fa-solid fa-bath" title="Bathtub" id="Bathtub"></i>
+<i class="fa-solid fa-snowflake" title="Central Air Conditioning" id="CentralAirConditioning"></i>
 <i class="fa-solid fa-beer-mug-empty" title="Mini Bar" id="MiniBar"></i>
 <i class="fa-solid fa-ban-smoking" title="Non-Smoking" id="Non-Smoking"></i>
 <i class="fa-solid fa-mug-hot" title="Complimentary Tea & Coffee" id="Complimentary Tea & Coffee"></i>
@@ -16,7 +16,9 @@
 <i class="fa-solid fa-city" title="City View" id="CityView"></i>
 <i class="fa-solid fa-cube" title="Additional Feature" id="AdditionalFeature"></i>
 <i class="fa-solid fa-person" title="Number of people" id="Numberofpeople"></i>
-
+<i class="fa-solid fa-cube"></i>
+<i class="fa-regular fa-3" title="Number of people"></i>
+<i class="fa-regular fa-4" title="Number of people"></i>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,30 +50,72 @@
             <h2>Description</h2>
             <p>
                 <%= room.description %>
+
             </p>
             <p>
                 <% if (room.characteristics) { %>
                     <% console.log("Room Characteristics:", room.characteristics); %>
-                        <% try { %>
-                            <% const characteristicsArray=JSON.parse(room.characteristics.replace(/'/g, '"' )); %>
-                                <% characteristicsArray.forEach(characteristic=> { %>
-                                    <% const characteristicWithoutSpaces=characteristic.replace(/\s/g, '' ); %>
-                                        <i class="fa-solid fa-<%=characteristicWithoutSpaces%>"
-                                            title="<%= characteristic %>" id="<%=characteristicWithoutSpaces%>"></i>
-                                        <% console.log(characteristicWithoutSpaces); %>
-                                            <% }); %>
-                                                <% } catch (error) { %>
-                                                    <% console.log("Error parsing characteristics:", error); %>
-                                                        <% } %>
-                                                            <% } else { %>
-                                                                <script>
-                                                                    console.warn('Room characteristics is not defined or empty.');
-                                                                </script>
-                                                                <% } %>
+                    <% try { %>
+                        <% const characteristicsArray = JSON.parse(room.characteristics); %>
+                        <% characteristicsArray.forEach(characteristic => { %>
+                            <% const characteristicWithoutSpaces = characteristic.replace(/\s/g, ''); %>
+            
+                            <% if (characteristicWithoutSpaces === 'NileRiverView') { %>
+                                <i class="fa-solid fa-water" title="<%= characteristic %>" id="<%= characteristicWithoutSpaces %>"></i>
+                            <% } else if (characteristicWithoutSpaces === 'LargeTerrace') { %>
+                                <i class="fa-solid fa-umbrella-beach" title="<%= characteristic %>" id="<%= characteristicWithoutSpaces %>"></i>
+                            <% } else if (characteristicWithoutSpaces === 'PoolView') { %>
+                                <i class="fa-solid fa-water-ladder" title="<%= characteristic %>" id="<%= characteristicWithoutSpaces %>"></i>
+                            <% } else if (characteristicWithoutSpaces === 'WiFi') { %>
+                                <i class="fa-solid fa-wifi" title="<%= characteristic %>" id="<%= characteristicWithoutSpaces %>"></i>
+                            <% } else if (characteristicWithoutSpaces === 'TV') { %>
+                                <i class="fa-solid fa-tv" title="<%= characteristic %>" id="<%= characteristicWithoutSpaces %>"></i>
+                            <% } else if (characteristicWithoutSpaces === 'Bathtub') { %>
+                                <i class="fa-solid fa-bath" title="<%= characteristic %>" id="<%= characteristicWithoutSpaces %>"></i>
+                            <% } else if (characteristicWithoutSpaces === 'CentralAirConditioning') { %>
+                                <i class="fa-solid fa-snowflake" title="<%= characteristic %>" id="<%= characteristicWithoutSpaces %>"></i>
+                            <% } else if (characteristicWithoutSpaces === 'Minibar') { %>
+                                <i class="fa-solid fa-beer-mug-empty" title="<%= characteristic %>" id="<%= characteristicWithoutSpaces %>"></i>
+                            <% } else if (characteristicWithoutSpaces === 'Non-Smoking') { %>
+                                <i class="fa-solid fa-ban-smoking" title="<%= characteristic %>" id="<%= characteristicWithoutSpaces %>"></i>
+                            <% } else if (characteristicWithoutSpaces === 'ComplementryTeaAndCoffee') { %>
+                                <i class="fa-solid fa-mug-hot" title="<%= characteristic %>" id="<%= characteristicWithoutSpaces %>"></i>
+                            <% } else if (characteristicWithoutSpaces === '24HourRoomService') { %>
+                                <i class="fa-solid fa-utensils" title="<%= characteristic %>" id="<%= characteristicWithoutSpaces %>"></i>
+                            <% } else if (characteristicWithoutSpaces === 'CityView') { %>
+                                <i class="fa-solid fa-city" title="<%= characteristic %>" id="<%= characteristicWithoutSpaces %>"></i>
+                            <% } else if (characteristicWithoutSpaces === 'AdditionalFeature') { %>
+                                <i class="fa-solid fa-cube" title="<%= characteristic %>" id="<%= characteristicWithoutSpaces %>"></i>
+                            <% } else if (characteristicWithoutSpaces === 'NumberOfPeople') { %>
+                                <i class="fa-solid fa-person" title="<%= characteristic %>" id="<%= characteristicWithoutSpaces %>"></i>
+                            <% } %>
+                            <% console.log(characteristicWithoutSpaces); %>
+                        <% }); %>
+                        <% let num = room.capacity; %>
+<% if (num == 3) { %>
+    <i class="fa-regular fa-3" title="Number of people"></i>
+<% } else { %>
+    <i class="fa-regular fa-4" title="Number of people"></i>
+<% } %>
+
+                        <% const lastCharacteristic = characteristicsArray[characteristicsArray.length - 1]; %>
+                        <% if (lastCharacteristic) { %>
+                            <% const characteristicWithoutSpaces = lastCharacteristic.replace(/\s/g, ''); %>
+                            <i class="fa-solid fa-cube" title="<%= lastCharacteristic %>" id="<%= characteristicWithoutSpaces %>"></i>
+                        <% } %>
+                        
+            
+                    <% } catch (error) { %>
+                        <% console.log("Error parsing characteristics:", error); %>
+                    <% } %>
+                <% } else { %>
+                    <script>
+                        console.warn('Room characteristics is not defined or empty.');
+                    </script>
+                <% } %>
             </p>
-
-
-
+            
+            
 
 
 
