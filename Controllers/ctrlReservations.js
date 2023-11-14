@@ -31,7 +31,13 @@ const reserve = async (req, res) => {
     }}}
 
 const  getUserReservations = async (req, res) => {
-    return await Reservation.findAll({guest_email: req.session.user.email})
+    return await Reservation.findAll({
+        
+        where: {
+            guest_email: req.session.user.email,         
+            
+        },})
+
 }
 const getReservations = async(req,res)=>{
     return await Reservation.findAll();

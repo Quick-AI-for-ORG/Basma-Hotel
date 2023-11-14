@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt') // for password hashing
 const { Guest } = require('../Models/Guest.js');
+const { guest } = require('./Pages.js');
 
 const register = async (req, res) => {
 
@@ -66,7 +67,7 @@ const login = async (req, res) => {
 
 
 
-const deleteGuest =async (req, res) => {
+const deleteGuest = async (req, res) => {
 
    try { await Guest.destroy({
         where: {
@@ -161,13 +162,19 @@ catch(err){
             res.redirect('/guest');
 
         }
-
-        const retriveGuests = async(req,res)=>{
-            return await Guest.findAll();
-        }
-module.exports = {
-    public: {register, login},
-    guest:{ updateGuest, updateBio},
-    admin: {retriveGuests, deleteGuest}
-}
-   
+        const checkMail = async (req, res) => {
+            Guest.findOne({where:{email: req.body.mail}}).then(async result=>{
+                console.log(result)
+                if(result!=null) res.send({ result: 'found' })
+                else res.send({ result: 'not found' })
+                })
+            }
+            const retriveGuests = async(req,res)=>{
+                return await Guest.findAll();
+            }
+            module.exports = {
+                public: {register, login,checkMail},
+                guest:{ updateGuest, updateBio},
+                admin: {retriveGuests, deleteGuest}
+            }
+               
