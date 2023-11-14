@@ -11,7 +11,7 @@ const bookings = (req, res) => {
   res.render("myBookings");
 };
 const basma = (req, res) => {
-  res.render("basma");
+  res.render("basma",{user: (req.session.user === undefined ? "" : req.session.user)});
 };
 const about = (req, res) => {
   res.render("aboutUs");
@@ -67,9 +67,13 @@ const viewRoom = async (req, res) => {
   const covid = (req, res) => {
     res.render("covid-19");
   }
+  const logout =  (req, res) => {
+    if (req.session.user !== undefined) req.session.destroy();
+     res.redirect('/');
+}
 
 module.exports = {
   public: { basma, about, facilities, privacy, covid,login, signup, viewRooms,viewRoom },
-  guest: { bookings, myProfile },
+  guest: { bookings, myProfile, logout },
   admin: {dashboard}
 };
