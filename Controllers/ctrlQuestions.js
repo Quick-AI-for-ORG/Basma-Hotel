@@ -16,9 +16,10 @@ else res.redirect('/guest')
 })}
 
 const getQuestions = async (req, res) => {
-    Question.findAll().then((questions) => {
-        res.status(200).json({ questions });
-    });
+   return await Question.findAll();
 }
 
-module.exports = { askQuestion, getQuestions }
+module.exports = { 
+    guest: {askQuestion},
+    admin: {getQuestions}
+}

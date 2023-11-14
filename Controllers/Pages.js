@@ -22,6 +22,9 @@ const facilities = (req, res) => {
 const privacy = (req, res) => {
   res.render("privacyPolicy");
 };
+const dashboard = (req, res) => {
+  res.render("dashboard", { layout: false });
+}
 const myProfile = (req, res) => {
   if (req.session.user === undefined) {
     res.redirect("/guest/login");
@@ -37,7 +40,7 @@ const myProfile = (req, res) => {
 const viewRooms = async (req, res) => {
   let pageNumber = parseInt(req.params.page);
   let rooms = null
-  let result = await ctrlRooms.getRooms()
+  let result = await ctrlRooms.public.getRooms()
   if(pageNumber>result.length/6) pageNumber = result.length/6;
   if(pageNumber<1) pageNumber = 1;
   rooms = result
@@ -50,7 +53,7 @@ const viewRooms = async (req, res) => {
 
 const viewRoom = async (req, res) => {
   let room = null
-  await ctrlRooms.getRoom(req,res).then((result)=>{
+  await ctrlRooms.public.getRoom(req,res).then((result)=>{
     room = result
     res.render('room', {  user: (req.session.user === undefined ? "" : req.session.user) ,
     room: (room === null ? "" : room)})
@@ -62,7 +65,7 @@ const viewRoom = async (req, res) => {
   }
 
 module.exports = {
-  root: { basma, about, facilities, privacy, covid },
-  guest: { login, signup, bookings, myProfile },
-  room:{viewRooms,viewRoom}
+  public: { basma, about, facilities, privacy, covid,login, signup, viewRooms,viewRoom },
+  guest: { bookings, myProfile },
+  admin: {dashboard}
 };

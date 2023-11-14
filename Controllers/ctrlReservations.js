@@ -30,4 +30,27 @@ const reserve = async (req, res) => {
         res.status(400).json({message:err.message})
     }}}
 
-    module.exports = {reserve}
+const  getUserReservations = async (req, res) => {
+    return await Reservation.findAll({guest_email: req.session.user.email})
+}
+const getReservations = async(req,res)=>{
+    return await Reservation.findAll();
+}
+const cancelReservation = async(req,res)=>{
+    try { await Reservation.destroy({
+        where: {
+          id: req.body.id
+        }
+      }).then((reservation) =>{
+        res.status(201).json({ message: "Reservation cancelled" });
+      })
+    }
+      catch(err) {
+        console.error("Error: " + err);
+        res.status(400).json({ message: err.message });
+      }
+    }
+    module.exports = {
+        guest: {reserve  , getUserReservations , cancelReservation},
+        admin: {getReservations}
+    }
