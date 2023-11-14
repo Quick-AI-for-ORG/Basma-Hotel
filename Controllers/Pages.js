@@ -1,4 +1,3 @@
-const {Room} = require('../Models/Room.js')
 const ctrlRooms = require('../Controllers/ctrlRooms')
 
 const login = (req, res) => {
