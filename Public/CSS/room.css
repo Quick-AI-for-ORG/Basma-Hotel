@@ -1,12 +1,13 @@
 body {
-  font-family: "Poppins", sans-serif; /* Use a modern and elegant font */
-  background-color: #f8f8f8; /* Light gray background */
+  font-family: "Poppins", sans-serif;
+  background-color: #f8f8f8;
   margin: 0;
   padding: 0;
+  color: #333;
 }
 
-.room-header {
-  background-color: #6c5ce7; /* Purple background color */
+header {
+  background-color: #6c5ce7;
   color: #fff;
   text-align: center;
   padding: 20px;
@@ -29,14 +30,14 @@ body {
 .room-image img {
   max-width: 100%;
   height: auto;
-  border-radius: 12px; /* Slightly increased border radius */
+  border-radius: 12px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 .room-description {
   width: 50%;
   padding: 20px;
-  font-size: 16px; /* Slightly reduced font size */
+  font-size: 16px;
   line-height: 1.8;
   background-color: #fff;
   border-radius: 12px;
@@ -44,14 +45,13 @@ body {
 }
 
 .room-description h2 {
-  font-size: 28px; /* Larger heading size */
+  font-size: 28px;
   margin-top: 20px;
-  color: #6c5ce7; /* Purple heading color */
+  color: #6c5ce7;
 }
 
 .room-description p {
   margin-top: 20px;
-  color: #333; /* Darker text color */
 }
 
 .room-description ul {
@@ -62,12 +62,11 @@ body {
 
 .room-description ul li {
   margin-top: 10px;
-  color: #333; /* Darker text color */
 }
 
 .room-description ul li:last-child {
   font-weight: bold;
-  color: #6c5ce7; /* Purple color for the last list item */
+  color: #6c5ce7;
 }
 
 form {
@@ -78,12 +77,12 @@ form {
 label {
   display: block;
   margin-top: 10px;
-  color: #6c5ce7; /* Purple label color */
+  color: #6c5ce7;
 }
 
 input[type="date"] {
   width: 100%;
-  padding: 12px; /* Increased padding for input elements */
+  padding: 12px;
   margin-top: 8px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -93,7 +92,7 @@ input[type="submit"] {
   display: block;
   margin: 20px auto;
   width: 50%;
-  padding: 14px; /* Increased padding for a more prominent button */
+  padding: 14px;
   background-color: #6c5ce7;
   color: #fff;
   border: none;
@@ -103,6 +102,6 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-  background-color: #4834d4; /* Darker purple on hover */
+  background-color: #4834d4;
   transition: background-color 0.3s;
 }
