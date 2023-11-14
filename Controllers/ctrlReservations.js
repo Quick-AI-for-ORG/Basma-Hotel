@@ -50,7 +50,53 @@ const cancelReservation = async(req,res)=>{
         res.status(400).json({ message: err.message });
       }
     }
+
+    const checkAvailability = async (req, res) => {
+
+
+        let startDate = new Date(req.body.startDate);
+        let endDate = new Date(req.body.endDate);
+    
+        const reservations = await Reservation.findAll({
+            where: {
+                room_Title: req.body.roomTitle,
+                
+                
+            },
+            
+        });
+
+        const room = await Room.findOne({where: {Title: req.body.roomTitle}})
+        
+        if(room != null)
+        {    
+        
+                let count = 0;
+                console.log(reservations)
+                reservations.forEach(reservation => {
+                    if(reservation.end_date > startDate && reservation.start_date < endDate )
+                    {
+                        count = count +1;
+                    }
+                  
+                });
+                if(count >= room.quantity)
+                    {
+                        res.status(400).json({message: "Room is not available"})
+                        console.log("Room is not available")
+                    }
+                else
+                {
+                    console.log(count)
+                    res.status(200).json({message: "Room is available"})
+                    console.log("Room is available")
+                    
+                }
+            
+    
+        }  
+    }
     module.exports = {
-        guest: {reserve  , getUserReservations , cancelReservation},
+        guest: {reserve  , getUserReservations , cancelReservation ,checkAvailability },
         admin: {getReservations}
     }

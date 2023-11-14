@@ -14,6 +14,7 @@ router.post('/delete', ctrlGuests.admin.deleteGuest)
 router.post('/update', ctrlGuests.guest.updateGuest)
 router.post('/updateBio', ctrlGuests.guest.updateBio)
 router.post('/reserve', ctrlReservations.guest.reserve)
+router.post('/checkAvailability', ctrlReservations.guest.checkAvailability)
 
 
 module.exports = router
