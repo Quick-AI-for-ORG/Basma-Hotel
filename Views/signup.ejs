@@ -58,15 +58,17 @@
 
                                 <!-- Password input -->
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="form3Example4" class="form-control" required
+                                    <input type="password" id="form3Example4" class="form-control pw" required
                                         placeholder="Enter your password" name="password" />
                                     <label class="form-label" for="form3Example4">Password</label>
                                 </div>
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="form3Example4" class="form-control" required
+                                    <input type="password" id="form3Example4" class="form-control cpw" required
                                         placeholder="Confirm your password" />
                                     <label class="form-label" for="form3Example4">Confirm password</label>
+                                    <label class="pswe" style="display: none; color:red;">Passwords do not match</label>
                                 </div>
+
                                 <div class="form-outline mb-4">
                                     <input type="tel" id="form3Example4" class="form-control" required
                                         placeholder="+20123456789" name="phoneNumber" />
@@ -133,7 +135,7 @@
         <!-- Jumbotron -->
     </section>
     <!-- Section: Design Block -->
-
+    <script type="text/javascript" src="/JS/verification.js"></script>
 </body>
 
 </html>
