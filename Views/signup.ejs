@@ -51,22 +51,25 @@
 
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
-                                    <input type="email" id="form3Example3" class="form-control" required
+                                    <input type="email" id="form3Example3" onkeyup="checkMail(this)" class="form-control" required
                                         placeholder="Enter your email e.g, example@gmail.com" name="email" />
                                     <label class="form-label" for="form3Example3">Email address</label>
                                 </div>
+                                <label class="cMail" style="display: none; color:red;">E-mail already in use</label>
 
                                 <!-- Password input -->
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="form3Example4" class="form-control" required
+                                    <input type="password" id="form3Example4" class="form-control pw" required
                                         placeholder="Enter your password" name="password" />
                                     <label class="form-label" for="form3Example4">Password</label>
                                 </div>
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="form3Example4" class="form-control" required
+                                    <input type="password" id="form3Example4" class="form-control cpw" required
                                         placeholder="Confirm your password" />
                                     <label class="form-label" for="form3Example4">Confirm password</label>
+                                    <label class="pswe" style="display: none; color:red;">Passwords do not match</label>
                                 </div>
+
                                 <div class="form-outline mb-4">
                                     <input type="tel" id="form3Example4" class="form-control" required
                                         placeholder="+20123456789" name="phoneNumber" />
@@ -94,7 +97,7 @@
                                 </div>
 
                                 <!-- Submit button -->
-                                <button type="submit" class="signUp btn-block mb-4">
+                                <button type ="button" onclick="submitable()" class="signUp btn-block mb-4">
                                     Sign up
                                 </button>
 
@@ -133,7 +136,7 @@
         <!-- Jumbotron -->
     </section>
     <!-- Section: Design Block -->
-
+    <script type="text/javascript" src="/JS/verification.js"></script>
 </body>
 
 </html>
