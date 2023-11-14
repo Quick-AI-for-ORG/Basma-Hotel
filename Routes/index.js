@@ -9,5 +9,4 @@ router.get("/facilities", pages.public.facilities);
 router.get("/privacyPolicy", pages.public.privacy);
 router.get("/covid-19", pages.public.covid);
 router.post("/askQuestion", questions.guest.askQuestion);
-
 module.exports = router;
