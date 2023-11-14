@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const expressLayouts = require("express-ejs-layouts");
 const Guest = require("./Models/Guest");
 const Room = require("./Models/Room");
-const Reservation = require("./Models/Reservations");
+const Reservation = require("./Models/Reservation");
 const Question = require("./Models/Question");
 
 const indexRouter = require("./Routes/index");
@@ -13,7 +13,7 @@ const guestRouter = require("./Routes/guest");
 const roomRouter = require("./Routes/room");
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(session({ secret: "Your_Secret_Key", saveUninitialized: true }));
+app.use(session({ secret: "Your_Secret_Key", saveUninitialized: true , resave: false}));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(expressLayouts);
