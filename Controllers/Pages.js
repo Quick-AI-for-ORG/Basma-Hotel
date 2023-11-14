@@ -25,15 +25,18 @@ const privacy = (req, res) => {
 const dashboard = (req, res) => {
   res.render("dashboard", { layout: false });
 }
-const myProfile = (req, res) => {
+const myProfile = async (req, res) => {
   if (req.session.user === undefined) {
     res.redirect("/guest/login");
   } else {
-    res.render("myProfile", {
-      layout: false,
-      user: req.session.user === undefined ? "" : req.session.user,
-    });
-  }
+    await ctrlReservations.guest.getUserReservations(req,res).then((result)=>{
+      res.render("myProfile", {
+        layout: false,
+        user: req.session.user === undefined ? "" : req.session.user,
+        reservations: result,
+      });
+  })
+}
 };
 
 
