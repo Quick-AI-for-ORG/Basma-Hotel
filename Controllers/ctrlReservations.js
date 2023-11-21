@@ -17,7 +17,7 @@ const reserve = async (req, res) => {
         let room = await Room.findOne({ where:{Title: req.body.room}});
         const reservation =  Reservation.create({
             room_Title: req.body.room,
-            guest_email: req.session.user.email,
+            guestEmail: req.session.user.email,
             start_date: req.body.arrivalDate,
             end_date: req.body.departureDate,
             price: room.startingPrice * days_between_dates ,
@@ -34,7 +34,7 @@ const  getUserReservations = async (req, res) => {
     return await Reservation.findAll({
         
         where: {
-            guest_email: req.session.user.email,         
+            guestEmail: req.session.user.email,         
             
         },
      order: [
