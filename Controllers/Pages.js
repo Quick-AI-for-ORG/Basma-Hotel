@@ -14,16 +14,16 @@ const basma = (req, res) => {
   res.render("basma",{user: (req.session.user === undefined ? "" : req.session.user)});
 };
 const about = (req, res) => {
-  res.render("aboutUs");
+  res.render("aboutUs",{user: (req.session.user === undefined ? "" : req.session.user)});
 };
 const facilities = (req, res) => {
-  res.render("facilities");
+  res.render("facilities",{user: (req.session.user === undefined ? "" : req.session.user)});
 };
 const privacy = (req, res) => {
-  res.render("privacyPolicy");
+  res.render("privacyPolicy",{user: (req.session.user === undefined ? "" : req.session.user)});
 };
 const dashboard = (req, res) => {
-  res.render("dashboard", { layout: false });
+  res.render("dashboard", { layout: false, user: (req.session.user === undefined ? "" : req.session.user) });
 }
 const myProfile = async (req, res) => {
   if (req.session.user === undefined) {
