@@ -8,6 +8,7 @@ router.get('/', (req, res) => {
 })
 router.get('/:page', pages.public.viewRooms)
 router.get('/details/:roomTitle',pages.public.viewRoom)
+router.get('/detail/:roomTitle',pages.public.details)
 router.post('/addRoom', ctrlRooms.admin.addRoom)
 router.post('/removeRoom', ctrlRooms.admin.removeRoom)
 router.post('/modifyRoom', ctrlRooms.admin.modifyRoom)
