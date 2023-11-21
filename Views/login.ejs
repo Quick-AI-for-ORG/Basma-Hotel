@@ -36,17 +36,18 @@
 
                                 <!-- Email input -->
                                 <div class="form-outline mb-5">
-                                    <input type="email" id="form3Example3" class="form-control" name="email"
+                                    <input id="mail" type="email" id="form3Example3" class="form-control" name="email"
                                         placeholder="e.g, example@gmail.com" />
                                     <label class="form-label" for="form3Example3">Email address</label>
                                 </div>
 
                                 <!-- Password input -->
                                 <div class="form-outline mb-3">
-                                    <input type="password" id="form3Example4" class="form-control"
+                                    <input type="password" id="password" class="form-control"
                                         placeholder="e.g, ●●●●●●●●●●" name="password" />
                                     <label class="form-label" for="form3Example4">Password</label>
                                 </div>
+                                <div id = "loginError" style="display: none;"></div>
 
                                 <!-- Checkbox -->
                                 <div class="form-check d-flex justify-content-center mb-4">
@@ -58,7 +59,7 @@
                                 </div>
 
                                 <!-- Submit button -->
-                                <button type="submit" class="signUp btn-block mb-4" style="width: 100%;">
+                                <button type="button" onclick="checkLogin()" class="signUp btn-block mb-4" style="width: 100%;">
                                     Sign in
                                 </button>
 
@@ -94,6 +95,7 @@
         </div>
     </section>
     <!-- Section: Design Block -->
+    <script type="text/javascript" src="/JS/loginVerification.js"></script>
 </body>
 
 </html>

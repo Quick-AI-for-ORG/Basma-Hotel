@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt') // for password hashing
 const { Guest } = require('../Models/Guest.js');
 const { guest } = require('./Pages.js');
+const { where } = require('sequelize');
 
 const register = async (req, res) => {
 
@@ -169,11 +170,24 @@ catch(err){
                 else res.send({ result: 'not found' })
                 })
             }
-            const retriveGuests = async(req,res)=>{
+
+            const checkLogin = async (req, res) => {
+               await  Guest.findOne({where:{email: req.body.mail}}).then(async guest=>{
+                    const isMatch = await bcrypt.compare(req.body.password, guest.password);
+                    if (!isMatch) {
+                        return res.send({ result: 'not found' });
+
+                    }
+                    else {
+                        res.send({ result: 'found' });
+                    }
+            })
+            }
+            const retriveGuests = async(req,res)=>{ 
                 return await Guest.findAll();
             }
             module.exports = {
-                public: {register, login,checkMail},
+                public: {register, login,checkMail, checkLogin},
                 guest:{ updateGuest, updateBio},
                 admin: {retriveGuests, deleteGuest}
             }
