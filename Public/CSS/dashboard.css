@@ -1,5 +1,19 @@
 body {
-  background: linear-gradient(to bottom, #1b2431, #673ab7);
+  background: linear-gradient(
+    to bottom,
+    #8d2bb1,
+    #64057a,
+    #480463,
+    #c86fee,
+    #fbd9fb,
+    #f8aefb,
+    #b24ed2,
+    #ad3bbb,
+    #a156d6,
+    #690990,
+    #ee98fb,
+    #df8ffa
+  );
   color: #202020;
   font-family: "Montserrat", "Helvetica", "Open Sans", "Arial";
   font-size: 13px;
@@ -9,34 +23,28 @@ a:hover {
   text-decoration: none;
 }
 
-p,
-figure {
-  margin: 0;
-  padding: 0;
-}
-
 .navbar {
-  background-color: #1b2431;
+  background-color: #8d2bb1;
 }
 
 .sidebar {
-  background-color: #1b2431;
+  background-color: #8d2bb1;
   box-shadow: none;
 }
 
 .sidebar .nav-link {
   border-left: 5px solid transparent;
-  color: #738297;
+  color: #3e0663;
   padding: 0.5rem 0.75rem;
 }
 
 .sidebar .nav-link:hover {
-  color: white;
+  color: #da4be4;
 }
 
 .sidebar .nav-link.active {
-  border-left: 5px solid #738297;
-  color: white;
+  border-left: 5px solid #f0f0f0;
+  color: #ffffff;
 }
 
 .sidebar .zmdi {
@@ -58,13 +66,13 @@ figure {
 
 .card {
   border-radius: 8px;
-  color: white;
+  color: #202020;
   padding: 10px;
   position: relative;
 }
 
 .card .zmdi {
-  color: white;
+  color: #202020;
   font-size: 28px;
   opacity: 0.3;
   position: absolute;
@@ -73,7 +81,7 @@ figure {
 }
 
 .card .stat {
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(32, 32, 32, 0.3);
   font-size: 8px;
   margin-top: 25px;
   padding: 10px 10px 0;
@@ -93,24 +101,24 @@ figure {
 }
 
 .card.blue {
-  background-color: #2298f1;
+  background-color: #a49de1;
 }
 
 .card.green {
-  background-color: #66b92e;
+  background-color: #8d82c4;
 }
 
 .card.orange {
-  background-color: #da932c;
+  background-color: #e3c4a8;
 }
 
 .card.red {
-  background-color: #d65b4a;
+  background-color: #e7ada0;
 }
 
 .projects {
-  background-color: #273142;
-  border: 1px solid #313d4f;
+  background-color: #d3d8eb;
+  border: 1px solid #b3bcc6;
   overflow-x: auto;
   width: 100%;
 }
@@ -120,7 +128,7 @@ figure {
 }
 
 .projects-header {
-  color: white;
+  color: #202020;
   padding: 22px;
 }
 
@@ -149,13 +157,13 @@ figure {
 }
 
 .projects-table {
-  background: #273142;
+  background: #d3d8eb;
   width: 100%;
 }
 
 .projects-table td,
 .projects-table th {
-  color: white;
+  color: #202020;
   padding: 10px 22px;
   vertical-align: middle;
 }
@@ -170,15 +178,15 @@ figure {
 }
 
 .projects-table th {
-  background-color: #313d4f;
+  background-color: #b3bcc6;
 }
 
 .projects-table tr:hover {
-  background-color: lighten(#273142, 5%);
+  background-color: rgba(211, 216, 235, 0.95);
 }
 
 .projects-table tr:not(:last-of-type) {
-  border-bottom: 1px solid #313d4f;
+  border-bottom: 1px solid #b3bcc6;
 }
 
 .projects-table .member figure,
@@ -238,7 +246,7 @@ figure {
 
 .selectric {
   background-color: transparent;
-  border-color: #313d4f;
+  border-color: #b3bcc6;
   border-radius: 4px;
 }
 
@@ -256,8 +264,8 @@ figure {
 
 .chart {
   border-radius: 3px;
-  border: 1px solid #313d4f;
-  color: white;
+  border: 1px solid #b3bcc6;
+  color: #202020;
   padding: 10px;
   position: relative;
   text-align: center;
@@ -281,11 +289,4 @@ figure {
   display: inline-block;
   font-size: 20px;
   margin: 5;
-}
-.projects-table tr:hover {
-  background-color: rgba(39, 49, 66, 0.95); /* Adjust the opacity as needed */
-}
-
-.projects-table tr:not(:last-of-type) {
-  border-bottom: 1px solid #313d4f;
 }

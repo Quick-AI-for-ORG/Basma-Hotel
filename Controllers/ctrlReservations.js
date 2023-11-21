@@ -72,7 +72,7 @@ const cancelReservation = async(req,res)=>{
     
         const reservations = await Reservation.findAll({
             where: {
-                room_Title: req.body.roomTitle,
+                roomTitle: req.body.roomTitle,
                 
                 
             },
@@ -87,7 +87,7 @@ const cancelReservation = async(req,res)=>{
                 let count = 0;
                 console.log(reservations)
                 reservations.forEach(reservation => {
-                    if(reservation.end_date > startDate && reservation.start_date < endDate )
+                    if(reservation.endDate > startDate && reservation.startDate < endDate )
                     {
                         count = count +1;
                     }
