@@ -36,7 +36,14 @@ const  getUserReservations = async (req, res) => {
         where: {
             guest_email: req.session.user.email,         
             
-        },})
+        },
+     order: [
+        ['createdAt', 'DESC'], 
+      ],
+      limit: 5, 
+
+       
+    });
 
 }
 const getReservations = async(req,res)=>{

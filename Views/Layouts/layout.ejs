@@ -25,12 +25,21 @@
         <li class="nav-item">
           <a class="nav-link mx-2" href="/aboutus"><i class="fas fa-circle-info pe-2"></i>About Us</a>
         </li>
+        <% if (user==""){ %>   
         <li class="nav-item ms-3">
           <a id="in" class="btn btn-dark rounded-pill" href="/guest/login">Sign in</a>
         </li>
         <li class="nav-item ms-3">
           <a id="up" class="btn rounded-pill" href="/guest/signup">Sign up</a>
         </li>
+        <% } else { %>
+          <li class="nav-item ms-3">
+            <a id="in" class="btn btn-dark rounded-pill" href="/guest">My Profile</a>
+          </li>
+          <li class="nav-item ms-3">
+            <a id="up" class="btn rounded-pill" href="/guest/logout">Log Out</a>
+          </li>
+          <% } %>
       </ul>
     </div>
   </nav>
