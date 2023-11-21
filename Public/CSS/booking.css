@@ -1,0 +1,47 @@
+.container-form {
+    width: 50%;
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px; /* Set the border-radius for rounded edges */
+}
+.button,.cancel{
+width: 100%;
+background-color: #8213c2;
+color: #fff;
+border: none;
+border-radius: 5px;
+padding: 10px;
+font-size: 18px;
+transition: background-color 0.5s;
+}
+.cancel{
+background-color: #6c757d;
+}
+
+.button:hover {
+background-color: #3c0266;
+}
+.cancel:hover {
+background-color: rgb(201, 0, 27);
+}
+
+#div {
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    height: 100vh; /* Set the body height to the full viewport height */
+    background: url('/IMAGES/helwa.jpg') center/cover no-repeat; /* Set the image as background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+table.table {
+    border-collapse: collapse;
+}
+
+table.table td, table.table th {
+    border: none;
+}
