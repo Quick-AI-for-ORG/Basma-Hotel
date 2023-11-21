@@ -77,19 +77,9 @@ const booking = (req, res) => {
   else res.redirect('/guest/login')
 }
 
-const details = async (req, res) => {
-  let room = null
-  await ctrlRooms.public.getRoom(req,res).then((result)=>{
-    room = result
-    if(room === null) res.redirect('/room')
-    res.render('details', {  user: (req.session.user === undefined ? "" : req.session.user) ,
-    room: (room === null ? "" : room)})
-  })
-  }
-
 
 module.exports = {
-  public: { basma, about, facilities, privacy, covid,login, signup, viewRooms,viewRoom,details },
+  public: { basma, about, facilities, privacy, covid,login, signup, viewRooms,viewRoom },
   guest: { myProfile,booking, logout },
   admin: {dashboard}
 };
