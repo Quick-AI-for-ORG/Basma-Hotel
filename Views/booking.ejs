@@ -12,21 +12,22 @@
     <div id="div">
         <div class="container-form mt-5">
             <h2 class="text-center mb-3">Booking Details</h2>
-            <form method="post">
+            <form method="post" action="/guest/reserve">
+                <input type="hidden" name="roomTitle" value="<%=roomTitle%>">
                 <div class="row mb-3">
                     <div class="col">
                         <label for="checkInDate" class="form-label">Check-In Date</label>
-                        <input type="date" name="checkInDate" id="checkInDate" class="form-control">
+                        <input type="date" name="arrivalDate" value="<%=arrivalDate%>" id="checkInDate" class="form-control">
                     </div>
                     <div class="col">
                         <label for="checkOutDate" class="form-label">Check-Out Date</label>
-                        <input type="date" name="checkOutDate" id="checkOutDate" class="form-control">
+                        <input type="date" name="departureDate" value="<%=departureDate%>"" id="checkOutDate" class="form-control">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col">
-                        <label for="numberOfGuests" class="form-label">Number of Guests</label>
-                        <input type="number" name="numberOfGuests" id="numberOfGuests" value="1" class="form-control">
+                        <label for="numberOfGuests" class="form-label">Number of Adults</label>
+                        <input type="number" name="numberOfAdults" id="numberOfGuests" value="1" class="form-control">
                     </div>
                     <div class="col">
                         <label for="numberOfChildren" class="form-label">Number of Children</label>
@@ -40,7 +41,7 @@
                         <tr>
                             <td>
                                 <div class="form-check">
-                                    <input title="Booking Options" type="checkbox" name="launch" id="amenitiesLaunch" class="form-check-input">
+                                    <input title="Booking Options" type="checkbox" name="lunch" id="amenitiesLaunch" class="form-check-input">
                                     <label for="amenitiesLaunch" class="form-check-label">Lunch</label>
                                 </div>
                             </td>
@@ -66,7 +67,7 @@
                             </td>
                             <td>
                                 <div class="form-check">
-                                    <input title="Booking Options" type="checkbox" name="4g" id="amenities4g" class="form-check-input">
+                                    <input title="Booking Options" type="checkbox" name="g4" id="amenities4g" class="form-check-input">
                                     <label for="amenities4g" class="form-check-label">High Speed 4G Wifi Personal Router</label>
                                 </div>
                             </td>
@@ -79,13 +80,26 @@
                         </tr>
                     </table>
                 </div>
+                <script>
+                    const labels = document.querySelectorAll('label');
+                
+                    labels.forEach(label => {
+                        label.addEventListener('click', () => {
+                            const inputId = label.getAttribute('for');
+                            const inputElement = document.getElementById(inputId);
+                
+                            // Check the input or perform any desired action
+                            console.log('Input checked:', inputElement.value);
+                        });
+                    });
+                </script>
                 
                 <div class="row">
                     <div class="col">
                         <button type="submit" name="submit" class="button">Confirm Reservation</button>
                     </div>
                     <div class="col">
-                        <button type="button" class="cancel" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button"  onclick="location.replace('/room')" class="cancel" data-bs-dismiss="modal">Cancel</button>
                     </div>
                 </div>
             </form>

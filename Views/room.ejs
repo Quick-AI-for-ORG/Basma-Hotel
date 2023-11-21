@@ -129,8 +129,8 @@
     
         <div class="col-md-6">
             <div class="booking-form">
-                <form action="/guest/reserve" method="POST">
-                    <input type="hidden" name="room" value="<%= room.Title %>">
+                <form action="/guest/booking" method="POST">
+                    <input type="hidden" name="roomTitle" value="<%= room.Title %>">
                     <label for="arrivalDate">Arrival Date:</label>
                     <input type="date" id="arrivalDate" name="arrivalDate" required>
                     <br>

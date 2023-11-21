@@ -73,7 +73,7 @@ const viewRoom = async (req, res) => {
 }
 
 const booking = (req, res) => {
-  if (req.session.user !== undefined)  res.render("booking", { user : req.session.user});
+  if (req.session.user !== undefined)  res.render("booking", { user : req.session.user, roomTitle: req.body.roomTitle, arrivalDate: req.body.arrivalDate, departureDate: req.body.departureDate});
   else res.redirect('/guest/login')
 }
 
