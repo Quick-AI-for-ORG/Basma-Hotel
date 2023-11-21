@@ -1,5 +1,5 @@
 body {
-  background-color: #1b2431;
+  background: linear-gradient(to bottom, #1b2431, #673ab7);
   color: #202020;
   font-family: "Montserrat", "Helvetica", "Open Sans", "Arial";
   font-size: 13px;

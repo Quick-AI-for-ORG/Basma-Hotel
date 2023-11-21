@@ -1,33 +1,19 @@
-let slideIndex = 1;
-showSlides(slideIndex);
+let slideIndex = 0;
 
-function plusSlides(n) {
-  showSlides((slideIndex += n));
-}
+function showSlides() {
+  let i;
+  let slides = document.getElementsByClassName("slideshow");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.opacity = 0;
+  }
 
-function currentSlide(n) {
-  showSlides((slideIndex = n));
-}
-
-function showSlides(n) {
-  let slides = document.querySelectorAll(".room-image img");
-
-  if (n > slides.length) {
+  slideIndex++;
+  if (slideIndex > slides.length) {
     slideIndex = 1;
   }
-  if (n < 1) {
-    slideIndex = slides.length;
-  }
 
-
-  slides[slideIndex - 1].style.display = "block";
+  slides[slideIndex - 1].style.opacity = 1;
+  setTimeout(showSlides, 5000);
 }
 
-// Arrow controls
-document.getElementById("prevArrow").addEventListener("click", function () {
-  plusSlides(-1);
-});
-
-document.getElementById("nextArrow").addEventListener("click", function () {
-  plusSlides(1);
-});
+showSlides();
