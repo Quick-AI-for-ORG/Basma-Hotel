@@ -3,7 +3,7 @@ document.getElementsByClassName("cpw")[0].onkeyup = function() {confirmPass()};
 
 ve=false
 
-vp=true
+vp=false
 
 function confirmPass(){
     let p = document.getElementsByClassName("pw")[0].value
@@ -13,7 +13,7 @@ function confirmPass(){
     x.style.display='block'
     vp=false
     }
-    else {
+    else if(p==cp) {
     x.style.display='none'
     vp=true
     }
