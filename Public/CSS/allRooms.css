@@ -1,5 +1,14 @@
 /* start allrooms */
 /* Room Cards */
+/* body {
+  background-image: linear-gradient(
+    to right,
+    rgb(43, 137, 226),
+    #0070cc,
+    #a331e6e7,
+    #6301c0
+  );
+} */
 header {
   text-align: center;
   margin-bottom: 30px;
@@ -28,7 +37,7 @@ header h1::after {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: stretch; /* Make all items stretch to the same height */
 }
 
 .room-row {
@@ -36,7 +45,7 @@ header h1::after {
   margin: 20px 30px;
   width: 100%;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* Align items to the start of the container */
 }
 
 .room-card {
@@ -50,16 +59,19 @@ header h1::after {
   max-width: 400px;
   transition: transform 0.2s;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
 }
 
 .room-card:hover {
-  transform: scale(1.05); /* Add a slight hover effect */
+  transform: scale(1.05);
 }
 
 .room-card img {
   max-width: 100%;
   height: auto;
-  margin-bottom: 10px;
+  margin: 0 auto 10px;
+  display: block;
 }
 
 .room-card h2 {
@@ -69,6 +81,8 @@ header h1::after {
 
 .room-card p {
   font-size: 16px;
+  margin-bottom: 10px;
+  flex-grow: 1;
 }
 /* End all rooms */
 /* Pagination styling */
@@ -113,7 +127,7 @@ a {
   border-radius: 5px;
 }
 /* end pagination   */
-
+/* make all cards the same size */
 ::-webkit-scrollbar {
   display: none;
 }
@@ -135,6 +149,7 @@ a {
   color: transparent;
   position: relative;
   z-index: 1;
+  /* color: aliceblue; */
 }
 
 .centered-text h2::after {
@@ -144,4 +159,14 @@ a {
   height: 4px;
   background-color: #600396aa;
   margin: 15px auto;
+}
+
+.room-card-container .equal-height {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.room-card-container .equal-height .room-card {
+  display: flex;
+  flex-direction: column;
 }

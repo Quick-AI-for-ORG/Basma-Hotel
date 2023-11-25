@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="/CSS/allRooms.css">
 </head>
 
-
 <body>
     <div class="centered-text">
         <h2>Basma Hotel Rooms</h2>
@@ -38,15 +37,16 @@
                 <% } }%>
         </div>
         <div class="pagination">
-            <button id="prevPage" onclick="location.replace('/room/<%=current_page-1%>')"><i
-                    class="fa-regular fa-circle-left"></i> Previous</button>
+            <button id="prevPage" onclick="location.replace('/room/<%=current_page-1%>')">
+                <i class="fa-regular fa-circle-left"></i> Previous
+            </button>
             <span id="currentPage">
                 <%=Math.ceil(current_page)%>
             </span>
-            <button id="nextPage" onclick="location.replace('/room/<%=current_page+1%>')">Next <i
-                    class="fa-regular fa-circle-right"></i></button>
+            <button id="nextPage" onclick="location.replace('/room/<%=current_page+1%>')">Next
+                <i class="fa-regular fa-circle-right"></i>
+            </button>
         </div>
-
     </main>
     <script src="/JS/allRooms.js"></script>
 </body>

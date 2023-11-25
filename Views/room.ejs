@@ -9,12 +9,14 @@
     </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-TDk5lZuPf3dIjwWS6vjo5er1e3I9Xn2V/9j8h1N7DgDOWzIuXW+56WZdQDd21h9N" crossorigin="anonymous">
-        <link rel="stylesheet" href="/CSS/room.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" integrity="...">
+    <link rel="stylesheet" href="/CSS/room.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+        integrity="...">
 
 </head>
 
-<body>
+<body class="background-radial-gradient">
+
     <div class="images">
         <h1 class="title"><%=room.Title%></h1> 
            <% const more =room.imageURL.substring(0,  room.imageURL.length- 5);%>
@@ -46,7 +48,9 @@
     <div class="data">
         <div class="col-md-6">
             <label>Description</label>
-            <p><%= room.description%></p>
+            <p>
+                <%= room.description%>
+            </p>
             <p>
                 <% 
                 if (characteristics) {
@@ -63,15 +67,27 @@
             </p> 
             <hr>
             <label>Room Details</label>
-              <p class="type"><%= room.executive ? 'Executive Club Room' : 'Basma Hotel Room' %></p>
+            <p class="type">
+                <%= room.executive ? 'Executive Club Room' : 'Basma Hotel Room' %>
+            </p>
             <ul>
-                <li>Quantity: <%= room.quantity %></li>
+                <li>Quantity: <%= room.quantity %>
+                </li>
                 <li>Capacity: <%= room.capacity %> people</li>
                 <li>Starting Price: $<%= room.startingPrice %> per night</li>
             </ul>
+            <div class="go-back-button">
+                <a href="/room">
+                    <button>
+                        <i class="fa-solid fa-circle-arrow-left"></i> Go Back to All Rooms
+                    </button>
+                </a>
+            </div>
         </div>
-    
+
         <div class="col-md-6">
+            <div id="radius-shape-1" class="radius-shape-1"></div>
+            <div id="radius-shape-2" class="radius-shape-2"></div>
             <div class="booking-form">
                 <form action="/guest/booking" method="POST">
                     <input type="hidden" name="roomTitle" value="<%= room.Title %>">
@@ -88,5 +104,7 @@
     </div>
    
     <script src="/JS/room.js"></script>
-    </body>
-    </html>
+
+</body>
+
+</html>
