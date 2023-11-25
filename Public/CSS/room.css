@@ -1,5 +1,13 @@
 body {
   font-family: "Arial", sans-serif;
+  /* background-image: url("/IMAGES/abdullah-helwa-cQU1Fy-17Dc-unsplash.jpg"); */
+  background-image: url("/IMAGES/mo-gabrail-Hks-nETQzgM-unsplash.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 100vw;
+  height: fit-content;
+  margin: 0;
+  background-repeat: no-repeat;
 }
 
 .room-description,
@@ -13,16 +21,6 @@ body {
   border-radius: 20px;
   padding: 20px;
   border: 2px solid #8213c2;
-}
-.background-radial-gradient {
-  /* background-color: rgba(57, 19, 194, 0.938); */
-  background-image: linear-gradient(
-    to right,
-    rgb(43, 137, 226),
-    #0070cc,
-    #a331e6e7,
-    #6301c0
-  );
 }
 
 .room-description h2,
