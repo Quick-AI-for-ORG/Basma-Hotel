@@ -1,19 +1,32 @@
-let slideIndex = 0;
+let slideIndex = 1;
+showSlides(slideIndex);
 
-function showSlides() {
-  let i;
-  let slides = document.getElementsByClassName("slideshow");
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.opacity = 0;
-  }
-
-  slideIndex++;
-  if (slideIndex > slides.length) {
-    slideIndex = 1;
-  }
-
-  slides[slideIndex - 1].style.opacity = 1;
-  setTimeout(showSlides, 5000);
+function plusSlides(n) {
+    showSlides(slideIndex += n);
 }
 
-showSlides();
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("demo");
+
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
+}
+const today = new Date();
+const formattedToday = today.toISOString().split('T')[0];
+document.getElementById('arrivalDate').setAttribute('min', formattedToday);
+document.getElementById('departureDate').setAttribute('min', formattedToday)
+document.getElementById('arrivalDate').valueAsDate = new Date();

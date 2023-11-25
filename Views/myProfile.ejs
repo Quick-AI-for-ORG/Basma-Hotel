@@ -241,8 +241,8 @@
                   </p>
                   <% reservations.forEach(reservation => { %>
                     <% const currentDate = new Date(); %>
-                    <% if (currentDate > reservation.end_date) { %>
-                      <% const date = reservation.end_date.toDateString().substring(0, 16); %>
+                    <% if (currentDate > reservation.endDate) { %>
+                      <% const date = reservation.endDate.toDateString().substring(0, 16); %>
                       <p class="mb-1 mt-4" style="font-size: .77rem;">Date: <%= date %></p>
                     <% } %>
                   <% }); %>
@@ -260,8 +260,8 @@
 
                   <% reservations.forEach(reservation => { %>
                     <% const currentDate = new Date(); %>
-                    <% if (currentDate < reservation.end_date) { %>
-                      <% const date = reservation.end_date.toDateString().substring(0, 16); %>
+                    <% if (currentDate < reservation.endDate) { %>
+                      <% const date = reservation.endDate.toDateString().substring(0, 16); %>
                       <p class="mb-1 mt-4" style="font-size: .77rem;">Date: <%= date %></p>
                     <% } %>
                   <% }); %>
