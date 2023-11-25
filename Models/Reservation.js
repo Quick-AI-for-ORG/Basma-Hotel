@@ -67,17 +67,27 @@ const reservationOptions = sequelize.define('ReservationOption', {
 });
 
 Reservation.belongsTo(Room, {
-  foreignKey: "roomTitle",
+  foreignKey: "roomTitle", onDelete: 'CASCADE' 
 });
 
 Reservation.belongsTo(Guest, {
-  foreignKey: "guestEmail",
+  foreignKey: "guestEmail", onDelete: 'CASCADE' 
 });
-
+Guest.hasMany(Reservation, {
+  foreignKey: "guestEmail", onDelete: 'CASCADE' 
+});
+Room.hasMany(Reservation, {
+  foreignKey: "roomTitle", onDelete: 'CASCADE' 
+});
+Reservation.hasMany(reservationOptions, {
+  foreignKey: "reservation", onDelete: 'CASCADE' 
+});
+Options.hasMany(reservationOptions, {
+  foreignKey: "option", onDelete: 'CASCADE' 
+});
 reservationOptions.belongsTo(Reservation, { foreignKey: 'id' });
 reservationOptions.belongsTo(Options, { foreignKey: 'option' });
 
-// Create the table if it does not exist
 async function createTable() {
   await Reservation.sync();
   await Options.sync();

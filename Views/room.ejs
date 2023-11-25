@@ -15,30 +15,29 @@
 </head>
 
 <body>
-    
     <div class="images">
         <h1 class="title"><%=room.Title%></h1> 
-        <% const newImagePath=room.imageURL.substring(15); 
-            const more = newImagePath.substring(2, newImagePath.length - 5); %>
+           <% const more =room.imageURL.substring(0,  room.imageURL.length- 5);%>
+            
         <div class="mySlides">
-            <img src="/IMAGES/ROOMS/<%= newImagePath %>" alt="<%= room.Title %>">
+            <img src="<%= room.imageURL %>" alt="<%= room.Title %>">
         </div>
         <div class="mySlides">
-            <img src="/IMAGES/ROOMS/<%= more + '1.jpeg' %>" alt="<%= room.Title %>">
+            <img src="<%= more + '1.jpeg' %>" alt="<%= room.Title %>">
         </div>
         <div class="mySlides">
-            <img src="/IMAGES/ROOMS/<%= more + '2.jpeg' %>" alt="<%= room.Title %>">
+            <img src="<%= more + '2.jpeg' %>" alt="<%= room.Title %>">
         </div>
 
         <div class="image-container">
             <div class="image-item">
-                <img class="demo img-fluid" src="/IMAGES/ROOMS/<%= newImagePath %>" alt="<%= room.Title %>" onclick="currentSlide(1)">
+                <img class="demo img-fluid" src="<%= room.imageURL %>" alt="<%= room.Title %>" onclick="currentSlide(1)">
             </div>
             <div class="image-item">
-                <img class="demo img-fluid" src="/IMAGES/ROOMS/<%= more + '1.jpeg' %>" alt="<%= room.Title %>" onclick="currentSlide(2)">
+                <img class="demo img-fluid" src="<%= more + '1.jpeg' %>" alt="<%= room.Title %>" onclick="currentSlide(2)">
             </div>
             <div class="image-item">
-                <img class="demo img-fluid" src="/IMAGES/ROOMS/<%= more + '2.jpeg' %>" alt="<%= room.Title %>" onclick="currentSlide(3)">
+                <img class="demo img-fluid" src="<%= more + '2.jpeg' %>" alt="<%= room.Title %>" onclick="currentSlide(3)">
             </div>
         </div>
         
@@ -49,74 +48,19 @@
             <label>Description</label>
             <p><%= room.description%></p>
             <p>
-                <% if (room.characteristics) {
-                    try {
-                        const characteristicsArray = JSON.parse(room.characteristics);
-                        characteristicsArray.forEach(characteristic => {
-                            const characteristicWithoutSpaces = characteristic.replace(/\s/g, '');
-                
-                            if (characteristicWithoutSpaces === 'NileRiverView') { %>
-                                <i class="fa-solid fa-water" title="<%= characteristic %>"
-                                    id="<%= characteristicWithoutSpaces %>"></i>
-                            <% } else if (characteristicWithoutSpaces === 'LargeTerrace') { %>
-                                <i class="fa-solid fa-umbrella-beach" title="<%= characteristic %>"
-                                    id="<%= characteristicWithoutSpaces %>"></i>
-                            <% } else if (characteristicWithoutSpaces === 'PoolView') { %>
-                                <i class="fa-solid fa-water-ladder" title="<%= characteristic %>"
-                                    id="<%= characteristicWithoutSpaces %>"></i>
-                            <% } else if (characteristicWithoutSpaces === 'WiFi') { %>
-                                <i class="fa-solid fa-wifi" title="<%= characteristic %>"
-                                    id="<%= characteristicWithoutSpaces %>"></i>
-                            <% } else if (characteristicWithoutSpaces === 'TV') { %>
-                                <i class="fa-solid fa-tv" title="<%= characteristic %>"
-                                    id="<%= characteristicWithoutSpaces %>"></i>
-                            <% } else if (characteristicWithoutSpaces === 'Bathtub') { %>
-                                <i class="fa-solid fa-bath" title="<%= characteristic %>"
-                                    id="<%= characteristicWithoutSpaces %>"></i>
-                            <% } else if (characteristicWithoutSpaces === 'CentralAirConditioning') { %>
-                                <i class="fa-solid fa-snowflake" title="<%= characteristic %>"
-                                    id="<%= characteristicWithoutSpaces %>"></i>
-                            <% } else if (characteristicWithoutSpaces === 'Minibar') { %>
-                                <i class="fa-solid fa-beer-mug-empty" title="<%= characteristic %>"
-                                    id="<%= characteristicWithoutSpaces %>"></i>
-                            <% } else if (characteristicWithoutSpaces === 'Non-Smoking') { %>
-                                <i class="fa-solid fa-ban-smoking" title="<%= characteristic %>"
-                                    id="<%= characteristicWithoutSpaces %>"></i>
-                            <% } else if (characteristicWithoutSpaces === 'ComplementryTeaAndCoffee') { %>
-                                <i class="fa-solid fa-mug-hot" title="<%= characteristic %>"
-                                    id="<%= characteristicWithoutSpaces %>"></i>
-                            <% } else if (characteristicWithoutSpaces === '24HourRoomService') { %>
-                                <i class="fa-solid fa-utensils" title="<%= characteristic %>"
-                                    id="<%= characteristicWithoutSpaces %>"></i>
-                            <% } else if (characteristicWithoutSpaces === 'CityView') { %>
-                                <i class="fa-solid fa-city" title="<%= characteristic %>"
-                                    id="<%= characteristicWithoutSpaces %>"></i>
-                            <% } else if (characteristicWithoutSpaces === 'AdditionalFeature') { %>
-                                <i class="fa-solid fa-cube" title="<%= characteristic %>"
-                                    id="<%= characteristicWithoutSpaces %>"></i>
-                            <% } else if (characteristicWithoutSpaces === 'NumberOfPeople') { %>
-                                <i class="fa-solid fa-person" title="<%= characteristic %>"
-                                    id="<%= characteristicWithoutSpaces %>"></i>
-                            <% }
-                        });
+                <% 
+                if (characteristics) {
+                        characteristics.forEach(characteristic => { %>
+                            <i class="<%=characteristic.icon%>" title="<%= characteristic.characteristic %>" alt=""<%= characteristic.characteristic %>""></i>
+                        <%
+                    })};
                         let num = room.capacity;
                         if (num == 3) { %>
                             <i class="fa-regular fa-3" title="Number of people"></i>
                         <% } else { %>
                             <i class="fa-regular fa-4" title="Number of people"></i>
-                        <% }
-                
-                        const lastCharacteristic = characteristicsArray[characteristicsArray.length - 1];
-                        if (lastCharacteristic) { %>
-                            <% const characteristicWithoutSpaces = lastCharacteristic.replace(/\s/g, ''); %>
-                            <i class="fa-solid fa-cube" title="<%= lastCharacteristic %>"
-                                id="<%= characteristicWithoutSpaces %>"></i>
-                        <% }
-                    } catch (error) {  }
-                } %>
-                
-            </p>
-            
+                        <% } %>
+            </p> 
             <hr>
             <label>Room Details</label>
               <p class="type"><%= room.executive ? 'Executive Club Room' : 'Basma Hotel Room' %></p>
@@ -142,6 +86,7 @@
             </div>
         </div>
     </div>
+   
     <script src="/JS/room.js"></script>
     </body>
     </html>

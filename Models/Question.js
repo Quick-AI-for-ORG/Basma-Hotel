@@ -18,7 +18,10 @@ const Question = sequelize.define('Questions', {
 });
 
 Question.belongsTo(Guest, {
-  foreignKey: 'email',
+  foreignKey: 'email', onDelete: 'CASCADE' 
+});
+Guest.hasMany(Question, {
+  foreignKey: 'email', onDelete: 'CASCADE' 
 });
 
 async function createTable() {

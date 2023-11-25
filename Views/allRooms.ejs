@@ -19,8 +19,8 @@
                 <div class="room-row">
                     <% } %>
                         <a href="/room/details/<%=rooms[i].Title%>" class="room-card">
-                            <% const newImagePath=rooms[i].imageURL.substring(15); %>
-                                <img src="/IMAGES/ROOMS/<%=newImagePath%>" width="300" height="300">
+                            
+                                <img src="<%=rooms[i].imageURL%>" width="300" height="300">
                                 <h2>
                                     <%=rooms[i].Title%>
                                 </h2>
