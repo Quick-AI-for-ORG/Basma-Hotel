@@ -22,7 +22,7 @@ const addRoom = async(req,res)=>{
             room: req.body.Title,
             characteristic: req.body.characteristics[i],
         })}}).then((roomsCharacteristic) => {
-        res.status(201).json({ message: "room added successfully" }); 
+        res.redirect('/admin')
     });
 } catch(err){
     res.status(400).json({message:err.message})

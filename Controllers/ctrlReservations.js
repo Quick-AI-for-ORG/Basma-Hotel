@@ -1,5 +1,5 @@
 const {Room} = require('../Models/Room.js')
-const {Reservation} = require('../Models/Reservation.js');
+const {Reservation, Option , reservationOption } = require('../Models/Reservation.js');
 
 
 const reserve = async (req, res) => {
@@ -7,36 +7,62 @@ const reserve = async (req, res) => {
         res.redirect("/guest/login");
       } else {
     try{
-        let d = new Date(req.body.departureDate)
-        let a = new Date(req.body.arrivalDate)
-        const milliseconds_between_dates = d.getTime() -a.getTime();
-        const days_between_dates = Math.floor(milliseconds_between_dates / (1000 * 60 * 60 * 24));
-
-
-        let options = [];
-        console.log(req.body)
-        if(req.body.g4) options.push("High Speed 4G Wifi Personal Router");
-        if(req.body.lunch) options.push("Lunch");
-        if(req.body.dinner) options.push("Dinner");
-        if(req.body.car) options.push("Airport Private Car Transportation (Up to 3 People)");
-        if(req.body.van) options.push("Airport Private Van (Up to 12 People | One Way)");
-        if(req.body.massage) options.push("Massage");
-        let room = await Room.findOne({ where:{Title: req.body.room}});
-        const reservation =  Reservation.create({
+       if(await checkAvailability(req,res)){
+        let options = [];        
+        let room = await Room.findOne({ where:{Title: req.body.roomTitle}});
+        let days_between_dates = Math.ceil(( new Date(req.body.departureDate).getTime() - new Date(req.body.arrivalDate).getTime()) / (1000 * 60 * 60 * 24));
+        const reservation =  await Reservation.create({
             roomTitle: req.body.roomTitle,
             guestEmail: req.session.user.email,
             startDate: req.body.arrivalDate,
             endDate: req.body.departureDate,
             numberOfAdults: req.body.numberOfAdults,
             numberOfChildren: req.body.numberOfChildren,
-            options: options,
-            price: room.startingPrice * days_between_dates + (150 * options.length)  
-        }).then((reservation) => {
-            res.status(201).json({ message: "reservation saved successfully" }); 
-        });
-    } catch(err){
-        res.status(400).json({message:err.message})
-    }}}
+            price: room.startingPrice * days_between_dates
+        }).then(async(reservation) => {
+        if(req.body.g4 == 'on') options.push("High Speed 4G Wifi Personal Router");
+        if(req.body.lunch == 'on') options.push("Lunch");
+        if(req.body.dinner == 'on') options.push("Dinner");
+        if(req.body.car == 'on') options.push("Airport Private Car Transportation (Up to 3 People)");
+        if(req.body.van == 'on') options.push("Airport Private Van (Up to 12 People | One Way)");
+        if(req.body.massage == 'on') options.push("Massage");
+        for(let i = 0; i<options.length; i++){
+                const reservationOptions =  await reservationOption.create({
+                    option: options[i],
+                    reservation: reservation.id,
+                })}
+                res.redirect('/guest');
+        })
+    }} catch(err) {
+        console.log(err)
+    }
+    }
+}
+
+const modifyReservationOptions = async (req, res) => {
+    try{
+        let options = [];
+        if(req.body.g4 == 'on') options.push("High Speed 4G Wifi Personal Router");
+        if(req.body.lunch == 'on') options.push("Lunch");
+        if(req.body.dinner == 'on') options.push("Dinner");
+        if(req.body.car == 'on') options.push("Airport Private Car Transportation (Up to 3 People)");
+        if(req.body.van == 'on') options.push("Airport Private Van (Up to 12 People | One Way)");
+        if(req.body.massage == 'on') options.push("Massage");
+        await reservationOption.destroy({
+            where: {
+                reservation: req.body.id
+            }
+        })
+        for(let i = 0; i<options.length; i++){
+                const reservationOptions =  await reservationOption.create({
+                    option: options[i],
+                    reservation: req.body.id,
+                })}
+                res.redirect('/guest');
+    } catch(err) {
+        console.log(err)
+    }
+}
 
 const  getUserReservations = async (req, res) => {
     return await Reservation.findAll({
@@ -48,12 +74,28 @@ const  getUserReservations = async (req, res) => {
      order: [
         ['createdAt', 'DESC'], 
       ],
-      limit: 5, 
-
-       
+      limit: 5,   
     });
-
 }
+
+const getUserReservationOptions = async (req, res) => {
+    let reservationOptions = await reservationOption.findAll({
+        where: {
+            reservation: req.body.id,         
+            
+        }, order: [
+            ['createdAt', 'DESC'], 
+          ],
+          limit: 5,   
+        });
+    let options = [];
+    for(let i = 0; i<reservationOptions.length; i++){
+        options.push(await Option.findOne({where:{option: reservationOptions[i].option}}))
+      }
+      return options;
+    }
+
+
 const getReservations = async(req,res)=>{
     return await Reservation.findAll();
 }
@@ -75,8 +117,8 @@ const cancelReservation = async(req,res)=>{
     const checkAvailability = async (req, res) => {
 
 
-        let startDate = new Date(req.body.startDate);
-        let endDate = new Date(req.body.endDate);
+        let startDate = new Date(req.body.arrivalDate);
+        let endDate = new Date(req.body.departureDate);
     
         const reservations = await Reservation.findAll({
             where: {
@@ -91,7 +133,6 @@ const cancelReservation = async(req,res)=>{
         {    
         
                 let count = 0;
-                console.log(reservations)
                 reservations.forEach(reservation => {
                     if(reservation.endDate > startDate && reservation.startDate < endDate )
                     {
@@ -101,21 +142,19 @@ const cancelReservation = async(req,res)=>{
                 });
                 if(count >= room.quantity)
                     {
-                        res.status(400).json({message: "Room is not available"})
-                        console.log("Room is not available")
+                        
+                        return false;
                     }
                 else
                 {
-                    console.log(count)
-                    res.status(200).json({message: "Room is available"})
-                    console.log("Room is available")
                     
+                    return true;
                 }
             
     
         }  
     }
     module.exports = {
-        guest: {reserve  , getUserReservations , cancelReservation ,checkAvailability },
+        guest: {reserve  , getUserReservations , cancelReservation ,checkAvailability, modifyReservationOptions, getUserReservationOptions },
         admin: {getReservations}
     }
