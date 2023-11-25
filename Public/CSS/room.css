@@ -1,26 +1,31 @@
-
 body {
   font-family: "Arial", sans-serif;
 }
 
 .room-description,
 .booking-form {
-  margin-left: 20%;;
-  flex: 1; 
-  max-width: 55%; 
-  box-sizing: border-box; 
-  background-color: #ffffff; 
-  color: #7f12be; 
-  border-radius: 10px; 
+  margin-left: 20%;
+  flex: 1;
+  max-width: 90%;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  color: #7f12be;
+  border-radius: 20px; /* Increased border-radius for a smoother look */
+  padding: 20px;
+  border: 2px solid #8213c2; /* Border added for a nicer outline */
+}
+.background-radial-gradient {
+  background-color: rgba(57, 19, 194, 0.938);
+  background-image: linear-gradient(to right, rgb(9, 0, 106), #8213c274);
 }
 
 .room-description h2,
 .booking-form h2 {
-  color: #7f12be; 
+  color: #7f12be;
 }
 
 .room-description p {
-  color: #2d3142; 
+  color: #2d3142;
 }
 
 .booking-form form {
@@ -35,57 +40,74 @@ label {
   color: transparent;
 }
 
-
 .booking-form input[type="date"] {
   padding: 10px;
   margin-bottom: 20px;
-  border: 1px solid #bfc0c0;
-  border-radius: 5px;
-  color: #000000; 
+  border: 2px solid #bfc0c0; /* Added border for a defined look */
+  border-radius: 10px; /* Adjusted border-radius for a smoother look */
+  color: #000000;
   transition: background-color 0.5s;
 }
+
 .booking-form input[type="submit"] {
   padding: 10px;
   margin-bottom: 20px;
-  border: 1px solid #bfc0c0; 
-  border-radius: 5px;
+  border: 2px solid #8213c2;
+  border-radius: 10px; /* Adjusted border-radius for a smoother look */
   background-color: #8213c2;
-  color: #fff; 
+  color: #fff;
   transition: background-color 0.5s;
 }
 
 .booking-form input[type="submit"]:hover {
-  background-color: #3c0266; 
+  background-color: #3c0266;
 }
 
-.data{
+/* Other styles remain unchanged */
+
+.data {
   display: flex;
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
   border-radius: 0.2rem;
-  padding: 1.25rem!important;
-  width:70%;
+  padding: 1.25rem !important;
+  width: 70%;
   margin-left: 15%;
-  padding:25%;
+  padding: 25%;
+  border-radius: 20px;
   margin-bottom: 3%;
   border-style: solid;
-  border-color:#8213c2;
+  border-color: #4d13c2;
   border-top: 0;
   border-width: middle;
+  background-color: white;
 }
 
-.images{
-  margin-top:7%;
-  padding:2%;
-  width:70%;
+.images {
+  background-color: white;
+  margin-top: 7%;
+  padding: 2%;
+  width: 70%;
   margin-left: 15%;
-  border-radius: 0.2rem;
-  border-style: solid;
-  border-color:#8213c2;
+  border-radius: 20px;
+  border: 2px solid #4106b7;
   border-bottom: 0;
-  border-width: middle;
+  /* background-image: url("/IMAGES/v822-aew-23.jpg"); */
+  position: relative;
 }
+
+.images::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 90%;
+  transform: translateX(-50%);
+  height: 1px;
+  background-color: #4106b7; /* You can adjust this color as needed */
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
@@ -105,7 +127,7 @@ label {
 .image-item {
   flex: 1;
   margin-top: 10px;
-  margin-right: 10px; 
+  margin-right: 10px;
 }
 .image-item img {
   width: 100%;
@@ -120,20 +142,21 @@ label {
   height: 70%;
   border-radius: 5px;
 }
-.type{
-  font-size:medium;
+.type {
+  font-size: medium;
   margin: 1%;
   margin-top: -1%;
   color: #1103af;
+}
+p i {
+  color: #133cc2;
+}
 
-}
-p i{
-  color:#133cc2;
-}
-.title{
+.title {
   text-align: center;
   display: flex;
   justify-content: center;
+  position: relative;
   align-items: center;
   margin-bottom: 2%;
   background-image: linear-gradient(to right, #133cc2, #8213c2);
@@ -141,23 +164,54 @@ p i{
   color: transparent;
 }
 
-.title::before {
-  content: "";
-  position: absolute;
-  margin-top: 1%;
-  height: 2px;
-  background-color: #0c008c;
-  width: 50px;
-  left: 32%;
-  transform: translate(0, -50%);
-}
+.title::before,
 .title::after {
   content: "";
-  margin-top: 1%;
+  flex: 0 1 10%;
+  height: 2px;
+  background-image: linear-gradient(to right, #133cc2, #8213c2);
+  width: 30%;
+}
+
+.title::before {
+  margin-right: 10px; /* Adjust the spacing between the line and the title */
+}
+
+.title::after {
+  margin-left: 10px; /* Adjust the spacing between the line and the title */
+}
+
+/* .title::before,
+.title::after {
+  content: "";
   position: absolute;
+  margin-top: 1%;
   height: 2px;
   background-color: #0c008c;
-  width: 50px;
-  right: 32%;
+  width: calc(10% + 2vw);
+}
+
+.title::before {
+  left: calc(22% - 1vw);
   transform: translate(0, -50%);
 }
+
+.title::after {
+  right: calc(21% - 1vw); 
+  transform: translate(0, -50%);
+}
+
+@media only screen and (max-width: 768px) {
+  .title::before,
+  .title::after {
+    width: calc(15% + 2vw);
+  }
+
+  .title::before {
+    left: calc(30% - 1vw);
+  }
+
+  .title::after {
+    right: calc(10% - 1vw);
+  }
+} */
