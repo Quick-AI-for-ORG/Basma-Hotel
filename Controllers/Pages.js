@@ -7,23 +7,20 @@ const login = (req, res) => {
 const signup = (req, res) => {
   res.render("signup", { layout: false });
 };
-const bookings = (req, res) => {
-  res.render("myBookings");
-};
 const basma = (req, res) => {
   res.render("basma",{user: (req.session.user === undefined ? "" : req.session.user)});
 };
 const about = (req, res) => {
-  res.render("aboutUs");
+  res.render("aboutUs",{user: (req.session.user === undefined ? "" : req.session.user)});
 };
 const facilities = (req, res) => {
-  res.render("facilities");
+  res.render("facilities",{user: (req.session.user === undefined ? "" : req.session.user)});
 };
 const privacy = (req, res) => {
-  res.render("privacyPolicy");
+  res.render("privacyPolicy",{user: (req.session.user === undefined ? "" : req.session.user)});
 };
 const dashboard = (req, res) => {
-  res.render("dashboard", { layout: false });
+  res.render("dashboard", { layout: false ,user: (req.session.user === undefined ? "" : req.session.user)});
 }
 const myProfile = async (req, res) => {
   if (req.session.user === undefined) {
@@ -75,8 +72,14 @@ const viewRoom = async (req, res) => {
      res.redirect('/');
 }
 
+const booking = (req, res) => {
+  if (req.session.user !== undefined)  res.render("booking", { user : req.session.user, roomTitle: req.body.roomTitle, arrivalDate: req.body.arrivalDate, departureDate: req.body.departureDate});
+  else res.redirect('/guest/login')
+}
+
+
 module.exports = {
   public: { basma, about, facilities, privacy, covid,login, signup, viewRooms,viewRoom },
-  guest: { bookings, myProfile, logout },
+  guest: { myProfile,booking, logout },
   admin: {dashboard}
 };

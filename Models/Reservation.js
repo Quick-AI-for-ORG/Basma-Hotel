@@ -12,19 +12,19 @@ const Reservation = sequelize.define("Reservation", {
     primaryKey: true,
     autoIncrement: true,
   },
-  room_Title: {
+  roomTitle: {
     type: Sequelize.STRING(255),
     allowNull: false,
   },
-  guest_email: {
+  guestEmail: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  start_date: {
+  startDate: {
     type: Sequelize.DATE,
     allowNull: false,
   },
-  end_date: { 
+  endDate: { 
     type: Sequelize.DATE,
     allowNull: false,
   },
@@ -32,25 +32,31 @@ const Reservation = sequelize.define("Reservation", {
     type: Sequelize.DECIMAL(10, 2),
     allowNull: false,
   },
-  number_of_people: {
+  numberOfAdults: {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
-  special_request: Sequelize.TEXT,
+  numberOfChildren: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
+  options: {
+    type: Sequelize.JSON,// This defines an array of strings
+  },
+  
 });
 
 // Define the foreign key constraints
 Reservation.belongsTo(Room, {
-  foreignKey: "room_Title",
+  foreignKey: "roomTitle",
 });
 
 Reservation.belongsTo(Guest, {
-  foreignKey: "guest_email",
+  foreignKey: "guestEmail",
 });
 
 // Create the table if it does not exist
 async function createTable() {
   await Reservation.sync();
 }
-
 module.exports = { createTable, Reservation };

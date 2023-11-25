@@ -13,16 +13,24 @@ const reserve = async (req, res) => {
         const days_between_dates = Math.floor(milliseconds_between_dates / (1000 * 60 * 60 * 24));
 
 
-
+        let options = [];
+        console.log(req.body)
+        if(req.body.g4) options.push("High Speed 4G Wifi Personal Router");
+        if(req.body.lunch) options.push("Lunch");
+        if(req.body.dinner) options.push("Dinner");
+        if(req.body.car) options.push("Airport Private Car Transportation (Up to 3 People)");
+        if(req.body.van) options.push("Airport Private Van (Up to 12 People | One Way)");
+        if(req.body.massage) options.push("Massage");
         let room = await Room.findOne({ where:{Title: req.body.room}});
         const reservation =  Reservation.create({
-            room_Title: req.body.room,
-            guest_email: req.session.user.email,
-            start_date: req.body.arrivalDate,
-            end_date: req.body.departureDate,
-            price: room.startingPrice * days_between_dates ,
-            number_of_people: room.capacity,
-           
+            roomTitle: req.body.roomTitle,
+            guestEmail: req.session.user.email,
+            startDate: req.body.arrivalDate,
+            endDate: req.body.departureDate,
+            numberOfAdults: req.body.numberOfAdults,
+            numberOfChildren: req.body.numberOfChildren,
+            options: options,
+            price: room.startingPrice * days_between_dates + (150 * options.length)  
         }).then((reservation) => {
             res.status(201).json({ message: "reservation saved successfully" }); 
         });
@@ -34,7 +42,7 @@ const  getUserReservations = async (req, res) => {
     return await Reservation.findAll({
         
         where: {
-            guest_email: req.session.user.email,         
+            guestEmail: req.session.user.email,         
             
         },
      order: [
@@ -72,9 +80,7 @@ const cancelReservation = async(req,res)=>{
     
         const reservations = await Reservation.findAll({
             where: {
-                room_Title: req.body.roomTitle,
-                
-                
+                roomTitle: req.body.roomTitle,   
             },
             
         });
@@ -87,7 +93,7 @@ const cancelReservation = async(req,res)=>{
                 let count = 0;
                 console.log(reservations)
                 reservations.forEach(reservation => {
-                    if(reservation.end_date > startDate && reservation.start_date < endDate )
+                    if(reservation.endDate > startDate && reservation.startDate < endDate )
                     {
                         count = count +1;
                     }
