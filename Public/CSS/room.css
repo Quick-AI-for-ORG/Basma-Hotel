@@ -10,9 +10,9 @@ body {
   box-sizing: border-box;
   background-color: #ffffff;
   color: #7f12be;
-  border-radius: 20px; /* Increased border-radius for a smoother look */
+  border-radius: 20px;
   padding: 20px;
-  border: 2px solid #8213c2; /* Border added for a nicer outline */
+  border: 2px solid #8213c2;
 }
 .background-radial-gradient {
   background-color: rgba(57, 19, 194, 0.938);
@@ -43,8 +43,8 @@ label {
 .booking-form input[type="date"] {
   padding: 10px;
   margin-bottom: 20px;
-  border: 2px solid #bfc0c0; /* Added border for a defined look */
-  border-radius: 10px; /* Adjusted border-radius for a smoother look */
+  border: 2px solid #bfc0c0;
+  border-radius: 10px;
   color: #000000;
   transition: background-color 0.5s;
 }
@@ -53,7 +53,7 @@ label {
   padding: 10px;
   margin-bottom: 20px;
   border: 2px solid #8213c2;
-  border-radius: 10px; /* Adjusted border-radius for a smoother look */
+  border-radius: 10px;
   background-color: #8213c2;
   color: #fff;
   transition: background-color 0.5s;
@@ -62,8 +62,6 @@ label {
 .booking-form input[type="submit"]:hover {
   background-color: #3c0266;
 }
-
-/* Other styles remain unchanged */
 
 .data {
   display: flex;
@@ -105,7 +103,7 @@ label {
   width: 90%;
   transform: translateX(-50%);
   height: 1px;
-  background-color: #4106b7; /* You can adjust this color as needed */
+  background-color: #4106b7;
 }
 
 ::-webkit-scrollbar {
@@ -135,7 +133,7 @@ label {
   border-radius: 5px;
 }
 .image-item:last-child {
-  margin-right: 0; /* Remove margin from the last item to prevent extra spacing */
+  margin-right: 0;
 }
 .mySlides img {
   width: 100%;
@@ -174,11 +172,11 @@ p i {
 }
 
 .title::before {
-  margin-right: 10px; /* Adjust the spacing between the line and the title */
+  margin-right: 10px;
 }
 
 .title::after {
-  margin-left: 10px; /* Adjust the spacing between the line and the title */
+  margin-left: 10px;
 }
 
 /* .title::before,
