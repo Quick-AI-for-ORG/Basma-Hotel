@@ -144,6 +144,13 @@
                 <li>Capacity: <%= room.capacity %> people</li>
                 <li>Starting Price: $<%= room.startingPrice %> per night</li>
             </ul>
+            <div class="go-back-button">
+                <a href="/room">
+                    <button>
+                        <i class="fa-solid fa-circle-arrow-left"></i> Go Back to All Rooms
+                    </button>
+                </a>
+            </div>
         </div>
 
         <div class="col-md-6">
@@ -164,26 +171,7 @@
         </div>
     </div>
     <script src="/JS/room.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            function updateLines() {
-                var title = document.querySelector(".title");
-                var titleWidth = title.offsetWidth;
-                var before = document.querySelector(".title::before");
-                var after = document.querySelector(".title::after");
 
-                var beforePosition = (titleWidth * 0.22) / 2; // Adjust as needed
-                var afterPosition = (titleWidth * 0.21) / 2; // Adjust as needed
-
-                before.style.left = beforePosition + "px";
-                after.style.right = afterPosition + "px";
-            }
-
-            // Call on page load and window resize
-            updateLines();
-            window.addEventListener("resize", updateLines);
-        });
-    </script>
 </body>
 
 </html>

@@ -1,5 +1,14 @@
 /* start allrooms */
 /* Room Cards */
+/* body {
+  background-image: linear-gradient(
+    to right,
+    rgb(43, 137, 226),
+    #0070cc,
+    #a331e6e7,
+    #6301c0
+  );
+} */
 header {
   text-align: center;
   margin-bottom: 30px;
@@ -140,6 +149,7 @@ a {
   color: transparent;
   position: relative;
   z-index: 1;
+  /* color: aliceblue; */
 }
 
 .centered-text h2::after {
