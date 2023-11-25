@@ -6,12 +6,6 @@ const sequelize = new Sequelize('SWEProject', 'root', '', {
 });
 
 const Guest = sequelize.define('Guest', {
-  id: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    allowNull: false,
-    unique: true,
-  },
   firstName: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -63,10 +57,6 @@ const Guest = sequelize.define('Guest', {
     allowNull: false,
     defaultValue: 'No address yet',
   },
-  instagramLink: Sequelize.STRING(255),
-  facebookLink: Sequelize.STRING(255),
-  twitterLink: Sequelize.STRING(255),
-  googleLink: Sequelize.STRING(255),
 });
 
 async function createTable() {
