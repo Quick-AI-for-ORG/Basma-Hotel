@@ -1,20 +1,19 @@
 body {
   font-family: "Arial", sans-serif;
-  /* background-image: url("/IMAGES/abdullah-helwa-cQU1Fy-17Dc-unsplash.jpg"); */
-  background-image: url("/IMAGES/mo-gabrail-Hks-nETQzgM-unsplash.jpg");
-  background-size: cover;
-  background-position: center;
-  width: 100vw;
-  height: fit-content;
+  background-image: url("/IMAGES/axp-photography-RfyqNPEU2RQ-unsplash_.jpg");
+  /* background-image: url("/IMAGES/Aswan+at+sunset-1920w.webp"); */
+  /* background-image: url("/IMAGES/aswan_0.jpg"); */
+  /* background-image: url("/IMAGES/GettyImages-465683519_full.jpg"); */
+  background-size: contain;
+
   margin: 0;
-  background-repeat: no-repeat;
 }
 
 .room-description,
 .booking-form {
   margin-left: 20%;
   flex: 1;
-  max-width: 90%;
+  max-width: 80%;
   box-sizing: border-box;
   background-color: #ffffff;
   color: #7f12be;
