@@ -42,7 +42,7 @@ const Reservation = sequelize.define("Reservation", {
   },
   
 });
-const Options = sequelize.define('Options', {
+const Option = sequelize.define('Options', {
   option: {
     type: Sequelize.STRING(255),
     allowNull: false,
@@ -50,7 +50,7 @@ const Options = sequelize.define('Options', {
   }
 });
 
-const reservationOptions = sequelize.define('ReservationOption', {
+const reservationOption = sequelize.define('ReservationOption', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -79,18 +79,18 @@ Guest.hasMany(Reservation, {
 Room.hasMany(Reservation, {
   foreignKey: "roomTitle", onDelete: 'CASCADE' 
 });
-Reservation.hasMany(reservationOptions, {
+Reservation.hasMany(reservationOption, {
   foreignKey: "reservation", onDelete: 'CASCADE' 
 });
-Options.hasMany(reservationOptions, {
+Option.hasMany(reservationOption, {
   foreignKey: "option", onDelete: 'CASCADE' 
 });
-reservationOptions.belongsTo(Reservation, { foreignKey: 'id' });
-reservationOptions.belongsTo(Options, { foreignKey: 'option' });
+reservationOption.belongsTo(Reservation, { foreignKey: 'reservation' });
+reservationOption.belongsTo(Option, { foreignKey: 'option' });
 
 async function createTable() {
   await Reservation.sync();
-  await Options.sync();
-  await reservationOptions.sync();
+  await Option.sync();
+  await reservationOption.sync();
 }
-module.exports = { createTable, Reservation, Options, reservationOptions };
+module.exports = { createTable, Reservation, Option, reservationOption };
