@@ -1,3 +1,4 @@
+let checkSubmitable = false
 function checkLogin(){
     let mail = document.getElementById("mail")
     let password = document.getElementById("password")
@@ -10,7 +11,7 @@ function checkLogin(){
         }).then(res => res.json()).then(result =>{ 
             console.log("I AM HERERERERE")
             errorMessage = document.getElementById("loginError")
-            let checkSubmitable = false;
+
         if(result.result=='not found'){
            errorMessage.style.display='block'
            errorMessage.style.color='red'
@@ -20,13 +21,13 @@ function checkLogin(){
         else{
            errorMessage.style.display='none'
                 checkSubmitable = true;
-              submitable(checkSubmitable)
+             
           }
           })
         }
 }
 
-function submitable(checkSubmitable){
+function submitable(){
     if(checkSubmitable==true){ 
     document.querySelector('form').submit()
 }

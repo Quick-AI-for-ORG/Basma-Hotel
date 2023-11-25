@@ -43,7 +43,7 @@
 
                                 <!-- Password input -->
                                 <div class="form-outline mb-3">
-                                    <input type="password" id="password" class="form-control"
+                                    <input type="password" onfocusout="checkLogin()" id="password" class="form-control"
                                         placeholder="e.g, ●●●●●●●●●●" name="password" />
                                     <label class="form-label" for="form3Example4">Password</label>
                                 </div>
@@ -59,7 +59,7 @@
                                 </div>
 
                                 <!-- Submit button -->
-                                <button type="button" onclick="checkLogin()" class="signUp btn-block mb-4" style="width: 100%;">
+                                <button type="button" onclick="submitable()" class="signUp btn-block mb-4" style="width: 100%;">
                                     Sign in
                                 </button>
 
