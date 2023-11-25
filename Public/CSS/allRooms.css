@@ -1,5 +1,29 @@
 /* start allrooms */
 /* Room Cards */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  margin-top: 7%;
+  font-size: 36px;
+  background-image: linear-gradient(to right, #133cc2, #8213c2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+header h1::after {
+  content: "";
+  display: block;
+  width: 400px;
+  height: 4px;
+  background-color: #600396aa;
+  margin: 15px auto;
+}
 .room-card-container {
   display: flex;
   flex-wrap: wrap;
