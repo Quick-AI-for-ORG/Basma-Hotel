@@ -15,8 +15,14 @@ body {
   border: 2px solid #8213c2;
 }
 .background-radial-gradient {
-  background-color: rgba(57, 19, 194, 0.938);
-  background-image: linear-gradient(to right, rgb(9, 0, 106), #8213c274);
+  /* background-color: rgba(57, 19, 194, 0.938); */
+  background-image: linear-gradient(
+    to right,
+    rgb(43, 137, 226),
+    #0070cc,
+    #a331e6e7,
+    #6301c0
+  );
 }
 
 .room-description h2,
@@ -61,6 +67,7 @@ label {
 
 .booking-form input[type="submit"]:hover {
   background-color: #3c0266;
+  border-color: #3c0266;
 }
 
 .data {

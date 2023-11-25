@@ -61,7 +61,8 @@ header h1::after {
 .room-card img {
   max-width: 100%;
   height: auto;
-  margin-bottom: 10px;
+  margin: 0 auto 10px;
+  display: block;
 }
 
 .room-card h2 {
