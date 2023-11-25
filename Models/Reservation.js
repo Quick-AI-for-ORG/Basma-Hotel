@@ -40,13 +40,32 @@ const Reservation = sequelize.define("Reservation", {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
-  options: {
-    type: Sequelize.JSON,// This defines an array of strings
-  },
   
 });
+const Options = sequelize.define('Options', {
+  option: {
+    type: Sequelize.STRING(255),
+    allowNull: false,
+    primaryKey: true,
+  }
+});
 
-// Define the foreign key constraints
+const reservationOptions = sequelize.define('ReservationOption', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  option: {
+    type: Sequelize.STRING(255),
+    allowNull: false,
+  },
+  reservation: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
+});
+
 Reservation.belongsTo(Room, {
   foreignKey: "roomTitle",
 });
@@ -55,8 +74,13 @@ Reservation.belongsTo(Guest, {
   foreignKey: "guestEmail",
 });
 
+reservationOptions.belongsTo(Reservation, { foreignKey: 'id' });
+reservationOptions.belongsTo(Options, { foreignKey: 'option' });
+
 // Create the table if it does not exist
 async function createTable() {
   await Reservation.sync();
+  await Options.sync();
+  await reservationOptions.sync();
 }
-module.exports = { createTable, Reservation };
+module.exports = { createTable, Reservation, Options, reservationOptions };
