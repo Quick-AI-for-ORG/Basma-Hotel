@@ -1,5 +1,6 @@
 const ctrlRooms = require('../Controllers/ctrlRooms')
 const ctrlReservations = require('../Controllers/ctrlReservations')
+const ctrlOptions = require('../Controllers/ctrlOptions')
 
 const login = (req, res) => {
   res.render("login", { layout: false });
@@ -74,14 +75,20 @@ const viewRoom = async (req, res) => {
      res.redirect('/');
 }
 
-const booking = (req, res) => {
-  if (req.session.user !== undefined)  res.render("booking", { user : req.session.user, roomTitle: req.body.roomTitle, arrivalDate: req.body.arrivalDate, departureDate: req.body.departureDate});
+const booking = async (req, res) => {
+  await ctrlOptions.admin.getOptions(req, res).then((result) => {
+  if (req.session.user !== undefined)  res.render("booking", { user : req.session.user, roomTitle: req.body.roomTitle, arrivalDate: req.body.arrivalDate, departureDate: req.body.departureDate, options:result});
+  else res.redirect('/guest/login')
+})}
+
+const payment = async (req, res) => {
+  if (req.session.user !== undefined)
+  res.render("payment", { user : req.session.user, room: await ctrlRooms.public.sessionedRoom(req,res), reservation: await ctrlReservations.guest.sessionedReservation(req,res) ,options: await ctrlReservations.guest.getUserReservationOptions(req,res) });
   else res.redirect('/guest/login')
 }
 
-
 module.exports = {
   public: { basma, about, facilities, privacy, covid,login, signup, viewRooms,viewRoom },
-  guest: { myProfile,booking, logout },
+  guest: { myProfile,booking, logout ,payment},
   admin: {dashboard}
 };

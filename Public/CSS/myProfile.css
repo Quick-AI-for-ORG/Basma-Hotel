@@ -41,5 +41,19 @@
   margin-left: 15px;
   margin-bottom: 5px;
 }
-
-/* Add this class to the parent container of the buttons in your HTML */
+::-webkit-scrollbar {
+  display: none;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-500px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+body {
+    animation: fadeIn 1.5s ease-in-out; /* Adjust duration as needed */
+  }

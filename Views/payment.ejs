@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Confirmation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/CSS/payment.css">
+</head>
+<body>
+    <div class="co d-lg-flex">
+        <div class="box-1 bg-light user">
+            <div class="d-flex align-items-center mb-3">
+                <p class="ps-2 name"><%=user.firstName +" " + user.lastName%></p>
+            </div>
+            <div class="box-inner-1 pb-3 mb-3 ">
+                <div class="d-flex justify-content-between mb-3 userdetails">
+                    <p class="fw-bold"><%=room.Title%></p>
+                    <p class="fw-lighter"><span class="fas fa-dollar-sign"></span><%=room.startingPrice%></p>
+                </div>
+                <div id="my" class="carousel slide carousel-fade img-details" data-bs-ride="carousel"
+                    data-bs-interval="2000">
+                    <div class="carousel-indicators"> <button type="button" data-bs-target="#my" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1"></button> <button type="button"
+                            data-bs-target="#my" data-bs-slide-to="1" aria-label="Slide 2"></button> <button type="button"
+                            data-bs-target="#my" data-bs-slide-to="2" aria-label="Slide 3"></button> </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active"> 
+                            <% const more =room.imageURL.substring(0,  room.imageURL.length- 5);%>
+                            <img
+                                src="<%= room.imageURL %>" alt="<%= room.Title %>" class="d-block w-100"> </div>
+                        <div class="carousel-item"> <img
+                                src="<%= more + '1.jpeg' %>" alt="<%= room.Title %>"
+                                class="d-block w-100"> </div>
+                        <div class="carousel-item"> <img
+                                src="<%= more + '2.jpeg' %>" alt="<%= room.Title %>"
+                                class="d-block w-100"> </div>
+                    </div> <button class="carousel-control-prev" type="button" data-bs-target="#my" data-bs-slide="prev">
+                        <div class="icon"> <span class="fas fa-arrow-left"></span> </div> <span
+                            class="visually-hidden">Previous</span>
+                    </button> <button class="carousel-control-next" type="button" data-bs-target="#my" data-bs-slide="next">
+                        <div class="icon"> <span class="fas fa-arrow-right"></span> </div> <span
+                            class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <p class="dis my-3 info"><%=room.description%> </p>
+                <p class="dis my-3 info">Check-in: <%=reservation.startDate.toDateString().substring(0, 16)%> </p>
+                <p class="dis my-3 info">Check-out: <%=reservation.endDate.toDateString().substring(0, 16)%> </p>
+            </div>
+        </div>
+        <div class="box-2">
+            <div class="box-inner-2">
+                <div>
+                    <p class="fw-bold">Payment Details</p>
+                    <p class="dis mb-3">Complete your booking by providing your payment details</p>
+                </div>
+                <form action="/guest/pay" method="post">
+                    <input type="hidden" name="reservation" value="<%=reservation%>">
+                    <div id="payment"class="mb-3">
+                        <label class="fw-bold">Payment Method</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="cash" value="cash" >
+                            <label class="form-check-label" for="cash">
+                                Cash
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="creditCard" checked>
+                            <label class="form-check-label" for="creditCard">
+                                Credit Card
+                            </label>
+                        </div>
+                        
+                    </div>
+                    <div id="details">
+                        <p class="dis fw-bold mb-2">Card details</p>
+                        <div class="d-flex align-items-center justify-content-between card-atm border rounded">
+                            <div class="fab fa-cc-visa ps-3"></div> <input type="text" class="form-control"
+                                placeholder="Card Details">
+                            <div class="d-flex w-50"> <input type="text" class="form-control px-0" placeholder="MM/YY">
+                                <input type="password" maxlength=3 class="form-control px-0" placeholder="CVV"> </div>
+                        </div>
+                        <div class="my-3 cardname">
+                            <p class="dis fw-bold mb-2">Cardholder name</p> <input class="form-control" type="text">
+                        </div>
+                        <div class="address">
+                           
+                            <div class="d-flex flex-column dis">
+                                <div class="d-flex flex-column dis justify-content-between mb-2">
+                                    <p>Subtotal</p>
+                                    <% for(let i=0; i<options.length; i++){%>
+                                        
+                                            <p><%=options[i].option%></p>
+                                            <p class="ms-auto"></span><%=options[i].price%> per night</p>
+                                        
+                                    <%}%> 
+                                </div>
+                                
+                                
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <p class="fw-bold">Total</p>
+                                    <%
+                                        let total = parseInt(room.startingPrice);
+                                        for(let i=0; i<options.length; i++){
+                                            total += parseInt(options[i].price);
+                                        }
+                                        let days_between_dates = Math.ceil((reservation.endDate.getTime() - reservation.startDate.getTime()) / (1000 * 60 * 60 * 24));
+                                    %>
+                                    <p class="fw-bold"><span class="fas fa-dollar-sign"></span><%=total*days_between_dates%></p>
+                                </div>
+                                <div class="btn btn-primary mt-2">Pay
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div> 
+        </div> 
+    </div>
+    <script src="/JS/payment.js"></script>
+</body>
+</html>

@@ -1,6 +1,8 @@
 .navbar-light .navbar-nav .nav-link {
   color: #000;
 }
+
+
 span {
   margin-right: 10%;
   color: #86807a;
@@ -103,4 +105,23 @@ footer {
   margin-top: 8px;
 }
 
-/* End Footer */
+*{
+  position: relative;
+  z-index: 1;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+@keyframes moving {
+  0% {
+    opacity: 0;
+    transform: translateX(-500px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+footer *, .navbar-nav  {
+  animation: moving 1.5s ease-in-out; /* Adjust duration as needed */
+}

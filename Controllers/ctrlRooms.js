@@ -53,6 +53,9 @@ const getRoom = async(req,res)=>{
 
     return await Room.findOne({where:{Title: req.params.roomTitle}})
 }
+const sessionedRoom = async(req,res)=>{
+    return await Room.findOne({where:{Title: req.session.room}})
+}
 
 const getRoomCharacteristics = async(req,res)=>{
   let roomCharacteristics = await RoomsCharacteristic.findAll({where:{room: req.params.roomTitle}})
@@ -98,6 +101,6 @@ const modifyRoom = async(req,res)=>{
 }
 
 module.exports ={
-    public: {getRooms,getRoom, getRoomCharacteristics},
+    public: {getRooms,getRoom, getRoomCharacteristics, sessionedRoom},
     admin: {addRoom,removeRoom,modifyRoom}
 }

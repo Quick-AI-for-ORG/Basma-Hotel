@@ -1,6 +1,6 @@
 const {Room} = require('../Models/Room.js')
 const {Reservation, Option , reservationOption } = require('../Models/Reservation.js');
-
+const {admin} = require('../Controllers/ctrlOptions.js');
 
 const reserve = async (req, res) => {
     if (req.session.user === undefined) {
@@ -8,7 +8,6 @@ const reserve = async (req, res) => {
       } else {
     try{
        if(await checkAvailability(req,res)){
-        let options = [];        
         let room = await Room.findOne({ where:{Title: req.body.roomTitle}});
         let days_between_dates = Math.ceil(( new Date(req.body.departureDate).getTime() - new Date(req.body.arrivalDate).getTime()) / (1000 * 60 * 60 * 24));
         const reservation =  await Reservation.create({
@@ -20,18 +19,17 @@ const reserve = async (req, res) => {
             numberOfChildren: req.body.numberOfChildren,
             price: room.startingPrice * days_between_dates
         }).then(async(reservation) => {
-        if(req.body.g4 == 'on') options.push("High Speed 4G Wifi Personal Router");
-        if(req.body.lunch == 'on') options.push("Lunch");
-        if(req.body.dinner == 'on') options.push("Dinner");
-        if(req.body.car == 'on') options.push("Airport Private Car Transportation (Up to 3 People)");
-        if(req.body.van == 'on') options.push("Airport Private Van (Up to 12 People | One Way)");
-        if(req.body.massage == 'on') options.push("Massage");
+            let options = await admin.getOptions(req,res);      
         for(let i = 0; i<options.length; i++){
-                const reservationOptions =  await reservationOption.create({
-                    option: options[i],
+            if(req.body[`${i+1}`]=='on'){
+                let reservationOptions =  await reservationOption.create({
+                    option: options[i].id,
                     reservation: reservation.id,
                 })}
-                res.redirect('/guest');
+            }
+            req.session.reservation = reservation.id
+            req.session.room = req.body.roomTitle
+                res.redirect('/guest/payment');
         })
     }} catch(err) {
         console.log(err)
@@ -39,27 +37,25 @@ const reserve = async (req, res) => {
     }
 }
 
+
+
 const modifyReservationOptions = async (req, res) => {
     try{
-        let options = [];
-        if(req.body.g4 == 'on') options.push("High Speed 4G Wifi Personal Router");
-        if(req.body.lunch == 'on') options.push("Lunch");
-        if(req.body.dinner == 'on') options.push("Dinner");
-        if(req.body.car == 'on') options.push("Airport Private Car Transportation (Up to 3 People)");
-        if(req.body.van == 'on') options.push("Airport Private Van (Up to 12 People | One Way)");
-        if(req.body.massage == 'on') options.push("Massage");
+        let options = await admin.getOptions(req,res);      
+        for(let i = 0; i<options.length; i++){
+            if(req.body[`${i+1}`]=='on'){
         await reservationOption.destroy({
             where: {
                 reservation: req.body.id
-            }
-        })
+            }})
+        }}
         for(let i = 0; i<options.length; i++){
                 const reservationOptions =  await reservationOption.create({
                     option: options[i],
                     reservation: req.body.id,
                 })}
                 res.redirect('/guest');
-    } catch(err) {
+    }catch(err) {
         console.log(err)
     }
 }
@@ -81,20 +77,18 @@ const  getUserReservations = async (req, res) => {
 const getUserReservationOptions = async (req, res) => {
     let reservationOptions = await reservationOption.findAll({
         where: {
-            reservation: req.body.id,         
-            
-        }, order: [
-            ['createdAt', 'DESC'], 
-          ],
-          limit: 5,   
-        });
+            reservation: req.session.reservation,   
+        } });
     let options = [];
     for(let i = 0; i<reservationOptions.length; i++){
-        options.push(await Option.findOne({where:{option: reservationOptions[i].option}}))
+        options.push(await Option.findOne({where:{id: reservationOptions[i].option}}))
       }
       return options;
     }
 
+    const sessionedReservation = async(req,res) => {
+        return await Reservation.findOne({where:{id: req.session.reservation}})
+    }
 
 const getReservations = async(req,res)=>{
     return await Reservation.findAll();
@@ -154,7 +148,8 @@ const cancelReservation = async(req,res)=>{
     
         }  
     }
+
     module.exports = {
-        guest: {reserve  , getUserReservations , cancelReservation ,checkAvailability, modifyReservationOptions, getUserReservationOptions },
+        guest: {reserve  , getUserReservations , cancelReservation ,checkAvailability, modifyReservationOptions, getUserReservationOptions ,sessionedReservation},
         admin: {getReservations}
     }

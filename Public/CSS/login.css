@@ -83,3 +83,19 @@
 .signup:hover {
   color: #551dff;
 }
+::-webkit-scrollbar {
+  display: none;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-500px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+body *:not(.background-radial-gradient,#loginError){
+    animation: fadeIn 1.5s ease-in-out; /* Adjust duration as needed */
+  }

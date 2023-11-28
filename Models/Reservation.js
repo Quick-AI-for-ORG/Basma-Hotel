@@ -40,14 +40,27 @@ const Reservation = sequelize.define("Reservation", {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
+  paid: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false, 
+  },
   
 });
 const Option = sequelize.define('Options', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
   option: {
     type: Sequelize.STRING(255),
     allowNull: false,
-    primaryKey: true,
-  }
+  },
+  price: {
+    type: Sequelize.DECIMAL(10, 2), // Assuming a decimal type for price, adjust as needed
+    allowNull: false,
+  },
 });
 
 const reservationOption = sequelize.define('ReservationOption', {
@@ -57,7 +70,7 @@ const reservationOption = sequelize.define('ReservationOption', {
     autoIncrement: true,
   },
   option: {
-    type: Sequelize.STRING(255),
+    type: Sequelize.INTEGER,
     allowNull: false,
   },
   reservation: {
@@ -82,7 +95,7 @@ Room.hasMany(Reservation, {
 Reservation.hasMany(reservationOption, {
   foreignKey: "reservation", onDelete: 'CASCADE' 
 });
-Option.hasMany(reservationOption, {
+Option.hasOne(reservationOption, {
   foreignKey: "option", onDelete: 'CASCADE' 
 });
 reservationOption.belongsTo(Reservation, { foreignKey: 'reservation' });

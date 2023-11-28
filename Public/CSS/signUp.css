@@ -44,3 +44,31 @@
 .login:hover {
   color: #551dff;
 }
+::-webkit-scrollbar {
+  display: none;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-500px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+@keyframes fade{
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+
+}
+body:not(.cMail, .pswe) {
+    animation: fadeIn 1s ease-in-out; 
+  }
+  img{
+    animation:  fade 0s ease-in-out;
+  }

@@ -1,8 +1,8 @@
-const {Options} = require('../Models/Reservation.js');
+const {Option} = require('../Models/Reservation.js');
 
 const addOption = async(req,res)=>{
     try{
-    const option =  Options.create({
+    const option =  Option.create({
         option: req.body.option,
     }).then((option) => {
         res.status(201).json({ message: "option added successfully" }); 
@@ -12,7 +12,7 @@ const addOption = async(req,res)=>{
 }}
 
 const removeOption = async(req,res)=>{
-    try { await Options.destroy({
+    try { await Option.destroy({
         where: {
           option: req.body.option,
         },
@@ -27,15 +27,15 @@ const removeOption = async(req,res)=>{
     }
 
 const getOptions = async(req,res)=>{
-    return await Options.findAll();
+    return await Option.findAll();
 }
 
 const getOption = async(req,res)=>{
-    return await Options.findOne({where:{option: req.body.option}})
+    return await Option.findOne({where:{option: req.body.option}})
 }
 
 const modifyOption = async(req,res)=>{
-    await Options.update({
+    await Option.update({
         option: req.body.option,
     }, {
         where: {
