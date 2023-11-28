@@ -20,8 +20,14 @@
 
 <body>
     <nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
-        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+
+        <a class="navbar-brand mx-auto" href="#">
+            <img id="MDB-logo" src="/IMAGES/download-removebg-preview.png" alt="Basma Hotel Logo" draggable="false"
+                height="40" />
+            Basma Hotel
+        </a>
+
+        <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
                 <a class="nav-link" href="#">Sign out</a>
@@ -33,12 +39,12 @@
             <nav class="col-md-2 d-none d-md-block sidebar">
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link active" href="#">
                                 <i class="zmdi zmdi-widgets"></i>
                                 Dashboard <span class="sr-only">(current)</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <i class="zmdi zmdi-file-text"></i>
@@ -111,7 +117,7 @@
                     <div class="row">
                         <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
                             <div class="card blue">
-                                <div class="title">all projects</div>
+                                <div class="title">All Bookings</div>
                                 <i class="zmdi zmdi-upload"></i>
                                 <div class="value">89</div>
                                 <div class="stat"><b>13</b>% increase</div>
@@ -126,7 +132,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
-                            <div class="card orange">
+                            <div class="card purple">
                                 <div class="title">total budget</div>
                                 <i class="zmdi zmdi-download"></i>
                                 <div class="value">$80,990</div>
@@ -146,23 +152,27 @@
                 <div class="projects mb-4">
                     <div class="projects-inner">
                         <header class="projects-header">
-                            <div class="title">Ongoing Projects</div>
-                            <div class="count">| 32 Projects</div>
+                            <div class="title">Ongoing Booking</div>
+                            <div class="count">| 32 Bookings</div>
                             <i class="zmdi zmdi-download"></i>
                         </header>
                         <table class="projects-table">
                             <thead>
                                 <tr>
-                                    <th>Project</th>
-                                    <th>Deadline</th>
-                                    <th>Leader + Team</th>
-                                    <th>Budget</th>
-                                    <th>Status</th>
-                                    <th class="text-right">Actions</th>
+                                    <th>Guest</th>
+                                    <th>Room</th>
+                                    <th>Arrival Date</th>
+                                    <th>Departure Date</th>
+                                    <th>Price</th>
+                                    <th>Payment Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tr>
                                 <td>
+                                    Dodo
+                                </td>
+                                <td>
                                     <p>New Dashboard</p>
                                     <p>Google</p>
                                 </td>
@@ -171,9 +181,6 @@
                                     <p class="text-danger">Overdue</p>
                                 </td>
                                 <td class="member">
-                                    <figure><img
-                                            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/people_8.png" />
-                                    </figure>
                                     <div class="member-info">
                                         <p>Myrtle Erickson</p>
                                         <p>UK Design Team</p>
@@ -182,22 +189,58 @@
                                 <td>
                                     <p>$4,670</p>
                                     <p>Paid</p>
+
                                 </td>
                                 <td class="status">
-                                    <span class="status-text status-orange">In progress</span>
-                                </td>
+                                    <span class="status-text status-orange">Upon Arrival</span>
                                 <td>
-                                    <form class="form" action="#" method="POST">
-                                        <select class="action-box">
-                                            <option>Actions</option>
-                                            <option>Start project</option>
-                                            <option>Send for QA</option>
-                                            <option>Send invoice</option>
-                                        </select>
-                                    </form>
+                                    <button class="delete">Delete</button>
                                 </td>
+                                </td>
+
                             </tr>
-                            <tr class="danger-item">
+                            <!-- <tr class="danger-item"> -->
+                            <tr>
+                                <td>
+                                    Misho
+                                </td>
+                                <td>
+                                    <p>New Dashboard</p>
+                                    <p>Google</p>
+                                </td>
+                                <td>
+                                    <p>17th Oct, 15</p>
+                                    <p class="text-danger">Overdue</p>
+
+                                </td>
+                                <td class="member">
+
+                                    <div class="member-info">
+                                        <p>Myrtle Erickson</p>
+                                        <p>UK Design Team</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p>$4,670</p>
+                                    <p>Paid</p>
+                                <td class="status">
+                                    <span class="status-text status-orange">Upon Arrival</span>
+                                <td>
+                                    <button class="delete">Delete</button>
+                                </td>
+                                </td>
+
+
+                                </td>
+                                <td class="status">
+                                </td>
+
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Mony
+                                </td>
                                 <td>
                                     <p>New Dashboard</p>
                                     <p>Google</p>
@@ -207,9 +250,7 @@
                                     <p class="text-danger">Overdue</p>
                                 </td>
                                 <td class="member">
-                                    <figure><img
-                                            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/people_8.png" />
-                                    </figure>
+
                                     <div class="member-info">
                                         <p>Myrtle Erickson</p>
                                         <p>UK Design Team</p>
@@ -220,21 +261,17 @@
                                     <p>Paid</p>
                                 </td>
                                 <td class="status">
-                                    <span class="status-text status-red">Blocked</span>
-                                </td>
+                                    <span class="status-text status-orange">Upon Arrival</span>
                                 <td>
-                                    <form class="form" action="#" method="POST">
-                                        <select class="action-box">
-                                            <option>Actions</option>
-                                            <option>Start project</option>
-                                            <option>Send for QA</option>
-                                            <option>Send invoice</option>
-                                        </select>
-                                    </form>
+                                    <button class="delete">Delete</button>
+                                </td>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
+                                    Khaled
+                                </td>
+                                <td>
                                     <p>New Dashboard</p>
                                     <p>Google</p>
                                 </td>
@@ -243,9 +280,7 @@
                                     <p class="text-danger">Overdue</p>
                                 </td>
                                 <td class="member">
-                                    <figure><img
-                                            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/people_8.png" />
-                                    </figure>
+
                                     <div class="member-info">
                                         <p>Myrtle Erickson</p>
                                         <p>UK Design Team</p>
@@ -256,21 +291,17 @@
                                     <p>Paid</p>
                                 </td>
                                 <td class="status">
-                                    <span class="status-text status-orange">In progress</span>
-                                </td>
+                                    <span class="status-text status-blue">Paid</span>
                                 <td>
-                                    <form class="form" action="#" method="POST">
-                                        <select class="action-box">
-                                            <option>Actions</option>
-                                            <option>Start project</option>
-                                            <option>Send for QA</option>
-                                            <option>Send invoice</option>
-                                        </select>
-                                    </form>
+                                    <button class="refund">Refund</button>
+                                </td>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
+                                    Adam
+                                </td>
+                                <td>
                                     <p>New Dashboard</p>
                                     <p>Google</p>
                                 </td>
@@ -279,9 +310,7 @@
                                     <p class="text-danger">Overdue</p>
                                 </td>
                                 <td class="member">
-                                    <figure><img
-                                            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/people_8.png" />
-                                    </figure>
+
                                     <div class="member-info">
                                         <p>Myrtle Erickson</p>
                                         <p>UK Design Team</p>
@@ -292,54 +321,12 @@
                                     <p>Paid</p>
                                 </td>
                                 <td class="status">
-                                    <span class="status-text status-blue">Early stages</span>
-                                </td>
+                                    <span class="status-text status-orange">Upon Arrival</span>
                                 <td>
-                                    <form class="form" action="#" method="POST">
-                                        <select class="action-box">
-                                            <option>Actions</option>
-                                            <option>Start project</option>
-                                            <option>Send for QA</option>
-                                            <option>Send invoice</option>
-                                        </select>
-                                    </form>
+                                    <button class="delete">Delete</button>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>New Dashboard</p>
-                                    <p>Google</p>
                                 </td>
-                                <td>
-                                    <p>17th Oct, 15</p>
-                                    <p class="text-danger">Overdue</p>
-                                </td>
-                                <td class="member">
-                                    <figure><img
-                                            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/people_8.png" />
-                                    </figure>
-                                    <div class="member-info">
-                                        <p>Myrtle Erickson</p>
-                                        <p>UK Design Team</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <p>$4,670</p>
-                                    <p>Paid</p>
-                                </td>
-                                <td class="status">
-                                    <span class="status-text status-orange">In progress</span>
-                                </td>
-                                <td>
-                                    <form class="form" action="#" method="POST">
-                                        <select class="action-box">
-                                            <option>Actions</option>
-                                            <option>Start project</option>
-                                            <option>Send for QA</option>
-                                            <option>Send invoice</option>
-                                        </select>
-                                    </form>
-                                </td>
+
                             </tr>
                         </table>
                     </div>
