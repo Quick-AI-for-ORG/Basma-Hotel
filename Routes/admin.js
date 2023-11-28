@@ -10,6 +10,7 @@ const ctrlOptions = require('../Controllers/ctrlOptions')
 const ctrlCharacteristics = require('../Controllers/ctrlCharacteristics')
 
 router.get('/',pages.admin.dashboard)
+router.get('/guests',pages.admin.guests)
 router.post('/addCharacteristic', ctrlCharacteristics.admin.addCharacteristic)
 router.post('/removeCharacteristic', ctrlCharacteristics.admin.removeCharacteristic)
 router.post('/modifyCharacteristic', ctrlCharacteristics.admin.modifyCharacteristic)
