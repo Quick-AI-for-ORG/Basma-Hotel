@@ -173,6 +173,9 @@ catch(err){
 
             const checkLogin = async (req, res) => {
                await  Guest.findOne({where:{email: req.body.mail}}).then(async guest=>{
+                console.log("the guest is" +guest)
+                if(guest==null) res.send({ result: 'not found' })
+                else{
                     const isMatch = await bcrypt.compare(req.body.password, guest.password);
                     if (!isMatch) {
                         return res.send({ result: 'not found' });
@@ -181,13 +184,30 @@ catch(err){
                     else {
                         res.send({ result: 'found' });
                     }
+                }
+                
             })
+
+
             }
             const retriveGuests = async(req,res)=>{ 
                 return await Guest.findAll();
             }
+
+            const facebookLogin = async (req, res) => {
+                console.log(req.body)
+                req.session.user = req.body
+                console.log(req.session.user)
+                console.log("END 1")
+                res.redirect('/guest');
+                
+                console.log("END 2")
+            
+            }
+
+
             module.exports = {
-                public: {register, login,checkMail, checkLogin},
+                public: {register, login,checkMail, checkLogin, facebookLogin},
                 guest:{ updateGuest, updateBio},
                 admin: {retriveGuests, deleteGuest}
             }
