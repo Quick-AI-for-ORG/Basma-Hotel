@@ -22,7 +22,10 @@ function addGuestRow() {
   cell5.innerHTML =
     '<input type="text" class="form-control" placeholder="Phone">';
   cell6.innerHTML =
-    '<button class="btn btn-primary">Edit</button> <button class="btn btn-danger" onclick="deleteGuestRow(this)">Delete</button>';
+    '<div class="btn-group" role="group">' +
+    '<button class="btn btn-primary" style="margin-right: 10px;" onclick="toggleReadOnly(this)">Edit</button>' +
+    '<button class="btn btn-danger" onclick="deleteGuestRow(this)">Delete</button>' +
+    "</div>";
 
   // Show the Save button container
   document.getElementById("saveButtonContainer").style.display = "block";
@@ -52,6 +55,12 @@ function saveGuestRow() {
 
     // Hide the Save button container after saving
     document.getElementById("saveButtonContainer").style.display = "none";
+
+    // Make the fields read-only
+    makeFieldsReadOnly(lastRow.cells);
+
+    // Clear the error message
+    document.getElementById("errorMessage").innerHTML = "";
   } else {
     document.getElementById("errorMessage").innerHTML =
       "Please fill in all fields before saving.";
@@ -61,4 +70,21 @@ function saveGuestRow() {
 function deleteGuestRow(button) {
   var row = button.closest("tr");
   row.parentNode.removeChild(row);
+}
+
+function toggleReadOnly(button) {
+  var row = button.closest("tr");
+  var cells = row.cells;
+
+  for (var i = 0; i < cells.length - 1; i++) {
+    var input = cells[i].querySelector("input");
+    input.readOnly = !input.readOnly;
+  }
+}
+
+function makeFieldsReadOnly(cells) {
+  for (var i = 0; i < cells.length - 1; i++) {
+    var input = cells[i].querySelector("input");
+    input.readOnly = true;
+  }
 }
