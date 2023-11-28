@@ -40,7 +40,5 @@ function checkMail(mail){
         }
 }
 function submitable(){
-    if((ve==true) && (vp==true)){ 
-    document.querySelector('form').submit()
-}
+return (ve==true && vp==true)
 }
