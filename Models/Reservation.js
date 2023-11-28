@@ -42,7 +42,7 @@ const Reservation = sequelize.define("Reservation", {
   },
   
 });
-const Options = sequelize.define('Options', {
+const Option = sequelize.define('Options', {
   option: {
     type: Sequelize.STRING(255),
     allowNull: false,
@@ -50,7 +50,7 @@ const Options = sequelize.define('Options', {
   }
 });
 
-const reservationOptions = sequelize.define('ReservationOption', {
+const reservationOption = sequelize.define('ReservationOption', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -67,20 +67,30 @@ const reservationOptions = sequelize.define('ReservationOption', {
 });
 
 Reservation.belongsTo(Room, {
-  foreignKey: "roomTitle",
+  foreignKey: "roomTitle", onDelete: 'CASCADE' 
 });
 
 Reservation.belongsTo(Guest, {
-  foreignKey: "guestEmail",
+  foreignKey: "guestEmail", onDelete: 'CASCADE' 
 });
+Guest.hasMany(Reservation, {
+  foreignKey: "guestEmail", onDelete: 'CASCADE' 
+});
+Room.hasMany(Reservation, {
+  foreignKey: "roomTitle", onDelete: 'CASCADE' 
+});
+Reservation.hasMany(reservationOption, {
+  foreignKey: "reservation", onDelete: 'CASCADE' 
+});
+Option.hasMany(reservationOption, {
+  foreignKey: "option", onDelete: 'CASCADE' 
+});
+reservationOption.belongsTo(Reservation, { foreignKey: 'reservation' });
+reservationOption.belongsTo(Option, { foreignKey: 'option' });
 
-reservationOptions.belongsTo(Reservation, { foreignKey: 'id' });
-reservationOptions.belongsTo(Options, { foreignKey: 'option' });
-
-// Create the table if it does not exist
 async function createTable() {
   await Reservation.sync();
-  await Options.sync();
-  await reservationOptions.sync();
+  await Option.sync();
+  await reservationOption.sync();
 }
-module.exports = { createTable, Reservation, Options, reservationOptions };
+module.exports = { createTable, Reservation, Option, reservationOption };

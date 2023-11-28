@@ -8,46 +8,41 @@
     <link rel="stylesheet" href="/CSS/allRooms.css">
 </head>
 
-
 <body>
     <div class="centered-text">
         <h2>Basma Hotel Rooms</h2>
     </div>
     <main>
-        <div class="room-card-container mt-4" id="roomList">
-            <% for (let i=0; i < rooms.length; i++) { if(i==3) { %>
-                <div class="room-row">
-                    <% } %>
-                        <a href="/room/details/<%=rooms[i].Title%>" class="room-card">
-                            <% const newImagePath=rooms[i].imageURL.substring(15); %>
-                                <img src="/IMAGES/ROOMS/<%=newImagePath%>" width="300" height="300">
-                                <h2>
-                                    <%=rooms[i].Title%>
-                                </h2>
-                                <p>$ <%=rooms[i].startingPrice%> Per night
-                                </p>
-                                <p>
-                                    <%=rooms[i].capacity%> guests
-                                </p>
-                                <p>
-                                    <%=rooms[i].description%>
-                                </p>
-                        </a>
-                        <% if(i==5) {%>
-                </div>
-                <% } }%>
+        <div class="room-card-container mt-4 equal-height" id="roomList">
+            <% for (let i=0; i < rooms.length; i++) { %>
+                <a href="/room/details/<%=rooms[i].Title%>" class="room-card">
+                    <img src="<%=rooms[i].imageURL%>" width="300" height="300">
+                    <h2>
+                        <%=rooms[i].Title%>
+                    </h2>
+                    <p>$ <%=rooms[i].startingPrice%> Per night</p>
+                    <p>
+                        <%=rooms[i].capacity%> guests
+                    </p>
+                    <p>
+                        <%=rooms[i].description%>
+                    </p>
+                </a>
+                <% } %>
         </div>
         <div class="pagination">
-            <button id="prevPage" onclick="location.replace('/room/<%=current_page-1%>')"><i
-                    class="fa-regular fa-circle-left"></i> Previous</button>
+            <button id="prevPage" onclick="location.replace('/room/<%= current_page - 1 %>')">
+                <i class="fa-regular fa-circle-left"></i> Previous
+            </button>
             <span id="currentPage">
-                <%=Math.ceil(current_page)%>
+                <%= Math.ceil(current_page) %>
             </span>
-            <button id="nextPage" onclick="location.replace('/room/<%=current_page+1%>')">Next <i
-                    class="fa-regular fa-circle-right"></i></button>
+            <button id="nextPage" onclick="location.replace('/room/<%= current_page + 1 %>')">
+                Next <i class="fa-regular fa-circle-right"></i>
+            </button>
         </div>
-
     </main>
+
     <script src="/JS/allRooms.js"></script>
 </body>
 

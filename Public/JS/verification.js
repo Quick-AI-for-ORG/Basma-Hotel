@@ -1,9 +1,8 @@
 document.getElementsByClassName("pw")[0].onkeyup = function() {confirmPass()};
 document.getElementsByClassName("cpw")[0].onkeyup = function() {confirmPass()};
 
-ve=false
-
-vp=false
+let ve=false
+let vp=false
 
 function confirmPass(){
     let p = document.getElementsByClassName("pw")[0].value

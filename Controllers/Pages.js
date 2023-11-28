@@ -55,12 +55,14 @@ const viewRooms = async (req, res) => {
 
 
 const viewRoom = async (req, res) => {
-  let room = null
-  await ctrlRooms.public.getRoom(req,res).then((result)=>{
+  let room = null, characteristics = null
+  await ctrlRooms.public.getRoom(req,res).then(async (result)=> {
     room = result
     if(room === null) res.redirect('/room')
+    characteristics = await ctrlRooms.public.getRoomCharacteristics(req,res)
     res.render('room', {  user: (req.session.user === undefined ? "" : req.session.user) ,
-    room: (room === null ? "" : room)})
+    room: (room === null ? "" : room),
+    characteristics: (characteristics === null ? "" : characteristics)})
   })
   }
 

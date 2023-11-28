@@ -64,10 +64,13 @@ const RoomsCharacteristic = sequelize.define('RoomsCharacteristic', {
   },
 });
 
-RoomsCharacteristic.belongsTo(Room, { foreignKey: 'room' });
-RoomsCharacteristic.belongsTo(Characteristic, { foreignKey: 'characteristic' });
+RoomsCharacteristic.belongsTo(Room, { foreignKey: 'room' , onDelete: 'CASCADE' });
+RoomsCharacteristic.belongsTo(Characteristic, { foreignKey: 'characteristic' , onDelete: 'CASCADE' });
 
-// Create the tables if they do not exist
+Room.hasMany(RoomsCharacteristic, { foreignKey: 'room' , onDelete: 'CASCADE' });
+Characteristic.hasMany(RoomsCharacteristic, { foreignKey: 'characteristic' , onDelete: 'CASCADE' });
+
+
 async function createTable() {
   await Room.sync();
   await Characteristic.sync();

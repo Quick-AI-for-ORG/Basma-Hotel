@@ -24,10 +24,10 @@ app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 
 // Create MySQL Table
-Room.createTable();
-Guest.createTable();
-Reservation.createTable();
-Question.createTable();
+// Room.createTable();
+// Guest.createTable();
+// Reservation.createTable();
+// Question.createTable();
 
 //routers
 app.use("/", indexRouter);
