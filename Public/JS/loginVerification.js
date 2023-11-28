@@ -1,5 +1,7 @@
 let checkSubmitable = false
-function checkLogin(){
+function checkLogin(event){
+    event.preventDefault()
+
     let mail = document.getElementById("mail")
     let password = document.getElementById("password")
 
@@ -9,7 +11,7 @@ function checkLogin(){
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({mail: mail.value, password: password.value})
         }).then(res => res.json()).then(result =>{ 
-            console.log("I AM HERERERERE")
+
             errorMessage = document.getElementById("loginError")
 
         if(result.result=='not found'){
@@ -27,7 +29,8 @@ function checkLogin(){
         }
 }
 
-function submitable(){
+function submitable(event){
+    event.preventDefault()
     if(checkSubmitable==true){ 
     document.querySelector('form').submit()
 }

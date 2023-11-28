@@ -32,7 +32,7 @@
                         <button type="button" class="cancel" onclick="location.replace('/')">
                             <i title="Exit" class="fa-solid fa-circle-xmark"></i></button>
                         <div class="card-body px-4 py-5 px-md-5">
-                            <form method="post" action="/guest/login">
+                            <form method="post" action="/guest/login" onsubmit="submitable(event)">
 
                                 <!-- Email input -->
                                 <div class="form-outline mb-5">
@@ -43,7 +43,7 @@
 
                                 <!-- Password input -->
                                 <div class="form-outline mb-3">
-                                    <input type="password" oninput="checkLogin()" id="password" class="form-control"
+                                    <input type="password" onchange="checkLogin(event)" id="password" class="form-control"
                                         placeholder="e.g, ●●●●●●●●●●" name="password" />
                                     <label class="form-label" for="form3Example4">Password</label>
                                 </div>
@@ -59,18 +59,26 @@
                                 </div>
 
                                 <!-- Submit button -->
-                                <button type="button" onclick="submitable()" class="signUp btn-block mb-4" style="width: 100%;">
+                                
+                                <button type="submit"  class="signUp btn-block mb-4" style="width: 100%;">
                                     Sign in
                                 </button>
 
 
+
+
+                                <!-- <a href="auth/facebook">FACEBOOK LOGIN!> -->
+
+
                                 <!-- Register buttons -->
                                 <div class="text-center">
+
                                     <p>or sign up with:</p>
+                                    <a href="auth/facebook">
                                     <button type="button" class="btn btn-link btn-floating mx-1">
                                         <i class="fab fa-facebook-f"></i>
                                     </button>
-
+                                </a>
                                     <button type="button" class="btn btn-link btn-floating mx-1">
                                         <i class="fab fa-google"></i>
                                     </button>
