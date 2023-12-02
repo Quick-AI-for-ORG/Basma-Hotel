@@ -17,7 +17,9 @@
       transparent 100%
     );
 }
-
+a{
+  text-decoration: none;
+}
 #radius-shape-1 {
   height: 220px;
   width: 220px;
@@ -97,5 +99,5 @@
   }
 }
 body *:not(.background-radial-gradient,#loginError){
-    animation: fadeIn 1.5s ease-in-out; /* Adjust duration as needed */
+    animation: fadeIn 0.7s ease-in-out; /* Adjust duration as needed */
   }

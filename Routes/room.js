@@ -11,6 +11,7 @@ router.get('/details/:roomTitle',pages.public.viewRoom)
 router.post('/addRoom', ctrlRooms.admin.addRoom)
 router.post('/removeRoom', ctrlRooms.admin.removeRoom)
 router.post('/modifyRoom', ctrlRooms.admin.modifyRoom)
+router.post('/findRooms', ctrlRooms.public.findRoom)
 
 
 module.exports=router

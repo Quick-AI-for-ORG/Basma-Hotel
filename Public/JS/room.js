@@ -25,8 +25,5 @@ function showSlides(n) {
     slides[slideIndex - 1].style.display = "block";
     dots[slideIndex - 1].className += " active";
 }
-const today = new Date();
-const formattedToday = today.toISOString().split('T')[0];
-document.getElementById('arrivalDate').setAttribute('min', formattedToday);
-document.getElementById('departureDate').setAttribute('min', formattedToday)
-document.getElementById('arrivalDate').valueAsDate = new Date();
+
+

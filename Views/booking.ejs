@@ -16,11 +16,15 @@
                 <div class="row mb-3">
                     <div class="col">
                         <label for="checkInDate" class="form-label">Check-In Date</label>
-                        <input type="date" name="arrivalDate" value="<%=arrivalDate%>" id="checkInDate" class="form-control">
+                        <%
+                        let temp = new Date(departureDate); 
+                        temp.setDate(temp.getDate() - 1);
+                        %>
+                        <input type="date" name="arrivalDate" value="<%=arrivalDate%>" id="arrivalDate" class="form-control" max="<%=temp.toISOString().split('T')[0]%>">
                     </div>
                     <div class="col">
                         <label for="checkOutDate" class="form-label">Check-Out Date</label>
-                        <input type="date" name="departureDate" value="<%=departureDate%>"" id="checkOutDate" class="form-control">
+                        <input type="date" name="departureDate" value="<%=departureDate%>"" id="departureDate" class="form-control">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -82,5 +86,6 @@
 
     <!-- Include Bootstrap JS and Popper.js (if needed) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/JS/dates.js"></script>
 </body>
 </html>
