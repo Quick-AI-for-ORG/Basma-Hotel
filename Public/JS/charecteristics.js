@@ -1,4 +1,4 @@
-function addcharecteristicsRow() {
+function addCharacteristicsRow() {
   var table = document
     .getElementById("roomTable")
     .getElementsByTagName("tbody")[0];
@@ -18,33 +18,27 @@ function addcharecteristicsRow() {
     '<button class="btn btn-danger" onclick="deleteRoomRow(this)">Delete</button>' +
     "</div>";
 
-  // Show the Save button container
   document.getElementById("saveButtonContainer").style.display = "block";
 }
 
-function saveCharecteristicRow() {
+function saveCharacteristicRow() {
   var table = document
     .getElementById("roomTable")
     .getElementsByTagName("tbody")[0];
   var lastRow = table.rows[table.rows.length - 1];
 
-  var Charecteristic = lastRow.cells[0].querySelector("input").value;
+  var characteristic = lastRow.cells[0].querySelector("input").value; // Corrected attribute name
   var icon = lastRow.cells[1].querySelector("input").value;
 
-  // Check if all fields are filled
-  if (Charecteristic && icon) {
-    // You can now save the data or perform any other actions with the data
-    console.log("Saving Charecteristics data:");
-    console.log("Charecteristic: " + Charecteristic);
+  if (characteristic && icon) {
+    console.log("Saving Characteristics data:");
+    console.log("Characteristic: " + characteristic); // Corrected variable name
     console.log("icon: " + icon);
 
-    // Hide the Save button container after saving
     document.getElementById("saveButtonContainer").style.display = "none";
 
-    // Make the fields read-only
     makeFieldsReadOnly(lastRow.cells);
 
-    // Clear the error message
     document.getElementById("errorMessage").innerHTML = "";
   } else {
     document.getElementById("errorMessage").innerHTML =
@@ -52,7 +46,7 @@ function saveCharecteristicRow() {
   }
 }
 
-function deleteCharecteristicRow(button) {
+function deleteCharacteristicRow(button) {
   var row = button.closest("tr");
   row.parentNode.removeChild(row);
 }
@@ -62,7 +56,6 @@ function toggleReadOnly(button) {
   var cells = row.cells;
 
   for (var i = 0; i < cells.length - 2; i++) {
-    // Exclude the last cell (buttons)
     var input = cells[i].querySelector("input");
     input.readOnly = !input.readOnly;
   }

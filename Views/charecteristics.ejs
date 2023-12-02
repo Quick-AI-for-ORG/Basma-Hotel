@@ -4,19 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charecteristics</title>
+    <title>Characteristics</title>
     <link rel="stylesheet" href="/CSS/dashboard.css">
-    <!-- <link rel="stylesheet" href="/CSS/rooms.css"> -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,600" />
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.selectric/1.10.1/selectric.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
-
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,600" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.selectric/1.10.1/selectric.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
 </head>
 
 <body>
@@ -26,7 +24,6 @@
                 height="40" />
             Basma Hotel
         </a>
-
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
                 <a class="nav-link" href="#">Sign out</a>
@@ -59,7 +56,6 @@
                             </a>
                         </li>
                     </ul>
-
                     <h6
                         class="sidebar-heading d-flex justify-content-between align-items-center pl-3 mt-4 mb-1 text-muted">
                         <span>Saved reports</span>
@@ -69,9 +65,9 @@
                     </h6>
                     <ul class="nav flex-column mb-2">
                         <li class="nav-item">
-                            <a class="nav-link" href="/admin/charecteristics">
+                            <a class="nav-link" href="/admin/characteristics">
                                 <i class="zmdi zmdi-file-text"></i>
-                                charecteristics
+                                Characteristics
                             </a>
                         </li>
                         <li class="nav-item">
@@ -94,48 +90,46 @@
             </nav>
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 my-3">
                 <div class="container">
-                    <h2>Room's Charecteristics</h2>
+                    <h2>Room's Characteristics</h2>
                     <div class="row justify-content-end mb-3">
                         <div class="col-auto">
-                            <button class="btn btn-success" onclick="addcharecteristicsRow()">Add
-                                Charecteristic</button>
+                            <button class="btn btn-success" onclick="addCharacteristicsRow()">Add
+                                Characteristic</button>
                         </div>
                         <div class="col-auto" id="saveButtonContainer" style="display: none;">
-                            <button class="btn btn-primary" onclick="saveCharecteristicRow()">Save</button>
+                            <button class="btn btn-primary" onclick="saveCharacteristicRow()">Save</button>
                         </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-bordered" id="roomTable">
                             <thead>
                                 <tr>
-                                    <th>Charecteristic </th>
-                                    <th>icon</th>
+                                    <th>Characteristic</th>
+                                    <th>Icon</th>
                                     <th>Action</th>
-
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <input type="text" class="form-control" readonly value="Nile River view">
-
-                                    </td>
-                                    <td
-                                        style="display: flex; align-items: center; justify-content: center; padding-bottom: 30%;">
-
-                                        <i class="fa-solid fa-circle-arrow-left" style="font-size: large;"></i>
-
-                                    </td>
-                                    <td>
-                                        <div class="btn-group" role="group">
-                                            <button class="btn btn-primary" style="margin-right: 10px;"
-                                                onclick="toggleReadOnly(this)">Edit</button>
-
-                                            <button class="btn btn-danger"
-                                                onclick="deleteCharecteristicRow(this)">Delete</button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <% for (let i=0; i < characteristics.length; i++) { %>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control" readonly
+                                                value="<%= characteristics[i].characteristic %>">
+                                        </td>
+                                        <td
+                                            style="display: flex; align-items: center; justify-content: center; padding-bottom: 30%;">
+                                            <i class="<%= characteristics[i].icon %>" style="font-size: large;"></i>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <button class="btn btn-primary" style="margin-right: 10px;"
+                                                    onclick="toggleReadOnly(this)">Edit</button>
+                                                <button class="btn btn-danger"
+                                                    onclick="deleteCharacteristicRow(this)">Delete</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <% } %>
                             </tbody>
 
                         </table>
@@ -146,6 +140,7 @@
         </div>
     </div>
     <script src="/JS/charecteristics.js"></script>
+
 </body>
 
 </html>

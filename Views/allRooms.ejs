@@ -14,6 +14,8 @@
     </div>
     <main>
         <div class="room-card-container mt-4 equal-height" id="roomList">
+          
+            <input type="text" class="search" onkeyup="search(this)">
             <% for (let i=0; i < rooms.length; i++) { %>
                 <a href="/room/details/<%=rooms[i].Title%>" class="room-card">
                     <img src="<%=rooms[i].imageURL%>" width="300" height="300">
@@ -42,7 +44,7 @@
             </button>
         </div>
     </main>
-
+    <script src="/JS/search.js"></script>
     <script src="/JS/allRooms.js"></script>
 </body>
 
