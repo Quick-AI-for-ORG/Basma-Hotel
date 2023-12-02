@@ -16,7 +16,7 @@
             <div class="box-inner-1 pb-3 mb-3 ">
                 <div class="d-flex justify-content-between mb-3 userdetails">
                     <p class="fw-bold"><%=room.Title%></p>
-                    <p class="fw-lighter"><span class="fas fa-dollar-sign"></span><%=room.startingPrice%></p>
+                    <p class="fw-lighter"><span class="fas fa-dollar-sign"><%=room.startingPrice%></span></p>
                 </div>
                 <div id="my" class="carousel slide carousel-fade img-details" data-bs-ride="carousel"
                     data-bs-interval="2000">
@@ -44,8 +44,10 @@
                     </button>
                 </div>
                 <p class="dis my-3 info"><%=room.description%> </p>
-                <p class="dis my-3 info">Check-in: <%=reservation.startDate.toDateString().substring(0, 16)%> </p>
-                <p class="dis my-3 info">Check-out: <%=reservation.endDate.toDateString().substring(0, 16)%> </p>
+                <p class="dis my-3 info">Check-in Date: <%=reservation.startDate.toDateString().substring(0, 16)%> </p>
+                <p class="dis my-3 info">Check-out Date: <%=reservation.endDate.toDateString().substring(0, 16)%> </p>
+                <%let days_between_dates = Math.ceil((reservation.endDate.getTime() - reservation.startDate.getTime()) / (1000 * 60 * 60 * 24));%>
+                <p class="dis my-3 info">Duration: <%=days_between_dates%> nights</p>
             </div>
         </div>
         <div class="box-2">
@@ -59,20 +61,19 @@
                     <div id="payment"class="mb-3">
                         <label class="fw-bold">Payment Method</label>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="paymentMethod" id="cash" value="cash" >
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="cash" value="cash"checked >
                             <label class="form-check-label" for="cash">
                                 Cash
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="creditCard" checked>
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="creditCard" >
                             <label class="form-check-label" for="creditCard">
                                 Credit Card
                             </label>
                         </div>
-                        
                     </div>
-                    <div id="details">
+                    <div id="details" style="display: none;">
                         <p class="dis fw-bold mb-2">Card details</p>
                         <div class="d-flex align-items-center justify-content-between card-atm border rounded">
                             <div class="fab fa-cc-visa ps-3"></div> <input type="text" class="form-control"
@@ -83,40 +84,39 @@
                         <div class="my-3 cardname">
                             <p class="dis fw-bold mb-2">Cardholder name</p> <input class="form-control" type="text">
                         </div>
-                        <div class="address">
                            
-                            <div class="d-flex flex-column dis">
-                                <div class="d-flex flex-column dis justify-content-between mb-2">
-                                    <p>Subtotal</p>
-                                    <% for(let i=0; i<options.length; i++){%>
-                                        
-                                            <p><%=options[i].option%></p>
-                                            <p class="ms-auto"></span><%=options[i].price%> per night</p>
-                                        
-                                    <%}%> 
-                                </div>
+                    </div>
+                    <div class="d-flex flex-column dis">
+                        <div class="d-flex flex-column dis justify-content-between mb-2">
+                            <p class="fw-semibold">Options</p>
+                            <% for(let i=0; i<options.length; i++){%>
                                 
+                                    <p><%=options[i].option%></p>
+                                    <p class="ms-auto"><i class="fas fa-dollar-sign"></i><%=options[i].price%> per night</p>
                                 
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <p class="fw-bold">Total</p>
-                                    <%
-                                        let total = parseInt(room.startingPrice);
-                                        for(let i=0; i<options.length; i++){
-                                            total += parseInt(options[i].price);
-                                        }
-                                        let days_between_dates = Math.ceil((reservation.endDate.getTime() - reservation.startDate.getTime()) / (1000 * 60 * 60 * 24));
-                                    %>
-                                    <p class="fw-bold"><span class="fas fa-dollar-sign"></span><%=total*days_between_dates%></p>
-                                </div>
-                                <div class="btn btn-primary mt-2">Pay
-                                </div>
-                            </div>
+                            <%}%> 
+                        </div>
+                        
+                        
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <p class="fw-bold">Total</p>
+                            <%
+                                let total = parseFloat(room.startingPrice);
+                                for(let i=0; i<options.length; i++){
+                                    total += parseFloat(options[i].price);
+                                }
+                            %>
+                            <p class="fw-bold"><span class="fas fa-dollar-sign"><%=(total*days_between_dates).toFixed(2)%></span></p>
                         </div>
                     </div>
+                    <div  id="card" style="display:none" onclick="document.querySelector('form').submit()" class="btn btn-primary mt-2">Pay</div>
+                    <div  id="cashed" onclick="location.replace('/guest/')" class="btn btn-primary mt-2">Confirm</div>
                 </form>
+              
             </div> 
         </div> 
     </div>
     <script src="/JS/payment.js"></script>
 </body>
+
 </html>

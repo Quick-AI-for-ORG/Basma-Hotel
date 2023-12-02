@@ -8,7 +8,9 @@ const reserve = async (req, res) => {
       } else {
     try{
        if(await checkAvailability(req,res)){
+        let numberOfGuests = req.body.numberOfAdults + req.body.numberOfChildren;
         let room = await Room.findOne({ where:{Title: req.body.roomTitle}});
+        if(numberOfGuests > room.capacity){
         let days_between_dates = Math.ceil(( new Date(req.body.departureDate).getTime() - new Date(req.body.arrivalDate).getTime()) / (1000 * 60 * 60 * 24));
         const reservation =  await Reservation.create({
             roomTitle: req.body.roomTitle,
@@ -17,7 +19,8 @@ const reserve = async (req, res) => {
             endDate: req.body.departureDate,
             numberOfAdults: req.body.numberOfAdults,
             numberOfChildren: req.body.numberOfChildren,
-            price: room.startingPrice * days_between_dates
+            price: room.startingPrice * days_between_dates,
+            
         }).then(async(reservation) => {
             let options = await admin.getOptions(req,res);      
         for(let i = 0; i<options.length; i++){
@@ -31,7 +34,7 @@ const reserve = async (req, res) => {
             req.session.room = req.body.roomTitle
                 res.redirect('/guest/payment');
         })
-    }} catch(err) {
+    }}} catch(err) {
         console.log(err)
     }
     }
@@ -51,7 +54,7 @@ const modifyReservationOptions = async (req, res) => {
         }}
         for(let i = 0; i<options.length; i++){
                 const reservationOptions =  await reservationOption.create({
-                    option: options[i],
+                    option: options[i].id,
                     reservation: req.body.id,
                 })}
                 res.redirect('/guest');
