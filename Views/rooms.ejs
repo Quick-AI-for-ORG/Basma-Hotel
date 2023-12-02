@@ -6,15 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rooms</title>
     <link rel="stylesheet" href="/CSS/dashboard.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-TDk5lZuPf3dIjwWS6vjo5er1e3I9Xn2V/9j8h1N7DgDOWzIuXW+56WZdQDd21h9N" crossorigin="anonymous">
+    <link rel="stylesheet" href="/CSS/rooms.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,600" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.selectric/1.10.1/selectric.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
-        integrity="...">
 
-    <link rel="stylesheet" href="/CSS/rooms.css">
 
 </head>
 
@@ -128,15 +129,17 @@
                                                 readonly></td>
                                         <td><input type="text" class="form-control" value="<%= rooms[i].description %>"
                                                 readonly></td>
-                                        <td>
+                                        <td style="display: flex; align-items: center; justify-content: center;">
                                             <% if (rooms[i].executive=="1" ) { %>
-                                                <i class="fa-solid fa-circle-check" style="color: green;"></i>
-                                                <p>yes</p>
+                                                <i class="fas fa-check-circle"
+                                                    style="color: green; font-size: large;"></i>
                                                 <% } else { %>
-                                                    <i class="fa-solid fa-circle-xmark" style="color: red;"></i>
-                                                    <p>no</p>
+                                                    <i class="fas fa-times-circle"
+                                                        style="color: red; font-size: large;"></i>
                                                     <% } %>
                                         </td>
+
+
 
 
                                         <td>
