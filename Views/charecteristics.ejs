@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rooms</title>
+    <title>Charecteristics</title>
     <link rel="stylesheet" href="/CSS/dashboard.css">
-    <link rel="stylesheet" href="/CSS/rooms.css">
+    <!-- <link rel="stylesheet" href="/CSS/rooms.css"> -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,600" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
@@ -94,63 +94,50 @@
             </nav>
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 my-3">
                 <div class="container">
-                    <h2>Basma's Rooms</h2>
+                    <h2>Room's Charecteristics</h2>
                     <div class="row justify-content-end mb-3">
                         <div class="col-auto">
-                            <button class="btn btn-success" onclick="addRoomRow()">Add Room</button>
+                            <button class="btn btn-success" onclick="addcharecteristicsRow()">Add
+                                Charecteristic</button>
                         </div>
                         <div class="col-auto" id="saveButtonContainer" style="display: none;">
-                            <button class="btn btn-primary" onclick="saveRoomRow()">Save</button>
+                            <button class="btn btn-primary" onclick="saveCharecteristicRow()">Save</button>
                         </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-bordered" id="roomTable">
                             <thead>
                                 <tr>
-                                    <th>Title </th>
+                                    <th>Charecteristic </th>
+                                    <th>icon</th>
+                                    <th>Action</th>
 
-                                    <th>Quantity</th>
-                                    <th>Starting Price</th>
-                                    <th>Capacity</th>
-                                    <th>Description</th>
-                                    <th>Executive</th>
-                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <% for (let i=0; i < rooms.length; i++) { %>
-                                    <tr>
-                                        <td><input type="text" class="form-control" value="<%= rooms[i].Title %>"
-                                                readonly></td>
-                                        <td><input type="text" class="form-control" value="<%= rooms[i].quantity %>"
-                                                readonly></td>
-                                        <td><input type="text" class="form-control"
-                                                value="<%= rooms[i].startingPrice %>" readonly></td>
-                                        <td><input type="text" class="form-control" value="<%= rooms[i].capacity %>"
-                                                readonly></td>
-                                        <td><input type="text" class="form-control" value="<%= rooms[i].description %>"
-                                                readonly></td>
-                                        <td style="display: flex; align-items: center; justify-content: center;">
-                                            <% if (rooms[i].executive=="1" ) { %>
-                                                <i class="fas fa-check-circle"
-                                                    style="color: green; font-size: large;"></i>
-                                                <% } else { %>
-                                                    <i class="fas fa-times-circle"
-                                                        style="color: red; font-size: large;"></i>
-                                                    <% } %>
-                                        </td>
+                                <tr>
+                                    <td>
+                                        <input type="text" class="form-control" readonly value="Nile River view">
 
-                                        <td>
-                                            <div class="btn-group" role="group">
-                                                <button class="btn btn-primary" style="margin-right: 10px;"
-                                                    onclick="toggleReadOnly(this)">Edit</button>
-                                                <button class="btn btn-danger"
-                                                    onclick="deleteRoomRow(this)">Delete</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <% } %>
+                                    </td>
+                                    <td
+                                        style="display: flex; align-items: center; justify-content: center; padding-bottom: 30%;">
+
+                                        <i class="fa-solid fa-circle-arrow-left" style="font-size: large;"></i>
+
+                                    </td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <button class="btn btn-primary" style="margin-right: 10px;"
+                                                onclick="toggleReadOnly(this)">Edit</button>
+
+                                            <button class="btn btn-danger"
+                                                onclick="deleteCharecteristicRow(this)">Delete</button>
+                                        </div>
+                                    </td>
+                                </tr>
                             </tbody>
+
                         </table>
                         <div id="errorMessage" style="color: red;"></div>
                     </div>
@@ -158,7 +145,7 @@
             </main>
         </div>
     </div>
-    <script src="/JS/rooms.js"></script>
+    <script src="/JS/charecteristics.js"></script>
 </body>
 
 </html>
