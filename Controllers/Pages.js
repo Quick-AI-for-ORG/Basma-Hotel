@@ -1,6 +1,8 @@
 const ctrlRooms = require("../Controllers/ctrlRooms");
 const ctrlReservations = require("../Controllers/ctrlReservations");
 const ctrlOptions = require("../Controllers/ctrlOptions");
+const ctrlGuests = require("../Controllers/ctrlGuests");
+const ctrlCharacteristics = require("../Controllers/ctrlCharacteristics");
 
 const login = (req, res) => {
   res.render("login", { layout: false });
@@ -34,16 +36,24 @@ const dashboard = (req, res) => {
     user: req.session.user === undefined ? "" : req.session.user,
   });
 };
-const guests = (req, res) => {
-  res.render("guests", {
-    layout: false,
-    user: req.session.user === undefined ? "" : req.session.user,
-  });
-};
-const rooms = async (req, res) => {
-  let roomsData = null;
+const guests = async (req, res) => {
   try {
-    roomsData = await ctrlRooms.public.getRooms(req, res);
+    const guestsData = await ctrlGuests.admin.retriveGuests();
+
+    res.render("guests", {
+      layout: false,
+      user: req.session.user === undefined ? "" : req.session.user,
+      guests: guestsData || [],
+    });
+  } catch (error) {
+    console.error("Error fetching guests data:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+const rooms = async (req, res) => {
+  try {
+    const roomsData = await ctrlRooms.admin.getRooms();
 
     res.render("rooms", {
       layout: false,
@@ -52,6 +62,21 @@ const rooms = async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching rooms data:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+const characteristics = async (req, res) => {
+  try {
+    const characteristicsData =
+      await ctrlCharacteristics.admin.getCharacteristics();
+
+    res.render("charecteristics", {
+      layout: false,
+      user: req.session.user === undefined ? "" : req.session.user,
+      rooms: characteristicsData === null ? "" : characteristicsData,
+    });
+  } catch (error) {
+    console.error("Error fetching characteristics data:", error);
     res.status(500).send("Internal Server Error");
   }
 };
@@ -151,5 +176,5 @@ module.exports = {
     viewRoom,
   },
   guest: { myProfile, booking, logout, payment },
-  admin: { dashboard, guests, rooms },
+  admin: { dashboard, guests, rooms, characteristics },
 };

@@ -305,3 +305,22 @@ p {
     position: relative;
     z-index: 1;
   }
+
+  .editBtn {
+  /* Adjust the width as needed, leave some space for spacing */
+  background-color: #8213c2;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  margin: 10px 0 20px 0;
+  transition: background-color 0.5s;
+  text-align: center;
+  line-height: 2.5;
+  width: 50%;
+  margin-left: 5%;
+}
+
+.editBtn:hover {
+  background-color: #3c0266;
+}

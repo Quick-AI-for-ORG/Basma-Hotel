@@ -181,14 +181,6 @@
                 var email = document.getElementById('email').innerHTML;
                 var phoneNumber = document.getElementById('phoneNumber').innerHTML;
                 var address = document.getElementById('address').innerHTML;
-    
-                console.error('check this out')
-                console.log(firstName);
-                console.log(lastName);
-                console.log(email);
-                console.log(phoneNumber);
-                console.log(address);
-    
                 document.getElementById('efn').value = firstName;
                 document.getElementById('eln').value = lastName;
                 document.getElementById('ee').value = email;
@@ -213,10 +205,20 @@
                   <% reservations.forEach(reservation => { %>
                     <% const currentDate = new Date(); %>
                     <% if (currentDate > reservation.endDate) { %>
-                      <% const date = reservation.endDate.toDateString().substring(0, 16); %>
-                      <p class="mb-1 mt-4" style="font-size: .77rem;">Date: <%= date %></p>
-                    <% } %>
-                  <% }); %>
+                      <% const endDate = reservation.endDate.toDateString().substring(0, 16);
+                      const startDate = reservation.startDate.toDateString().substring(0.16) 
+                  %>            
+  <div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6 col-sm-12 mb-2 mb-md-0">
+            <p class="mb-1" style="font-size: .77rem;">From <%= startDate %></p>
+        </div>
+        <div class="col-md-6 col-sm-12 text-md-end">
+            <p class="mb-1" style="font-size: .77rem;">To <%= endDate %></p>
+        </div>
+    </div>
+</div>
+<% }})%> 
                 
                   </div>
                 </div>
@@ -232,13 +234,21 @@
                   <% reservations.forEach(reservation => { %>
                     <% const currentDate = new Date(); %>
                     <% if (currentDate < reservation.endDate) { %>
-                      <% const date = reservation.endDate.toDateString().substring(0, 16); %>
-                      <p class="mb-1 mt-4" style="font-size: .77rem;">Date: <%= date %></p>
-                    <% } %>
-                  <% }); %>
-
-
-                 
+                      <% const endDate = reservation.endDate.toDateString().substring(0, 16);
+                        const startDate = reservation.startDate.toDateString().substring(0.16) 
+                    %>            
+    <div class="container mt-4">
+      <div class="row">
+          <div class="col-md-6 col-sm-12 mb-2 mb-md-0">
+              <p class="mb-1" style="font-size: .77rem;">From <%= startDate %></p>
+          </div>
+          <div class="col-md-6 col-sm-12 text-md-end">
+              <p class="mb-1" style="font-size: .77rem;">To <%= endDate %></p>
+          </div>
+      </div>
+  </div>
+                      
+                    <% }})%> 
                   </div>
                 </div>
                 </div>
