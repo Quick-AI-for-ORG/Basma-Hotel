@@ -1,6 +1,6 @@
-const ctrlRooms = require('../Controllers/ctrlRooms')
-const ctrlReservations = require('../Controllers/ctrlReservations')
-const ctrlOptions = require('../Controllers/ctrlOptions')
+const ctrlRooms = require("../Controllers/ctrlRooms");
+const ctrlReservations = require("../Controllers/ctrlReservations");
+const ctrlOptions = require("../Controllers/ctrlOptions");
 
 const login = (req, res) => {
   res.render("login", { layout: false });
@@ -36,6 +36,12 @@ const dashboard = (req, res) => {
 };
 const guests = (req, res) => {
   res.render("guests", {
+    layout: false,
+    user: req.session.user === undefined ? "" : req.session.user,
+  });
+};
+const rooms = (req, res) => {
+  res.render("rooms", {
     layout: false,
     user: req.session.user === undefined ? "" : req.session.user,
   });
@@ -99,15 +105,28 @@ const logout = (req, res) => {
 
 const booking = async (req, res) => {
   await ctrlOptions.admin.getOptions(req, res).then((result) => {
-  if (req.session.user !== undefined)  res.render("booking", { user : req.session.user, roomTitle: req.body.roomTitle, arrivalDate: req.body.arrivalDate, departureDate: req.body.departureDate, options:result});
-  else res.redirect('/guest/login')
-})}
+    if (req.session.user !== undefined)
+      res.render("booking", {
+        user: req.session.user,
+        roomTitle: req.body.roomTitle,
+        arrivalDate: req.body.arrivalDate,
+        departureDate: req.body.departureDate,
+        options: result,
+      });
+    else res.redirect("/guest/login");
+  });
+};
 
 const payment = async (req, res) => {
   if (req.session.user !== undefined)
-  res.render("payment", { user : req.session.user, room: await ctrlRooms.public.sessionedRoom(req,res), reservation: await ctrlReservations.guest.sessionedReservation(req,res) ,options: await ctrlReservations.guest.getUserReservationOptions(req,res) });
-  else res.redirect('/guest/login')
-}
+    res.render("payment", {
+      user: req.session.user,
+      room: await ctrlRooms.public.sessionedRoom(req, res),
+      reservation: await ctrlReservations.guest.sessionedReservation(req, res),
+      options: await ctrlReservations.guest.getUserReservationOptions(req, res),
+    });
+  else res.redirect("/guest/login");
+};
 
 module.exports = {
   public: {
@@ -121,6 +140,6 @@ module.exports = {
     viewRooms,
     viewRoom,
   },
-  guest: { myProfile, booking, logout ,payment},
-  admin: { dashboard, guests },
+  guest: { myProfile, booking, logout, payment },
+  admin: { dashboard, guests, rooms },
 };
