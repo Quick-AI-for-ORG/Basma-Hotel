@@ -1,6 +1,6 @@
-function addGuestRow() {
+function addRoomRow() {
   var table = document
-    .getElementById("guestTable")
+    .getElementById("roomTable")
     .getElementsByTagName("tbody")[0];
   var newRow = table.insertRow(table.rows.length);
 
@@ -11,56 +11,59 @@ function addGuestRow() {
   var cell5 = newRow.insertCell(4);
   var cell6 = newRow.insertCell(5);
   var cell7 = newRow.insertCell(6);
-  var cell8 = newRow.insertCell(7);
-  var cell9 = newRow.insertCell(8);
 
   cell1.innerHTML =
-    '<input type="text" class="form-control" placeholder="First Name">';
+    '<input type="text" class="form-control" placeholder="Title">';
   cell2.innerHTML =
-    '<input type="text" class="form-control" placeholder="Last Name">';
+    '<input type="text" class="form-control" placeholder="Quantity">';
   cell3.innerHTML =
-    '<input type="text" class="form-control" placeholder="Email">';
+    '<input type="text" class="form-control" placeholder="Starting Price">';
   cell4.innerHTML =
-    '<input type="text" class="form-control" placeholder="Password">';
+    '<input type="text" class="form-control" placeholder="Capacity">';
   cell5.innerHTML =
-    '<input type="text" class="form-control" placeholder="Phone">';
+    '<input type="text" class="form-control" placeholder="Description">';
   cell6.innerHTML =
-    '<input type="text" class="form-control" placeholder="Role">';
+    '<input type="text" class="form-control" placeholder="Executive">';
   cell7.innerHTML =
-    '<input type="text" class="form-control" placeholder="Bio">';
-  cell8.innerHTML =
-    '<input type="text" class="form-control" placeholder="Address">';
-  cell9.innerHTML =
     '<div class="btn-group" role="group">' +
     '<button class="btn btn-primary" style="margin-right: 10px;" onclick="toggleReadOnly(this)">Edit</button>' +
-    '<button class="btn btn-danger" onclick="deleteGuestRow(this)">Delete</button>' +
+    '<button class="btn btn-danger" onclick="deleteRoomRow(this)">Delete</button>' +
     "</div>";
 
   // Show the Save button container
   document.getElementById("saveButtonContainer").style.display = "block";
 }
 
-function saveGuestRow() {
+function saveRoomRow() {
   var table = document
-    .getElementById("guestTable")
+    .getElementById("roomTable")
     .getElementsByTagName("tbody")[0];
   var lastRow = table.rows[table.rows.length - 1];
 
-  var firstName = lastRow.cells[0].querySelector("input").value;
-  var lastName = lastRow.cells[1].querySelector("input").value;
-  var email = lastRow.cells[2].querySelector("input").value;
-  var password = lastRow.cells[3].querySelector("input").value;
-  var phone = lastRow.cells[4].querySelector("input").value;
+  var title = lastRow.cells[0].querySelector("input").value;
+  var quantity = lastRow.cells[1].querySelector("input").value;
+  var startingPrice = lastRow.cells[2].querySelector("input").value;
+  var capacity = lastRow.cells[3].querySelector("input").value;
+  var description = lastRow.cells[4].querySelector("input").value;
+  var executive = lastRow.cells[5].querySelector("input").value;
 
   // Check if all fields are filled
-  if (firstName && lastName && email && password && phone) {
+  if (
+    title &&
+    quantity &&
+    startingPrice &&
+    capacity &&
+    description &&
+    executive
+  ) {
     // You can now save the data or perform any other actions with the data
-    console.log("Saving guest data:");
-    console.log("First Name: " + firstName);
-    console.log("Last Name: " + lastName);
-    console.log("Email: " + email);
-    console.log("Password: " + password);
-    console.log("Phone: " + phone);
+    console.log("Saving room data:");
+    console.log("Title: " + title);
+    console.log("Quantity: " + quantity);
+    console.log("Starting Price: " + startingPrice);
+    console.log("Capacity: " + capacity);
+    console.log("Description: " + description);
+    console.log("Executive: " + executive);
 
     // Hide the Save button container after saving
     document.getElementById("saveButtonContainer").style.display = "none";
@@ -76,7 +79,7 @@ function saveGuestRow() {
   }
 }
 
-function deleteGuestRow(button) {
+function deleteRoomRow(button) {
   var row = button.closest("tr");
   row.parentNode.removeChild(row);
 }
@@ -85,14 +88,16 @@ function toggleReadOnly(button) {
   var row = button.closest("tr");
   var cells = row.cells;
 
-  for (var i = 0; i < cells.length - 1; i++) {
+  for (var i = 0; i < cells.length - 2; i++) {
+    // Exclude the last cell (buttons)
     var input = cells[i].querySelector("input");
     input.readOnly = !input.readOnly;
   }
 }
 
 function makeFieldsReadOnly(cells) {
-  for (var i = 0; i < cells.length - 1; i++) {
+  for (var i = 0; i < cells.length - 2; i++) {
+    // Exclude the last cell (buttons)
     var input = cells[i].querySelector("input");
     input.readOnly = true;
   }

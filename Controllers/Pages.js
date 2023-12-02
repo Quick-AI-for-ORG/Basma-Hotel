@@ -1,6 +1,8 @@
-const ctrlRooms = require('../Controllers/ctrlRooms')
-const ctrlReservations = require('../Controllers/ctrlReservations')
-const ctrlOptions = require('../Controllers/ctrlOptions')
+const ctrlRooms = require("../Controllers/ctrlRooms");
+const ctrlReservations = require("../Controllers/ctrlReservations");
+const ctrlOptions = require("../Controllers/ctrlOptions");
+const ctrlGuests = require("../Controllers/ctrlGuests");
+const ctrlCharacteristics = require("../Controllers/ctrlCharacteristics");
 
 const login = (req, res) => {
   res.render("login", { layout: false });
@@ -34,12 +36,51 @@ const dashboard = (req, res) => {
     user: req.session.user === undefined ? "" : req.session.user,
   });
 };
-const guests = (req, res) => {
-  res.render("guests", {
-    layout: false,
-    user: req.session.user === undefined ? "" : req.session.user,
-  });
+const guests = async (req, res) => {
+  try {
+    const guestsData = await ctrlGuests.admin.retriveGuests();
+
+    res.render("guests", {
+      layout: false,
+      user: req.session.user === undefined ? "" : req.session.user,
+      guests: guestsData || [],
+    });
+  } catch (error) {
+    console.error("Error fetching guests data:", error);
+    res.status(500).send("Internal Server Error");
+  }
 };
+
+const rooms = async (req, res) => {
+  try {
+    const roomsData = await ctrlRooms.admin.getRooms();
+
+    res.render("rooms", {
+      layout: false,
+      user: req.session.user === undefined ? "" : req.session.user,
+      rooms: roomsData === null ? "" : roomsData,
+    });
+  } catch (error) {
+    console.error("Error fetching rooms data:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+const characteristics = async (req, res) => {
+  try {
+    const characteristicsData =
+      await ctrlCharacteristics.admin.getCharacteristics();
+
+    res.render("charecteristics", {
+      layout: false,
+      user: req.session.user === undefined ? "" : req.session.user,
+      rooms: characteristicsData === null ? "" : characteristicsData,
+    });
+  } catch (error) {
+    console.error("Error fetching characteristics data:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
 const myProfile = async (req, res) => {
   if (req.session.user === undefined) {
     res.redirect("/guest/login");
@@ -99,15 +140,28 @@ const logout = (req, res) => {
 
 const booking = async (req, res) => {
   await ctrlOptions.admin.getOptions(req, res).then((result) => {
-  if (req.session.user !== undefined)  res.render("booking", { user : req.session.user, roomTitle: req.body.roomTitle, arrivalDate: req.body.arrivalDate, departureDate: req.body.departureDate, options:result});
-  else res.redirect('/guest/login')
-})}
+    if (req.session.user !== undefined)
+      res.render("booking", {
+        user: req.session.user,
+        roomTitle: req.body.roomTitle,
+        arrivalDate: req.body.arrivalDate,
+        departureDate: req.body.departureDate,
+        options: result,
+      });
+    else res.redirect("/guest/login");
+  });
+};
 
 const payment = async (req, res) => {
   if (req.session.user !== undefined)
-  res.render("payment", { user : req.session.user, room: await ctrlRooms.public.sessionedRoom(req,res), reservation: await ctrlReservations.guest.sessionedReservation(req,res) ,options: await ctrlReservations.guest.getUserReservationOptions(req,res) });
-  else res.redirect('/guest/login')
-}
+    res.render("payment", {
+      user: req.session.user,
+      room: await ctrlRooms.public.sessionedRoom(req, res),
+      reservation: await ctrlReservations.guest.sessionedReservation(req, res),
+      options: await ctrlReservations.guest.getUserReservationOptions(req, res),
+    });
+  else res.redirect("/guest/login");
+};
 
 module.exports = {
   public: {
@@ -121,6 +175,6 @@ module.exports = {
     viewRooms,
     viewRoom,
   },
-  guest: { myProfile, booking, logout ,payment},
-  admin: { dashboard, guests },
+  guest: { myProfile, booking, logout, payment },
+  admin: { dashboard, guests, rooms, characteristics },
 };
