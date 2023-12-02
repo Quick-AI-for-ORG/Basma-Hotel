@@ -1,6 +1,6 @@
 const {Room, Characteristic, RoomsCharacteristic} = require('../Models/Room.js')
 const Sequelize = require('sequelize');
-
+const {Op} = require('sequelize');
 const addRoom = async(req,res)=>{     
    let found = await Room.findOne({ where:{Title: req.body.Title}});
    if(found){
@@ -100,7 +100,32 @@ const modifyRoom = async(req,res)=>{
         })
 }
 
+const findRoom = async (req, res) => {
+  try {
+    const input = req.body.Title;
+    console.log(input);
+
+    const search = await Room.findAll({
+      where: {
+        Title: {
+          // Use [Op.iLike] for case-insensitive LIKE query
+          [Op.regexp]: `^${input}.*`,
+        },
+      },
+      limit: 10,
+    });
+
+    console.log(search);
+    res.send(search);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: 'Internal Server Error' });
+  }
+};
+
+
+
 module.exports ={
-    public: {getRooms,getRoom, getRoomCharacteristics, sessionedRoom},
+    public: {getRooms,getRoom, getRoomCharacteristics, sessionedRoom,findRoom},
     admin: {addRoom,removeRoom,modifyRoom}
 }
