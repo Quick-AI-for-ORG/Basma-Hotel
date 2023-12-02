@@ -193,3 +193,4 @@ a {
 body *:not(nav, nav *,footer, footer *){
     animation: fadeIn 1.5s ease-in-out; /* Adjust duration as needed */
   }
+

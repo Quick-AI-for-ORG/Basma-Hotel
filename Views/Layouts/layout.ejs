@@ -22,7 +22,16 @@
           <span class="mb-3">Basma Hotel Aswan</span>
           <img id="MDB-logo" src="/IMAGES/download-removebg-preview.png" alt="Basma Hotel Logo" draggable="false" height="50" />
       </a>
+      <% if(rooms != null){ %>
 
+
+        <div class="col-4 ms-5">
+          <input onkeyup="search(this)" class="form-control ms-5" type="search" name="search" placeholder="Search" aria-label="Search">
+      </div>
+      <div id="searchResults" class="position-absolute p-3 bg-white border">
+          
+      </div>      
+      <%}%>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>

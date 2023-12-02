@@ -155,23 +155,17 @@ const modifyRoom = async (req, res) => {
 const findRoom = async (req, res) => {
   try {
     const input = req.body.Title;
-    console.log(input);
-
     const search = await Room.findAll({
       where: {
         Title: {
-          // Use [Op.iLike] for case-insensitive LIKE query
-          [Op.regexp]: `^${input}.*`,
+          [Op.regexp]:`^.*${input}.*$`,
         },
       },
-      limit: 10,
+      
     });
-
-    console.log(search);
     res.send(search);
   } catch (error) {
     console.error(error);
-    res.status(500).send({ error: 'Internal Server Error' });
   }
 };
 
