@@ -1,6 +1,7 @@
 const ctrlRooms = require("../Controllers/ctrlRooms");
 const ctrlReservations = require("../Controllers/ctrlReservations");
 const ctrlOptions = require("../Controllers/ctrlOptions");
+const ctrlGuests = require("../Controllers/ctrlGuests");
 
 const login = (req, res) => {
   res.render("login", { layout: false });
@@ -34,16 +35,25 @@ const dashboard = (req, res) => {
     user: req.session.user === undefined ? "" : req.session.user,
   });
 };
-const guests = (req, res) => {
-  res.render("guests", {
-    layout: false,
-    user: req.session.user === undefined ? "" : req.session.user,
-  });
+const guests = async (req, res) => {
+  try {
+    const guestsData = await ctrlGuests.admin.retriveGuests();
+
+    res.render("guests", {
+      layout: false,
+      user: req.session.user === undefined ? "" : req.session.user,
+      guests: guestsData || [],
+    });
+  } catch (error) {
+    console.error("Error fetching guests data:", error);
+    res.status(500).send("Internal Server Error");
+  }
 };
+
 const rooms = async (req, res) => {
   let roomsData = null;
   try {
-    roomsData = await ctrlRooms.public.getRooms(req, res);
+    roomsData = await ctrlRooms.public.getRooms();
 
     res.render("rooms", {
       layout: false,

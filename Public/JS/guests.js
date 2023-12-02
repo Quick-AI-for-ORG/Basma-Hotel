@@ -10,6 +10,9 @@ function addGuestRow() {
   var cell4 = newRow.insertCell(3);
   var cell5 = newRow.insertCell(4);
   var cell6 = newRow.insertCell(5);
+  var cell7 = newRow.insertCell(6);
+  var cell8 = newRow.insertCell(7);
+  var cell9 = newRow.insertCell(8);
 
   cell1.innerHTML =
     '<input type="text" class="form-control" placeholder="First Name">';
@@ -22,6 +25,12 @@ function addGuestRow() {
   cell5.innerHTML =
     '<input type="text" class="form-control" placeholder="Phone">';
   cell6.innerHTML =
+    '<input type="text" class="form-control" placeholder="Role">';
+  cell7.innerHTML =
+    '<input type="text" class="form-control" placeholder="Bio">';
+  cell8.innerHTML =
+    '<input type="text" class="form-control" placeholder="Address">';
+  cell9.innerHTML =
     '<div class="btn-group" role="group">' +
     '<button class="btn btn-primary" style="margin-right: 10px;" onclick="toggleReadOnly(this)">Edit</button>' +
     '<button class="btn btn-danger" onclick="deleteGuestRow(this)">Delete</button>' +
