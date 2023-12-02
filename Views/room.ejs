@@ -18,31 +18,36 @@
 <body class="background-radial-gradient">
 
     <div class="images">
-        <h1 class="title"><%=room.Title%></h1> 
-           <% const more =room.imageURL.substring(0,  room.imageURL.length- 5);%>
-            
-        <div class="mySlides">
-            <img src="<%= room.imageURL %>" alt="<%= room.Title %>">
-        </div>
-        <div class="mySlides">
-            <img src="<%= more + '1.jpeg' %>" alt="<%= room.Title %>">
-        </div>
-        <div class="mySlides">
-            <img src="<%= more + '2.jpeg' %>" alt="<%= room.Title %>">
-        </div>
+        <h1 class="title">
+            <%=room.Title%>
+        </h1>
+        <% const more=room.imageURL.substring(0, room.imageURL.length- 5);%>
 
-        <div class="image-container">
-            <div class="image-item">
-                <img class="demo img-fluid" src="<%= room.imageURL %>" alt="<%= room.Title %>" onclick="currentSlide(1)">
+            <div class="mySlides">
+                <img src="<%= room.imageURL %>" alt="<%= room.Title %>">
             </div>
-            <div class="image-item">
-                <img class="demo img-fluid" src="<%= more + '1.jpeg' %>" alt="<%= room.Title %>" onclick="currentSlide(2)">
+            <div class="mySlides">
+                <img src="<%= more + '1.jpeg' %>" alt="<%= room.Title %>">
             </div>
-            <div class="image-item">
-                <img class="demo img-fluid" src="<%= more + '2.jpeg' %>" alt="<%= room.Title %>" onclick="currentSlide(3)">
+            <div class="mySlides">
+                <img src="<%= more + '2.jpeg' %>" alt="<%= room.Title %>">
             </div>
-        </div>
-        
+
+            <div class="image-container">
+                <div class="image-item">
+                    <img class="demo img-fluid" src="<%= room.imageURL %>" alt="<%= room.Title %>"
+                        onclick="currentSlide(1)">
+                </div>
+                <div class="image-item">
+                    <img class="demo img-fluid" src="<%= more + '1.jpeg' %>" alt="<%= room.Title %>"
+                        onclick="currentSlide(2)">
+                </div>
+                <div class="image-item">
+                    <img class="demo img-fluid" src="<%= more + '2.jpeg' %>" alt="<%= room.Title %>"
+                        onclick="currentSlide(3)">
+                </div>
+            </div>
+
     </div>
     </div>
     <div class="data">
@@ -52,19 +57,15 @@
                 <%= room.description%>
             </p>
             <p>
-                <% 
-                if (characteristics) {
-                        characteristics.forEach(characteristic => { %>
-                            <i class="<%=characteristic.icon%>" title="<%= characteristic.characteristic %>" alt=""<%= characteristic.characteristic %>""></i>
-                        <%
-                    })};
-                        let num = room.capacity;
-                        if (num == 3) { %>
-                            <i class="fa-regular fa-3" title="Number of people"></i>
+                <% if (characteristics) { characteristics.forEach(characteristic=> { %>
+                    <i class="<%=characteristic.icon%>" title="<%= characteristic.characteristic %>" alt=""
+                        <%=characteristic.characteristic %>""></i>
+                    <% })}; let num=room.capacity; if (num==3) { %>
+                        <i class="fa-regular fa-3" title="Number of people"></i>
                         <% } else { %>
                             <i class="fa-regular fa-4" title="Number of people"></i>
-                        <% } %>
-            </p> 
+                            <% } %>
+            </p>
             <hr>
             <label>Room Details</label>
             <p class="type">
@@ -102,7 +103,7 @@
             </div>
         </div>
     </div>
-   
+
     <script src="/JS/room.js"></script>
 
 </body>

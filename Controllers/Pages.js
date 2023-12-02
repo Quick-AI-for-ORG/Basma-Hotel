@@ -40,12 +40,22 @@ const guests = (req, res) => {
     user: req.session.user === undefined ? "" : req.session.user,
   });
 };
-const rooms = (req, res) => {
-  res.render("rooms", {
-    layout: false,
-    user: req.session.user === undefined ? "" : req.session.user,
-  });
+const rooms = async (req, res) => {
+  let roomsData = null;
+  try {
+    roomsData = await ctrlRooms.public.getRooms(req, res);
+
+    res.render("rooms", {
+      layout: false,
+      user: req.session.user === undefined ? "" : req.session.user,
+      rooms: roomsData === null ? "" : roomsData,
+    });
+  } catch (error) {
+    console.error("Error fetching rooms data:", error);
+    res.status(500).send("Internal Server Error");
+  }
 };
+
 const myProfile = async (req, res) => {
   if (req.session.user === undefined) {
     res.redirect("/guest/login");
