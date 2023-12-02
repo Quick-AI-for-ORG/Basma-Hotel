@@ -73,7 +73,7 @@ const characteristics = async (req, res) => {
     res.render("charecteristics", {
       layout: false,
       user: req.session.user === undefined ? "" : req.session.user,
-      rooms: characteristicsData === null ? "" : characteristicsData,
+      characteristics: characteristicsData === null ? "" : characteristicsData,
     });
   } catch (error) {
     console.error("Error fetching characteristics data:", error);
