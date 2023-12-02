@@ -49,27 +49,35 @@
         <td>
             <div class="form-check">
                 <input title="Booking Options" type="checkbox" name="<%=options[i].id%>" id="<%=options[i].id%>" class="form-check-input">
-                <label for="<%=options[i].id%>" class="form-check-label"><%=options[i].option%></label>
-                <p class="help-block text-muted"><%=options[i].price%></p>
+                <label for="<%=options[i].id%>"style="cursor: pointer;" class="form-check-label"><%=options[i].option%></label>
+                <p class="help-block text-muted" style="cursor: pointer;"><%=options[i].price%></p>
             </div>
         </td>
         <% if(i%3==2){ %>
-            </tr>
-        <% } %>
-    <% } %>
+            </tr><% } } %>
 </table>
 
                 </div>
                 <script>
                     const labels = document.querySelectorAll('label');
-                
                     labels.forEach(label => {
                         label.addEventListener('click', () => {
                             const inputId = label.getAttribute('for');
                             const inputElement = document.getElementById(inputId);
-                            console.log('Input checked:', inputElement.value);
                         });
                     });
+                    const labelsAndParagraphs = document.querySelectorAll('p.help-block.text-muted');
+
+    labelsAndParagraphs.forEach(element => {
+        element.addEventListener('click', () => {
+            const inputId = element.getAttribute('for') || element.parentElement.querySelector('input').id;
+            const inputElement = document.getElementById(inputId);
+
+            if (inputElement) {
+                inputElement.checked = !inputElement.checked;
+            }
+        });
+    });
                 </script>
                 
                 <div class="row">
