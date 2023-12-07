@@ -1,7 +1,5 @@
 const bcrypt = require("bcrypt"); // for password hashing
 const { Guest } = require("../Models/Guest.js");
-const { guest } = require("./Pages.js");
-const { where } = require("sequelize");
 const axios = require("axios");
 
 const REDIRECT_URI = "http://localhost:3000/guest/auth/facebook/callback";

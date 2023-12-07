@@ -125,3 +125,28 @@ footer {
 footer *, .navbar-nav  {
   animation: moving 1.5s ease-in-out; /* Adjust duration as needed */
 }
+#searchResults {
+  position: absolute;
+  top: 100%; /* Position it below the search bar */
+  left: 25%;
+  width: 34%;
+  background-color: #fff; /* Set background color */
+  border: 1px solid #ccc; /* Add a border for better visibility */
+  z-index: 1000; /* Set a z-index to control stacking order */
+  display: none; 
+  overflow: scroll;
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: darkgray lightgray; /* For Firefox */
+}
+
+#searchResults a {
+  display: block; 
+  font-size: 14px; /* Increase font size */
+  color: #000; 
+  padding: 5px;
+  margin: 0;
+}
+#searchResults a:hover {
+  border: 3px solid #0f3ed7;
+  border-radius: 10px;
+}
