@@ -156,7 +156,7 @@ a {
   color: transparent;
   position: relative;
   z-index: 1;
-  color: aliceblue;
+  color: #333333ac;
 }
 
 .centered-text h2::after {
@@ -190,7 +190,6 @@ a {
     transform: translateY(0px);
   }
 }
-body *:not(nav, nav *,footer, footer *){
-    animation: fadeIn 1.5s ease-in-out; /* Adjust duration as needed */
-  }
-
+body *:not(nav, nav *, footer, footer *) {
+  animation: fadeIn 1.5s ease-in-out; /* Adjust duration as needed */
+}
