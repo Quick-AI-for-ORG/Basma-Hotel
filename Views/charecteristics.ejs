@@ -15,14 +15,35 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.selectric/1.10.1/selectric.css">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
-
     <style>
         .custom-col {
-            width: 33.33%;
-            /* Set the desired width */
+            width: 5%;
+        }
+
+        #roomTable thead th:first-child,
+        #roomTable tbody td:first-child {
+            width: 15%;
+        }
+
+        #roomTable thead th:nth-child(2),
+        #roomTable tbody td:nth-child(2) {
+            width: 10%;
+        }
+
+        #roomTable tbody td:last-child {
+            width: 5%;
+        }
+
+        #roomTable tbody td i {
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        #roomTable tbody td div {
+            text-align: center;
         }
     </style>
-
 </head>
 
 <body>
@@ -98,17 +119,19 @@
             </nav>
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 my-3">
                 <div class="container">
-                    <h2>Room's Characteristics</h2>
+                    <h2 style="margin-left: 55px;">Room's Characteristics</h2>
                     <div class="row justify-content-end mb-3">
                         <div class="col-auto">
-                            <button class="btn btn-success" onclick="addCharacteristicsRow()">Add
+                            <button class="btn btn-success" style="margin-right: 10px;"
+                                onclick="addCharacteristicsRow()">Add
                                 Characteristic</button>
+
                         </div>
                         <div class="col-auto" id="saveButtonContainer" style="display: none;">
                             <button class="btn btn-primary" onclick="saveCharacteristicRow()">Save</button>
                         </div>
                     </div>
-                    <div class="table-responsive">
+                    <div class="table-responsive mx-auto" style="width: 90%; ">
                         <table class="table table-bordered fixed-width" id="roomTable">
                             <thead>
                                 <tr>
@@ -120,23 +143,28 @@
                             <tbody>
                                 <% for (let i=0; i < characteristics.length; i++) { %>
                                     <tr>
-                                        <td>
-                                            <input type="text" class="form-control" style="width: 150px;" readonly
+                                        <td style="vertical-align: middle;">
+                                            <input type="text" class="form-control"
+                                                style="width: 90%; vertical-align: middle;" readonly
                                                 value="<%= characteristics[i].characteristic %>">
                                         </td>
                                         <td
-                                            style="display: flex; align-items: center; justify-content: center; padding-bottom: 30%;">
-                                            <i class="<%= characteristics[i].icon %>" style="font-size: large;"></i>
+                                            style="display: flex; align-items: center; justify-content: center; padding: 7%; width: 100%;">
+                                            <i class="<%= characteristics[i].icon %>"
+                                                style="font-size: large; width: 150px; display: flex; align-items: center; justify-content: center; "></i>
                                         </td>
 
+
                                         <td>
-                                            <div class="btn-group" role="group">
-                                                <button class="btn btn-primary" style="margin-right: 10px;"
+                                            <div class="btn-group d-flex justify-content-center" role="group"
+                                                style="width: 100%;">
+                                                <button class="btn btn-primary mx-2"
                                                     onclick="toggleReadOnly(this)">Edit</button>
-                                                <button class="btn btn-danger"
+                                                <button class="btn btn-danger mx-2"
                                                     onclick="deleteCharacteristicRow(this)">Delete</button>
                                             </div>
                                         </td>
+
                                     </tr>
                                     <% } %>
                             </tbody>

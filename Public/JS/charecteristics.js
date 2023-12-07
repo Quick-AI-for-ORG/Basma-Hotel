@@ -16,16 +16,17 @@ function addCharacteristicsRow() {
 
   // Insert form controls inside the grid columns
   cell1.innerHTML =
-    '<input type="text" class="form-control" placeholder="Characteristic">';
+    '<input type="text" class="form-control"  placeholder="Characteristic">';
   cell2.innerHTML =
-    '<input type="text" class="form-control" placeholder="Icon">';
+    '<input type="text" class="form-control"  style="font-size: large;" placeholder="Icon">';
   cell3.innerHTML =
-    '<div class="btn-group" role="group">' +
+    '<div class="btn-group d-flex justify-content-center"" role="group">' +
     '<button class="btn btn-primary" style="margin-right: 10px;" onclick="toggleReadOnly(this)">Edit</button>' +
     '<button class="btn btn-danger" onclick="deleteRoomRow(this)">Delete</button>' +
     "</div>";
 
-  document.getElementById("saveButtonContainer").style.display = "block";
+  document.getElementById("saveButtonContainer").style.cssText =
+    "display: block; margin-right: 70px;";
 }
 
 function saveCharacteristicRow() {
