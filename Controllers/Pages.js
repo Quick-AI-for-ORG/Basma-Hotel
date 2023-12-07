@@ -143,7 +143,10 @@ const viewRoom = async (req, res) => {
 };
 
 const covid = (req, res) => {
-  res.render("covid-19");
+  res.render("covid-19", {
+    rooms: null,
+    user: req.session.user === undefined ? "" : req.session.user,
+  });
 };
 const logout = (req, res) => {
   if (req.session.user !== undefined) req.session.destroy();
