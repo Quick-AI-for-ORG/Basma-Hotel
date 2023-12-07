@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guests</title>
+    <title>Options</title>
     <link rel="stylesheet" href="/CSS/dashboard.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,600" />
 
@@ -93,57 +93,38 @@
             </nav>
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 my-3">
                 <div class="container">
-                    <h2>Basma's guests</h2>
+                    <h2>Basma's Options</h2>
                     <div class="row justify-content-end mb-3">
                         <div class="col-auto">
-                            <button class="btn btn-success" onclick="addGuestRow()">Add Guest</button>
+                            <button class="btn btn-success" onclick="addOptionRow()">Add Option</button>
                         </div>
                         <div class="col-auto" id="saveButtonContainer" style="display: none;">
-                            <button class="btn btn-primary" onclick="saveGuestRow()">Save</button>
+                            <button class="btn btn-primary" onclick="saveOptionRow()">Save</button>
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="guestTable">
+                        <table class="table table-bordered" id="optionTable">
                             <thead>
                                 <tr>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Email</th>
-                                    <th>Password</th>
-                                    <th>Phone</th>
-                                    <th>Role</th>
-                                    <th>Bio</th>
-                                    <th>Address</th>
-                                    <th>Actions</th>
+                                    <th>Option</th>
+                                    <th>Price</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <% guests.forEach(function(guest) { %>
+                                <% options.forEach(function(option) { %>
                                     <tr>
-                                        <td><input type="text" class="form-control" value="<%= guest.firstName %>"
+                                        <td><input type="text" class="form-control" value="<%= option.option %>"
                                                 readonly></td>
-                                        <td><input type="text" class="form-control" value="<%= guest.lastName %>"
+                                        <td><input type="text" class="form-control" value="<%= option.price %>"
                                                 readonly></td>
-                                        <td><input type="text" class="form-control" value="<%= guest.email %>" readonly>
-                                        </td>
-                                        <td><input type="text" class="form-control" value="<%= guest.password %>"
-                                                readonly></td>
-                                        <td><input type="text" class="form-control" value="<%= guest.phoneNumber %>"
-                                                readonly>
-                                        </td>
-                                        <td><input type="text" class="form-control" value="<%= guest.role %>" readonly>
-                                        </td>
-                                        <td><input type="text" class="form-control" value="<%= guest.bio %>" readonly>
-                                        </td>
-                                        <td><input type="text" class="form-control" value="<%= guest.address %>"
-                                                readonly>
-                                        </td>
+
                                         <td>
                                             <div class="btn-group" role="group">
                                                 <button class="btn btn-primary" style="margin-right: 10px;"
                                                     onclick="toggleReadOnly(this)">Edit</button>
                                                 <button class="btn btn-danger"
-                                                    onclick="deleteGuestRow(this)">Delete</button>
+                                                    onclick="deleteOptionRow(this)">Delete</button>
                                             </div>
                                         </td>
                                     </tr>
@@ -156,7 +137,7 @@
             </main>
         </div>
     </div>
-    <script src="/JS/guests.js"></script>
+    <script src="/JS/options.js"></script>
 </body>
 
 </html>

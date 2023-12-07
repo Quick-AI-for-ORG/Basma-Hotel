@@ -50,11 +50,17 @@ const guests = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
+const options = async (req, res) => {
+    res.render("options", {
+      layout: false,
+      user: req.session.user === undefined ? "" : req.session.user,
+      options: await ctrlOptions.admin.getOptions(req,res),
+    });
+};
 
 const rooms = async (req, res) => {
   try {
     const roomsData = await ctrlRooms.admin.getRooms();
-
     res.render("rooms", {
       layout: false,
       user: req.session.user === undefined ? "" : req.session.user,
@@ -176,5 +182,5 @@ module.exports = {
     viewRoom,
   },
   guest: { myProfile, booking, logout, payment },
-  admin: { dashboard, guests, rooms, characteristics },
+  admin: { dashboard, guests, rooms, characteristics, options },
 };

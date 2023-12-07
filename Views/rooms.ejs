@@ -75,8 +75,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                Last quarter
+                            <a class="nav-link" href="/admin/options">
+                                Options
                             </a>
                         </li>
                         <li class="nav-item">
@@ -114,6 +114,7 @@
                                     <th>Capacity</th>
                                     <th>Description</th>
                                     <th>Executive</th>
+                                    <th>Charecteristics</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -130,7 +131,9 @@
                                                 readonly></td>
                                         <td><input type="text" class="form-control" value="<%= rooms[i].description %>"
                                                 readonly></td>
-                                        <td style="display: flex; align-items: center; justify-content: center;">
+
+                                        <td
+                                            style="display: flex; align-items: center; justify-content: center; padding-bottom: 40%;">
                                             <% if (rooms[i].executive=="1" ) { %>
                                                 <i class="fas fa-check-circle"
                                                     style="color: green; font-size: large;"></i>
@@ -139,7 +142,8 @@
                                                         style="color: red; font-size: large;"></i>
                                                     <% } %>
                                         </td>
-
+                                        <td><input type="text" class="form-control" value="Add charecteristics here"
+                                                readonly></td>
                                         <td>
                                             <div class="btn-group" role="group">
                                                 <button class="btn btn-primary" style="margin-right: 10px;"
