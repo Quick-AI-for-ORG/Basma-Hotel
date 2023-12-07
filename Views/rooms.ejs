@@ -95,7 +95,6 @@
                             <thead>
                                 <tr>
                                     <th>Title </th>
-
                                     <th>Quantity</th>
                                     <th>Starting Price</th>
                                     <th>Capacity</th>
@@ -129,8 +128,14 @@
                                                         style="color: red; font-size: large;"></i>
                                                     <% } %>
                                         </td>
-                                        <td><input type="text" class="form-control" value="Add charecteristics here"
-                                                readonly></td>
+                                        <td>
+                                            <% for (let j=0; j < rooms[i].RoomsCharacteristics.length; j++) { %>
+                                                <input type="text" class="form-control"
+                                                    value="<%= rooms[i].RoomsCharacteristics[j].characteristic %>"
+                                                    readonly>
+                                                <% } %>
+                                        </td>
+
                                         <td>
                                             <div class="btn-group" role="group">
                                                 <button class="btn btn-primary" style="margin-right: 10px;"
