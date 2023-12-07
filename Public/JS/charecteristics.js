@@ -4,12 +4,19 @@ function addCharacteristicsRow() {
     .getElementsByTagName("tbody")[0];
   var newRow = table.insertRow(table.rows.length);
 
+  // Create grid columns for each cell
   var cell1 = newRow.insertCell(0);
   var cell2 = newRow.insertCell(1);
   var cell3 = newRow.insertCell(2);
 
+  // Add a custom class to the grid columns
+  cell1.className = "custom-col";
+  cell2.className = "custom-col";
+  cell3.className = "custom-col";
+
+  // Insert form controls inside the grid columns
   cell1.innerHTML =
-    '<input type="text" class="form-control" placeholder="Charecteristic">';
+    '<input type="text" class="form-control" placeholder="Characteristic">';
   cell2.innerHTML =
     '<input type="text" class="form-control" placeholder="Icon">';
   cell3.innerHTML =

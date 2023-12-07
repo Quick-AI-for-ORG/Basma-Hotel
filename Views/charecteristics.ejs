@@ -15,6 +15,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.selectric/1.10.1/selectric.css">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+
+    <style>
+        .custom-col {
+            width: 33.33%;
+            /* Set the desired width */
+        }
+    </style>
+
 </head>
 
 <body>
@@ -101,7 +109,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="roomTable">
+                        <table class="table table-bordered fixed-width" id="roomTable">
                             <thead>
                                 <tr>
                                     <th>Characteristic</th>
@@ -113,13 +121,14 @@
                                 <% for (let i=0; i < characteristics.length; i++) { %>
                                     <tr>
                                         <td>
-                                            <input type="text" class="form-control" readonly
+                                            <input type="text" class="form-control" style="width: 150px;" readonly
                                                 value="<%= characteristics[i].characteristic %>">
                                         </td>
                                         <td
                                             style="display: flex; align-items: center; justify-content: center; padding-bottom: 30%;">
                                             <i class="<%= characteristics[i].icon %>" style="font-size: large;"></i>
                                         </td>
+
                                         <td>
                                             <div class="btn-group" role="group">
                                                 <button class="btn btn-primary" style="margin-right: 10px;"
