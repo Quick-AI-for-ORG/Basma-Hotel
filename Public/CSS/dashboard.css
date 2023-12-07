@@ -349,3 +349,28 @@ body {
   background-color: #f2dede;
   color: #a94442;
 }
+
+.reservations-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.reservations-header .title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.reservations-header .count {
+  font-size: 18px;
+  color: #6c757d;
+}
+
+.reservations-header i {
+  margin-left: auto;
+  font-size: 24px;
+  color: #007bff;
+}
