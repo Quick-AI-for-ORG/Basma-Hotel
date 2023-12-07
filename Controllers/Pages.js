@@ -65,7 +65,7 @@ const options = async (req, res) => {
 
 const rooms = async (req, res) => {
   try {
-    const roomsData = await ctrlRooms.admin.getRooms();
+    const roomsData = await ctrlRooms.admin.getRoomsAndCharacteristics();
     res.render("rooms", {
       layout: false,
       user: req.session.user === undefined ? "" : req.session.user,

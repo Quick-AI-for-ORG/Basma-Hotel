@@ -73,6 +73,14 @@ const getRoomCharacteristics = async (req, res) => {
   }
   return characteristics;
 };
+const getRoomsAndCharacteristics = async (req, res) => {
+  return await Room.findAll({
+    include: [{
+      model: RoomsCharacteristic,
+      required: true
+    }]
+  });
+};
 
 const getRooms_ = async () => {
   try {
@@ -173,5 +181,5 @@ const findRoom = async (req, res) => {
 
 module.exports = {
   public: { getRooms, getRoom, getRoomCharacteristics, sessionedRoom ,findRoom},
-  admin: { addRoom, removeRoom, modifyRoom, getRooms },
+  admin: { addRoom, removeRoom, modifyRoom, getRooms ,getRoomsAndCharacteristics },
 };
