@@ -21,87 +21,86 @@
 
 <body>
     <%- include("./Partials/dashPartial.ejs")%>
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 my-3">
-                <div class="container">
-                    <h2>Basma's Rooms</h2>
-                    <div class="row justify-content-end mb-3">
-                        <div class="col-auto">
-                            <button class="btn btn-success" onclick="addRoomRow()">Add Room</button>
-                        </div>
-                        <div class="col-auto" id="saveButtonContainer" style="display: none;">
-                            <button class="btn btn-primary" onclick="saveRoomRow()">Save</button>
-                        </div>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 my-3">
+            <div class="title-strap">
+                <h2>Basma's Rooms</h2>
+            </div>
+            <div class="container">
+                <div class="row justify-content-end mb-3">
+                    <div class="col-auto">
+                        <button class="btn btn-success" onclick="addRoomRow()">Add Room</button>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="roomTable">
-                            <thead>
-                                <tr>
-                                    <th>Title </th>
-                                    <th>Quantity</th>
-                                    <th>Starting Price</th>
-                                    <th>Capacity</th>
-                                    <th>Description</th>
-                                    <th>Executive</th>
-                                    <th>Charecteristics</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% for (let i=0; i < rooms.length; i++) { %>
-                                    <tr>
-                                        <td><input type="text" class="form-control" value="<%= rooms[i].Title %>"
-                                                readonly></td>
-                                        <td><input type="text" class="form-control" value="<%= rooms[i].quantity %>"
-                                                readonly></td>
-                                        <td><input type="text" class="form-control"
-                                                value="<%= rooms[i].startingPrice %>" readonly></td>
-                                        <td><input type="text" class="form-control" value="<%= rooms[i].capacity %>"
-                                                readonly></td>
-                                        <td><input type="text" class="form-control" value="<%= rooms[i].description %>"
-                                                readonly></td>
-
-                                        <td
-                                            style="display: flex; align-items: center; justify-content: center; padding-bottom: 40%;">
-                                            <% if (rooms[i].executive=="1" ) { %>
-                                                <i class="fas fa-check-circle"
-                                                    style="color: green; font-size: large;"></i>
-                                                <% } else { %>
-                                                    <i class="fas fa-times-circle"
-                                                        style="color: red; font-size: large;"></i>
-                                                    <% } %>
-                                        </td>
-                                        <td>
-                                            <div class="dropdown-container">
-                                                <select class="form-control dropdown-content">
-                                                    <% for (let j=0; j < rooms[i].RoomsCharacteristics.length; j++) { %>
-                                                        <option
-                                                            value="<%= rooms[i].RoomsCharacteristics[j].characteristic %>">
-                                                            <%= rooms[i].RoomsCharacteristics[j].characteristic %>
-                                                        </option>
-                                                        <% } %>
-                                                </select>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <div class="btn-group" role="group">
-                                                <button class="btn btn-primary" style="margin-right: 10px;"
-                                                    onclick="toggleReadOnly(this)">Edit</button>
-                                                <button class="btn btn-danger"
-                                                    onclick="deleteRoomRow(this)">Delete</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <% } %>
-                            </tbody>
-                        </table>
-                        <div id="errorMessage" style="color: red;"></div>
+                    <div class="col-auto" id="saveButtonContainer" style="display: none;">
+                        <button class="btn btn-primary" onclick="saveRoomRow()">Save</button>
                     </div>
                 </div>
-            </main>
+                <div class="table-responsive">
+                    <table class="rooms-table" id="roomTable">
+                        <thead>
+                            <tr>
+                                <th>Title </th>
+                                <th>Quantity</th>
+                                <th>Starting Price</th>
+                                <th>Capacity</th>
+                                <th>Description</th>
+                                <th>Executive</th>
+                                <th>Charecteristics</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for (let i=0; i < rooms.length; i++) { %>
+                                <tr>
+                                    <td><input type="text" class="form-control" value="<%= rooms[i].Title %>" readonly>
+                                    </td>
+                                    <td><input type="text" class="form-control" value="<%= rooms[i].quantity %>"
+                                            readonly></td>
+                                    <td><input type="text" class="form-control" value="<%= rooms[i].startingPrice %>"
+                                            readonly></td>
+                                    <td><input type="text" class="form-control" value="<%= rooms[i].capacity %>"
+                                            readonly></td>
+                                    <td><input type="text" class="form-control" value="<%= rooms[i].description %>"
+                                            readonly></td>
+
+                                    <td style=" text-align: center;">
+                                        <% if (rooms[i].executive=="1" ) { %>
+                                            <i class="fas fa-check-circle" style="color: green; font-size: large;"></i>
+                                            <% } else { %>
+                                                <i class="fas fa-times-circle"
+                                                    style="color: red; font-size: large;"></i>
+                                                <% } %>
+                                    </td>
+                                    <td>
+                                        <div class="dropdown-container">
+                                            <select class="form-control dropdown-content">
+                                                <% for (let j=0; j < rooms[i].RoomsCharacteristics.length; j++) { %>
+                                                    <option
+                                                        value="<%= rooms[i].RoomsCharacteristics[j].characteristic %>">
+                                                        <%= rooms[i].RoomsCharacteristics[j].characteristic %>
+                                                    </option>
+                                                    <% } %>
+                                            </select>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <button class="btn btn-primary" style="margin-right: 10px;"
+                                                onclick="toggleReadOnly(this)">Edit</button>
+                                            <button class="btn btn-danger" onclick="deleteRoomRow(this)">Delete</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <% } %>
+                        </tbody>
+                    </table>
+                    <div id="errorMessage" style="color: red;"></div>
+                </div>
+            </div>
+        </main>
         </div>
-    </div>
-    <script src="/JS/rooms.js"></script>
+        </div>
+        <script src="/JS/rooms.js"></script>
 </body>
 
 </html>

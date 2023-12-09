@@ -1,16 +1,42 @@
+.title-strap {
+  background-color: #e5b7ff54;
+  padding: 15px;
+  width: max-content;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.title-strap h2 {
+  color: #4d003e;
+  font-size: 24px; /* Adjust font size as needed */
+  margin: 0; /* Remove default margin */
+}
+
 table {
   width: 100%;
   margin-top: 20px;
   border-collapse: collapse;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-th,
+th {
+  padding: 10px;
+  border-bottom: 2px solid #8213c2; /* Border color for header rows */
+  text-align: left;
+  background-color: #8213c2;
+  color: white;
+}
+
 td {
   padding: 10px;
   border-bottom: 1px solid #dee2e6;
   text-align: left;
+}
+
+tr:nth-child(even) td {
+  background-color: #d8a7f53b;
 }
 
 tr:hover {

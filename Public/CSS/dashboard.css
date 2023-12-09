@@ -4,9 +4,13 @@ body {
   padding: 0;
 }
 
+/* .row:not(.exclude-tables) {
+  background-color: #dd00ff4c;
+} */
+
 /* Navigation bar styles */
 .navbar {
-  background-color: #8213c2; /* Purple */
+  background-color: #8213c2;
   color: #ffffff;
   width: 100%;
 }
@@ -50,16 +54,24 @@ body {
 .side-bar a {
   padding: 15px;
   display: block;
-  color: #0d1216;
+  color: #333;
   transition: color 0.3s ease;
   margin-top: 10px;
   margin-left: 20px;
   text-decoration: none;
 }
 
+.side-bar span {
+  margin-left: 10px;
+}
+
+.side-bar i.zmdi {
+  color: purple;
+}
+
 .side-bar a:hover {
   background-color: #9e2be061;
-  color: #333;
+  color: #4d003e;
   transition: background-color 0.3s ease, color 0.3s ease,
     border-radius 0.3s ease;
   border-radius: 12px;
@@ -139,6 +151,10 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+}
+
+.projects-table table {
+  border-radius: 10px;
 }
 
 .projects-table th,
