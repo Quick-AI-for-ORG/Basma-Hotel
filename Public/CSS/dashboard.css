@@ -25,10 +25,10 @@ body {
 }
 
 /* Sidebar */
-.sidebar {
+.side-bar {
   background-color: #ffffff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-  width: 50px; /* Adjust the width as needed */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  width: 220px; /* Adjust the width as needed */
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -36,31 +36,37 @@ body {
   border-right: 1px solid #dddddd;
   border-bottom-right-radius: 10px;
   transition: width 0.3s ease;
+
+  position: fixed; /* Fixed positioning */
+  top: 0; /* Position from the top */
+  left: 0; /* Position from the left */
+  z-index: 1000; /* Adjust z-index as needed */
 }
 
-.sidebar:hover {
-  width: 150px; /* Expanded width on hover */
+.side-bar:hover {
+  width: 250px; /* Expanded width on hover */
 }
 
-.sidebar a {
+.side-bar a {
   padding: 15px;
   display: block;
   color: #0d1216;
   transition: color 0.3s ease;
   margin-top: 10px;
+  margin-left: 20px;
   text-decoration: none;
 }
 
-.sidebar a:hover {
-  background-color: #8213c2;
-  color: white;
+.side-bar a:hover {
+  background-color: #9e2be061;
+  color: #333;
   transition: background-color 0.3s ease, color 0.3s ease,
     border-radius 0.3s ease;
   border-radius: 12px;
 }
 
 .content {
-  margin-left: 250px;
+  margin-left: 25px;
   transition: margin-left 0.3s ease;
 }
 

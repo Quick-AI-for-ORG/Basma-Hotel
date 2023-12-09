@@ -11,6 +11,7 @@ function addRoomRow() {
   var cell5 = newRow.insertCell(4);
   var cell6 = newRow.insertCell(5);
   var cell7 = newRow.insertCell(6);
+  var cell8 = newRow.insertCell(7);
 
   cell1.innerHTML =
     '<input type="text" class="form-control" placeholder="Title">';
@@ -25,6 +26,8 @@ function addRoomRow() {
   cell6.innerHTML =
     '<input type="text" class="form-control" placeholder="Executive">';
   cell7.innerHTML =
+    '<input type="text" class="form-control" placeholder="Charecteristics">';
+  cell8.innerHTML =
     '<div class="btn-group" role="group">' +
     '<button class="btn btn-primary" style="margin-right: 10px;" onclick="toggleReadOnly(this)">Edit</button>' +
     '<button class="btn btn-danger" onclick="deleteRoomRow(this)">Delete</button>' +
@@ -46,6 +49,7 @@ function saveRoomRow() {
   var capacity = lastRow.cells[3].querySelector("input").value;
   var description = lastRow.cells[4].querySelector("input").value;
   var executive = lastRow.cells[5].querySelector("input").value;
+  var charecteristics = lastRow.cells[6].querySelector("input").value;
 
   // Check if all fields are filled
   if (
@@ -54,7 +58,8 @@ function saveRoomRow() {
     startingPrice &&
     capacity &&
     description &&
-    executive
+    executive &&
+    charecteristics
   ) {
     // You can now save the data or perform any other actions with the data
     console.log("Saving room data:");
