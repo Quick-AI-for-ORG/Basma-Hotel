@@ -31,3 +31,47 @@ tr:hover {
   margin-top: 10px;
   color: red;
 }
+
+/* Dropdown button style (optional) */
+.dropdown-container button {
+  padding: 10px;
+  border: 1px solid #3498db; /* Border color */
+  border-radius: 4px;
+  background-color: #3498db; /* Background color */
+  color: #ffffff; /* Text color */
+  cursor: pointer;
+}
+
+/* Dropdown content */
+.dropdown-content {
+  display: none;
+  top: 100%;
+  left: 0;
+  min-width: 160px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff; /* White background */
+  border: 1px solid #ccc; /* Light border color */
+  border-radius: 4px;
+  z-index: 1;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+/* Dropdown options */
+.dropdown-content select {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+
+.dropdown-content select option {
+  padding: 10px;
+}
+
+.dropdown-container:hover .dropdown-content {
+  display: block;
+  background-color: #f0f0f0;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}

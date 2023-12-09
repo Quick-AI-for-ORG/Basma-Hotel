@@ -24,13 +24,22 @@ body {
   background-color: transparent;
 }
 
+/* Sidebar */
 .sidebar {
-  background-color: #f2f3f5;
-  width: 250px;
-  height: 200vh;
-  color: #0d1216;
-  position: fixed;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  width: 50px; /* Adjust the width as needed */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-right: 1px solid #dddddd;
+  border-bottom-right-radius: 10px;
   transition: width 0.3s ease;
+}
+
+.sidebar:hover {
+  width: 150px; /* Expanded width on hover */
 }
 
 .sidebar a {
@@ -39,6 +48,7 @@ body {
   color: #0d1216;
   transition: color 0.3s ease;
   margin-top: 10px;
+  text-decoration: none;
 }
 
 .sidebar a:hover {
@@ -49,15 +59,12 @@ body {
   border-radius: 12px;
 }
 
-.sidebar {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 .content {
   margin-left: 250px;
   transition: margin-left 0.3s ease;
 }
 
+/* Sidebar Toggle Button (if needed) */
 /* #sidebarToggle {
   color: #ffffff;
   background-color: #663399;
@@ -80,7 +87,7 @@ body {
 }
 
 .sidebar a.active {
-  background-color: #3498db; /* Light blue */
+  background-color: #3498db;
 }
 
 .sidebar a {
@@ -214,39 +221,6 @@ body {
 .projects-table .status-blue {
   background-color: #007bff;
   color: #fff;
-}
-
-.chart {
-  margin-top: 20px;
-}
-
-.chart h3 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-}
-
-.chart p {
-  font-size: 0.8em;
-  color: #6c757d;
-}
-
-.chart canvas {
-  width: 100%;
-  max-width: 400px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border-radius: 10px;
-}
-
-.chart .actions button {
-  background-color: transparent;
-  border: none;
-  font-size: 1.2em;
-  color: #6c757d;
-}
-
-.chart .actions button:hover {
-  color: #343a40;
 }
 
 .dropdown-menu {

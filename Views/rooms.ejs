@@ -129,11 +129,16 @@
                                                     <% } %>
                                         </td>
                                         <td>
-                                            <% for (let j=0; j < rooms[i].RoomsCharacteristics.length; j++) { %>
-                                                <input type="text" class="form-control"
-                                                    value="<%= rooms[i].RoomsCharacteristics[j].characteristic %>"
-                                                    readonly>
-                                                <% } %>
+                                            <div class="dropdown-container">
+                                                <select class="form-control dropdown-content">
+                                                    <% for (let j=0; j < rooms[i].RoomsCharacteristics.length; j++) { %>
+                                                        <option
+                                                            value="<%= rooms[i].RoomsCharacteristics[j].characteristic %>">
+                                                            <%= rooms[i].RoomsCharacteristics[j].characteristic %>
+                                                        </option>
+                                                        <% } %>
+                                                </select>
+                                            </div>
                                         </td>
 
                                         <td>
