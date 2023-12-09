@@ -19,11 +19,6 @@ const register = async (req, res) => {
     phoneNumber: req.body.phoneNumber,
     password: hashed,
     address: req.body.address,
-    twitterLink: "",
-    facebookLink: "",
-    instagramLink: "",
-    googleLink: "",
-    bio: "",
     role: "Guest",
   }).then((user) => {
     req.session.user = user;
@@ -84,7 +79,6 @@ const updateGuest = async (req, res) => {
         lastName: req.body.lastName,
         email: req.body.email,
         phoneNumber: req.body.phoneNumber,
-        // password: req.body.password,
         address: req.body.address,
       },
       {
@@ -104,11 +98,6 @@ const updateGuest = async (req, res) => {
     phoneNumber: req.body.phoneNumber,
     password: req.body.password,
     address: req.body.address,
-    twitterLink: "",
-    facebookLink: "",
-    instagramLink: "",
-    googleLink: "",
-    bio: "",
     role: "Guest",
   };
   res.redirect("/guest");
@@ -138,10 +127,6 @@ const updateBio = async (req, res) => {
     phoneNumber: req.session.user.phoneNumber,
     password: req.session.user.password,
     address: req.session.user.address,
-    twitterLink: req.session.user.twitterLink,
-    facebookLink: req.session.user.facebookLink,
-    instagramLink: req.session.user.instagramLink,
-    googleLink: req.session.user.googleLink,
     bio: req.body.bio,
     role: req.session.user.role,
   };
