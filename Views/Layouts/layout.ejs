@@ -50,17 +50,17 @@
               </li>
               <% if (user) { %>
               <li class="nav-item ms-3">
-                  <a id= "in" class="btn btn-dark rounded-pill" href="/guest"><i class="fas fa-user pe-2"></i>My Profile</a>
+                  <a id= "in" class="btn btn-dark rounded-pill" href="/user"><i class="fas fa-user pe-2"></i>My Profile</a>
               </li>
               <li class="nav-item ms-3">
-                  <a id= "up" class="btn rounded-pill"" href="/guest/logout"><i class="fas fa-sign-out-alt pe-2"></i>Logout</a>
+                  <a id= "up" class="btn rounded-pill"" href="/user/logout"><i class="fas fa-sign-out-alt pe-2"></i>Logout</a>
               </li>
               <% } else { %>
               <li class="nav-item ms-3">
-                  <a id="in" class="btn btn-dark rounded-pill" href="/guest/login">Sign in</a>
+                  <a id="in" class="btn btn-dark rounded-pill" href="/user/login">Sign in</a>
               </li>
               <li class="nav-item ms-3">
-                  <a id="up" class="btn rounded-pill" href="/guest/signup">Sign up</a>
+                  <a id="up" class="btn rounded-pill" href="/user/signup">Sign up</a>
               </li>
               <% } %>
           </ul>

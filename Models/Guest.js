@@ -1,11 +1,10 @@
+const { userModel } = require('./DBsequelize')
 const User = require('./User')
 class Guest extends User{
-  constructor(firstName, lastName, email, password, phoneNumber, bio, address, role="Guest") {
-    super(firstName, lastName, email, password, phoneNumber, bio, address, role)
+  constructor(guestJSON) {
+    super(guestJSON,"Guest")
   }
-  async register(){
-
-  }
+  
   async reserve(){
 
   }
@@ -16,9 +15,6 @@ class Guest extends User{
 
   }
   async pay(){
-
-  }
-  async modify(){
 
   }
 

@@ -1,7 +1,8 @@
 const ctrlRooms = require("../Controllers/ctrlRooms");
 const ctrlReservations = require("../Controllers/ctrlReservations");
 const ctrlOptions = require("../Controllers/ctrlOptions");
-const ctrlGuests = require("../Controllers/ctrlGuests");
+const ctrlUsers = require("../Controllers/ctrlUsers");
+const ctrlStaff = require("../Controllers/ctrlStaff");
 const ctrlCharacteristics = require("../Controllers/ctrlCharacteristics");
 
 const login = (req, res) => {
@@ -42,7 +43,7 @@ const dashboard = (req, res) => {
 };
 const guests = async (req, res) => {
   try {
-    const guestsData = await ctrlGuests.admin.retriveGuests();
+    const guestsData = await ctrlStaff.staff.getAll();
 
     res.render("guests", {
       layout: false,
@@ -177,11 +178,10 @@ module.exports = {
     facilities,
     privacy,
     covid,
-    login,
-    signup,
     viewRooms,
     viewRoom,
   },
-  guest: { myProfile, booking, logout, payment },
+  user: { myProfile , logout,login, signup, },
+  guest:{booking,payment},
   admin: { dashboard, guests, rooms, characteristics },
 };
