@@ -18,66 +18,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0">
-        <a class="navbar-brand mx-auto" href="#">
-            <img id="MDB-logo" src="/IMAGES/download-removebg-preview.png" alt="Basma Hotel Logo" draggable="false"
-                height="40" />
-            Basma Hotel
-        </a>
-
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a class="nav-link" href="#">Sign out</a>
-            </li>
-        </ul>
-    </nav>
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-2 d-none d-md-block sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin">
-                                Reservations
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/guests">
-                                Guests
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/rooms">
-                                Rooms
-                            </a>
-                        </li>
-                    </ul>
-
-                    <h6
-                        class="sidebar-heading d-flex justify-content-between align-items-center pl-3 mt-4 mb-1 text-muted">
-                        <span>Saved reports</span>
-                        <a class="d-flex align-items-center text-muted" href="#">
-                            <i class="zmdi zmdi-plus-circle-o"></i>
-                        </a>
-                    </h6>
-                    <ul class="nav flex-column mb-2">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/charecteristics">
-                                <i class="zmdi zmdi-file-text"></i>
-                                charecteristics
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/options">
-                                Options
-                            </a>
-                        </li>
-
-                    </ul>
-                </div>
-            </nav>
+    <%- include("./Partials/dashPartial.ejs") %>
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 my-3">
                 <div class="container">
                     <h2>Basma's Options</h2>
