@@ -56,7 +56,7 @@
                     <p class="fw-bold">Payment Details</p>
                     <p class="dis mb-3">Complete your booking by providing your payment details</p>
                 </div>
-                <form action="/guest/pay" method="post">
+                <form action="/user/pay" method="post">
                     <input type="hidden" name="reservation" value="<%=reservation%>">
                     <div id="payment"class="mb-3">
                         <label class="fw-bold">Payment Method</label>
@@ -110,7 +110,7 @@
                         </div>
                     </div>
                     <div  id="card" style="display:none" onclick="document.querySelector('form').submit()" class="btn btn-primary mt-2">Pay</div>
-                    <div  id="cashed" onclick="location.replace('/guest/')" class="btn btn-primary mt-2">Confirm</div>
+                    <div  id="cashed" onclick="location.replace('/user/')" class="btn btn-primary mt-2">Confirm</div>
                 </form>
               
             </div> 

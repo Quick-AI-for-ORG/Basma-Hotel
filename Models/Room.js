@@ -2,9 +2,11 @@
 const {roomModel, roomCharacteristicModel} = require('./DBsequelize')
 const crudInterface = require('./CRUD');
 const Characteristic = require('./Characteristic')
+const garInterface = require('./GAR')
 const {Op} = require('sequelize')
 class Room {
     static crudInterface = crudInterface;
+    static garInterface = garInterface;
     constructor(roomJSON){
         this.jsonToObject(roomJSON)
         this.characteristics = []
@@ -47,28 +49,27 @@ class Room {
     }
 
     async getRoomCharacteristics(){
-        const records = await roomCharacteristicModel.findAll({where : {room : this.title}})
-        if(records.length > 0){
+        const records = await Room.garInterface.get(this.title,roomCharacteristicModel,"room")
+        if(!records) return null
+        let characteristics = []
         for(let i = 0; i < records.length; i++){
-          this.characteristics.push(Characteristic.get(records[i].characteristic))
+            characteristics.push(await Characteristic.get(records[i].characteristic))
         }
-        return this.characteristics
-     }
-     return null
+        return characteristics
     }
     async addRoomCharacteristic(characteristic){
         for(let i = 0; i < this.characteristics.length; i++){
             if(this.characteristics[i].characteristic == characteristic)
             return
         }
+        await Room.garInterface.add(this.title,roomCharacteristicModel,"room",characteristic,"characteristic")
         this.characteristics.push(Characteristic.get(characteristic))
-        await roomCharacteristicModel.create({room : this.title, characteristic:characteristic})
     }
     async removeRoomCharacteristic(characteristic){
         for(let i = 0; i < this.characteristics.length; i++){
             if(this.characteristics[i].characteristic == characteristic){
+            await Room.garInterface.remove(this.title,roomCharacteristicModel,"room",characteristic,"characteristic")
             this.characteristics.splice(i,1)
-            await roomCharacteristicModel.destroy({where : {room : this.title, characteristic:characteristic}})
             }
         }
        return

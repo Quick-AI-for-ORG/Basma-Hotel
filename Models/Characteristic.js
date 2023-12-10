@@ -13,7 +13,7 @@ class Characteristic {
         await Characteristic.crudInterface.create(this,characteristicModel,"Characteristic") 
     }
     static async modify(characteristic,newCharacteristic){
-        this.jsonToObject(await Characteristic.crudInterface.modify(characteristic,newCharacteristic,characteristicModel,"Characteristic") )
+        return new Characteristic(await Characteristic.crudInterface.modify(characteristic,newCharacteristic,characteristicModel,"Characteristic"))
     }
     static async remove(characteristic){
         await Characteristic.crudInterface.remove(characteristic,characteristicModel,"Characteristic") 

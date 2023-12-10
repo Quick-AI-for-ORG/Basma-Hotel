@@ -17,7 +17,7 @@ const crudInterface = {
     modify: async function (primaryKey,newData,model,compareKey) {
         try {
           const compareClause = {[compareKey]: primaryKey};
-          const record = await model.findOne({ where: compareClause });
+          let record = await model.findOne({ where: compareClause });
           if (!record) {
             console.error(`Record with ${compareKey}: ${primaryKey} not found. Skipping modification.`);
           } else {

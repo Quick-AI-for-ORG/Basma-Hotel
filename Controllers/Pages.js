@@ -88,7 +88,7 @@ const characteristics = async (req, res) => {
 
 const myProfile = async (req, res) => {
   if (req.session.user === undefined) {
-    res.redirect("/guest/login");
+    res.redirect("/user/login");
   } else {
     console.log(req.session.user);
     await ctrlReservations.guest
@@ -97,7 +97,7 @@ const myProfile = async (req, res) => {
         res.render("myProfile", {
           layout: false,
           user: req.session.user === undefined ? "" : req.session.user,
-          reservations: result,
+          reservations: result === null ? [] : result,
         });
       });
   }
@@ -145,18 +145,17 @@ const logout = (req, res) => {
 };
 
 const booking = async (req, res) => {
-  await ctrlOptions.admin.getOptions(req, res).then((result) => {
+ let records = await ctrlOptions.admin.getOptions(req, res)
     if (req.session.user !== undefined)
       res.render("booking", {
         user: req.session.user,
         roomTitle: req.body.roomTitle,
         arrivalDate: req.body.arrivalDate,
         departureDate: req.body.departureDate,
-        options: result,
+        options: records=== null ? "" :records,
         rooms: null
       });
-    else res.redirect("/guest/login");
-  });
+    else res.redirect("/user/login");
 };
 
 const payment = async (req, res) => {
@@ -168,7 +167,7 @@ const payment = async (req, res) => {
       options: await ctrlReservations.guest.getUserReservationOptions(req, res),
       rooms: null
     });
-  else res.redirect("/guest/login");
+  else res.redirect("/user/login");
 };
 
 module.exports = {

@@ -8,6 +8,7 @@ class Option {
    jsonToObject(optionJSON) {
     this.option = optionJSON.option;
     this.price = optionJSON.price;
+    this.id = null
   }
   static async generateID() {
     if(optionModel.max('id') == null) return 0
@@ -19,8 +20,9 @@ class Option {
   }
   static async modify(option,newOption){
     const record = await Option.crudInterface.modify(option,newOption,optionModel,"option") 
-    this.jsonToObject(record)
-    this.id = record.id
+    let modifiedOption = new Option(record)
+    modifiedOption.id = record.id
+    return modifiedOption
   }
   static async remove(option){
     await Option.crudInterface.remove(option,optionModel,"option") 
@@ -28,13 +30,14 @@ class Option {
   }
   static async get(option){
     const record = await Option.crudInterface.get(option,optionModel,"option") 
-    this.jsonToObject(record)
-    this.id = record.id
+    let searchedOption = new Option(record)
+    searchedOption.id = record.id
+    return searchedOption 
   }
   static async getAll(){
     const records = await Option.crudInterface.getAll(optionModel) 
     let options= []
-    if(options.length>0){
+    if(records.length>0){
     for(let i=0;i<records.length; i++){
       options.push(new Option(records[i]))
       options[i].id = records[i].id

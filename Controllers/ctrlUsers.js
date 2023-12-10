@@ -27,7 +27,7 @@ const login = async (req, res) => {
       req.session.user = user;
       res.redirect("/user");
       }
-      else await checkLogin(req, req)
+      else await validateLogin(req, req)
 }
 
 const removeUser = async (req, res) => {
@@ -37,6 +37,7 @@ const removeUser = async (req, res) => {
 };
 
 const modifyUser = async (req, res) => {
+  if(!req.body.role) req.body.role = "Guest"
   let temp = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -44,26 +45,29 @@ const modifyUser = async (req, res) => {
     phoneNumber: req.body.phoneNumber,
     password: req.body.password,
     address: req.body.address,
-    role: req.body.user.role,
+    role: req.body.role,
   }
-  req.session['user'].modify(temp)
+  let user = await User.get(req.session.user.email)
+  await user.modify(temp)
+  req.session.user = user;
   res.redirect("/user");
 }
 
 const modifyBio = async (req, res) => {
-  req.sessions['user'].modify({bio: req.body.bio})
+  let user = await User.get(req.session.user.email)
+  await user.modify({bio: req.body.bio})
   req.session.user.bio = req.body.bio,
   res.redirect("/user");
 }
 
 
 const validateSignup = async (req, res) => {
-    if (await User.get(req.body.mail) != null) res.send({ result: "found" });
+    if (await User.get(req.body.email) != null) res.send({ result: "found" });
     else res.send({ result: "not found" });
 };
 
 const validateLogin = async (req, res) => {
-  if (await User.login(req.body.mail) != null) res.send({ result: "found" });
+  if (await User.login(req.body.email, req.body.password) != null) res.send({ result: "found" });
     else res.send({ result: "not found" });
 };
 

@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt')
 const {userModel} = require('./DBsequelize')
 const crudInterface = require('./CRUD');
 class User {
@@ -20,7 +21,7 @@ class User {
     }
     async modify(newUser){
        const user = await User.crudInterface.modify(this.email,newUser,userModel,"email") 
-        this.jsonToObject(user,user.role)
+       this.jsonToObject(user,user.role)
     }
     async remove(){
        await User.crudInterface.remove(this.email,userModel,"email") 
@@ -43,24 +44,20 @@ class User {
     return null
   }
     static async login(email, password) {
-        try {
           const user = await User.get(email);
           if (!user) {
             console.log('User not found');
             return null
           }
+          if(password != null){
           const isPasswordValid = await bcrypt.compare(password, user.password);
           if (!isPasswordValid) {
            console.log('Incorrect password');
            return null
           }
-          
-          return new User(user,user.role);
-        } catch (error) {
-          console.error(`Error during login: ${error.message}`);
-          return null
         }
-      }
+          return new User(user,user.role);
+        }
   }
 
   module.exports = User

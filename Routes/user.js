@@ -17,9 +17,9 @@ router.get('/payment', pages.guest.payment)
 router.post('/booking', pages.guest.booking);
 router.post('/register', ctrlUsers.guest.register);
 router.post('/login', ctrlUsers.user.login);
-router.post('/delete', ctrlUsers.user.removeUser);
-router.post('/update', ctrlUsers.user.modifyUser);
-router.post('/updateBio', ctrlUsers.user.modifyBio);
+router.post('/remove', ctrlUsers.user.removeUser);
+router.post('/modify', ctrlUsers.user.modifyUser);
+router.post('/modifyBio', ctrlUsers.user.modifyBio);
 router.post('/reserve', ctrlReservations.guest.reserve);
 router.post('/checkAvailability', ctrlReservations.guest.checkAvailability);
 router.post('/validateSignup', ctrlUsers.guest.validateSignup);
@@ -28,9 +28,9 @@ router.get('/auth/facebook', facebookAPI.guest.facebookLogin);
 
 // Callback URL for handling the Facebook Login response
 router.get('/auth/facebook/callback',facebookAPI.guest.facebookLoginCallback);
-  
-
-
 router.post('/modifyReservation', ctrlReservations.guest.modifyReservationOptions)
+router.get('*', (req, res) => {
+    res.redirect('/'); // Redirect to the index page or handle as needed
+  });
 
 module.exports = router;

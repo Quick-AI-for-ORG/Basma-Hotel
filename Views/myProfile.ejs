@@ -29,7 +29,7 @@
               <li class="breadcrumb-item"><a href="/">Home</a></li>
               <li class="breadcrumb-item"><a href="/room">Rooms</a></li>
               <li class="breadcrumb-item active" aria-current="page"><%=user.role%> Profile</li>
-              <li class="breadcrumb-item ms-auto"><a href="/guest/logout">Logout</a></li>
+              <li class="breadcrumb-item ms-auto"><a href="/user/logout">Logout</a></li>
 
             </ol>
           </nav>
@@ -53,7 +53,7 @@
               </div>
               <label style="visibility: hidden;" for="bio" class="bio"></label>
               
-              <form action="/guest/updateBio" style="visibility: hidden;" method="post">
+              <form action="/user/modifyBio" style="visibility: hidden;" method="post">
                 <textarea name='bio'id="bio" class="bio" type="textarea" style="visibility:hidden;"> </textarea>
                 <button class="bio" onclick="submit">save</button>
             </form>
@@ -191,7 +191,7 @@
                 
                 " ><i class="fa-solid fa-user-pen"style="margin-right: 5px;"></i> Edit Profile</button>
               <button class="deleteBtn" title="Delete" onclick="document.getElementById('del').submit()"> Delete Profile <i class="fa-solid fa-trash" style="margin-left: 5px;"></i></button>
-              <form method="POST" action="/guest/delete" id='del' style="visibility:hidden">
+              <form method="POST" action="/user/remove" id='del' style="visibility:hidden">
               </form>
             </div>
           </div>
@@ -264,7 +264,7 @@
             <% } %>
         </div>
       </div>
-      <form method="post" id="editor" action="/guest/update" style="visibility: hidden;">
+      <form method="post" id="editor" action="/user/modify" style="visibility: hidden;">
         <input type="text" style="visibility: hidden;" name="firstName" id="efn" class="hidden">
         <input type="text" style="visibility: hidden;" name="lastName" id="eln" class="hidden">
         <input type="email" style="visibility: hidden;" name="email" id="ee" class="hidden">

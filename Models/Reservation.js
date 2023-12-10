@@ -1,8 +1,11 @@
 const {reservationModel, reservationOptionModel} = require('./DBsequelize');
 const Option = require('./Option')
-const crudInterface = require('./CRUD');
+const {Op} = require('sequelize')
+const crudInterface = require('./CRUD')
+const garInterface = require('./GAR')
 class Reservation {
     static crudInterface = crudInterface;
+    static garInterface = garInterface;
     constructor(reservationJSON) {
         this.jsonToObject(reservationJSON)
         this.options = []
@@ -22,12 +25,8 @@ class Reservation {
       }
       async create(){ 
         this.id = Reservation.generateID()+1;
+        this.paid = false;
         await Reservation.crudInterface.create(this,reservationModel,"id") 
-      }
-      static async modify(id,newReservation){
-        const record = await Reservation.crudInterface.modify(id,newReservation,reservationModel,"id") 
-        this.jsonToObject(record)
-        this.id = record.id
       }
       static async remove(id){
         await Reservation.crudInterface.remove(id,reservationModel,"id") 
@@ -35,46 +34,90 @@ class Reservation {
       }
       static async get(id){
         const record = await Reservation.crudInterface.get(id,reservationModel,"id") 
-        this.jsonToObject(record)
-        this.id = record.id
+        const searchedReservation = new Reservation(record)
+        searchedReservation.id = record.id
+        searchedReservation.paid = record.paid
+        return searchedReservation
       }
       static async getAll(){
         const records = await Reservation.crudInterface.getAll(reservationModel) 
-        let reservations = []
-        if(records.length > 0){
-        for(let i = 0; i < records.length; i++){
-            reservations.push(new Reservation(records[i]))
-        }
-        return reservations
-     }
-     return null
+        return Reservation.jsonToObjects(records)
      }
      async getReservationOptions(){
-        const records = await reservationOptionModel.findAll({where : {reservation : this.id}})
-        if(records.length > 0){
+        const records = await Reservation.garInterface.get(this.id,reservationOptionModel,"reservation")
+        if(!records) return null
+        let options = []
         for(let i = 0; i < records.length; i++){
-          this.options.push(Option.get(records[i].option))
+            options.push(await Option.get(records[i].option))
         }
-        return this.options
-     }
-     return null
+        return options
     }
     async addReservationOption(option){
         for(let i = 0; i < this.options.length; i++){
             if(this.options[i].option == option)
             return
         }
-        this.options.push(Characteristic.get(option))
-        await reservationOptionModel.create({reservation : this.id, option:option})
+        await Reservation.garInterface.add(this.id,reservationOptionModel,"reservation",option,"option")
+        this.options.push(Option.get(option))
     }
     async removeReservationOption(option){
         for(let i = 0; i < this.options.length; i++){
             if(this.options[i].option == option){
+            await Reservation.garInterface.remove(this.id,reservationOptionModel,"reservation",option,"option")
             this.options.splice(i,1)
-            await reservationOptionModel.destroy({where : {reservation : this.id, option:option}})
             }
         }
        return
     }
+    static async getGuestReservations(email){
+        const records = await reservationModel.findAll({where:{ guestEmail : email}, order: [['createdAt', 'DESC']]})
+        return Reservation.jsonToObjects(records)
+    }
+    static async getRoomReservations(title){
+        const records = await reservationModel.findAll({where:{ roomTitle : title}, order: [['createdAt', 'DESC']]})
+        return Reservation.jsonToObjects(records)
+    }
+    static async getGuestRoomReservations(email,title){
+        const records = await reservationModel.findAll({where:{ guestEmail : email, roomTitle: title}, order: [['createdAt', 'DESC']]})
+        return Reservation.jsonToObjects(records)
+
+    }
+    static async searchByDate(startDate=null, endDate=null){
+        if(arrivalDate && departureDate)
+         whereclause = {
+            arrivalDate: {[Op.between]: [startDate, endDate]},
+          departureDate: { [Op.between]: [startDate, endDate]}
+        }
+        else if (startDate) 
+        whereclause = { [Op.or]: [
+            {arrivalDate: startDate},
+            {departureDate:startDate},
+          ]}
+        else if (endDate)
+        whereclause = { [Op.or]: [
+            {arrivalDate: endDate},
+            {departureDate:endDate},
+          ]}
+        const records = await reservationModel.findAll({where:whereclause})
+        return Reservation.jsonToObjects(records)
+    }
+    async modifyPaid(boolean){
+        this.paid = boolean
+        return this
+    }
+    static jsonToObjects(records){
+        if(records.length>0){
+            let reservations = []
+            for(let i =0; i<records.length;i++){
+                reservations.push(new Reservation(records[i]))
+                reservations[i].id = records[i].id
+                reservations[i].paid = records[i].paid
+            }
+            return reservations
+        }
+        return null
+    }
+
+
 }
 module.exports = Reservation
