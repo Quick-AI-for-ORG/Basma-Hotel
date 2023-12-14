@@ -12,7 +12,7 @@ class Reservation {
     }
     jsonToObject(reservationJSON){
         this.roomTitle = reservationJSON.roomTitle,
-        this.guestEmail = reservationJSON.email,
+        this.guestEmail = reservationJSON.guestEmail,
         this.arrivalDate = reservationJSON.arrivalDate,
         this.departureDate = reservationJSON.departureDate,
         this.numberOfAdults =  reservationJSON.numberOfAdults,
@@ -24,8 +24,7 @@ class Reservation {
           return await reservationModel.max('id')
       }
       async create(){ 
-        this.id = Reservation.generateID()+1;
-        this.paid = false;
+        this.id = await Reservation.generateID()+1;
         await Reservation.crudInterface.create(this,reservationModel,"id") 
       }
       static async remove(id){
@@ -46,24 +45,28 @@ class Reservation {
      async getReservationOptions(){
         const records = await Reservation.garInterface.get(this.id,reservationOptionModel,"reservation")
         if(!records) return null
-        let options = []
+        let options = await Option.getAll()
+        let reservationOptions = []
         for(let i = 0; i < records.length; i++){
-            options.push(await Option.get(records[i].option))
+            for(let j = 0; j < options.length; j++){
+            if(options[j].id == records[i].option)
+            reservationOptions.push(options[j])
+            }
         }
-        return options
+        return this.options = reservationOptions
     }
     async addReservationOption(option){
         for(let i = 0; i < this.options.length; i++){
-            if(this.options[i].option == option)
+            if(this.options[i].id == option.id)
             return
         }
-        await Reservation.garInterface.add(this.id,reservationOptionModel,"reservation",option,"option")
-        this.options.push(Option.get(option))
+        await Reservation.garInterface.add(this.id,reservationOptionModel,"reservation",option.id,"option")
+        this.options.push(await Option.get(option.option))
     }
     async removeReservationOption(option){
         for(let i = 0; i < this.options.length; i++){
-            if(this.options[i].option == option){
-            await Reservation.garInterface.remove(this.id,reservationOptionModel,"reservation",option,"option")
+            if(this.options[i].id == option.id){
+            await Reservation.garInterface.remove(this.id,reservationOptionModel,"reservation",option.id,"option")
             this.options.splice(i,1)
             }
         }
@@ -101,8 +104,10 @@ class Reservation {
         const records = await reservationModel.findAll({where:whereclause})
         return Reservation.jsonToObjects(records)
     }
-    async modifyPaid(boolean){
+    async modify(boolean,price){
         this.paid = boolean
+        this.price = price
+        await Reservation.crudInterface.modify(this.id,this,reservationModel,"id")
         return this
     }
     static jsonToObjects(records){

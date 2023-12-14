@@ -25,12 +25,13 @@ router.post('/checkAvailability', ctrlReservations.guest.checkAvailability);
 router.post('/validateSignup', ctrlUsers.guest.validateSignup);
 router.post('/validateLogin', ctrlUsers.user.validateLogin);
 router.get('/auth/facebook', facebookAPI.guest.facebookLogin);
-
+router.post('/confirm', ctrlReservations.guest.confirmReservation)
 // Callback URL for handling the Facebook Login response
 router.get('/auth/facebook/callback',facebookAPI.guest.facebookLoginCallback);
 router.post('/modifyReservation', ctrlReservations.guest.modifyReservationOptions)
-router.get('*', (req, res) => {
-    res.redirect('/'); // Redirect to the index page or handle as needed
+
+router.get('/*', (req, res) => {
+    res.redirect('/user')
   });
 
 module.exports = router;

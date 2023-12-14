@@ -31,7 +31,8 @@ const login = async (req, res) => {
 }
 
 const removeUser = async (req, res) => {
-  req.session['user'].remove();
+  let user = await User.get(req.session.user.email)
+  await user.remove();
   req.session.destroy();
   res.redirect("/");
 };
@@ -70,6 +71,8 @@ const validateLogin = async (req, res) => {
   if (await User.login(req.body.email, req.body.password) != null) res.send({ result: "found" });
     else res.send({ result: "not found" });
 };
+
+
 
 
 

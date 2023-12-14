@@ -159,7 +159,8 @@ const booking = async (req, res) => {
 };
 
 const payment = async (req, res) => {
-  if (req.session.user !== undefined)
+  console.log("inside function")
+  if (req.session.user !== undefined){
     res.render("payment", {
       user: req.session.user,
       room: await ctrlRooms.public.sessionedRoom(req, res),
@@ -167,6 +168,7 @@ const payment = async (req, res) => {
       options: await ctrlReservations.guest.getUserReservationOptions(req, res),
       rooms: null
     });
+  }
   else res.redirect("/user/login");
 };
 

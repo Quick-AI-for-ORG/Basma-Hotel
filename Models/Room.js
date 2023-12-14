@@ -55,7 +55,7 @@ class Room {
         for(let i = 0; i < records.length; i++){
             characteristics.push(await Characteristic.get(records[i].characteristic))
         }
-        return characteristics
+        return this.characteristics = characteristics
     }
     async addRoomCharacteristic(characteristic){
         for(let i = 0; i < this.characteristics.length; i++){
@@ -63,7 +63,7 @@ class Room {
             return
         }
         await Room.garInterface.add(this.title,roomCharacteristicModel,"room",characteristic,"characteristic")
-        this.characteristics.push(Characteristic.get(characteristic))
+        this.characteristics.push(await Characteristic.get(characteristic))
     }
     async removeRoomCharacteristic(characteristic){
         for(let i = 0; i < this.characteristics.length; i++){

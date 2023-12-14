@@ -7,10 +7,10 @@ const reserve = async (req, res) => {
     if (req.session.user === undefined || req.session.user.role != "Guest") 
             res.redirect("/user/login");
        if(await checkAvailability(req,res)){
-        const numberOfGuests = req.body.numberOfAdults + req.body.numberOfChildren;
+        const numberOfGuests = parseInt(req.body.numberOfAdults) + parseInt(req.body.numberOfChildren);
         const room = await Room.get(req.body.roomTitle)
         if(numberOfGuests > room.capacity){
-            res.redirect(`/room/${room.title}`);
+           res.redirect(`/room/details/${req.body.roomTitle}`)
         }
         let days_between_dates = Math.ceil(( new Date(req.body.departureDate).getTime() - new Date(req.body.arrivalDate).getTime()) / (1000 * 60 * 60 * 24));
         const reservationJSON =  {
@@ -24,16 +24,16 @@ const reserve = async (req, res) => {
         }
         const reservation = new Reservation(reservationJSON)
         await reservation.create()
+        req.session.reservation = reservation.id
+        req.session.room = req.body.roomTitle
         const options = await Option.getAll();      
         for(let i = 0; i<options.length; i++){
             if(req.body[`${i+1}`]=='on')
-                reservation.addReservationOption(options[i].option)
+               await reservation.addReservationOption(options[i])
         }
-            req.session.reservation = reservation.id
-            req.session.room = req.body.roomTitle
-                res.redirect('/user/payment');
+        res.redirect('/user/payment')
     }
-    else res.redirect(`/room/${req.body.roomTitle}`)
+    else res.redirect(`/room/details/${req.body.roomTitle}`)
 }
 
 
@@ -43,8 +43,8 @@ const modifyReservationOptions = async (req, res) => {
     const options = await Option.getAll();      
     for(let i = 0; i<options.length; i++){
         if(req.body[`${i+1}`]=='on')
-            await reservation.addReservationOption(options[i].option)
-        else (await reservation).removeReservationOption(options[i].option)
+            await reservation.addReservationOption(options[i].id)
+        else (await reservation).removeReservationOption(options[i].id)
     }
     res.redirect('/user');
 }
@@ -59,7 +59,7 @@ const  getUserReservations = async (req, res) => {
 }
 
 const getUserReservationOptions = async (req, res) => {
-   const reservation = await Reservation.get(req.session.reservarion)
+   const reservation = await sessionedReservation(req,res)
     return await reservation.getReservationOptions()
     }
 
@@ -81,19 +81,30 @@ const cancelReservation = async(req,res)=>{
         const arrivalDate = new Date(req.body.arrivalDate);
         const departureDate = new Date(req.body.departureDate);
         const reservations = await Reservation.getRoomReservations(req.body.roomTitle)
+        console.log(req.body)
         const room = await Room.get(req.body.roomTitle)
         if(room) {    
             let count = 0;
+            if(!reservations) return true
             reservations.forEach(reservation => {
-                if(reservation.endDate > arrivalDate && reservation.startDate < departureDate )
+                if(reservation.departureDate > arrivalDate && reservation.arrivalDate < departureDate )
                     count = count +1;
             });
             if(count >= room.quantity) return false
             else return true;
         }  
+        return false
     }
 
+    const confirmReservation = async (req, res) => {
+        const reservation = await sessionedReservation(req,res)
+        const guest = await Guest.get(req.session.user.email)
+        guest.pay(reservation.id, req.body.method)
+        res.redirect("/user");
+        
+      };
+
     module.exports = {
-        guest: {reserve  , getUserReservations , cancelReservation ,checkAvailability, modifyReservationOptions, getUserReservationOptions ,sessionedReservation},
+        guest: {reserve  , getUserReservations , cancelReservation ,checkAvailability, modifyReservationOptions, getUserReservationOptions ,sessionedReservation,confirmReservation},
         staff: {getReservations}
     }
