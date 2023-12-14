@@ -16,8 +16,8 @@
 
 .title-strap h2 {
   color: #4d003e;
-  font-size: 24px; /* Adjust font size as needed */
-  margin: 0; /* Remove default margin */
+  font-size: 24px; 
+  margin: 0; 
 }
 
 table {
@@ -28,7 +28,7 @@ table {
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
-
+  
 th {
   padding: 10px;
   border-bottom: 2px solid #8213c2; /* Border color for header rows */
