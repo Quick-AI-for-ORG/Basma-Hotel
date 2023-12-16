@@ -3,6 +3,7 @@ const ctrlReservations = require("../Controllers/ctrlReservations");
 const ctrlOptions = require("../Controllers/ctrlOptions");
 const ctrlUsers = require("../Controllers/ctrlUsers");
 const ctrlCharacteristics = require("../Controllers/ctrlCharacteristics");
+const ctrlQuestion = require("../Controllers/ctrlQuestions");
 
 const login = (req, res) => {
   res.render("login", { layout: false });
@@ -96,6 +97,21 @@ const characteristics = async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching characteristics data:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+const questions = async (req, res) => {
+  try {
+    const questions = await ctrlQuestion.admin.getQuestions();
+
+    res.render("questions", {
+      layout: false,
+      user: req.session.user === undefined ? "" : req.session.user,
+      questions: questions === null ? "" : questions,
+    });
+  } catch (error) {
+    console.error("Error fetching questions data:", error);
     res.status(500).send("Internal Server Error");
   }
 };
@@ -199,9 +215,11 @@ module.exports = {
     viewRooms,
     viewRoom,
   },
+
   user: { myProfile , logout,login, signup, },
   guest:{booking,payment},
   admin: { dashboard, rooms, characteristics,options },
-  staff:{users}
+  staff:{users,questions,rooms}
+
 
 };

@@ -15,36 +15,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.selectric/1.10.1/selectric.css">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" href="/CSS/guests.css">
-    <style>
-        .custom-col {
-            width: 5%;
-        }
+    <link rel="stylesheet" href="/CSS/characteristics.css">
 
-        #roomTable thead th:first-child,
-        #roomTable tbody td:first-child {
-            width: 15%;
-        }
-
-        #roomTable thead th:nth-child(2),
-        #roomTable tbody td:nth-child(2) {
-            width: 10%;
-        }
-
-        #roomTable tbody td:last-child {
-            width: 5%;
-        }
-
-        #roomTable tbody td i {
-            max-width: 100%;
-            display: block;
-            margin: 0 auto;
-        }
-
-        #roomTable tbody td div {
-            text-align: center;
-        }
-    </style>
 </head>
 
 <body>
@@ -65,8 +37,8 @@
                         <button class="btn btn-primary" onclick="saveCharacteristicRow()">Save</button>
                     </div>
                 </div>
-                <div class="table-responsive mx-auto" style="width: 90%; ">
-                    <table class="table table-bordered fixed-width" id="roomTable">
+                <div class="table-responsive">
+                    <table class=" rooms-table" id="roomTable">
                         <thead>
                             <tr>
                                 <th>Characteristic</th>
