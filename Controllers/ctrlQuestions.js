@@ -9,8 +9,7 @@ const askQuestion = async (req, res) => {
         message: req.body.message,
         email: req.body.email
       }
-      const question = new Question(questionJSON)
-      await question.create();
+      await guest.askQuestion(questionJSON)
     }
     else res.redirect('/user')
 }

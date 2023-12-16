@@ -1,7 +1,6 @@
 const Staff = require('./Staff')
 const Characteristic = require('./Characteristic')
 const Room = require('./Room')
-const Reservation = require('./Reservation')
 const Guest = require('./Guest')
 const Option = require('./Option')
 class Admin extends Staff{

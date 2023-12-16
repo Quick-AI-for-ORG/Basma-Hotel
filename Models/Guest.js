@@ -1,6 +1,7 @@
 const User = require('./User')
 const {userModel} = require('./DBsequelize')
 const Reservation = require('./Reservation')
+const Question = require('./Question')
 class Guest extends User{
   constructor(guestJSON) {
     super(guestJSON,"Guest")
@@ -40,6 +41,11 @@ class Guest extends User{
     let price = (totalOptions * daysBetweenDates) + parseFloat(reservation.price)
     if(method == "card")  await reservation.modify(true,price.toFixed(2))
     else await reservation.modify(false,price)
+  }
+  async askQuestion(questionJSON){
+    let question = new Question(questionJSON)
+    await question.create()
+    return question
   }
 }
 

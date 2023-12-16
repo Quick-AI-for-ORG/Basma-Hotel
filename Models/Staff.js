@@ -62,6 +62,5 @@ class Staff extends User{
     async getQuestions(){
         return await Question.getAll()
     }
-
 }
 module.exports = Staff
