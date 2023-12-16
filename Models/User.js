@@ -56,7 +56,7 @@ class User {
            return null
           }
         }
-          return new User(user,user.role);
+          return new User(user,user.role)
         }
   }
 

@@ -58,8 +58,8 @@ class Admin extends Staff{
       await option.modify(optionJSON)
       return option
     }
-    async modifyCharacteristic(characteristic,characteristicJSON){
-      let characteristic = await Characteristic.get(characteristic)
+    async modifyCharacteristic(key,characteristicJSON){
+      let characteristic = await Characteristic.get(key)
       await characteristic.modify(characteristicJSON)
       return characteristic
     }
