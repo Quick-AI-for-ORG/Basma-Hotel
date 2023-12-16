@@ -128,8 +128,8 @@ footer *, .navbar-nav  {
 #searchResults {
   position: absolute;
   top: 100%; /* Position it below the search bar */
-  left: 25%;
-  width: 34%;
+  left: 23%;
+  width: 25%;
   background-color: #fff; /* Set background color */
   border: 1px solid #ccc; /* Add a border for better visibility */
   z-index: 1000; /* Set a z-index to control stacking order */

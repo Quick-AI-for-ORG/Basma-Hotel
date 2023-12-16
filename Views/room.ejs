@@ -19,7 +19,7 @@
 
     <div class="images">
         <h1 class="title">
-            <%=room.Title%>
+            <%=room.title%>
         </h1>
         <% const more=room.imageURL.substring(0, room.imageURL.length- 5);%>
 
@@ -90,8 +90,8 @@
             <div id="radius-shape-1" class="radius-shape-1"></div>
             <div id="radius-shape-2" class="radius-shape-2"></div>
             <div class="booking-form">
-                <form action="/guest/booking" method="POST">
-                    <input type="hidden" name="roomTitle" value="<%= room.Title %>">
+                <form action="/user/booking" method="POST">
+                    <input type="hidden" name="roomTitle" value="<%= room.title %>">
                     <label for="arrivalDate">Arrival Date:</label>
                     <input type="date" id="arrivalDate" name="arrivalDate" required>
                     <br>

@@ -3,14 +3,10 @@ const app = express();
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const expressLayouts = require("express-ejs-layouts");
-const Guest = require("./Models/Guest");
-const Room = require("./Models/Room");
-const Reservation = require("./Models/Reservation");
-const Question = require("./Models/Question");
-
+const sequelize = require("./Models/DBsequelize");
 
 const indexRouter = require("./Routes/index");
-const guestRouter = require("./Routes/guest");
+const userRouter = require("./Routes/user");
 const roomRouter = require("./Routes/room");
 const adminRouter = require("./Routes/admin");
 
@@ -26,15 +22,13 @@ app.set("layout", "layouts/layout");
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 
-// Create MySQL Table
-//Room.createTable();
-//Guest.createTable();
-//Reservation.createTable();
-//Question.createTable();
+
+// sequelize.createTables()
+
 
 //routers
 app.use("/", indexRouter);
-app.use("/guest", guestRouter);
+app.use("/user", userRouter);
 app.use("/room", roomRouter);
 app.use("/admin", adminRouter);
 

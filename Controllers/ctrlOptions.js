@@ -1,53 +1,51 @@
-const {Option} = require('../Models/Reservation.js');
+const Option = require('../Models/Option.js');
+const Admin = require('../Models/Admin.js');
 
 const addOption = async(req,res)=>{
-    try{
-    const option =  Option.create({
-        option: req.body.option,
-    }).then((option) => {
-        res.status(201).json({ message: "option added successfully" }); 
-    });
-} catch(err){
-    res.status(400).json({message:err.message})
-}}
+    if(req.session.user != null && req.session.user.role === 'Admin'){
+        const admin = new Admin(await User.get(req.session.user.email))
+        const optionJSON = {
+            option : req.body.option,
+            price: req.body.price
+        }
+        await admin.addOption(optionJSON)
+        res.redirect('/admin/options')
+    }
+    else res.redirect('/user/login')
+}
 
 const removeOption = async(req,res)=>{
-    try { await Option.destroy({
-        where: {
-          option: req.body.option,
-        },
-      }).then((option) =>{
-        res.status(201).json({ message: "option removed successfully" });
-      })
+       if(req.session.user != null && req.session.user.role === 'Admin'){
+        const admin = new Admin(await User.get(req.session.user.email))
+        const option = await getOption(req,res)
+        await admin.removeOption(option.id)
+        res.redirect('/admin/options')
     }
-        catch(err) {
-        console.error("Error: " + err);
-        res.status(400).json({ message: err.message });
-        }
-    }
+    else res.redirect('/user/login')
+}
 
 const getOptions = async(req,res)=>{
-    return await Option.findAll();
+    return await Option.getAll();
 }
 
 const getOption = async(req,res)=>{
-    return await Option.findOne({where:{option: req.body.option}})
+    return await Option.get(req.body.option)
 }
 
 const modifyOption = async(req,res)=>{
-    await Option.update({
-        option: req.body.option,
-    }, {
-        where: {
-            option: req.body.option,
+    if(req.session.user != null && req.session.user.role === 'Admin'){
+        const admin = new Admin(await User.get(req.session.user.email))
+        const optionJSON = {
+            option : req.body.option,
+            price: req.body.price
         }
-    }).then((option) => {
-        if(option)
-        res.status(201).json({ message: "option modified successfully" });
-        else
-        res.status(400).json({ message: "option not found" });
-    })
+        const option = await getOption(req,res)
+        await admin.modifyOption(option.id,optionJSON)
+        res.redirect('/admin/options')
+    }
+    else res.redirect('/user/login')
 }
+
 
 module.exports = {
     admin: {addOption, removeOption, getOptions, getOption, modifyOption}

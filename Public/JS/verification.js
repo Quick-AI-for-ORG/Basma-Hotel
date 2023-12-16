@@ -19,7 +19,7 @@ function confirmPass(){
 }
 function checkMail(mail){
     if(mail.value!=''){
-        fetch('/guest/checkMail',{
+        fetch('/user/validateSignup',{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({mail: mail.value})

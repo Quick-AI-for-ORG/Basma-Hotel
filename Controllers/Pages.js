@@ -1,7 +1,7 @@
 const ctrlRooms = require("../Controllers/ctrlRooms");
 const ctrlReservations = require("../Controllers/ctrlReservations");
 const ctrlOptions = require("../Controllers/ctrlOptions");
-const ctrlGuests = require("../Controllers/ctrlGuests");
+const ctrlUsers = require("../Controllers/ctrlUsers");
 const ctrlCharacteristics = require("../Controllers/ctrlCharacteristics");
 const ctrlQuestion = require("../Controllers/ctrlQuestions");
 
@@ -36,46 +36,54 @@ const privacy = (req, res) => {
   });
 };
 const dashboard = async (req, res) => {
+  if(req.session.user != null && (req.session.user.role =="Staff" || req.session.user.role =="Admin")){
   res.render("dashboard", {
     layout: false,
-    user: req.session.user === undefined ? "" : req.session.user,
-    reservations: await ctrlReservations.admin.getReservations(req, res),
+    user: req.session.user ,
+    reservations: await ctrlReservations.staff.getReservations(req, res),
   });
+  }
+  else res.redirect("/user/login")
 };
-const guests = async (req, res) => {
-  try {
-    const guestsData = await ctrlGuests.admin.retriveGuests();
-
+const users = async (req, res) => {
+  if(req.session.user != null && req.session.user.role =="Admin"){
     res.render("guests", {
       layout: false,
-      user: req.session.user === undefined ? "" : req.session.user,
-      guests: guestsData || [],
-    });
-  } catch (error) {
-    console.error("Error fetching guests data:", error);
-    res.status(500).send("Internal Server Error");
+      user: req.session.user,
+      guests: await ctrlUsers.admin.getAllUsers(req, res),
+    })
   }
-};
+    else if (req.session.user != null && req.session.user.role =="Staff"){
+      res.render("guests", {
+        layout: false,
+        user: req.session.user,
+        guests: await ctrlUsers.staff.getAllGuests(req, res),
+      })
+    }
+    else res.redirect("/user/login")
+}
+
 const options = async (req, res) => {
+  if(req.session.user != null && (req.session.user.role =="Admin" || req.session.user.role =="Staff")){
   res.render("options", {
     layout: false,
-    user: req.session.user === undefined ? "" : req.session.user,
+    user: req.session.user,
     options: await ctrlOptions.admin.getOptions(req, res),
   });
+}
+else res.redirect("/user/login")
+
 };
 
 const rooms = async (req, res) => {
-  try {
-    const roomsData = await ctrlRooms.admin.getRoomsAndCharacteristics();
+  if(req.session.user != null && (req.session.user.role =="Admin" || req.session.user.role =="Staff")){
     res.render("rooms", {
       layout: false,
-      user: req.session.user === undefined ? "" : req.session.user,
-      rooms: roomsData === null ? "" : roomsData,
+      user: req.session.user,
+      rooms: await ctrlRooms.admin.getRoomsAndCharacteristics(req, res),
     });
-  } catch (error) {
-    console.error("Error fetching rooms data:", error);
-    res.status(500).send("Internal Server Error");
   }
+  else res.redirect("/user/login")
 };
 const characteristics = async (req, res) => {
   try {
@@ -110,7 +118,7 @@ const questions = async (req, res) => {
 
 const myProfile = async (req, res) => {
   if (req.session.user === undefined) {
-    res.redirect("/guest/login");
+    res.redirect("/user/login");
   } else {
     console.log(req.session.user);
     await ctrlReservations.guest
@@ -119,7 +127,7 @@ const myProfile = async (req, res) => {
         res.render("myProfile", {
           layout: false,
           user: req.session.user === undefined ? "" : req.session.user,
-          reservations: result,
+          reservations: result === null ? [] : result,
         });
       });
   }
@@ -170,22 +178,22 @@ const logout = (req, res) => {
 };
 
 const booking = async (req, res) => {
-  await ctrlOptions.admin.getOptions(req, res).then((result) => {
+ let records = await ctrlOptions.admin.getOptions(req, res)
     if (req.session.user !== undefined)
       res.render("booking", {
         user: req.session.user,
         roomTitle: req.body.roomTitle,
         arrivalDate: req.body.arrivalDate,
         departureDate: req.body.departureDate,
-        options: result,
-        rooms: null,
+        options: records=== null ? "" :records,
+        rooms: null
       });
-    else res.redirect("/guest/login");
-  });
+    else res.redirect("/user/login");
 };
 
 const payment = async (req, res) => {
-  if (req.session.user !== undefined)
+  console.log("inside function")
+  if (req.session.user !== undefined){
     res.render("payment", {
       user: req.session.user,
       room: await ctrlRooms.public.sessionedRoom(req, res),
@@ -193,7 +201,8 @@ const payment = async (req, res) => {
       options: await ctrlReservations.guest.getUserReservationOptions(req, res),
       rooms: null,
     });
-  else res.redirect("/guest/login");
+  }
+  else res.redirect("/user/login");
 };
 
 module.exports = {
@@ -203,11 +212,14 @@ module.exports = {
     facilities,
     privacy,
     covid,
-    login,
-    signup,
     viewRooms,
     viewRoom,
   },
-  guest: { myProfile, booking, logout, payment },
-  admin: { dashboard, guests, rooms, characteristics, options, questions },
+
+  user: { myProfile , logout,login, signup, },
+  guest:{booking,payment},
+  admin: { dashboard, rooms, characteristics,options },
+  staff:{users,questions,rooms}
+
+
 };

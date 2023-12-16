@@ -25,10 +25,10 @@
       <% if(rooms != null){ %>
 
 
-        <div class="col-4 ms-5">
-          <input onkeyup="search(this)" class="form-control ms-5" type="search" name="search" placeholder="Search" aria-label="Search">
+        <div class="col-3 ms-5">
+          <input onkeyup="search(this)" class="form-control ms-3" type="search" name="search" placeholder="Search" aria-label="Search">
       </div>
-      <div id="searchResults" class="position-absolute p-3 bg-white border">
+      <div id="searchResults" class="position-absolute p-2 bg-white border">
           
       </div>      
       <%}%>
@@ -50,17 +50,17 @@
               </li>
               <% if (user) { %>
               <li class="nav-item ms-3">
-                  <a id= "in" class="btn btn-dark rounded-pill" href="/guest"><i class="fas fa-user pe-2"></i>My Profile</a>
+                  <a id= "in" class="btn btn-dark rounded-pill" href="/user"><i class="fas fa-user pe-2"></i>My Profile</a>
               </li>
               <li class="nav-item ms-3">
-                  <a id= "up" class="btn rounded-pill"" href="/guest/logout"><i class="fas fa-sign-out-alt pe-2"></i>Logout</a>
+                  <a id= "up" class="btn rounded-pill"" href="/user/logout"><i class="fas fa-sign-out-alt pe-2"></i>Logout</a>
               </li>
               <% } else { %>
               <li class="nav-item ms-3">
-                  <a id="in" class="btn btn-dark rounded-pill" href="/guest/login">Sign in</a>
+                  <a id="in" class="btn btn-dark rounded-pill" href="/user/login">Sign in</a>
               </li>
               <li class="nav-item ms-3">
-                  <a id="up" class="btn rounded-pill" href="/guest/signup">Sign up</a>
+                  <a id="up" class="btn rounded-pill" href="/user/signup">Sign up</a>
               </li>
               <% } %>
           </ul>
