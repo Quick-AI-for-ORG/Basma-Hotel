@@ -72,3 +72,7 @@ tr:hover {
   margin-top: 10px;
   color: red;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}

@@ -149,22 +149,40 @@ body {
 }
 
 .projects-table table {
-  border-radius: 10px;
-}
-
-.projects-table th,
-.projects-table td {
-  padding: 15px;
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .projects-table th {
-  font-weight: bold;
-  background-color: #343a40;
-  color: #fff;
+  padding: 10px;
+  border-bottom: 2px solid #8213c2;
+  text-align: left;
+  background-color: #8213c2;
+  color: white;
+}
+.projects-table td {
+  padding: 10px;
+  /* border-bottom: 1px solid #dee2e6; */
+  text-align: left;
+  /* border-radius: 7px; */
 }
 
-.projects-table tr:hover {
-  background-color: #f8f9fa;
+.projects-table tr:nth-child(even) td {
+  background-color: #d8a7f53b;
+  /* border-radius: 20px; */
+}
+
+.projects-table tr:last-child td {
+  border-bottom: none;
+  border-radius: 0 0 15px 15px;
+}
+/* Hover effect for rows */
+tr:hover {
+  background-color: #f5f5f5b5;
 }
 
 .projects-table .member {
@@ -223,21 +241,6 @@ body {
 .projects-table .status-text {
   padding: 8px 12px;
   border-radius: 5px;
-}
-
-.projects-table .status-orange {
-  background-color: #ffc107;
-  color: white;
-}
-
-.projects-table .status-red {
-  background-color: #dc3545;
-  color: #fff;
-}
-
-.projects-table .status-blue {
-  background-color: #007bff;
-  color: #fff;
 }
 
 .dropdown-menu {
@@ -347,6 +350,7 @@ body {
   padding: 10px;
   display: flex;
   align-items: center;
+  border-radius: 8px;
 }
 
 .reservations-header .title {
@@ -364,4 +368,8 @@ body {
   margin-left: auto;
   font-size: 24px;
   color: #007bff;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
