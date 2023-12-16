@@ -2,6 +2,7 @@ const Reservation = require("../Models/Reservation")
 const Option = require("../Models/Option")
 const Room = require("../Models/Room")
 const Guest = require("../Models/Guest")
+const Staff = require("../Models/Staff")
 
 const reserve = async (req, res) => {
     if (req.session.user === undefined || req.session.user.role != "Guest") 
@@ -104,7 +105,16 @@ const cancelReservation = async(req,res)=>{
         
       };
 
+    const removeReservation = async(req,res)=>{
+        if(req.session.user != null && (req.session.user.role == "Staff" || req.session.user.role == "Admin")){
+        const staff = new Staff(await User.get(req.session.user.email))
+        await staff.removeReservation(req.body.id)
+        res.redirect("/admin");
+        }
+        else res.redirect("/user")
+    }
+
     module.exports = {
         guest: {reserve  , getUserReservations , cancelReservation ,checkAvailability, modifyReservationOptions, getUserReservationOptions ,sessionedReservation,confirmReservation},
-        staff: {getReservations}
+        staff: {getReservations, removeReservation}
     }

@@ -4,7 +4,6 @@ const router = express.Router();
 const pages = require("../Controllers/Pages");
 const ctrlUsers = require("../Controllers/ctrlUsers");
 const ctrlReservations = require("../Controllers/ctrlReservations");
-const ctrlStaff = require("../Controllers/ctrlStaff");
 const facebookAPI = require("../Controllers/facebookAPI");
 
 

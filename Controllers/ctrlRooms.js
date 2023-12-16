@@ -1,7 +1,9 @@
 const Room = require("../Models/Room.js");
 const Characteristic = require("../Models/Characteristic.js");
-
+const Admin = require("../Models/Admin.js");
 const addRoom = async (req, res) => {
+  if(req.session.user != null && req.session.user.role == "Admin"){
+
       const roomJSON = {
         title: req.body.Title,
         quantity: req.body.quantity,
@@ -11,8 +13,9 @@ const addRoom = async (req, res) => {
         executive: req.body.executive,
         imageURL: req.body.imageURL,
       }
-      const room = new Room(roomJSON)
-      await room.create()
+      const admin = new Admin(await User.get(req.session.user.email))
+      await admin.addRoom(roomJSON)
+      const room =  await Room.get(roomJSON.title)
       const characteristics = await Characteristic.getAll()
       for(let i = 0; i < characteristics.length; i++) {
         if(req.body[`${characteristics[i].characteristic}`]){
@@ -20,11 +23,16 @@ const addRoom = async (req, res) => {
           await room.addRoomCharacteristic(characteristics[i].characteristic)
         }
       }
+      res.redirect('/admin/rooms')
+  }
+  else res.redirect('/user/login')
 }
-        
 
 const removeRoom = async (req, res) => {
+  if(req.session.user != null && req.session.user.role == "Admin"){
+
   await Room.remove(req.body.title)
+  }
 }
 
 const getRooms = async (req, res) => {
@@ -44,12 +52,11 @@ const getRoomCharacteristics = async (req, res) => {
   return await room.getRoomCharacteristics()
 };
 const getRoomsAndCharacteristics = async (req, res) => {
-  return await Room.findAll({
-    include: [{
-      model: RoomsCharacteristic,
-      required: true
-    }]
-  });
+  let rooms = await Room.getAll()
+  for (let i = 0; i < rooms.length; i++) {
+    rooms[i].characteristics = await rooms[i].getRoomCharacteristics()
+  }
+  return rooms
 };
 
 

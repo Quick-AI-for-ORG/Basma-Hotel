@@ -1,7 +1,7 @@
 const Staff = require('./Staff')
 const Characteristic = require('./Characteristic')
 const Room = require('./Room')
-const Guest = require('./Guest')
+const User = require('./User')
 const Option = require('./Option')
 class Admin extends Staff{
     constructor(adminJSON) {
@@ -63,45 +63,20 @@ class Admin extends Staff{
       await characteristic.modify(characteristicJSON)
       return characteristic
     }
-    async addStaff(staffJSON){
-      let staff = new Staff(staffJSON)
-      await staff.create()
-      return staff
-  }
-
-  async removeStaff(email){
-      await Staff.remove(email)
+    async addUser(userJSON){
+      let user = new User(userJSON)
+      await user.create()
+      return user
+    }
+    async removeUser(email){
+      await User.remove(email)
       return true
-  }
-  async addAdmin(adminJSON){
-    let admin = new Admin(adminJSON)
-    await admin.create()
-    return admin
-  }
-  async removeAdmin(email){
-    await Admin.remove(email)
-    return true
-  }
-  async removeGuest(email){
-    await Guest.remove(email)
-    return true
-  }
-
-  async modifyStaff(email,staffJSON){
-    let staff = await Staff.get(email)
-    await staff.modify(staffJSON)
-    return staff
-  }
-  async modifyAdmin(email,adminJSON){
-    let admin = await Admin.get(email)
-    await admin.modify(adminJSON)
-    return admin
-  }
-  async modifyGuest(email,guestJSON){
-    let guest = await Guest.get(email)
-    await guest.modify(guestJSON)
-    return guest
-  }
+    }
+    async modifyUser(email,userJSON){
+      let user = await User.get(email)
+      await user.modify(userJSON)
+      return user
+    }
 
 
  }

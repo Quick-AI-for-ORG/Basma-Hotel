@@ -1,7 +1,8 @@
 const bcrypt = require('bcrypt')
 const User  = require('../Models/User.js')
 const Guest = require('../Models/Guest.js')
-
+const Admin = require('../Models/Admin.js')
+const Staff = require('../Models/Staff.js')
 
 const register = async (req, res) => {
   let hashed = await bcrypt.hash(req.body.password, 12);
@@ -25,7 +26,8 @@ const login = async (req, res) => {
       let user = await User.login(req.body.email, req.session.password)
       if(user != null) {
       req.session.user = user;
-      res.redirect("/user");
+      if(user.role=="Admin") res.redirect("/admin");
+      else res.redirect("/user");
       }
       else await validateLogin(req, req)
 }
@@ -72,7 +74,67 @@ const validateLogin = async (req, res) => {
     else res.send({ result: "not found" });
 };
 
+const getAllUsers = async (req, res) => {
+  if(req.session.user != null && req.session.user.role == "Admin"){
+    const admin = new Admin(await User.get(req.session.user.email))
+    return await admin.getAllUsers();
+  }
+};
 
+const getAllGuests = async (req, res) => {
+  if(req.session.user != null && (req.session.user.role == "Admin"||req.session.user.role == "Staff")){
+    const staff = new Staff(await User.get(req.session.user.email))
+    return await staff.getAllGuests();
+  }
+};
+
+const addUsers = async (req, res) => {
+  if(req.session.user != null && req.session.user.role == "Admin"){
+    let hashed = await bcrypt.hash(req.body.password, 12);
+    let userJSON = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      phoneNumber: req.body.phoneNumber,
+      password: hashed,
+      address: req.body.address,
+      role: req.body.role,
+    }
+    const admin = new Admin(await User.get(req.session.user.email))
+    await admin.addUser(userJSON);
+    res.redirect('/user/guests')
+  }
+  else res.redirect('/user/login')
+}
+
+const removeUsers = async(req,res) =>{
+  if(req.session.user != null && req.session.user.role == "Admin"){
+    const admin = new Admin(await User.get(req.session.user.email))
+    await admin.removeUser(req.body.email)
+    res.redirect('/admin/guests')
+
+  }
+  else res.redirect('/user/login')
+}
+
+const modifyUsers = async(req,res) =>{
+  if(req.session.user != null && req.session.user.role == "Admin"){
+    let userJSON = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      phoneNumber: req.body.phoneNumber,
+      password: req.body.password,
+      address: req.body.address,
+      role: req.body.role,
+    }
+    const admin = new Admin(await User.get(req.session.user.email))
+    await admin.modifyUser(req.body.email,userJSON)
+    res.redirect('/admin/guests')
+
+  }
+  else res.redirect('/user/login')
+}
 
 
 
@@ -80,4 +142,6 @@ const validateLogin = async (req, res) => {
 module.exports = {
   user: { modifyUser, modifyBio, removeUser, login, validateLogin },
   guest: {register, validateSignup},
+  admin:{getAllUsers, addUsers,removeUsers, modifyUsers},
+  staff:{getAllGuests}
 };

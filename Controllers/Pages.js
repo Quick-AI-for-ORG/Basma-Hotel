@@ -2,7 +2,6 @@ const ctrlRooms = require("../Controllers/ctrlRooms");
 const ctrlReservations = require("../Controllers/ctrlReservations");
 const ctrlOptions = require("../Controllers/ctrlOptions");
 const ctrlUsers = require("../Controllers/ctrlUsers");
-const ctrlStaff = require("../Controllers/ctrlStaff");
 const ctrlCharacteristics = require("../Controllers/ctrlCharacteristics");
 
 const login = (req, res) => {
@@ -36,46 +35,54 @@ const privacy = (req, res) => {
   });
 };
 const dashboard = async (req, res) => {
+  if(req.session.user != null && (req.session.user.role =="Staff" || req.session.user.role =="Admin")){
   res.render("dashboard", {
     layout: false,
-    user: req.session.user === undefined ? "" : req.session.user,
-    reservations: await ctrlReservations.admin.getReservations(req, res),
+    user: req.session.user ,
+    reservations: await ctrlReservations.staff.getReservations(req, res),
   });
+  }
+  else res.redirect("/user/login")
 };
-const guests = async (req, res) => {
-  try {
-    const guestsData = await ctrlStaff.staff.getAll();
-
+const users = async (req, res) => {
+  if(req.session.user != null && req.session.user.role =="Admin"){
     res.render("guests", {
       layout: false,
-      user: req.session.user === undefined ? "" : req.session.user,
-      guests: guestsData || [],
-    });
-  } catch (error) {
-    console.error("Error fetching guests data:", error);
-    res.status(500).send("Internal Server Error");
+      user: req.session.user,
+      guests: await ctrlUsers.admin.getAllUsers(req, res),
+    })
   }
-};
+    else if (req.session.user != null && req.session.user.role =="Staff"){
+      res.render("guests", {
+        layout: false,
+        user: req.session.user,
+        guests: await ctrlUsers.staff.getAllGuests(req, res),
+      })
+    }
+    else res.redirect("/user/login")
+}
+
 const options = async (req, res) => {
+  if(req.session.user != null && (req.session.user.role =="Admin" || req.session.user.role =="Staff")){
   res.render("options", {
     layout: false,
-    user: req.session.user === undefined ? "" : req.session.user,
+    user: req.session.user,
     options: await ctrlOptions.admin.getOptions(req, res),
   });
+}
+else res.redirect("/user/login")
+
 };
 
 const rooms = async (req, res) => {
-  try {
-    const roomsData = await ctrlRooms.admin.getRoomsAndCharacteristics();
+  if(req.session.user != null && (req.session.user.role =="Admin" || req.session.user.role =="Staff")){
     res.render("rooms", {
       layout: false,
-      user: req.session.user === undefined ? "" : req.session.user,
-      rooms: roomsData === null ? "" : roomsData,
+      user: req.session.user,
+      rooms: await ctrlRooms.admin.getRoomsAndCharacteristics(req, res),
     });
-  } catch (error) {
-    console.error("Error fetching rooms data:", error);
-    res.status(500).send("Internal Server Error");
   }
+  else res.redirect("/user/login")
 };
 const characteristics = async (req, res) => {
   try {
@@ -194,6 +201,7 @@ module.exports = {
   },
   user: { myProfile , logout,login, signup, },
   guest:{booking,payment},
-  admin: { dashboard, guests, rooms, characteristics },
+  admin: { dashboard, rooms, characteristics,options },
+  staff:{users}
 
 };
