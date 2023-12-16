@@ -44,9 +44,9 @@
                     </button>
                 </div>
                 <p class="dis my-3 info"><%=room.description%> </p>
-                <p class="dis my-3 info">Check-in Date: <%=reservation.startDate.toDateString().substring(0, 16)%> </p>
-                <p class="dis my-3 info">Check-out Date: <%=reservation.endDate.toDateString().substring(0, 16)%> </p>
-                <%let days_between_dates = Math.ceil((reservation.endDate.getTime() - reservation.startDate.getTime()) / (1000 * 60 * 60 * 24));%>
+                <p class="dis my-3 info">Check-in Date: <%=reservation.arrivalDate.toDateString().substring(0, 16)%> </p>
+                <p class="dis my-3 info">Check-out Date: <%=reservation.departureDate.toDateString().substring(0, 16)%> </p>
+                <%let days_between_dates = Math.ceil((reservation.departureDate.getTime() - reservation.arrivalDate.getTime()) / (1000 * 60 * 60 * 24));%>
                 <p class="dis my-3 info">Duration: <%=days_between_dates%> nights</p>
             </div>
         </div>
@@ -56,18 +56,18 @@
                     <p class="fw-bold">Payment Details</p>
                     <p class="dis mb-3">Complete your booking by providing your payment details</p>
                 </div>
-                <form action="/guest/pay" method="post">
+                <form action="/user/confirm" method="post">
                     <input type="hidden" name="reservation" value="<%=reservation%>">
                     <div id="payment"class="mb-3">
                         <label class="fw-bold">Payment Method</label>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="paymentMethod" id="cash" value="cash"checked >
+                            <input class="form-check-input" type="radio" name="mthod" id="cash" value="cash"checked >
                             <label class="form-check-label" for="cash">
                                 Cash
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="creditCard" >
+                            <input class="form-check-input" type="radio" name="method" id="creditCard" value="card" >
                             <label class="form-check-label" for="creditCard">
                                 Credit Card
                             </label>
@@ -110,7 +110,7 @@
                         </div>
                     </div>
                     <div  id="card" style="display:none" onclick="document.querySelector('form').submit()" class="btn btn-primary mt-2">Pay</div>
-                    <div  id="cashed" onclick="location.replace('/guest/')" class="btn btn-primary mt-2">Confirm</div>
+                    <div  id="cashed" onclick="document.querySelector('form').submit()" class="btn btn-primary mt-2">Confirm</div>
                 </form>
               
             </div> 

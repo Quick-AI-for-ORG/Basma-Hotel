@@ -16,10 +16,10 @@
         <div class="room-card-container mt-4 equal-height" id="roomList">
           
             <% for (let i=0; i < rooms.length; i++) { %>
-                <a href="/room/details/<%=rooms[i].Title%>" class="room-card">
+                <a href="/room/details/<%=rooms[i].title%>" class="room-card">
                     <img src="<%=rooms[i].imageURL%>" width="300" height="300">
                     <h2>
-                        <%=rooms[i].Title%>
+                        <%=rooms[i].title%>
                     </h2>
                     <p>$ <%=rooms[i].startingPrice%> Per night</p>
                     <p>
@@ -44,7 +44,6 @@
         </div>
     </main>
     <script src="/JS/search.js"></script>
-    <script src="/JS/allRooms.js"></script>
 </body>
 
 </html>

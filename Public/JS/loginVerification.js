@@ -6,10 +6,10 @@ function checkLogin(event){
     let password = document.getElementById("password")
 
     if(mail.value!=''){
-        fetch('/guest/checkLogin',{
+        fetch('/user/validateLogin',{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({mail: mail.value, password: password.value})
+            body: JSON.stringify({email: mail.value, password: password.value})
         }).then(res => res.json()).then(result =>{ 
 
             errorMessage = document.getElementById("loginError")

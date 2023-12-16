@@ -1,53 +1,41 @@
 const {Characteristic } = require('../Models/Room.js')
 
 const addCharacteristic = async(req,res)=>{
-    try{
-    const characteristic =  Characteristic.create({
+    if(req.session.user.role === 'Admin'){
+    let characteristicJSON =  {
         characteristic: req.body.characteristic,
         icon: req.body.icon,
-    }).then((characteristic) => {
-        res.status(201).json({ message: "characteristic added successfully" }); 
-    });
-} catch(err){
-    res.status(400).json({message:err.message})
-}}
+    }
+    const characteristic = new Characteristic(characteristicJSON)
+    await characteristic.create()
+    }
+    else res.redirect('/user/login')
+}
 
 const removeCharacteristic = async(req,res)=>{
-    try { await Characteristic.destroy({
-        where: {
-          characteristic: req.body.characteristic,
-        },
-      }).then((characteristic) =>{
-        res.status(201).json({ message: "characteristic removed successfully" });
-      })
-    }
-        catch(err) {
-        console.error("Error: " + err);
-        res.status(400).json({ message: err.message });
-        }
+    if(req.session.user.role === 'Admin')
+        await Characteristic.remove(req.body.characteristic)
+        else res.redirect('/user/login')
     }
 
 const getCharacteristics = async(req,res)=>{
-    return await Characteristic.findAll();
+    return await Characteristic.getAll();
 }
 
 const getCharacteristic = async(req,res)=>{
-    return await Characteristic.findOne({where:{characteristic: req.body.characteristic}})
+    return await Characteristic.get(req.body.characteristic)
 }
 
 const modifyCharacteristic = async(req,res)=>{
-    await Characteristic.update({
-        icon: req.body.icon,
-    }, {
-        where: {
+    if(req.session.user.role === 'Admin'){
+        let characteristicJSON =  {
             characteristic: req.body.characteristic,
+            icon: req.body.icon,
         }
-    }).then((characteristic) => {
-        if(characteristic)
-        res.status(201).json({ message: "characteristic modified successfully" });
-        else
-        res.status(400).json({ message: "characteristic not found" });
-    })
+        await Characteristic.modify(req.body.option,characteristicJSON)
+    }
+    else res.redirect('/user/login')
+    
 }
 
 module.exports = {

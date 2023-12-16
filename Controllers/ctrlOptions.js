@@ -1,52 +1,40 @@
-const {Option} = require('../Models/Reservation.js');
+const Option = require('../Models/Option.js');
 
 const addOption = async(req,res)=>{
-    try{
-    const option =  Option.create({
-        option: req.body.option,
-    }).then((option) => {
-        res.status(201).json({ message: "option added successfully" }); 
-    });
-} catch(err){
-    res.status(400).json({message:err.message})
-}}
+    if(req.session.user.role === 'Admin'){
+    const optionJSON = {
+        option : req.body.option,
+        price: req.body.price
+    }
+    const option = new Option(optionJSON)
+    await option.create()
+    }
+    else res.redirect('/user/login')
+}
 
 const removeOption = async(req,res)=>{
-    try { await Option.destroy({
-        where: {
-          option: req.body.option,
-        },
-      }).then((option) =>{
-        res.status(201).json({ message: "option removed successfully" });
-      })
-    }
-        catch(err) {
-        console.error("Error: " + err);
-        res.status(400).json({ message: err.message });
-        }
+    if(req.session.user.role === 'Admin')
+        await Option.remove(req.body.option)
+        else res.redirect('/user/login')
     }
 
 const getOptions = async(req,res)=>{
-    return await Option.findAll();
+    return await Option.getAll();
 }
 
 const getOption = async(req,res)=>{
-    return await Option.findOne({where:{option: req.body.option}})
+    return await Option.get(req.body.option)
 }
 
 const modifyOption = async(req,res)=>{
-    await Option.update({
-        option: req.body.option,
-    }, {
-        where: {
-            option: req.body.option,
+    if(req.session.user.role === 'Admin'){
+        const optionJSON = {
+            option : req.body.option,
+            price: req.body.price
         }
-    }).then((option) => {
-        if(option)
-        res.status(201).json({ message: "option modified successfully" });
-        else
-        res.status(400).json({ message: "option not found" });
-    })
+        await Option.modify(req.body.option,optionJSON)
+    }
+    else res.redirect('/user/login')
 }
 
 module.exports = {

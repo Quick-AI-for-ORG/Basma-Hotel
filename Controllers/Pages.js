@@ -1,7 +1,8 @@
 const ctrlRooms = require("../Controllers/ctrlRooms");
 const ctrlReservations = require("../Controllers/ctrlReservations");
 const ctrlOptions = require("../Controllers/ctrlOptions");
-const ctrlGuests = require("../Controllers/ctrlGuests");
+const ctrlUsers = require("../Controllers/ctrlUsers");
+const ctrlStaff = require("../Controllers/ctrlStaff");
 const ctrlCharacteristics = require("../Controllers/ctrlCharacteristics");
 
 const login = (req, res) => {
@@ -43,7 +44,7 @@ const dashboard = async (req, res) => {
 };
 const guests = async (req, res) => {
   try {
-    const guestsData = await ctrlGuests.admin.retriveGuests();
+    const guestsData = await ctrlStaff.staff.getAll();
 
     res.render("guests", {
       layout: false,
@@ -94,7 +95,7 @@ const characteristics = async (req, res) => {
 
 const myProfile = async (req, res) => {
   if (req.session.user === undefined) {
-    res.redirect("/guest/login");
+    res.redirect("/user/login");
   } else {
     console.log(req.session.user);
     await ctrlReservations.guest
@@ -103,7 +104,7 @@ const myProfile = async (req, res) => {
         res.render("myProfile", {
           layout: false,
           user: req.session.user === undefined ? "" : req.session.user,
-          reservations: result,
+          reservations: result === null ? [] : result,
         });
       });
   }
@@ -154,22 +155,22 @@ const logout = (req, res) => {
 };
 
 const booking = async (req, res) => {
-  await ctrlOptions.admin.getOptions(req, res).then((result) => {
+ let records = await ctrlOptions.admin.getOptions(req, res)
     if (req.session.user !== undefined)
       res.render("booking", {
         user: req.session.user,
         roomTitle: req.body.roomTitle,
         arrivalDate: req.body.arrivalDate,
         departureDate: req.body.departureDate,
-        options: result,
-        rooms: null,
+        options: records=== null ? "" :records,
+        rooms: null
       });
-    else res.redirect("/guest/login");
-  });
+    else res.redirect("/user/login");
 };
 
 const payment = async (req, res) => {
-  if (req.session.user !== undefined)
+  console.log("inside function")
+  if (req.session.user !== undefined){
     res.render("payment", {
       user: req.session.user,
       room: await ctrlRooms.public.sessionedRoom(req, res),
@@ -177,7 +178,8 @@ const payment = async (req, res) => {
       options: await ctrlReservations.guest.getUserReservationOptions(req, res),
       rooms: null,
     });
-  else res.redirect("/guest/login");
+  }
+  else res.redirect("/user/login");
 };
 
 module.exports = {
@@ -187,11 +189,11 @@ module.exports = {
     facilities,
     privacy,
     covid,
-    login,
-    signup,
     viewRooms,
     viewRoom,
   },
-  guest: { myProfile, booking, logout, payment },
-  admin: { dashboard, guests, rooms, characteristics, options },
+  user: { myProfile , logout,login, signup, },
+  guest:{booking,payment},
+  admin: { dashboard, guests, rooms, characteristics },
+
 };
