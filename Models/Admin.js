@@ -69,10 +69,14 @@ class Admin extends Staff{
       return user
     }
     async removeUser(email){
+      if (email == 'admin@basmahotel.com')
+      return false
       await User.remove(email)
       return true
     }
     async modifyUser(email,userJSON){
+      if (email == 'admin@basmahotel.com')
+      return false
       let user = await User.get(email)
       await user.modify(userJSON)
       return user

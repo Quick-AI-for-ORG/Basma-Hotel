@@ -58,8 +58,8 @@
             </p>
             <p>
                 <% if (characteristics) { characteristics.forEach(characteristic=> { %>
-                    <i class="<%=characteristic.icon%>" title="<%= characteristic.characteristic %>" alt=""
-                        <%=characteristic.characteristic %>""></i>
+                    <i class="<%=characteristic.icon%>" title="<%= characteristic.characteristic %>" alt="
+                        <%=characteristic.characteristic %>"></i>
                     <% })}; let num=room.capacity; if (num==3) { %>
                         <i class="fa-regular fa-3" title="Number of people"></i>
                         <% } else { %>

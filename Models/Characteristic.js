@@ -6,7 +6,7 @@ class Characteristic {
        this.jsonToObject(characteristicJSON)
     }
      jsonToObject(characteristicJSON){
-        this.characteristic = characteristicJSON.Characteristic;
+        this.characteristic = characteristicJSON.characteristic;
         this.icon = characteristicJSON.icon;
     }
      async create(){ 

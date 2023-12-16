@@ -51,7 +51,7 @@
                         <tbody>
                             <% for (let i=0; i < rooms.length; i++) { %>
                                 <tr>
-                                    <td><input type="text" class="form-control" value="<%= rooms[i].Title %>" readonly>
+                                    <td><input type="text" class="form-control" value="<%= rooms[i].title %>" readonly>
                                     </td>
                                     <td><input type="text" class="form-control" value="<%= rooms[i].quantity %>"
                                             readonly></td>
@@ -73,10 +73,10 @@
                                     <td>
                                         <div class="dropdown-container">
                                             <select class="form-control dropdown-content">
-                                                <% for (let j=0; j < rooms[i].RoomsCharacteristics.length; j++) { %>
+                                                <% for (let j=0; j < rooms[i].characteristics.length; j++) { %>
                                                     <option
-                                                        value="<%= rooms[i].RoomsCharacteristics[j].characteristic %>">
-                                                        <%= rooms[i].RoomsCharacteristics[j].characteristic %>
+                                                        value="<%= rooms[i].characteristics[j].characteristic %>">
+                                                        <%= rooms[i].characteristics[j].characteristic %>
                                                     </option>
                                                     <% } %>
                                             </select>

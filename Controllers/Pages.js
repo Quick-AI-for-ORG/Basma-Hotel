@@ -86,34 +86,25 @@ const rooms = async (req, res) => {
   else res.redirect("/user/login")
 };
 const characteristics = async (req, res) => {
-  try {
-    const characteristicsData =
-      await ctrlCharacteristics.admin.getCharacteristics();
-
+  if(req.session.user != null && req.session.user.role =="Admin" ){
     res.render("charecteristics", {
       layout: false,
-      user: req.session.user === undefined ? "" : req.session.user,
-      characteristics: characteristicsData === null ? "" : characteristicsData,
+      user: req.session.user,
+      characteristics: await ctrlCharacteristics.admin.getCharacteristics(req, res)
     });
-  } catch (error) {
-    console.error("Error fetching characteristics data:", error);
-    res.status(500).send("Internal Server Error");
   }
+  else res.redirect("/user/login")
 };
 
 const questions = async (req, res) => {
-  try {
-    const questions = await ctrlQuestion.admin.getQuestions();
-
+  if(req.session.user != null && (req.session.user.role =="Admin" || req.session.user.role =="Staff")){
     res.render("questions", {
       layout: false,
-      user: req.session.user === undefined ? "" : req.session.user,
-      questions: questions === null ? "" : questions,
+      user: req.session.user,
+      questions: await ctrlQuestion.staff.getQuestions(req, res) || []
     });
-  } catch (error) {
-    console.error("Error fetching questions data:", error);
-    res.status(500).send("Internal Server Error");
   }
+  else res.redirect("/user/login")
 };
 
 const myProfile = async (req, res) => {
@@ -218,7 +209,7 @@ module.exports = {
 
   user: { myProfile , logout,login, signup, },
   guest:{booking,payment},
-  admin: { dashboard, rooms, characteristics,options },
+  admin: { dashboard, characteristics,options },
   staff:{users,questions,rooms}
 
 

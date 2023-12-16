@@ -52,7 +52,7 @@ const getRoomCharacteristics = async (req, res) => {
   return await room.getRoomCharacteristics()
 };
 const getRoomsAndCharacteristics = async (req, res) => {
-  let rooms = await Room.getAll()
+  let rooms = await getRooms(req,res)
   for (let i = 0; i < rooms.length; i++) {
     rooms[i].characteristics = await rooms[i].getRoomCharacteristics()
   }
