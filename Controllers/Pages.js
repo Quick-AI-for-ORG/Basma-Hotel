@@ -14,31 +14,32 @@ const signup = (req, res) => {
 const basma = (req, res) => {
   res.render("basma", {
     user: req.session.user === undefined ? "" : req.session.user,
-    rooms: null
+    rooms: null,
   });
 };
 const about = (req, res) => {
   res.render("aboutUs", {
     user: req.session.user === undefined ? "" : req.session.user,
-    rooms: null
+    rooms: null,
   });
 };
 const facilities = (req, res) => {
   res.render("facilities", {
     user: req.session.user === undefined ? "" : req.session.user,
-    rooms: null
+    rooms: null,
   });
 };
 const privacy = (req, res) => {
   res.render("privacyPolicy", {
     user: req.session.user === undefined ? "" : req.session.user,
-    rooms: null
+    rooms: null,
   });
 };
-const dashboard = (req, res) => {
+const dashboard = async (req, res) => {
   res.render("dashboard", {
     layout: false,
     user: req.session.user === undefined ? "" : req.session.user,
+    reservations: await ctrlReservations.admin.getReservations(req, res),
   });
 };
 const guests = async (req, res) => {
@@ -55,11 +56,17 @@ const guests = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
+const options = async (req, res) => {
+  res.render("options", {
+    layout: false,
+    user: req.session.user === undefined ? "" : req.session.user,
+    options: await ctrlOptions.admin.getOptions(req, res),
+  });
+};
 
 const rooms = async (req, res) => {
   try {
-    const roomsData = await ctrlRooms.admin.getRooms();
-
+    const roomsData = await ctrlRooms.admin.getRoomsAndCharacteristics();
     res.render("rooms", {
       layout: false,
       user: req.session.user === undefined ? "" : req.session.user,
@@ -131,13 +138,16 @@ const viewRoom = async (req, res) => {
       user: req.session.user === undefined ? "" : req.session.user,
       room: room === null ? "" : room,
       characteristics: characteristics === null ? "" : characteristics,
-      rooms: null
+      rooms: null,
     });
   });
 };
 
 const covid = (req, res) => {
-  res.render("covid-19");
+  res.render("covid-19", {
+    rooms: null,
+    user: req.session.user === undefined ? "" : req.session.user,
+  });
 };
 const logout = (req, res) => {
   if (req.session.user !== undefined) req.session.destroy();
@@ -166,7 +176,7 @@ const payment = async (req, res) => {
       room: await ctrlRooms.public.sessionedRoom(req, res),
       reservation: await ctrlReservations.guest.sessionedReservation(req, res),
       options: await ctrlReservations.guest.getUserReservationOptions(req, res),
-      rooms: null
+      rooms: null,
     });
   }
   else res.redirect("/user/login");
@@ -185,4 +195,5 @@ module.exports = {
   user: { myProfile , logout,login, signup, },
   guest:{booking,payment},
   admin: { dashboard, guests, rooms, characteristics },
+
 };
