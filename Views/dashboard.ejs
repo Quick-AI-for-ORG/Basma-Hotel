@@ -61,7 +61,7 @@
                 <div class="reservations-inner">
                     <header class="reservations-header">
                         <div class="title">Ongoing Booking</div>
-                        <div class="count">| 32 Bookings</div>
+                        <div class="count">| <%- reservations.length %> Bookings</div>
                         <i class="zmdi zmdi-download"></i>
                     </header>
                     <table class="projects-table">
@@ -81,8 +81,9 @@
                         <tbody>
                             <% reservations.forEach(function(reservation) { %>
                                 <tr>
-                                    <td><input type="text" class="form-control" value="<%= reservation.roomTitle %>"
-                                            readonly></td>
+                                    <td>
+                                        <input type="text" class="form-control" title="<%= reservation.roomTitle %>" value="<%= reservation.roomTitle %> " readonly>
+                                      </td> 
                                     <td><input type="text" class="form-control" value="<%= reservation.guestEmail %>"
                                             readonly></td>
 
