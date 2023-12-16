@@ -2,62 +2,68 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%
-    if(user == "")
-        user= {firstName:"Firstname",lastName: "Lastname", role:"Guest", email:"example@gmail.com", phoneNumber:"(097) 234-5678", address:"Bay Area, San Francisco, CA", bio:"Account bio to be inserted here"};
-        user.name = user.firstName +" " + user.lastName
-        if(user.bio =='') user.bio="Add your bio"
-
-     %>
-    <title><%=user.name%></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <% if(user=="" ) user={firstName:"Firstname",lastName: "Lastname" , role:"Guest", email:"example@gmail.com",
+    phoneNumber:"(097) 234-5678", address:"Bay Area, San Francisco, CA", bio:"Account bio to be inserted here"};
+    user.name=user.firstName +" " + user.lastName
+        if(user.bio =='') user.bio=" Add your bio" %>
+    <title>
+      <%=user.name%>
+    </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="/CSS/myProfile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
 
 <body>
-<section style="background-color: #eee;">
+  <section>
     <div class="container py-5">
       <div class="row">
         <div class="col">
           <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
             <ol class="breadcrumb mb-0">
-              <li class="breadcrumb-item"><a href="/">Home</a></li>
-              <li class="breadcrumb-item"><a href="/room">Rooms</a></li>
-              <li class="breadcrumb-item active" aria-current="page"><%=user.role%> Profile</li>
-              <li class="breadcrumb-item ms-auto"><a href="/guest/logout">Logout</a></li>
-
+              <li class="breadcrumb-item"><a href="/"><i class="fa-solid fa-house"></i> Home</a></li>
+              <li class="breadcrumb-item"><a href="/room"><i class="fa-solid fa-door-open"></i> Rooms</a></li>
+              <li class="breadcrumb-item active" aria-current="page" style="color: blueviolet;">
+                <i class="fa-solid fa-user"></i>
+                <%=user.role%> Profile
+              </li>
+              <li class="breadcrumb-item ms-auto"><a href="/guest/logout">Logout <i
+                    class="fa-solid fa-right-from-bracket"></i></a></li>
             </ol>
           </nav>
         </div>
       </div>
-  
+
       <div class="row">
         <div class="col-lg-4">
           <div class="card mb-4">
             <div class="card-body text-center">
-              <img src="/IMAGES/user.png" alt="avatar"
-                class="rounded-circle img-fluid" style="width: 150px;">
-              <h5 class="my-3"><%=user.name%></h5>
+              <img src="/IMAGES/user.png" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+              <h5 class="my-3">
+                <%=user.name%>
+              </h5>
               <div>
-                <p style="display: inline;"  class="text-muted mb-1"><%=user.bio%></p>
-                <img src="/IMAGES/edit.png" class="editLogo" alt="edit button" onclick = "var array = document.getElementsByClassName('bio');
+                <p style="display: inline;" class="text-muted mb-1">
+                  <%=user.bio%>
+                </p>
+                <img src="/IMAGES/edit.png" class="editLogo" alt="edit button" onclick="var array = document.getElementsByClassName('bio');
                 for (let i = 0; i < array.length; i++) {
                   array[i].style.visibility = 'visible';
                   
-                }">  
+                }">
               </div>
               <label style="visibility: hidden;" for="bio" class="bio"></label>
-              
+
               <form action="/guest/updateBio" style="visibility: hidden;" method="post">
-                <textarea name='bio'id="bio" class="bio" type="textarea" style="visibility:hidden;"> </textarea>
-                <button class="bio" onclick="submit">save</button>
-            </form>
-              
+                <textarea name='bio' id="bio" class="bio" type="textarea" style="visibility:hidden;"> </textarea>
+                <button class="bio" onclick="submit" style="background-color: #8213c2; color: #ffffff;border: none;
+  border-radius: 5px;">save</button>
+              </form>
+
             </div>
           </div>
         </div>
@@ -70,8 +76,10 @@
                 </div>
                 <div class="col-sm-9">
                   <div>
-                  <p id="fullName"  style="display: inline;" class="text-muted mb-0"><%=user.name%> </p>
-                  <img src= "/IMAGES/edit.png" class="editLogo" alt="edit button" onclick="
+                    <p id="fullName" style="display: inline;" class="text-muted mb-0">
+                      <%=user.name%>
+                    </p>
+                    <img src="/IMAGES/edit.png" class="editLogo" alt="edit button" onclick="
                   
                   var array = document.getElementsByClassName('name');
                   for (let i = 0; i < array.length; i++) {
@@ -79,12 +87,14 @@
                     
                   }">
                   </div>
-                  <label class="name " style="visibility:hidden;">first name</label >
-                  <input id="firstName" type="text" style="visibility:hidden;"  class="edited name">
+                  <label class="name " style="visibility:hidden;">first name</label>
+                  <input id="firstName" type="text" style="visibility:hidden;" class="edited name">
                   <br>
                   <label class="name" style="visibility:hidden;">last name</label>
-                  <input id="lastName" type="text" style="visibility:hidden; "  class="edited name">
-                  <button style="visibility: hidden;" class="name" onclick="
+                  <input id="lastName" type="text" style="visibility:hidden; " class="edited name">
+                  <button
+                    style="visibility: hidden; background-color: #8213c2; color:white; border: none; border-radius: 5px; "
+                    class="name" onclick="
                     const firstNameElement = document.getElementById('firstName');
                     document.getElementById('efn').value = firstNameElement.value;
                     const lastNameElement = document.getElementById('lastName');
@@ -103,8 +113,10 @@
                 </div>
                 <div class="col-sm-9">
                   <div>
-                  <p id="email" style="display: inline;" class="text-muted mb-0"><%=user.email%> </p> 
-                  <img src="/IMAGES/edit.png" class="editLogo" alt="edit button" onclick = "var array = document.getElementsByClassName('emailEdit');
+                    <p id="email" style="display: inline;" class="text-muted mb-0">
+                      <%=user.email%>
+                    </p>
+                    <img src="/IMAGES/edit.png" class="editLogo" alt="edit button" onclick="var array = document.getElementsByClassName('emailEdit');
                     for (let i = 0; i < array.length; i++) {
                       array[i].style.visibility = 'visible';
                       
@@ -112,7 +124,9 @@
                   </div>
 
                   <input id="emailEdit" type="email" style="visibility:hidden; " class="edited emailEdit">
-                  <button style="visibility: hidden;" class="emailEdit" onclick="
+                  <button
+                    style="visibility: hidden;  background-color: #8213c2; color:white; border: none; border-radius: 5px;"
+                    class="emailEdit" onclick="
                     const emailElement = document.getElementById('email');
                     const emailEditElement = document.getElementById('emailEdit');
                     document.getElementById('ee').value = emailEditElement.value;
@@ -125,45 +139,53 @@
               <div class="row">
                 <div class="col-sm-3">
                   <p class="mb-0">Phone Number</p>
-                  
+
                 </div>
                 <div class="col-sm-9">
                   <div>
-                  <p id="phoneNumber" style="display: inline;" class="text-muted mb-0"><%=user.phoneNumber%> </p>
-                  <img src="/IMAGES/edit.png" class="editLogo" alt="edit button" onclick = "var array = document.getElementsByClassName('phoneEdit');
+                    <p id="phoneNumber" style="display: inline;" class="text-muted mb-0">
+                      <%=user.phoneNumber%>
+                    </p>
+                    <img src="/IMAGES/edit.png" class="editLogo" alt="edit button" onclick="var array = document.getElementsByClassName('phoneEdit');
                     for (let i = 0; i < array.length; i++) {
                       array[i].style.visibility = 'visible';
                       
                     }">
-                    </div>
-                    <input id="phoneEdit" type="text" style="visibility: hidden; " class="edited phoneEdit">
-                  <button style="visibility: hidden;" class="phoneEdit centre" onclick="
+                  </div>
+                  <input id="phoneEdit" type="text" style="visibility: hidden; " class="edited phoneEdit">
+                  <button
+                    style="visibility: hidden;  background-color: #8213c2; color:white; border: none; border-radius: 5px;"
+                    class="phoneEdit centre" onclick="
                     const phoneElement = document.getElementById('phoneNumber');
                     const phoneEditElement = document.getElementById('phoneEdit');
                     document.getElementById('ep').value = phoneEditElement.value;
                     phoneElement.innerText = phoneEditElement.value;
 
                   ">EDIT</button>
-                  
+
                 </div>
               </div>
               <hr>
               <div class="row">
                 <div class="col-sm-3">
                   <p class="mb-0">Address</p>
-                  
+
                 </div>
                 <div class="col-sm-9">
                   <div>
-                  <p style="display: inline;" id="address"text-muted mb-0"><%=user.address%></p>
-                  <img src="/IMAGES/edit.png" class="editLogo" alt="edit button" onclick = "var array = document.getElementsByClassName('editAddress');
+                    <p style="display: inline;" id="address" text-muted mb-0">
+                      <%=user.address%>
+                    </p>
+                    <img src="/IMAGES/edit.png" class="editLogo" alt="edit button" onclick="var array = document.getElementsByClassName('editAddress');
                     for (let i = 0; i < array.length; i++) {
                       array[i].style.visibility = 'visible';
                       
                     }">
                   </div>
                   <input type="text" style="visibility: hidden;" id="editAddress" class="edited editAddress">
-                  <button style="visibility: hidden;" onclick=" const addressElement = document.getElementById('address');
+                  <button
+                    style="visibility: hidden; background-color: #8213c2; color:white; border: none; border-radius: 5px;"
+                    onclick=" const addressElement = document.getElementById('address');
                   const editAddressElement = document.getElementById('editAddress');
                   addressElement.innerText = editAddressElement.value; 
                   document.getElementById('ea').value = editAddressElement.value;" id="editAddress
@@ -172,7 +194,7 @@
               </div>
             </div>
             <div class="buttonContainer">
-              <button class="editBtn"  title="Edit" onclick="
+              <button class="editBtn" title="Edit" onclick="
                 
                 
                 var fullName = document.getElementById('fullName').innerHTML;
@@ -189,89 +211,92 @@
                 document.getElementById('editor').submit();
                 
                 
-                " ><i class="fa-solid fa-user-pen"style="margin-right: 5px;"></i> Edit Profile</button>
-              <button class="deleteBtn" title="Delete" onclick="document.getElementById('del').submit()"> Delete Profile <i class="fa-solid fa-trash" style="margin-left: 5px;"></i></button>
+                "><i class="fa-solid fa-user-pen" style="margin-right: 5px;"></i> Edit Profile</button>
+              <button class="deleteBtn" title="Delete" onclick="document.getElementById('del').submit()"> Delete Profile
+                <i class="fa-solid fa-trash" style="margin-left: 5px;"></i></button>
               <form method="POST" action="/guest/delete" id='del' style="visibility:hidden">
               </form>
             </div>
           </div>
-          <% if(reservations.length != 0)  {  %>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="card mb-4 mb-md-0">
-                <div class="card-body">
-                  <p class="mb-4"><span class="text-primary font-italic me-1">Previous Bookings</span>
-                  </p>
-                  <% reservations.forEach(reservation => { %>
-                    <% const currentDate = new Date(); %>
-                    <% if (currentDate > reservation.endDate) { %>
-                      <% const endDate = reservation.endDate.toDateString().substring(0, 16);
-                      const startDate = reservation.startDate.toDateString().substring(0.16) 
-                  %>            
-  <div class="container mt-4">
-    <div class="row">
-        <div class="col-md-6 col-sm-12 mb-2 mb-md-0">
-            <p class="mb-1" style="font-size: .77rem;">From <%= startDate %></p>
-        </div>
-        <div class="col-md-6 col-sm-12 text-md-end">
-            <p class="mb-1" style="font-size: .77rem;">To <%= endDate %></p>
-        </div>
-    </div>
-</div>
-<% }})%> 
-                
+          <% if(reservations.length !=0) { %>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card mb-4 mb-md-0">
+                  <div class="card-body">
+                    <p class="mb-4"><span class="text-primary font-italic me-1">Previous Bookings</span>
+                    </p>
+                    <% reservations.forEach(reservation=> { %>
+                      <% const currentDate=new Date(); %>
+                        <% if (currentDate> reservation.endDate) { %>
+                          <% const endDate=reservation.endDate.toDateString().substring(0, 16); const
+                            startDate=reservation.startDate.toDateString().substring(0.16) %>
+                            <div class="container mt-4">
+                              <div class="row">
+                                <div class="col-md-6 col-sm-12 mb-2 mb-md-0">
+                                  <p class="mb-1" style="font-size: .77rem;">From <%= startDate %>
+                                  </p>
+                                </div>
+                                <div class="col-md-6 col-sm-12 text-md-end">
+                                  <p class="mb-1" style="font-size: .77rem;">To <%= endDate %>
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                            <% }})%>
+
                   </div>
                 </div>
               </div>
-            
-            <div class="col-md-6">
-              <div class="card mb-4 mb-md-0">
-                <div class="card-body">
-                  <p class="mb-4"><span class="text-primary font-italic me-1">Active Bookings</span>
-                  </p>
+
+              <div class="col-md-6">
+                <div class="card mb-4 mb-md-0">
+                  <div class="card-body">
+                    <p class="mb-4"><span class="text-primary font-italic me-1">Active Bookings</span>
+                    </p>
 
 
-                  <% reservations.forEach(reservation => { %>
-                    <% const currentDate = new Date(); %>
-                    <% if (currentDate < reservation.endDate) { %>
-                      <% const endDate = reservation.endDate.toDateString().substring(0, 16);
-                        const startDate = reservation.startDate.toDateString().substring(0.16) 
-                    %>            
-    <div class="container mt-4">
-      <div class="row">
-          <div class="col-md-6 col-sm-12 mb-2 mb-md-0">
-              <p class="mb-1" style="font-size: .77rem;">From <%= startDate %></p>
-          </div>
-          <div class="col-md-6 col-sm-12 text-md-end">
-              <p class="mb-1" style="font-size: .77rem;">To <%= endDate %></p>
-          </div>
-      </div>
-  </div>
-                      
-                    <% }})%> 
+                    <% reservations.forEach(reservation=> { %>
+                      <% const currentDate=new Date(); %>
+                        <% if (currentDate < reservation.endDate) { %>
+                          <% const endDate=reservation.endDate.toDateString().substring(0, 16); const
+                            startDate=reservation.startDate.toDateString().substring(0.16) %>
+                            <div class="container mt-4">
+                              <div class="row">
+                                <div class="col-md-6 col-sm-12 mb-2 mb-md-0">
+                                  <p class="mb-1" style="font-size: .77rem;">From <%= startDate %>
+                                  </p>
+                                </div>
+                                <div class="col-md-6 col-sm-12 text-md-end">
+                                  <p class="mb-1" style="font-size: .77rem;">To <%= endDate %>
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <% }})%>
                   </div>
-                </div>
                 </div>
               </div>
             </div>
-          </div>
-          <% } else { %>
-                <div class="text-center">
-                  <!-- <button class = "editBtn">Book now!</button> -->
-                  <a href="room/1" style="color: white;" class="btn editBtn">Book now!</a>
-                </div>
-                
-            <% } %>
         </div>
       </div>
-      <form method="post" id="editor" action="/guest/update" style="visibility: hidden;">
-        <input type="text" style="visibility: hidden;" name="firstName" id="efn" class="hidden">
-        <input type="text" style="visibility: hidden;" name="lastName" id="eln" class="hidden">
-        <input type="email" style="visibility: hidden;" name="email" id="ee" class="hidden">
-        <input type="text" style="visibility: hidden;" name="phoneNumber" id="ep" class="hidden">
-        <input type="text" style="visibility: hidden;" name="address" id="ea" class="hidden">
-      
-      </form>
+      <% } else { %>
+        <div class="text-center">
+          <!-- <button class = "editBtn">Book now!</button> -->
+          <a href="room/1" style="color: white;" class="btn editBtn">Book now!</a>
+        </div>
+
+        <% } %>
+    </div>
+    </div>
+    <form method="post" id="editor" action="/guest/update" style="visibility: hidden;">
+      <input type="text" style="visibility: hidden;" name="firstName" id="efn" class="hidden">
+      <input type="text" style="visibility: hidden;" name="lastName" id="eln" class="hidden">
+      <input type="email" style="visibility: hidden;" name="email" id="ee" class="hidden">
+      <input type="text" style="visibility: hidden;" name="phoneNumber" id="ep" class="hidden">
+      <input type="text" style="visibility: hidden;" name="address" id="ea" class="hidden">
+
+    </form>
     </div>
   </section>
   <script src="/JS/edit.js"></script>
