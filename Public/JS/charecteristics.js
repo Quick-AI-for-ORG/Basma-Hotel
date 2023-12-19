@@ -16,13 +16,13 @@ function addCharacteristicsRow() {
 
   // Insert form controls inside the grid columns
   cell1.innerHTML =
-    '<input type="text" class="form-control"  placeholder="Characteristic">';
+    '<input type="text" class="form-control" placeholder="Characteristic">';
   cell2.innerHTML =
-    '<input type="text" class="form-control"  style="font-size: large;" placeholder="Icon">';
+    '<input type="text" class="form-control" style="font-size: large;" placeholder="Icon">';
   cell3.innerHTML =
     '<div class="btn-group d-flex justify-content-center"" role="group">' +
     '<button class="btn btn-primary" style="margin-right: 10px;" onclick="toggleReadOnly(this)">Edit</button>' +
-    '<button class="btn btn-danger" onclick="deleteRoomRow(this)">Delete</button>' +
+    '<button class="btn btn-danger" onclick="deleteCharacteristicRow(this)">Delete</button>' +
     "</div>";
 
   document.getElementById("saveButtonContainer").style.cssText =
@@ -35,13 +35,22 @@ function saveCharacteristicRow() {
     .getElementsByTagName("tbody")[0];
   var lastRow = table.rows[table.rows.length - 1];
 
-  var characteristic = lastRow.cells[0].querySelector("input").value; // Corrected attribute name
-  var icon = lastRow.cells[1].querySelector("input").value;
+  var characteristic = lastRow.cells[0].querySelector("input").value;
+  var iconInput = lastRow.cells[1].querySelector("input");
+  var icon = iconInput.value;
 
   if (characteristic && icon) {
     console.log("Saving Characteristics data:");
-    console.log("Characteristic: " + characteristic); // Corrected variable name
-    console.log("icon: " + icon);
+    console.log("Characteristic: " + characteristic);
+    console.log("Icon: " + icon);
+
+    // Create a new <i> element
+    var iconElement = document.createElement("i");
+    iconElement.className = "fa-solid fa-" + icon;
+
+    // Replace the content of the <td> with the <i> element
+    lastRow.cells[1].innerHTML = "";
+    lastRow.cells[1].appendChild(iconElement);
 
     document.getElementById("saveButtonContainer").style.display = "none";
 

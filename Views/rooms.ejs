@@ -28,7 +28,8 @@
             <div class="container">
                 <div class="row justify-content-end mb-3">
                     <div class="col-auto">
-                        <button class="btn btn-success" onclick="addRoomRow()">Add Room</button>
+                        <button class="btn btn-success" onclick="addRoomRow(`<%= JSON.stringify(characteristics) %>`)">Add Room</button>
+
                     </div>
                     <div class="col-auto" id="saveButtonContainer" style="display: none;">
                         <button class="btn btn-primary" onclick="saveRoomRow()">Save</button>
@@ -72,12 +73,12 @@
                                     </td>
                                     <td>
                                         <div class="dropdown-container">
-                                            <select class="form-control dropdown-content">
+                                            <select class="form-control dropdown-content" multiple>
                                                 <% for (let j=0; j < rooms[i].characteristics.length; j++) { %>
-                                                    <option
-                                                        value="<%= rooms[i].characteristics[j].characteristic %>">
+                                                    <option value="<%= rooms[i].characteristics[j].characteristic %>">
                                                         <%= rooms[i].characteristics[j].characteristic %>
                                                     </option>
+
                                                     <% } %>
                                             </select>
                                         </div>

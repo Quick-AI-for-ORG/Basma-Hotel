@@ -81,6 +81,7 @@ const rooms = async (req, res) => {
       layout: false,
       user: req.session.user,
       rooms: await ctrlRooms.admin.getRoomsAndCharacteristics(req, res) || [],
+      characteristics: await ctrlCharacteristics.admin.getCharacteristics(req,res) || []
     });
   }
   else res.redirect("/user/login")
