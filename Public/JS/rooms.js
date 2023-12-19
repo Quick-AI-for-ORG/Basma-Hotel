@@ -169,12 +169,8 @@ function toggleReadOnly(button) {
     input.readOnly = !input.readOnly;
   });
 
-  // Toggle the dropdown between readonly and editable
-  var select = row.querySelector("select");
-  select.disabled = !select.disabled;
-
   // Change the button text and class
-  if (button.textContent === "Edit") {
+  if (button.textContent == "Edit") {
     button.textContent = "Save";
     button.classList.remove("btn-primary");
     button.classList.add("btn-success");
@@ -184,8 +180,8 @@ function toggleReadOnly(button) {
     button.classList.add("btn-primary");
   }
 
-  // Show or hide the save button container
-  // document.getElementById("saveButtonContainer").style.display = "block";
+  // Show or hide the Save button container
+  enableSaveButton();
 }
 
 function saveRoomRow() {
