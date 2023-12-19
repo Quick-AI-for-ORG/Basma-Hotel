@@ -18,8 +18,8 @@ class Option {
     this.id = Option.generateID()+1;
     await Option.crudInterface.create(this,optionModel,"id") 
   }
-  static async modify(option,newOption){
-    const record = await Option.crudInterface.modify(option,newOption,optionModel,"option") 
+  static async modify(id,newOption){
+    const record = await Option.crudInterface.modify(id,newOption,optionModel,"id") 
     let modifiedOption = new Option(record)
     modifiedOption.id = record.id
     return modifiedOption

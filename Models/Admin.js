@@ -54,9 +54,8 @@ class Admin extends Staff{
       return room
     }
     async modifyOption(id,optionJSON){
-      let option = await Option.get(id)
-      await option.modify(optionJSON)
-      return option
+      await Option.modify(id,optionJSON)
+      return true
     }
     async modifyCharacteristic(key,characteristicJSON){
       let characteristic = await Characteristic.get(key)

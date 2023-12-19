@@ -61,6 +61,11 @@ function toggleReadOnly(button) {
     var input = cells[i].querySelector("input");
     input.readOnly = !input.readOnly;
   }
+  button.style.display = 'none';
+  var saveButton = row.querySelector('.btn-success');
+  if (saveButton) {
+    saveButton.style.display = 'block';
+  }
 }
 
 function makeFieldsReadOnly(cells) {
