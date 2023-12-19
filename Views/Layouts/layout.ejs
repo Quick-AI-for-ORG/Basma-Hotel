@@ -5,71 +5,75 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <style>
-     
-      .navbar-brand {
-          display: flex;
-          align-items: center;
-      }
-
+  <style>
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+    }
   </style>
+  <link rel="icon" href="/IMAGES/download-removebg-preview.png" type=" image/png">
 </head>
+
 <body>
 
-<nav class="navbar navbar-expand-lg fixed-top bg-light navbar-light">
-  <div class="container">
+  <nav class="navbar navbar-expand-lg fixed-top bg-light navbar-light">
+    <div class="container">
       <a class="navbar-brand" href="/">
-          <span class="mb-3">Basma Hotel Aswan</span>
-          <img id="MDB-logo" src="/IMAGES/download-removebg-preview.png" alt="Basma Hotel Logo" draggable="false" height="50" />
+        <span class="mb-3">Basma Hotel Aswan</span>
+        <img id="MDB-logo" src="/IMAGES/download-removebg-preview.png" alt="Basma Hotel Logo" draggable="false"
+          height="50" />
       </a>
-      <% if(rooms != null){ %>
+      <% if(rooms !=null){ %>
 
 
         <div class="col-3 ms-5">
-          <input onkeyup="search(this)" class="form-control ms-3" type="search" name="search" placeholder="Search" aria-label="Search">
-      </div>
-      <div id="searchResults" class="position-absolute p-2 bg-white border">
-          
-      </div>      
-      <%}%>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
+          <input onkeyup="search(this)" class="form-control ms-3" type="search" name="search" placeholder="Search"
+            aria-label="Search">
+        </div>
+        <div id="searchResults" class="position-absolute p-2 bg-white border">
 
-      <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto align-items-center">
+        </div>
+        <%}%>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
               <li class="nav-item">
-                  <a class="nav-link mx-2" href="/room"><i class="fa-solid fa-hotel pe-2"></i>Rooms</a>
+                <a class="nav-link mx-2" href="/room"><i class="fa-solid fa-hotel pe-2"></i>Rooms</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link mx-2" href="/facilities"><i class="fas fa-utensils pe-2"></i>Facilities</a>
+                <a class="nav-link mx-2" href="/facilities"><i class="fas fa-utensils pe-2"></i>Facilities</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link mx-2" href="/aboutus"><i class="fas fa-circle-info pe-2"></i>About Us</a>
+                <a class="nav-link mx-2" href="/aboutus"><i class="fas fa-circle-info pe-2"></i>About Us</a>
               </li>
               <% if (user) { %>
-              <li class="nav-item ms-3">
-                  <a id= "in" class="btn btn-dark rounded-pill" href="/user"><i class="fas fa-user pe-2"></i>My Profile</a>
-              </li>
-              <li class="nav-item ms-3">
-                  <a id= "up" class="btn rounded-pill"" href="/user/logout"><i class="fas fa-sign-out-alt pe-2"></i>Logout</a>
-              </li>
-              <% } else { %>
-              <li class="nav-item ms-3">
-                  <a id="in" class="btn btn-dark rounded-pill" href="/user/login">Sign in</a>
-              </li>
-              <li class="nav-item ms-3">
-                  <a id="up" class="btn rounded-pill" href="/user/signup">Sign up</a>
-              </li>
-              <% } %>
-          </ul>
-      </div>
-  </div>
-</nav>
+                <li class="nav-item ms-3">
+                  <a id="in" class="btn btn-dark rounded-pill" href="/user"><i class="fas fa-user pe-2"></i>My
+                    Profile</a>
+                </li>
+                <li class="nav-item ms-3">
+                  <a id="up" class="btn rounded-pill"" href=" /user/logout"><i
+                      class="fas fa-sign-out-alt pe-2"></i>Logout</a>
+                </li>
+                <% } else { %>
+                  <li class="nav-item ms-3">
+                    <a id="in" class="btn btn-dark rounded-pill" href="/user/login">Sign in</a>
+                  </li>
+                  <li class="nav-item ms-3">
+                    <a id="up" class="btn rounded-pill" href="/user/signup">Sign up</a>
+                  </li>
+                  <% } %>
+            </ul>
+          </div>
+    </div>
+  </nav>
 
-<!-- Include Bootstrap JS and Popper.js (if needed) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Include Bootstrap JS and Popper.js (if needed) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/JS/toggle.js"></script>
   <!-- Navbar -->
   <%-body%>
