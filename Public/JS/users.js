@@ -120,26 +120,6 @@ function deleteGuestRow(button) {
   enableSaveButton();
 }
 
-// function toggleReadOnly(button) {
-//   var row = button.closest("tr");
-//   var cells = row.cells;
-
-//   for (var i = 0; i < cells.length - 1; i++) {
-//     var input = cells[i].querySelector("input");
-//     input.readOnly = !input.readOnly;
-//   }
-
-//   // Show the Save button container
-//   enableSaveButton();
-// }
-
-// function makeFieldsReadOnly(cells) {
-//   for (var i = 0; i < cells.length - 1; i++) {
-//     var input = cells[i].querySelector("input");
-//     input.readOnly = true;
-//   }
-// }
-
 function enableSaveButton() {
   var table = document.getElementById("guestTable");
   var rows = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
