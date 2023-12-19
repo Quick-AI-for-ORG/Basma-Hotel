@@ -55,7 +55,8 @@
                                             <form method="post" action="/admin/modifyOption" >
                                                 <input type="hidden" name="option" value="<%= option.option %>" >  
                                                 <input type="hidden" class="form-control" value="<%= option.price %>">
-                                            <button type ='submit' class="btn btn-primary" style="margin-right: 10px;"
+                                                </form>
+                                            <button  onclick="toggleReadOnly(this)"class="btn btn-primary" style="margin-right: 10px;"
                                                 onclick="toggleReadOnly(this)">Edit</button>
                                                 <form method="post" action="/admin/removeOption" >
                                                     <input type="hidden" name="option" value="<%= option.option %>" >

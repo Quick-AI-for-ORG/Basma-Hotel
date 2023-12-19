@@ -10,6 +10,7 @@ const askQuestion = async (req, res) => {
         email: req.body.email
       }
       await guest.askQuestion(questionJSON)
+      res.redirect('/')
     }
     else res.redirect('/user')
 }

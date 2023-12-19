@@ -11,7 +11,7 @@ const GAR = {
     },
     remove: async function(primaryKey,model,compareKey, addition, additionKey){
         const whereClause = {[compareKey]: primaryKey, [additionKey]: addition}
-        await reservationOptionModel.destroy({where : whereClause})
+        await model.destroy({where : whereClause})
     }
 }
 module.exports = GAR

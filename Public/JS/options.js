@@ -69,3 +69,4 @@ function makeFieldsReadOnly(cells) {
     input.readOnly = true;
   }
 }
+

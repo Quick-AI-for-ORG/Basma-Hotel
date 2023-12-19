@@ -15,7 +15,7 @@ class Question {
       return await questionModel.max('id')
   }
   async create(){ 
-    this.id = Question.generateID()+1
+    this.id = await Question.generateID()+1
     await Question.crudInterface.create(this,questionModel,"id") 
   }
   static async getAll(){ 

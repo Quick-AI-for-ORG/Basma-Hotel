@@ -114,7 +114,15 @@ const cancelReservation = async(req,res)=>{
         else res.redirect("/user")
     }
 
+    const getReservationsAndOptions = async (req, res) => {
+        const reservations = await getReservations(req,res)
+        for(let i = 0; i < reservations.length; i++) {
+            reservations[i].options = await reservations[i].getReservationOptions()
+        }
+        return reservations
+    }
+
     module.exports = {
         guest: {reserve  , getUserReservations , cancelReservation ,checkAvailability, modifyReservationOptions, getUserReservationOptions ,sessionedReservation,confirmReservation},
-        staff: {getReservations, removeReservation}
+        staff: {getReservations, removeReservation,getReservationsAndOptions}
     }

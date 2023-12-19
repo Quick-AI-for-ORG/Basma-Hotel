@@ -40,7 +40,7 @@ const dashboard = async (req, res) => {
   res.render("dashboard", {
     layout: false,
     user: req.session.user ,
-    reservations: await ctrlReservations.staff.getReservations(req, res) || [],
+    reservations: await ctrlReservations.staff.getReservationsAndOptions(req, res) || [],
     users: await ctrlUsers.admin.getAllUsers(req, res) || [],
   });
   }

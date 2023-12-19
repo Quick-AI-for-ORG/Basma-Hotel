@@ -78,7 +78,7 @@
                 <div class="reservations-inner">
                     <header class="reservations-header">
                         <div class="title">Ongoing Booking</div>
-                        <div class="count">| <%- ongoing %> Bookings</div>
+                        <div class="count">| <%=ongoing %> Bookings</div>
                         <i class="zmdi zmdi-download"></i>
                     </header>
                     <table class="projects-table">
@@ -104,11 +104,9 @@
                                     <td><input type="text" class="form-control" value="<%= reservation.guestEmail %>"
                                             readonly></td>
 
-                                    <td><input type="text" class="form-control" value="<%= reservation.startDate %>"
+                                    <td><input type="text" class="form-control" value="<%= reservation.arrivalDate %>"
                                             readonly></td>
-                                    <td><input type="text" class="form-control" value="<%= reservation.endDate %>"
-                                            readonly></td>
-                                    <td><input type="text" class="form-control" value="<%= reservation.roomTitle %>"
+                                    <td><input type="text" class="form-control" value="<%= reservation.departureDate %>"
                                             readonly></td>
                                     <td><input type="text" class="form-control" value="<%= reservation.price %>"
                                             readonly></td>
