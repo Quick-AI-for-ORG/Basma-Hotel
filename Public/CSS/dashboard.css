@@ -385,3 +385,7 @@ tr:hover {
   font-size: 24px;
   color: #007bff;
 }
+
+::-webkit-scrollbar {
+  visibility: hidden;
+}

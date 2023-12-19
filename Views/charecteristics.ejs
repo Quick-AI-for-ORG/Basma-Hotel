@@ -64,13 +64,14 @@
                                     <td>
                                         <div class="btn-group d-flex justify-content-center" role="group"
                                             style="width: 100%;">
-                                            <button class="btn btn-primary mx-2"
-                                                onclick="toggleReadOnly(this)">Edit</button>
-                                                <form action="/admin/removeCharacteristic" method="post">
-                                                    <input type="hidden"name="characteristic" value="<%= characteristics[i].characteristic %>">
-                                                    <button class="btn btn-danger mx-2"
-                                                type="submit">Delete</button>
-                                                </form>
+                                            <!-- Update the "onclick" attribute to call "toggleEditMode" instead of "toggleReadOnly" -->
+<button class="btn btn-primary btn-edit" style="margin-right: 10px;" onclick="toggleEditMode(this)">Edit</button>
+
+                                            <form action="/admin/removeCharacteristic" method="post">
+                                                <input type="hidden" name="characteristic"
+                                                    value="<%= characteristics[i].characteristic %>">
+                                                <button class="btn btn-danger mx-2" type="submit">Delete</button>
+                                            </form>
                                         </div>
                                     </td>
 
