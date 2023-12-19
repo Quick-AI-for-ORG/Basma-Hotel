@@ -47,10 +47,10 @@ const dashboard = async (req, res) => {
 };
 const users = async (req, res) => {
   if(req.session.user != null && req.session.user.role =="Admin"){
-    res.render("guests", {
+    res.render("users", {
       layout: false,
       user: req.session.user,
-      guests: await ctrlUsers.admin.getAllUsers(req, res) || [],
+      users: await ctrlUsers.admin.getAllUsers(req, res) || [],
     })
   }
     else if (req.session.user != null && req.session.user.role =="Staff"){
