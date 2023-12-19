@@ -83,7 +83,7 @@ function saveGuestRow() {
     form.appendChild(input4);
     var input5 = document.createElement('input');
     input5.type = 'hidden';
-    input5.name = 'phone';
+    input5.name = 'phoneNumber';
     input5.value = phone; 
     form.appendChild(input5);
     var input6 = document.createElement('input');

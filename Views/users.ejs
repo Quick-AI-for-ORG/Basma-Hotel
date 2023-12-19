@@ -71,8 +71,10 @@
                                         <div class="btn-group" role="group">
                                             <button class="btn btn-primary" style="margin-right: 10px;"
                                                 onclick="toggleReadOnly(this)">Edit</button>
-                                            <button class="btn btn-danger"
-                                                onclick="deleteGuestRow(this)">Delete</button>
+                                                <form method="post" action="/admin/removeUser" >
+                                                    <input type="hidden" name="email" value="<%= guest.email %>" >
+                                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                                </form>
                                         </div>
                                     </td>
                                 </tr>

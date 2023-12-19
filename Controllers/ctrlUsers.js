@@ -102,7 +102,7 @@ const addUsers = async (req, res) => {
     }
     const admin = new Admin(await User.get(req.session.user.email))
     await admin.addUser(userJSON);
-    res.redirect('/user/guests')
+    res.redirect('/admin/users')
   }
   else res.redirect('/user/login')
 }
@@ -111,7 +111,7 @@ const removeUsers = async(req,res) =>{
   if(req.session.user != null && req.session.user.role == "Admin"){
     const admin = new Admin(await User.get(req.session.user.email))
     await admin.removeUser(req.body.email)
-    res.redirect('/admin/guests')
+    res.redirect('/admin/users')
 
   }
   else res.redirect('/user/login')
@@ -130,7 +130,7 @@ const modifyUsers = async(req,res) =>{
     }
     const admin = new Admin(await User.get(req.session.user.email))
     await admin.modifyUser(req.body.email,userJSON)
-    res.redirect('/admin/guests')
+    res.redirect('/admin/users')
 
   }
   else res.redirect('/user/login')
