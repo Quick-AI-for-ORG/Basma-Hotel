@@ -1,12 +1,35 @@
+body {
+  background-image: url("/IMAGES/closeup-shot-ganet-sinai-resort-dahab-egypt-sunny-day.jpg");
+  background-size: cover;
+  background-position: center;
+  /* width: 95vw; */
+  height: 90vh;
+  margin: 0;
+  background-repeat: no-repeat;
+}
+
+.card {
+  background-color: white;
+}
+
 .buttonContainer {
   display: flex;
-  justify-content: space-between; /* This will place the buttons at each end of the container */
+  justify-content: space-between;
   width: 100%;
+}
+
+.breadcrumb-item a {
+  text-decoration: none;
+  color: #8213c2;
+  transition: color 0.5s;
+}
+.breadcrumb-item a:hover {
+  text-decoration: none;
+  color: #3e0160;
 }
 
 .editBtn,
 .deleteBtn {
-  /* Adjust the width as needed, leave some space for spacing */
   background-color: #8213c2;
   color: #ffffff;
   border: none;
@@ -34,8 +57,7 @@
   background-color: #940303;
 }
 
-.editLogo
-{
+.editLogo {
   width: 20px;
   height: 20px;
   margin-left: 15px;
@@ -55,5 +77,5 @@
   }
 }
 body {
-    animation: fadeIn 1.5s ease-in-out; /* Adjust duration as needed */
-  }
+  animation: fadeIn 1.5s ease-in-out; /* Adjust duration as needed */
+}
