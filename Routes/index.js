@@ -4,6 +4,7 @@ const pages = require("../Controllers/Pages");
 const questions = require("../Controllers/ctrlQuestions");
 
 router.get("/", pages.public.basma);
+router.get("/chat", pages.public.chat);
 router.get("/aboutus", pages.public.about);
 router.get("/facilities", pages.public.facilities);
 router.get("/privacyPolicy", pages.public.privacy);

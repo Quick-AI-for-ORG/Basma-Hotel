@@ -1,0 +1,112 @@
+/* start chat */
+.chatx button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.chat-btnx {
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  background: dodgerblue;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+}
+.chat-btnx:hover,
+.submit:hover,
+#emoji-btn:hover {
+  opacity: 1;
+}
+.chat-popupx {
+  z-index: 999; /* Adjust the z-index to ensure the chat is above other elements */
+  display: none;
+  position: fixed;
+  bottom: 80px;
+  right: 120px;
+  height: 400px;
+  width: 300px;
+  background-color: white;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.75rem;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+}
+.show {
+  display: flex;
+}
+.chat-areax {
+  height: 80%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.income-msgx {
+  display: flex;
+  align-items: center;
+}
+.avatarx {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.income-msgx .msgx {
+  background-color: dodgerblue;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 25px;
+  margin-left: 1rem;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+.input-areax {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.input-areax input[type="text"] {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  border-radius: 5px;
+  height: 2.2rem;
+}
+.submit {
+  padding: 0.25rem 0.5rem;
+  margin-left: 0.5rem;
+  background-color: green;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  opacity: 0.7;
+}
+.out-msgx {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.my-msgx {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0.75rem;
+  padding: 0.5rem;
+  background-color: #ddd;
+  border-radius: 25px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  word-break: break-all;
+}
+@media (max-width: 500px) {
+  .chat-popupx {
+    bottom: 120px;
+    right: 10%;
+    width: 80vw;
+  }
+}
+/* end chat */

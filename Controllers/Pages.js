@@ -65,48 +65,54 @@ const users = async (req, res) => {
 }
 
 const options = async (req, res) => {
-  if(req.session.user != null && (req.session.user.role =="Admin" || req.session.user.role =="Staff")){
-  res.render("options", {
-    layout: false,
-    user: req.session.user,
-    options: await ctrlOptions.admin.getOptions(req, res) || [ ],
-  });
-}
-else res.redirect("/user/login")
-
+  if (
+    req.session.user != null &&
+    (req.session.user.role == "Admin" || req.session.user.role == "Staff")
+  ) {
+    res.render("options", {
+      layout: false,
+      user: req.session.user,
+      options: (await ctrlOptions.admin.getOptions(req, res)) || [],
+    });
+  } else res.redirect("/user/login");
 };
 
 const rooms = async (req, res) => {
-  if(req.session.user != null && (req.session.user.role =="Admin" || req.session.user.role =="Staff")){
+  if (
+    req.session.user != null &&
+    (req.session.user.role == "Admin" || req.session.user.role == "Staff")
+  ) {
     res.render("rooms", {
       layout: false,
       user: req.session.user,
-      rooms: await ctrlRooms.admin.getRoomsAndCharacteristics(req, res) || [],
-      characteristics: await ctrlCharacteristics.admin.getCharacteristics(req,res) || []
+      rooms: (await ctrlRooms.admin.getRoomsAndCharacteristics(req, res)) || [],
+      characteristics:
+        (await ctrlCharacteristics.admin.getCharacteristics(req, res)) || [],
     });
-  }
-  else res.redirect("/user/login")
+  } else res.redirect("/user/login");
 };
 const characteristics = async (req, res) => {
-  if(req.session.user != null && req.session.user.role =="Admin" ){
+  if (req.session.user != null && req.session.user.role == "Admin") {
     res.render("charecteristics", {
       layout: false,
       user: req.session.user,
-      characteristics: await ctrlCharacteristics.admin.getCharacteristics(req, res) || []
+      characteristics:
+        (await ctrlCharacteristics.admin.getCharacteristics(req, res)) || [],
     });
-  }
-  else res.redirect("/user/login")
+  } else res.redirect("/user/login");
 };
 
 const questions = async (req, res) => {
-  if(req.session.user != null && (req.session.user.role =="Admin" || req.session.user.role =="Staff")){
+  if (
+    req.session.user != null &&
+    (req.session.user.role == "Admin" || req.session.user.role == "Staff")
+  ) {
     res.render("questions", {
       layout: false,
       user: req.session.user,
-      questions: await ctrlQuestion.staff.getQuestions(req, res) || []
+      questions: (await ctrlQuestion.staff.getQuestions(req, res)) || [],
     });
-  }
-  else res.redirect("/user/login")
+  } else res.redirect("/user/login");
 };
 
 const myProfile = async (req, res) => {
@@ -165,28 +171,35 @@ const covid = (req, res) => {
     user: req.session.user === undefined ? "" : req.session.user,
   });
 };
+const chat = (req, res) => {
+  res.render("chat", {
+    rooms: null,
+    user: req.session.user === undefined ? "" : req.session.user,
+    layout: false,
+  });
+};
 const logout = (req, res) => {
   if (req.session.user !== undefined) req.session.destroy();
   res.redirect("/");
 };
 
 const booking = async (req, res) => {
- let records = await ctrlOptions.admin.getOptions(req, res)
-    if (req.session.user !== undefined)
-      res.render("booking", {
-        user: req.session.user,
-        roomTitle: req.body.roomTitle,
-        arrivalDate: req.body.arrivalDate,
-        departureDate: req.body.departureDate,
-        options: records=== null ? "" :records,
-        rooms: null
-      });
-    else res.redirect("/user/login");
+  let records = await ctrlOptions.admin.getOptions(req, res);
+  if (req.session.user !== undefined)
+    res.render("booking", {
+      user: req.session.user,
+      roomTitle: req.body.roomTitle,
+      arrivalDate: req.body.arrivalDate,
+      departureDate: req.body.departureDate,
+      options: records === null ? "" : records,
+      rooms: null,
+    });
+  else res.redirect("/user/login");
 };
 
 const payment = async (req, res) => {
-  console.log("inside function")
-  if (req.session.user !== undefined){
+  console.log("inside function");
+  if (req.session.user !== undefined) {
     res.render("payment", {
       user: req.session.user,
       room: await ctrlRooms.public.sessionedRoom(req, res),
@@ -194,8 +207,7 @@ const payment = async (req, res) => {
       options: await ctrlReservations.guest.getUserReservationOptions(req, res),
       rooms: null,
     });
-  }
-  else res.redirect("/user/login");
+  } else res.redirect("/user/login");
 };
 
 module.exports = {
@@ -207,12 +219,11 @@ module.exports = {
     covid,
     viewRooms,
     viewRoom,
+    chat,
   },
 
-  user: { myProfile , logout,login, signup, },
-  guest:{booking,payment},
-  admin: { dashboard, characteristics,options },
-  staff:{users,questions,rooms}
-
-
+  user: { myProfile, logout, login, signup, chat },
+  guest: { booking, payment },
+  admin: { dashboard, characteristics, options },
+  staff: { users, questions, rooms },
 };

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/CSS/chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <section class="chatx">
+        <button class="chat-btnx">
+            <i class="fa-solid fa-comment"></i>
+        </button>
+        <div class="chat-popupx">
+            <div class="chat-areax"></div>
+            <div class="input-areax">
+                <input type="text" />
+                <button class="submit"><i class="fa-solid fa-reply"></i></button>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
+
+<script>
+    const apiKey = "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";
+    async function sendMessage(message) {
+        const response = await fetch(
+            "https://api.openai.com/v1/chat/completions", //Api endpoint url
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${apiKey}`, //This header is used for authentication and authorizing access to the ChatGPT API.
+                },
+                body: JSON.stringify({
+                    model: "gpt-3.5-turbo", // or any other model you prefer
+                    messages: [
+                        { role: "system", content: "You are" }, //This is the initial system message to set the context for the conversation
+                        { role: "user", content: message },
+                    ],
+                }),
+            }
+        );
+        const data = await response.json();
+        return data.choices[0].message.content;
+    }
+
+    //start chat
+    const popup = document.querySelector(".chat-popupx");
+    const chatBtn = document.querySelector(".chat-btnx");
+    const submitBtn = document.querySelector(".submit");
+    const chatArea = document.querySelector(".chat-areax");
+    const inputElm = document.querySelector(".input-areax input");
+
+    chatBtn.addEventListener("click", () => {
+        popup.classList.toggle("show");
+    });
+
+    submitBtn.addEventListener("click", async () => {
+        let userInput = inputElm.value;
+
+        let temp = `<div class="out-msgx">
+                  <span class="my-msgx">${userInput}</span>
+                  <img src="<%= user.profilePic %>" class="avatarx">
+                  </div>`;
+
+        chatArea.insertAdjacentHTML("beforeend", temp);
+        inputElm.value = "";
+
+        let chatGptMessage = await sendMessage(userInput);
+        let temp2 = `<div class="income-msgx">
+                  <img src="/img/default/chatgpt.jpg" class="avatarx">
+                  <span class="msgx">${chatGptMessage}</span>
+                  </div>`;
+
+        chatArea.insertAdjacentHTML("beforeend", temp2);
+    });
+    //end chat
+
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
