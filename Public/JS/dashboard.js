@@ -1,4 +1,4 @@
-function addReservationRow() {
+function addReservationRow(optionst) {
   var tableBody = document.querySelector(".projects-table tbody");
 
   var newRow = tableBody.insertRow();
@@ -14,12 +14,91 @@ function addReservationRow() {
     "Payment Status",
     "Options",
   ];
+  const options = JSON.parse(optionst)
   for (var i = 0; i < placeholders.length; i++) {
     var cell = newRow.insertCell(i);
-    cell.innerHTML =
-      '<input type="text" class="form-control" placeholder="' +
-      placeholders[i] +
-      '">';
+    if(placeholders[i]=="Options"){
+      var selectElement = document.createElement("select");
+      selectElement.name = "options";
+      selectElement.classList.add("form-control", "dropdown-content");
+      selectElement.multiple = true;
+      for (var j = 0; j < options.length; j++) {
+        var optionElement = document.createElement("option");
+        optionElement.value = options[j].option;
+        optionElement.textContent = options[j].option;
+        selectElement.appendChild(optionElement);
+      }
+      cell.appendChild(selectElement);
+      continue;
+    }
+    if(placeholders[i]=="Payment Status"){
+      var selectElement = document.createElement("select");
+      selectElement.classList.add("form-control", "dropdown-content");
+      selectElement.multiple = false;
+      var optionElement = document.createElement("option");
+      optionElement.value = "Paid";
+      optionElement.textContent = "Paid";
+      selectElement.appendChild(optionElement);
+      optionElement = document.createElement("option");
+      optionElement.value = "Not Paid";
+      optionElement.textContent = "Not Paid";
+      selectElement.appendChild(optionElement);
+      cell.appendChild(selectElement);
+      selectElement.name = "paid";
+      continue;
+    }
+    if(placeholders[i]== "Arrival Date" ){
+      var input = document.createElement("input");
+      input.type = "date";
+      input.name = "arrivalDate";
+      input.classList.add("form-control");
+      cell.appendChild(input);
+      continue;
+    }
+    if(placeholders[i]== "Departure Date" ){
+      var input = document.createElement("input");
+      input.type = "date";
+      input.name = "departureDate";
+      input.classList.add("form-control");
+      cell.appendChild(input);
+      continue;
+    }
+    if(placeholders[i]=="Price"){
+     cell.innerHTML = "Automatically Calculated"
+    }
+    if(placeholders[i]=="Adults"){
+      var input = document.createElement("input");
+      input.type = "number";
+      input.name = "numberOfAdults";
+      input.classList.add("form-control");
+      cell.appendChild(input);
+      continue;
+    }
+    if(placeholders[i]=="Children"){
+      var input = document.createElement("input");
+      input.type = "number";
+      input.name = "numberOfChildren";
+      input.classList.add("form-control");
+      cell.appendChild(input);
+      continue;
+    }
+    if(placeholders[i]=="Guest Email"){
+      var input = document.createElement("input");
+      input.type = "email";
+      input.name = "guestEmail";
+      input.classList.add("form-control");
+      cell.appendChild(input);
+      continue;
+    }
+    if(placeholders[i]=="Room Title"){
+      var input = document.createElement("input");
+      input.type = "text";
+      input.name = "roomTitle";
+      input.classList.add("form-control");
+      cell.appendChild(input);
+      continue;
+    }
+   
   }
 
   var actionsCell = newRow.insertCell(placeholders.length);
@@ -70,24 +149,17 @@ function deleteReservationRow(button) {
 
 function toggleReadOnly(button) {
   var row = button.closest("tr");
-  var cells = row.cells;
 
-  for (var i = 0; i < cells.length - 1; i++) {
-    var input = cells[i].querySelector("input");
-    input.readOnly = !input.readOnly;
-  }
-
-  row.classList.toggle("edit-mode");
-
-  var editButton = row.querySelector(".btn-primary");
-  editButton.textContent = editButton.textContent === "Edit" ? "Save" : "Edit";
-}
-
-function makeFieldsReadOnly(cells) {
-  for (var i = 0; i < cells.length - 1; i++) {
-    // Exclude the last cell with buttons
-    var input = cells[i].querySelector("input");
-    input.readOnly = true;
+  var inputFields = row.querySelectorAll("input");
+  inputFields.forEach(function (input) {
+    if (input.name != "email") {
+      input.readOnly = !input.readOnly;
+    }
+  });
+  button.style.display = 'none';
+  var saveButton = row.querySelector('.btn-success');
+  if (saveButton) {
+    saveButton.style.display = 'block';
   }
 }
 
@@ -98,7 +170,7 @@ function enableSaveButton() {
   var enableSave = Array.from(rows).some((row) => {
     var cells = row.cells;
     return Array.from(cells)
-      .slice(0, -1) // Exclude the last cell with buttons
+      .slice(0, -1) 
       .some((cell) => !cell.querySelector("input").readOnly);
   });
 
