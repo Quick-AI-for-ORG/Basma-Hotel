@@ -64,9 +64,6 @@
                                     <td>
                                         <div class="btn-group d-flex justify-content-center" role="group"
                                             style="width: 100%;">
-                                            <!-- Update the "onclick" attribute to call "toggleEditMode" instead of "toggleReadOnly" -->
-<button class="btn btn-primary btn-edit" style="margin-right: 10px;" onclick="toggleEditMode(this)">Edit</button>
-
                                             <form action="/admin/removeCharacteristic" method="post">
                                                 <input type="hidden" name="characteristic"
                                                     value="<%= characteristics[i].characteristic %>">
