@@ -11,6 +11,7 @@ body {
 }
 
 .facility-card-container {
+  z-index: -1;
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
