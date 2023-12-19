@@ -120,25 +120,25 @@ function deleteGuestRow(button) {
   enableSaveButton();
 }
 
-function toggleReadOnly(button) {
-  var row = button.closest("tr");
-  var cells = row.cells;
+// function toggleReadOnly(button) {
+//   var row = button.closest("tr");
+//   var cells = row.cells;
 
-  for (var i = 0; i < cells.length - 1; i++) {
-    var input = cells[i].querySelector("input");
-    input.readOnly = !input.readOnly;
-  }
+//   for (var i = 0; i < cells.length - 1; i++) {
+//     var input = cells[i].querySelector("input");
+//     input.readOnly = !input.readOnly;
+//   }
 
-  // Show the Save button container
-  enableSaveButton();
-}
+//   // Show the Save button container
+//   enableSaveButton();
+// }
 
-function makeFieldsReadOnly(cells) {
-  for (var i = 0; i < cells.length - 1; i++) {
-    var input = cells[i].querySelector("input");
-    input.readOnly = true;
-  }
-}
+// function makeFieldsReadOnly(cells) {
+//   for (var i = 0; i < cells.length - 1; i++) {
+//     var input = cells[i].querySelector("input");
+//     input.readOnly = true;
+//   }
+// }
 
 function enableSaveButton() {
   var table = document.getElementById("guestTable");
@@ -164,4 +164,54 @@ function enableSaveButton() {
   document.getElementById("saveButtonContainer").style.display = enableSave
     ? "block"
     : "none";
+}
+
+function toggleReadOnly(button) {
+  var row = button.closest("tr");
+
+  // Toggle input fields between readonly and editable
+  var inputFields = row.querySelectorAll("input");
+  inputFields.forEach(function (input) {
+    input.readOnly = !input.readOnly;
+  });
+
+  // Change the button text and class
+  if (button.textContent == "Edit") {
+    button.textContent = "Save";
+    button.classList.remove("btn-primary");
+    button.classList.add("btn-success");
+  } else {
+    button.textContent = "Edit";
+    button.classList.remove("btn-success");
+    button.classList.add("btn-primary");
+  }
+
+  // Show or hide the Save button container
+  // enableSaveButton();
+}
+
+function saveRoomRow() {
+  // Add logic to save the changes made to the row (e.g., update data on the server)
+
+  // Toggle the input fields and dropdown back to readonly
+  var inputFields = document.querySelectorAll("#roomTable input");
+  inputFields.forEach(function (input) {
+    input.readOnly = true;
+  });
+
+  var selectFields = document.querySelectorAll("#roomTable select");
+  selectFields.forEach(function (select) {
+    select.disabled = true;
+  });
+
+  // Change the edit buttons back to their initial state
+  var editButtons = document.querySelectorAll(".btn-edit");
+  editButtons.forEach(function (button) {
+    button.textContent = "Edit";
+    button.classList.remove("btn-success");
+    button.classList.add("btn-primary");
+  });
+
+  // Hide the save button container
+  document.getElementById("saveButtonContainer").style.display = "none";
 }
