@@ -41,6 +41,7 @@ const dashboard = async (req, res) => {
     layout: false,
     user: req.session.user ,
     reservations: await ctrlReservations.staff.getReservationsAndOptions(req, res) || [],
+    options: await ctrlOptions.admin.getOptions(req, res) || [],
     users: await ctrlUsers.admin.getAllUsers(req, res) || [],
   });
   }
@@ -204,7 +205,7 @@ const payment = async (req, res) => {
       user: req.session.user,
       room: await ctrlRooms.public.sessionedRoom(req, res),
       reservation: await ctrlReservations.guest.sessionedReservation(req, res),
-      options: await ctrlReservations.guest.getUserReservationOptions(req, res),
+      options: await ctrlReservations.guest.getUserReservationOptions(req, res) || [],
       rooms: null,
     });
   } else res.redirect("/user/login");
