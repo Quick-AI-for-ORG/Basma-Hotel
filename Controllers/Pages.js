@@ -205,7 +205,7 @@ const payment = async (req, res) => {
       user: req.session.user,
       room: await ctrlRooms.public.sessionedRoom(req, res),
       reservation: await ctrlReservations.guest.sessionedReservation(req, res),
-      options: await ctrlReservations.guest.getUserReservationOptions(req, res),
+      options: await ctrlReservations.guest.getUserReservationOptions(req, res) || [],
       rooms: null,
     });
   } else res.redirect("/user/login");
