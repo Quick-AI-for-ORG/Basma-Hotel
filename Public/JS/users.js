@@ -108,7 +108,6 @@ function saveGuestRow() {
       "Please fill in all fields before saving.";
   }
 
-  // Show the Save button container
   enableSaveButton();
 }
 
@@ -149,31 +148,20 @@ function enableSaveButton() {
 function toggleReadOnly(button) {
   var row = button.closest("tr");
 
-  // Toggle input fields between readonly and editable
   var inputFields = row.querySelectorAll("input");
   inputFields.forEach(function (input) {
-    input.readOnly = !input.readOnly;
+    if (input.name != "email") {
+      input.readOnly = !input.readOnly;
+    }
   });
-
-  // Change the button text and class
-  if (button.textContent == "Edit") {
-    button.textContent = "Save";
-    button.classList.remove("btn-primary");
-    button.classList.add("btn-success");
-  } else {
-    button.textContent = "Edit";
-    button.classList.remove("btn-success");
-    button.classList.add("btn-primary");
+  button.style.display = 'none';
+  var saveButton = row.querySelector('.btn-success');
+  if (saveButton) {
+    saveButton.style.display = 'block';
   }
-
-  // Show or hide the Save button container
-  // enableSaveButton();
 }
 
 function saveRoomRow() {
-  // Add logic to save the changes made to the row (e.g., update data on the server)
-
-  // Toggle the input fields and dropdown back to readonly
   var inputFields = document.querySelectorAll("#roomTable input");
   inputFields.forEach(function (input) {
     input.readOnly = true;
@@ -184,7 +172,6 @@ function saveRoomRow() {
     select.disabled = true;
   });
 
-  // Change the edit buttons back to their initial state
   var editButtons = document.querySelectorAll(".btn-edit");
   editButtons.forEach(function (button) {
     button.textContent = "Edit";

@@ -78,7 +78,7 @@
                         <div class="count">| <%=ongoing %> Bookings</div>
                         <i class="zmdi zmdi-download"></i>
                         <div class="col-auto">
-                            <button class="btn btn-success" onclick="addReservationRow()">Add Reservation</button>
+                            <button class="btn btn-success" onclick="addReservationRow(`<%=JSON.stringify(options)%>`)">Add Reservation</button>
                         </div>
                         <div class="col-auto" id="saveButtonContainer" style="display: none;">
                             <button id="saveButton" class="btn btn-primary" onclick="saveReservationRow()">Save</button>
@@ -102,27 +102,29 @@
                         <tbody>
                             <% reservations.forEach(function(reservation) { %>
                                 <tr>
-                                    <td>
-                                        <input type="text" class="form-control" title="<%= reservation.roomTitle %>" value="<%= reservation.roomTitle %> " readonly>
+                                    
+                                    <td><%= reservation.roomTitle %>
+                                        <input type="hidden" class="form-control" title="<%= reservation.roomTitle %>" value="<%= reservation.roomTitle %> " readonly>
                                     </td> 
-                                    <td><input type="text" class="form-control" value="<%= reservation.guestEmail %>"
+                                    <td><%= reservation.guestEmail %><input type="hidden" class="form-control" value="<%= reservation.guestEmail %>"
                                             readonly></td>
-                                    <td><input type="text" class="form-control" value="<%= reservation.arrivalDate %>"
+                                    <td><%= reservation.arrivalDate.toDateString().substring(0, 16) %><input type="hidden" class="form-control" value="<%= reservation.arrivalDate %>"
                                             readonly></td>
-                                    <td><input type="text" class="form-control" value="<%= reservation.departureDate %>"
+                                    <td><%= reservation.departureDate.toDateString().substring(0, 16) %><input type="hidden" class="form-control" value="<%= reservation.departureDate %>"
                                             readonly></td>
-                                    <td><input type="text" class="form-control" value="<%= reservation.price %>"
+                                    <td><%= reservation.price %><input type="hidden" class="form-control" value="<%= reservation.price %>"
                                             readonly></td>
-                                    <td><input type="text" class="form-control"
+                                    <td><%= reservation.numberOfAdults %><input type="hidden" class="form-control"
                                             value="<%= reservation.numberOfAdults %>" readonly></td>
-                                    <td><input type="text" class="form-control"
+                                    <td><%= reservation.numberOfChildren %><input type="hidden" class="form-control"
                                             value="<%= reservation.numberOfChildren %>" readonly></td>
-                                    <td><input type="text" class="form-control" value="<%= reservation.paid %>"
+                                    <td><%= reservation.paid %><input type="hidden" class="form-control" value="<%= reservation.paid %>"
                                             readonly></td>
                                             <td>
+                                                <form action="/admin/modifyReservation" method="post">
                                                 <% if(reservation.options ){%>
                                                 <div class="dropdown-container">
-                                                    <select class="form-control dropdown-content" multiple>
+                                                    <select class="form-control dropdown-content" readonly>
                                                         <% for (let j=0; j < reservation.options.length; j++) { %>
                                                             <option value="<%= reservation.options[j].option %>">
                                                                 <%= reservation.options[j].option %>
@@ -131,11 +133,9 @@
                                                     </select>
                                                 </div>
                                                 <%} else {%><input type ="text" value="None" readonly><%}%>
+                                                
                                             </td>
                                     <td>
-                                        <div class="btn-group" role="group">
-                                            <button class="btn btn-primary" style="margin-right: 10px;"
-                                                onclick="toggleReadOnly(this)">Edit</button>
                                                 <button class="btn btn-danger" onclick="deleteReservationRow(this)">Delete</button>
                                         </div>
                                     </td>

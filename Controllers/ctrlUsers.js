@@ -124,9 +124,9 @@ const modifyUsers = async(req,res) =>{
       lastName: req.body.lastName,
       email: req.body.email,
       phoneNumber: req.body.phoneNumber,
-      password: req.body.password,
       address: req.body.address,
       role: req.body.role,
+      bio: req.body.bio
     }
     const admin = new Admin(await User.get(req.session.user.email))
     await admin.modifyUser(req.body.email,userJSON)
