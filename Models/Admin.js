@@ -64,7 +64,7 @@ class Admin extends Staff{
       return characteristic
     }
     async addUser(userJSON){
-      let user = new User(userJSON)
+      let user = new User(userJSON,userJSON.role)
       await user.create()
       return user
     }
