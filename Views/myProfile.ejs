@@ -227,17 +227,17 @@
                     </p>
                     <% reservations.forEach(reservation=> { %>
                       <% const currentDate=new Date(); %>
-                        <% if (currentDate> reservation.endDate) { %>
-                          <% const endDate=reservation.endDate.toDateString().substring(0, 16); const
-                            startDate=reservation.startDate.toDateString().substring(0.16) %>
+                        <% if (currentDate> reservation.departureDate) { %>
+                          <% const departureDate=reservation.departureDate.toDateString().substring(0, 16); const
+                            arrivalDate=reservation.arrivalDate.toDateString().substring(0.16) %>
                             <div class="container mt-4">
                               <div class="row">
                                 <div class="col-md-6 col-sm-12 mb-2 mb-md-0">
-                                  <p class="mb-1" style="font-size: .77rem;">From <%= startDate %>
+                                  <p class="mb-1" style="font-size: .77rem;">From <%= arrivalDate %>
                                   </p>
                                 </div>
                                 <div class="col-md-6 col-sm-12 text-md-end">
-                                  <p class="mb-1" style="font-size: .77rem;">To <%= endDate %>
+                                  <p class="mb-1" style="font-size: .77rem;">To <%= departureDate %>
                                   </p>
                                 </div>
                               </div>
@@ -257,17 +257,17 @@
 
                     <% reservations.forEach(reservation=> { %>
                       <% const currentDate=new Date(); %>
-                        <% if (currentDate < reservation.endDate) { %>
-                          <% const endDate=reservation.endDate.toDateString().substring(0, 16); const
-                            startDate=reservation.startDate.toDateString().substring(0.16) %>
+                        <% if (currentDate < reservation.departureDate) { %>
+                          <% const departureDate=reservation.departureDate.toDateString().substring(0, 16);
+                           const arrivalDate=reservation.arrivalDate.toDateString().substring(0.16) %>
                             <div class="container mt-4">
                               <div class="row">
                                 <div class="col-md-6 col-sm-12 mb-2 mb-md-0">
-                                  <p class="mb-1" style="font-size: .77rem;">From <%= startDate %>
+                                  <p class="mb-1" style="font-size: .77rem;">From <%= arrivalDate %>
                                   </p>
                                 </div>
                                 <div class="col-md-6 col-sm-12 text-md-end">
-                                  <p class="mb-1" style="font-size: .77rem;">To <%= endDate %>
+                                  <p class="mb-1" style="font-size: .77rem;">To <%= departureDate %>
                                   </p>
                                 </div>
                               </div>

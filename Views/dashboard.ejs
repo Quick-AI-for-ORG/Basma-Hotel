@@ -78,7 +78,7 @@
                         <div class="count">| <%=ongoing %> Bookings</div>
                         <i class="zmdi zmdi-download"></i>
                         <div class="col-auto">
-                            <button class="btn btn-success" onclick="addReservationRow(`<%=JSON.stringify(options)%>`)">Add Reservation</button>
+                            <button class="btn btn-success" onclick="addReservationRow(`<%=JSON.stringify(options)%>`,`<%=JSON.stringify(users)%>`,`<%=JSON.stringify(rooms)%>`)">Add Reservation</button>
                         </div>
                         <div class="col-auto" id="saveButtonContainer" style="display: none;">
                             <button id="saveButton" class="btn btn-primary" onclick="saveReservationRow()">Save</button>
@@ -121,9 +121,7 @@
                                             value="<%= reservation.numberOfChildren %>" readonly></td>
                                     <td><%= reservation.paid %><input type="hidden" class="form-control" value="<%= reservation.paid %>"
                                             readonly></td>
-                                            <td>
-                                                <form action="/admin/modifyReservation" method="post">
-                                                <% if(reservation.options ){%>
+                                            <td>                                                <% if(reservation.options ){%>
                                                 <div class="dropdown-container">
                                                     <select class="form-control dropdown-content" readonly>
                                                         <% for (let j=0; j < reservation.options.length; j++) { %>
@@ -137,7 +135,10 @@
                                                 
                                             </td>
                                     <td>
-                                                <button class="btn btn-danger" onclick="deleteReservationRow(this)">Delete</button>
+                                        <form action="/admin/removeReservation" method="post">
+                                            <input type="hidden" name="id" value="<%= reservation.id %>">
+                                                <button class="btn btn-danger" type="submit">Delete</button>
+                                        </form>
                                         </div>
                                     </div>
                                     </td>

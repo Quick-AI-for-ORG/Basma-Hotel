@@ -43,6 +43,7 @@ const dashboard = async (req, res) => {
     reservations: await ctrlReservations.staff.getReservationsAndOptions(req, res) || [],
     options: await ctrlOptions.admin.getOptions(req, res) || [],
     users: await ctrlUsers.admin.getAllUsers(req, res) || [],
+    rooms: await ctrlRooms.admin.getRooms(req,res) || [],
   });
   }
   else res.redirect("/user/login")

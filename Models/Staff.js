@@ -62,5 +62,10 @@ class Staff extends User{
     async getQuestions(){
         return await Question.getAll()
     }
+    async addReservation(reservationJSON){
+        let reservation = new Reservation(reservationJSON)
+        await reservation.create()
+        return reservation
+    }
 }
 module.exports = Staff

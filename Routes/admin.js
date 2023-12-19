@@ -28,6 +28,7 @@ router.post('/addUser', ctrlUsers.admin.addUsers)
 router.post('/removeUser', ctrlUsers.admin.removeUsers)
 router.post('/modifyUser', ctrlUsers.admin.modifyUsers)
 router.post('/removeReservation', ctrlReservations.staff.removeReservation)
+router.post('/addReservation', ctrlReservations.staff.addReservation)
 router.get('/*', (req, res) => {
     res.redirect('/admin')
   });

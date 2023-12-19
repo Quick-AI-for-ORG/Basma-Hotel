@@ -3,7 +3,7 @@ const Option = require("../Models/Option");
 const Room = require("../Models/Room");
 const Guest = require("../Models/Guest");
 const Staff = require("../Models/Staff");
-
+const User = require("../Models/User");
 const reserve = async (req, res) => {
   if (req.session.user === undefined || req.session.user.role != "Guest")
     res.redirect("/user/login");
@@ -134,7 +134,32 @@ const getReservationsAndOptions = async (req, res) => {
   }
   return [];
 };
-
+const addReservation = async (req, res) => {
+    if (req.session.user != null && (req.session.user.role == "Staff" || req.session.user.role == "Admin")) {
+        const room = await Room.get(req.body.roomTitle);
+            const numberOfGuests = parseInt(req.body.numberOfAdults) + parseInt(req.body.numberOfChildren);
+            if (numberOfGuests > room.capacity) {
+                res.redirect(`/room/details/${req.body.roomTitle}`);
+            }
+            let days_between_dates = Math.ceil((new Date(req.body.departureDate).getTime() - new Date(req.body.arrivalDate).getTime()) / (1000 * 60 * 60 * 24));
+        const staff = new Staff(await User.get(req.session.user.email));
+        const reservationJSON = {
+            roomTitle: req.body.roomTitle,
+            guestEmail: req.body.guestEmail,
+            arrivalDate: req.body.arrivalDate,
+            departureDate: req.body.departureDate,
+            numberOfAdults: req.body.numberOfAdults,
+            numberOfChildren: req.body.numberOfChildren,
+            price: room.startingPrice * days_between_dates,
+        };
+        let reservation = await staff.addReservation(reservationJSON);
+        const options = await Option.getAll();
+        for (let i = 0; i < options.length; i++) {
+        await reservation.addReservationOption(options[i]);
+    }
+        res.redirect("/admin");
+    }
+}
 module.exports = {
   guest: {
     reserve,
@@ -146,5 +171,5 @@ module.exports = {
     sessionedReservation,
     confirmReservation,
   },
-  staff: { getReservations, removeReservation, getReservationsAndOptions },
+  staff: { getReservations, removeReservation, getReservationsAndOptions, addReservation },
 };

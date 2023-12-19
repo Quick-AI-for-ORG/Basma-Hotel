@@ -1,4 +1,4 @@
-function addReservationRow(optionst) {
+function addReservationRow(optionst,userst,roomst) {
   var tableBody = document.querySelector(".projects-table tbody");
 
   var newRow = tableBody.insertRow();
@@ -31,6 +31,8 @@ function addReservationRow(optionst) {
   ];
 
   const options = JSON.parse(optionst);
+  const users = JSON.parse(userst);
+  const rooms = JSON.parse(roomst);
   for (var i = 0; i < placeholders.length; i++) {
     var cell = newRow.insertCell(i);
     cell.style.width = cellWidths[i];
@@ -49,24 +51,13 @@ function addReservationRow(optionst) {
       continue;
     }
     if (placeholders[i] == "Payment Status") {
-      var selectElement = document.createElement("select");
-      selectElement.classList.add("form-control", "dropdown-content");
-      selectElement.multiple = false;
-      var optionElement = document.createElement("option");
-      optionElement.value = "Paid";
-      optionElement.textContent = "Paid";
-      selectElement.appendChild(optionElement);
-      optionElement = document.createElement("option");
-      optionElement.value = "Not Paid";
-      optionElement.textContent = "Not Paid";
-      selectElement.appendChild(optionElement);
-      cell.appendChild(selectElement);
-      selectElement.name = "paid";
+      cell.innerHTML = "Not Paid";
       continue;
     }
     if (placeholders[i] == "Arrival Date") {
       var input = document.createElement("input");
       input.type = "date";
+      input.min = new Date().toISOString().split("T")[0];
       input.name = "arrivalDate";
       input.classList.add("form-control");
       cell.appendChild(input);
@@ -75,6 +66,7 @@ function addReservationRow(optionst) {
     if (placeholders[i] == "Departure Date") {
       var input = document.createElement("input");
       input.type = "date";
+      input.min = new Date().toISOString().split("T")[0];
       input.name = "departureDate";
       input.classList.add("form-control");
       cell.appendChild(input);
@@ -82,11 +74,13 @@ function addReservationRow(optionst) {
     }
     if (placeholders[i] == "Price") {
       cell.innerHTML = "Automatically Calculated";
+      continue;
     }
     if (placeholders[i] == "Adults") {
       var input = document.createElement("input");
       input.type = "number";
       input.name = "numberOfAdults";
+      input.value=1
       input.classList.add("form-control");
       cell.appendChild(input);
       continue;
@@ -94,26 +88,39 @@ function addReservationRow(optionst) {
     if (placeholders[i] == "Children") {
       var input = document.createElement("input");
       input.type = "number";
+      input.value=0
       input.name = "numberOfChildren";
       input.classList.add("form-control");
       cell.appendChild(input);
       continue;
     }
     if (placeholders[i] == "Guest Email") {
-      var input = document.createElement("input");
-      input.type = "email";
-      input.name = "guestEmail";
-      input.classList.add("form-control");
-      cell.appendChild(input);
+          var selectElement = document.createElement("select");
+          selectElement.name = "guestEmail";
+          selectElement.classList.add("form-control", "dropdown-content");
+          selectElement.multiple = false;
+          for (var j = 0; j < users.length; j++) {
+            var optionElement = document.createElement("option");
+optionElement.value = users[j].email;
+optionElement.textContent = users[j].email;
+selectElement.appendChild(optionElement);
+          }
+          cell.appendChild(selectElement);
       continue;
     }
     if (placeholders[i] == "Room Title") {
-      var input = document.createElement("input");
-      input.type = "text";
-      input.name = "roomTitle";
-      input.classList.add("form-control");
-      cell.appendChild(input);
-      continue;
+      var selectElement = document.createElement("select");
+      selectElement.name = "roomTitle";
+      selectElement.classList.add("form-control", "dropdown-content");
+      selectElement.multiple = false;
+      for (var j = 0; j < rooms.length; j++) {
+        var optionElement = document.createElement("option");
+        optionElement.value = rooms[j].title;
+        optionElement.textContent = rooms[j].title;
+        selectElement.appendChild(optionElement);
+      }
+      cell.appendChild(selectElement);
+  continue;
     }
     var tableContainer = document.querySelector(".table-container");
     tableContainer.style.maxWidth = "100%";
@@ -122,11 +129,11 @@ function addReservationRow(optionst) {
   var actionsCell = newRow.insertCell(placeholders.length);
   actionsCell.innerHTML =
     '<div class="btn-group" role="group">' +
-    '<button class="btn btn-primary btn-edit" style="margin-right: 10px;" onclick="toggleReadOnly(this)">Edit</button>' +
     '<button class="btn btn-danger" onclick="deleteReservationRow(this)">Delete</button>' +
     "</div>";
 
   document.getElementById("saveButtonContainer").style.display = "block";
+  saveReservationRow()
 }
 
 function saveReservationRow() {
@@ -137,21 +144,51 @@ function saveReservationRow() {
     .getElementsByTagName("tbody")[0];
   console.log("Table:", table);
   var lastRow = table.rows[table.rows.length - 1];
+var roomTitle = lastRow.cells[0].querySelector("select").value;
+var guestEmail = lastRow.cells[1].querySelector("select").value;
+var arrivalDate = lastRow.cells[2].querySelector("input").value;
+var departureDate = lastRow.cells[3].querySelector("input").value;
+var numberOfAdults = lastRow.cells[5].querySelector("input").value;
+var numberOfChildren = lastRow.cells[6].querySelector("input").value;
+var options = Array.from(lastRow.cells[8].querySelector("select").options).map(option => option.value);
 
-  var cells = lastRow.cells;
-  var inputValues = Array.from(cells).map(
-    (cell) => cell.querySelector("input").value
-  );
+if (roomTitle && guestEmail && arrivalDate && departureDate && numberOfAdults && numberOfChildren) {
+    var reservationForm = document.createElement('form');
+    reservationForm.style.visibility = 'hidden';
+    reservationForm.method = 'post';
+    reservationForm.action = '/admin/addReservation';
+    var formFields = {
+        'roomTitle': roomTitle,
+        'guestEmail': guestEmail,
+        'arrivalDate': arrivalDate,
+        'departureDate': departureDate,
+        'numberOfAdults': numberOfAdults,
+        'numberOfChildren': numberOfChildren,
+    };
+    for (var fieldName in formFields) {
+        if (formFields.hasOwnProperty(fieldName)) {
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = fieldName;
+            input.value = formFields[fieldName];
+            reservationForm.appendChild(input);
+        }
+    }
+    options.forEach(function (option) {
+        var checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.name = '';
+        checkbox.checked = options.includes(option);
+        checkbox.checked = true; 
+        var label = document.createElement('label');
+        label.appendChild(checkbox);
+        label.appendChild(document.createTextNode(option));
 
-  if (inputValues.every(Boolean)) {
-    console.log("Saving reservation data:");
-    inputValues.forEach((value, index) =>
-      console.log("Field " + (index + 1) + ": " + value)
-    );
-
-    makeFieldsReadOnly(cells);
-    document.getElementById("saveButtonContainer").style.display = "none";
-  } else {
+        reservationForm.appendChild(label);
+    });
+    document.body.appendChild(reservationForm);
+    reservationForm.submit()
+  }else {
     let errorMessage = document.getElementById("errorMessage");
     errorMessage.style.display = "block";
     errorMessage.style.color = "red";
