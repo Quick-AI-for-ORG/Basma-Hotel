@@ -66,8 +66,11 @@
                                             style="width: 100%;">
                                             <button class="btn btn-primary mx-2"
                                                 onclick="toggleReadOnly(this)">Edit</button>
-                                            <button class="btn btn-danger mx-2"
-                                                onclick="deleteCharacteristicRow(this)">Delete</button>
+                                                <form action="/admin/removeCharacteristic" method="post">
+                                                    <input type="hidden"name="characteristic" value="<%= characteristics[i].characteristic %>">
+                                                    <button class="btn btn-danger mx-2"
+                                                type="submit">Delete</button>
+                                                </form>
                                         </div>
                                     </td>
 

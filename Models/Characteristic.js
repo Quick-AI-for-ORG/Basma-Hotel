@@ -10,17 +10,17 @@ class Characteristic {
         this.icon = characteristicJSON.icon;
     }
      async create(){ 
-        await Characteristic.crudInterface.create(this,characteristicModel,"Characteristic") 
+        await Characteristic.crudInterface.create(this,characteristicModel,"characteristic") 
     }
     static async modify(characteristic,newCharacteristic){
-        return new Characteristic(await Characteristic.crudInterface.modify(characteristic,newCharacteristic,characteristicModel,"Characteristic"))
+        return new Characteristic(await Characteristic.crudInterface.modify(characteristic,newCharacteristic,characteristicModel,"characteristic"))
     }
     static async remove(characteristic){
-        await Characteristic.crudInterface.remove(characteristic,characteristicModel,"Characteristic") 
+        await Characteristic.crudInterface.remove(characteristic,characteristicModel,"characteristic") 
         return null
     }
     static async get(characteristic){
-        return new Characteristic( await Characteristic.crudInterface.get(characteristic,characteristicModel,"Characteristic") )
+        return new Characteristic( await Characteristic.crudInterface.get(characteristic,characteristicModel,"characteristic") )
     }
     static async getAll(){
         const records = await Characteristic.crudInterface.getAll(characteristicModel) 

@@ -58,7 +58,6 @@ function toggleReadOnly(button) {
   var cells = row.cells;
 
   for (var i = 0; i < cells.length - 1; i++) {
-    // Change from cells.length - 2 to cells.length - 1
     var input = cells[i].querySelector("input");
     input.readOnly = !input.readOnly;
   }

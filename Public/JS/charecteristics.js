@@ -40,23 +40,23 @@ function saveCharacteristicRow() {
   var icon = iconInput.value;
 
   if (characteristic && icon) {
-    console.log("Saving Characteristics data:");
-    console.log("Characteristic: " + characteristic);
-    console.log("Icon: " + icon);
-
-    // Create a new <i> element
-    var iconElement = document.createElement("i");
-    iconElement.className = "fa-solid fa-" + icon;
-
-    // Replace the content of the <td> with the <i> element
-    lastRow.cells[1].innerHTML = "";
-    lastRow.cells[1].appendChild(iconElement);
-
-    document.getElementById("saveButtonContainer").style.display = "none";
-
-    makeFieldsReadOnly(lastRow.cells);
-
     document.getElementById("errorMessage").innerHTML = "";
+    var form = document.createElement('form');
+    form.style.visibility = 'hidden';
+    form.method = 'post';
+    form.action = '/admin/addCharacteristic';
+    var input1 = document.createElement('input');
+    input1.type = 'hidden';
+    input1.name = 'characteristic';
+    input1.value = characteristic; 
+    form.appendChild(input1);
+    var input2 = document.createElement('input');
+    input2.type = 'hidden';
+    input2.name = 'icon';
+    input2.value = "fa-solid fa-" + icon;
+    form.appendChild(input2);
+    document.body.appendChild(form);
+    form.submit();
   } else {
     document.getElementById("errorMessage").innerHTML =
       "Please fill in all fields before saving.";
