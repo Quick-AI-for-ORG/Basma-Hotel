@@ -27,6 +27,10 @@ class User {
        await User.crudInterface.remove(this.email,userModel,"email") 
        return null;
     }
+    static async remove(email){
+      await User.crudInterface.remove(email,userModel,"email") 
+      return null;
+   }
     static async get(email){
       const user = await User.crudInterface.get(email,userModel,"email")
       if(user) return new User(user,user.role) 

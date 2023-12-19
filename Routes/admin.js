@@ -10,7 +10,7 @@ const ctrlOptions = require('../Controllers/ctrlOptions')
 const ctrlCharacteristics = require('../Controllers/ctrlCharacteristics')
 
 router.get('/',pages.admin.dashboard)
-router.get('/guests',pages.staff.users)
+router.get('/users',pages.staff.users)
 router.get('/rooms',pages.staff.rooms)
 router.get('/questions',pages.staff.questions)
 router.get('/characteristics',pages.admin.characteristics)

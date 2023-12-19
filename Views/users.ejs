@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guests</title>
+    <title>Users</title>
     <link rel="stylesheet" href="/CSS/dashboard.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,600" />
 
@@ -22,11 +22,11 @@
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 my-3">
             <div class="container">
                 <div class="title-strap">
-                    <h2>Basma's guests</h2>
+                    <h2>Basma's Users</h2>
                 </div>
                 <div class="row justify-content-end mb-3">
                     <div class="col-auto">
-                        <button class="btn btn-success" onclick="addGuestRow()">Add Guest</button>
+                        <button class="btn btn-success" onclick="addGuestRow()">Add User</button>
                     </div>
                     <div class="col-auto" id="saveButtonContainer" style="display: none;">
                         <button id="saveButton" class="btn btn-primary" onclick="saveGuestRow()">Save</button>
@@ -48,7 +48,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <% guests.forEach(function(guest) { %>
+                            <% users.forEach(function(guest) { %>
                                 <tr>
                                     <td><input type="text" class="form-control" value="<%= guest.firstName %>" readonly>
                                     </td>
@@ -71,8 +71,10 @@
                                         <div class="btn-group" role="group">
                                             <button class="btn btn-primary" style="margin-right: 10px;"
                                                 onclick="toggleReadOnly(this)">Edit</button>
-                                            <button class="btn btn-danger"
-                                                onclick="deleteGuestRow(this)">Delete</button>
+                                                <form method="post" action="/admin/removeUser" >
+                                                    <input type="hidden" name="email" value="<%= guest.email %>" >
+                                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                                </form>
                                         </div>
                                     </td>
                                 </tr>
@@ -85,7 +87,7 @@
         </main>
         </div>
         </div>
-        <script src="/JS/guests.js"></script>
+        <script src="/JS/users.js"></script>
 </body>
 
 </html>

@@ -20,6 +20,27 @@
 
 <body>
     <%- include("./Partials/dashPartial.ejs") %>
+    <%
+    let staff = []
+    let guests = []
+    for(let i = 0; i < users.length; i++){
+        if(users[i].role == "Guest"){
+            guests.push(users[i])
+        }else{
+            staff.push(users[i])
+        }
+    }
+    let profit =0;
+    let ongoing = 0 
+    const currentDate = new Date()
+    for(let i = 0; i < reservations.length; i++){
+        profit += reservations[i].price
+         if (currentDate < reservations[i].departureDate)
+            ongoing++
+    }
+    
+
+    %>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 my-3">
             <div class="card-list">
                 <div class="row">
@@ -27,32 +48,28 @@
                         <div class="card blue">
                             <div class="title">All Bookings</div>
                             <i class="zmdi zmdi-upload"></i>
-                            <div class="value">89</div>
-                            <div class="stat"><b>13</b>% increase</div>
+                            <div class="value"><%=reservations.length%></div>
                         </div>
                     </div>
                     <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
                         <div class="card green">
-                            <div class="title">team members</div>
+                            <div class="title">Staff members</div>
                             <i class="zmdi zmdi-upload"></i>
-                            <div class="value">5,990</div>
-                            <div class="stat"><b>4</b>% increase</div>
+                            <div class="value"><%=staff.length%></div>
                         </div>
                     </div>
                     <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
                         <div class="card purple">
-                            <div class="title">total budget</div>
+                            <div class="title">Total profit</div>
                             <i class="zmdi zmdi-download"></i>
-                            <div class="value">$80,990</div>
-                            <div class="stat"><b>13</b>% decrease</div>
+                            <div class="value">$<%=profit%></div>
                         </div>
                     </div>
                     <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
                         <div class="card red">
-                            <div class="title">new customers</div>
+                            <div class="title">Registered guests</div>
                             <i class="zmdi zmdi-download"></i>
-                            <div class="value">3</div>
-                            <div class="stat"><b>13</b>% decrease</div>
+                            <div class="value"><%=guests.length%></div>
                         </div>
                     </div>
                 </div>
@@ -61,7 +78,7 @@
                 <div class="reservations-inner">
                     <header class="reservations-header">
                         <div class="title">Ongoing Booking</div>
-                        <div class="count">| <%- reservations.length %> Bookings</div>
+                        <div class="count">| <%- ongoing %> Bookings</div>
                         <i class="zmdi zmdi-download"></i>
                     </header>
                     <table class="projects-table">

@@ -36,34 +36,33 @@ const privacy = (req, res) => {
   });
 };
 const dashboard = async (req, res) => {
-  if (
-    req.session.user != null &&
-    (req.session.user.role == "Staff" || req.session.user.role == "Admin")
-  ) {
-    res.render("dashboard", {
-      layout: false,
-      user: req.session.user,
-      reservations:
-        (await ctrlReservations.staff.getReservations(req, res)) || [],
-      options: (await ctrlOptions.admin.getOptions(req, res)) || [],
-    });
-  } else res.redirect("/user/login");
+  if(req.session.user != null && (req.session.user.role =="Staff" || req.session.user.role =="Admin")){
+  res.render("dashboard", {
+    layout: false,
+    user: req.session.user ,
+    reservations: await ctrlReservations.staff.getReservations(req, res) || [],
+    users: await ctrlUsers.admin.getAllUsers(req, res) || [],
+  });
+  }
+  else res.redirect("/user/login")
 };
 const users = async (req, res) => {
-  if (req.session.user != null && req.session.user.role == "Admin") {
-    res.render("guests", {
+  if(req.session.user != null && req.session.user.role =="Admin"){
+    res.render("users", {
       layout: false,
       user: req.session.user,
-      guests: (await ctrlUsers.admin.getAllUsers(req, res)) || [],
-    });
-  } else if (req.session.user != null && req.session.user.role == "Staff") {
-    res.render("guests", {
-      layout: false,
-      user: req.session.user,
-      guests: (await ctrlUsers.staff.getAllGuests(req, res)) || [],
-    });
-  } else res.redirect("/user/login");
-};
+      users: await ctrlUsers.admin.getAllUsers(req, res) || [],
+    })
+  }
+    else if (req.session.user != null && req.session.user.role =="Staff"){
+      res.render("guests", {
+        layout: false,
+        user: req.session.user,
+        guests: await ctrlUsers.staff.getAllGuests(req, res) || [],
+      })
+    }
+    else res.redirect("/user/login")
+}
 
 const options = async (req, res) => {
   if (

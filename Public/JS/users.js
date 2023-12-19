@@ -51,25 +51,58 @@ function saveGuestRow() {
   var email = lastRow.cells[2].querySelector("input").value;
   var password = lastRow.cells[3].querySelector("input").value;
   var phone = lastRow.cells[4].querySelector("input").value;
+  var role = lastRow.cells[5].querySelector("input").value;
+  var bio = lastRow.cells[6].querySelector("input").value;
+  var address = lastRow.cells[7].querySelector("input").value;
 
-  // Check if all fields are filled
-  if (firstName && lastName && email && password && phone) {
-    // You can now save the data or perform any other actions with the data
-    console.log("Saving guest data:");
-    console.log("First Name: " + firstName);
-    console.log("Last Name: " + lastName);
-    console.log("Email: " + email);
-    console.log("Password: " + password);
-    console.log("Phone: " + phone);
-
-    // Hide the Save button container after saving
-    document.getElementById("saveButtonContainer").style.display = "none";
-
-    // Make the fields read-only
-    makeFieldsReadOnly(lastRow.cells);
-
-    // Clear the error message
+  if (firstName && lastName && email && password && phone && role) {
     document.getElementById("errorMessage").innerHTML = "";
+    var form = document.createElement('form');
+    form.style.visibility = 'hidden';
+    form.method = 'post';
+    form.action = '/admin/addUser';
+    var input1 = document.createElement('input');
+    input1.type = 'hidden';
+    input1.name = 'firstName';
+    input1.value = firstName; 
+    form.appendChild(input1);
+    var input2 = document.createElement('input');
+    input2.type = 'hidden';
+    input2.name = 'lastName';
+    input2.value = lastName; 
+    form.appendChild(input2);
+    var input3 = document.createElement('input');
+    input3.type = 'hidden';
+    input3.name = 'email';
+    input3.value = email; 
+    form.appendChild(input3);
+    var input4 = document.createElement('input');
+    input4.type = 'hidden';
+    input4.name = 'password';
+    input4.value = password; 
+    form.appendChild(input4);
+    var input5 = document.createElement('input');
+    input5.type = 'hidden';
+    input5.name = 'phoneNumber';
+    input5.value = phone; 
+    form.appendChild(input5);
+    var input6 = document.createElement('input');
+    input6.type = 'hidden';
+    input6.name = 'role';
+    input6.value = role; 
+    form.appendChild(input6);
+    var input7 = document.createElement('input');
+    input7.type = 'hidden';
+    input7.name = 'bio';
+    input7.value = bio; 
+    form.appendChild(input7);
+    var input8 = document.createElement('input');
+    input8.type = 'hidden';
+    input8.name = 'address';
+    input8.value = address; 
+    form.appendChild(input8);
+    document.body.appendChild(form);
+    form.submit();
   } else {
     document.getElementById("errorMessage").innerHTML =
       "Please fill in all fields before saving.";
@@ -86,26 +119,6 @@ function deleteGuestRow(button) {
   // Show the Save button container
   enableSaveButton();
 }
-
-// function toggleReadOnly(button) {
-//   var row = button.closest("tr");
-//   var cells = row.cells;
-
-//   for (var i = 0; i < cells.length - 1; i++) {
-//     var input = cells[i].querySelector("input");
-//     input.readOnly = !input.readOnly;
-//   }
-
-//   // Show the Save button container
-//   enableSaveButton();
-// }
-
-// function makeFieldsReadOnly(cells) {
-//   for (var i = 0; i < cells.length - 1; i++) {
-//     var input = cells[i].querySelector("input");
-//     input.readOnly = true;
-//   }
-// }
 
 function enableSaveButton() {
   var table = document.getElementById("guestTable");
