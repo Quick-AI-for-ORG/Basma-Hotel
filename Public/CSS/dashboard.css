@@ -12,6 +12,10 @@ body {
   margin: 0;
   background-repeat: no-repeat;
 }
+.table-container {
+  overflow-y: auto;
+}
+
 /* .row:not(.exclude-tables) {
   background-color: #dd00ff4c;
 } */
@@ -362,6 +366,7 @@ tr:hover {
 }
 
 .reservations-header {
+  border-radius: 8px;
   background-color: #ffffff9a;
   border-bottom: 1px solid #ddd;
   padding: 10px;

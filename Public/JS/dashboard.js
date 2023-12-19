@@ -2,7 +2,11 @@ function addReservationRow(optionst) {
   var tableBody = document.querySelector(".projects-table tbody");
 
   var newRow = tableBody.insertRow();
+  // var maxWidth = "1500%";
+  newRow.style.maxWidth = "55%";
+  // var tableContainer = document.querySelector(".table-container");
 
+  // tableContainer.style.maxWidth = maxWidth;
   var placeholders = [
     "Room Title",
     "Guest Email",
@@ -14,10 +18,23 @@ function addReservationRow(optionst) {
     "Payment Status",
     "Options",
   ];
-  const options = JSON.parse(optionst)
+  var cellWidths = [
+    "8%", // Room Title
+    "8%", // Guest Email
+    "8%", // Arrival Date
+    "8%", // Departure Date
+    "8%", // Price
+    "8%", // Adults
+    "8%", // Children
+    "8%", // Payment Status
+    "8%", // Options
+  ];
+
+  const options = JSON.parse(optionst);
   for (var i = 0; i < placeholders.length; i++) {
     var cell = newRow.insertCell(i);
-    if(placeholders[i]=="Options"){
+    cell.style.width = cellWidths[i];
+    if (placeholders[i] == "Options") {
       var selectElement = document.createElement("select");
       selectElement.name = "options";
       selectElement.classList.add("form-control", "dropdown-content");
@@ -31,7 +48,7 @@ function addReservationRow(optionst) {
       cell.appendChild(selectElement);
       continue;
     }
-    if(placeholders[i]=="Payment Status"){
+    if (placeholders[i] == "Payment Status") {
       var selectElement = document.createElement("select");
       selectElement.classList.add("form-control", "dropdown-content");
       selectElement.multiple = false;
@@ -47,7 +64,7 @@ function addReservationRow(optionst) {
       selectElement.name = "paid";
       continue;
     }
-    if(placeholders[i]== "Arrival Date" ){
+    if (placeholders[i] == "Arrival Date") {
       var input = document.createElement("input");
       input.type = "date";
       input.name = "arrivalDate";
@@ -55,7 +72,7 @@ function addReservationRow(optionst) {
       cell.appendChild(input);
       continue;
     }
-    if(placeholders[i]== "Departure Date" ){
+    if (placeholders[i] == "Departure Date") {
       var input = document.createElement("input");
       input.type = "date";
       input.name = "departureDate";
@@ -63,10 +80,10 @@ function addReservationRow(optionst) {
       cell.appendChild(input);
       continue;
     }
-    if(placeholders[i]=="Price"){
-     cell.innerHTML = "Automatically Calculated"
+    if (placeholders[i] == "Price") {
+      cell.innerHTML = "Automatically Calculated";
     }
-    if(placeholders[i]=="Adults"){
+    if (placeholders[i] == "Adults") {
       var input = document.createElement("input");
       input.type = "number";
       input.name = "numberOfAdults";
@@ -74,7 +91,7 @@ function addReservationRow(optionst) {
       cell.appendChild(input);
       continue;
     }
-    if(placeholders[i]=="Children"){
+    if (placeholders[i] == "Children") {
       var input = document.createElement("input");
       input.type = "number";
       input.name = "numberOfChildren";
@@ -82,7 +99,7 @@ function addReservationRow(optionst) {
       cell.appendChild(input);
       continue;
     }
-    if(placeholders[i]=="Guest Email"){
+    if (placeholders[i] == "Guest Email") {
       var input = document.createElement("input");
       input.type = "email";
       input.name = "guestEmail";
@@ -90,7 +107,7 @@ function addReservationRow(optionst) {
       cell.appendChild(input);
       continue;
     }
-    if(placeholders[i]=="Room Title"){
+    if (placeholders[i] == "Room Title") {
       var input = document.createElement("input");
       input.type = "text";
       input.name = "roomTitle";
@@ -98,7 +115,8 @@ function addReservationRow(optionst) {
       cell.appendChild(input);
       continue;
     }
-   
+    var tableContainer = document.querySelector(".table-container");
+    tableContainer.style.maxWidth = "100%";
   }
 
   var actionsCell = newRow.insertCell(placeholders.length);
@@ -156,10 +174,10 @@ function toggleReadOnly(button) {
       input.readOnly = !input.readOnly;
     }
   });
-  button.style.display = 'none';
-  var saveButton = row.querySelector('.btn-success');
+  button.style.display = "none";
+  var saveButton = row.querySelector(".btn-success");
   if (saveButton) {
-    saveButton.style.display = 'block';
+    saveButton.style.display = "block";
   }
 }
 
@@ -170,7 +188,7 @@ function enableSaveButton() {
   var enableSave = Array.from(rows).some((row) => {
     var cells = row.cells;
     return Array.from(cells)
-      .slice(0, -1) 
+      .slice(0, -1)
       .some((cell) => !cell.querySelector("input").readOnly);
   });
 
