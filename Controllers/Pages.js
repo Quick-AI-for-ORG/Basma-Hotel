@@ -40,7 +40,7 @@ const dashboard = async (req, res) => {
   res.render("dashboard", {
     layout: false,
     user: req.session.user ,
-    reservations: await ctrlReservations.staff.getReservations(req, res),
+    reservations: await ctrlReservations.staff.getReservations(req, res) || [],
   });
   }
   else res.redirect("/user/login")
@@ -50,14 +50,14 @@ const users = async (req, res) => {
     res.render("guests", {
       layout: false,
       user: req.session.user,
-      guests: await ctrlUsers.admin.getAllUsers(req, res),
+      guests: await ctrlUsers.admin.getAllUsers(req, res) || [],
     })
   }
     else if (req.session.user != null && req.session.user.role =="Staff"){
       res.render("guests", {
         layout: false,
         user: req.session.user,
-        guests: await ctrlUsers.staff.getAllGuests(req, res),
+        guests: await ctrlUsers.staff.getAllGuests(req, res) || [],
       })
     }
     else res.redirect("/user/login")
@@ -68,7 +68,7 @@ const options = async (req, res) => {
   res.render("options", {
     layout: false,
     user: req.session.user,
-    options: await ctrlOptions.admin.getOptions(req, res),
+    options: await ctrlOptions.admin.getOptions(req, res) || [ ],
   });
 }
 else res.redirect("/user/login")
@@ -80,7 +80,7 @@ const rooms = async (req, res) => {
     res.render("rooms", {
       layout: false,
       user: req.session.user,
-      rooms: await ctrlRooms.admin.getRoomsAndCharacteristics(req, res),
+      rooms: await ctrlRooms.admin.getRoomsAndCharacteristics(req, res) || [],
     });
   }
   else res.redirect("/user/login")
@@ -90,7 +90,7 @@ const characteristics = async (req, res) => {
     res.render("charecteristics", {
       layout: false,
       user: req.session.user,
-      characteristics: await ctrlCharacteristics.admin.getCharacteristics(req, res)
+      characteristics: await ctrlCharacteristics.admin.getCharacteristics(req, res) || []
     });
   }
   else res.redirect("/user/login")
