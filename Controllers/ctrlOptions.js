@@ -1,6 +1,6 @@
 const Option = require('../Models/Option.js');
 const Admin = require('../Models/Admin.js');
-
+const User = require('../Models/User.js');
 const addOption = async(req,res)=>{
     if(req.session.user != null && req.session.user.role === 'Admin'){
         const admin = new Admin(await User.get(req.session.user.email))
