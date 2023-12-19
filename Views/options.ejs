@@ -43,21 +43,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <% options.forEach(function(option) { %>
+                            <%let i =0;options.forEach(function(option) { i++;%>
                                 <tr>
+                                    
                                     <td><input type="text" class="form-control" value="<%= option.option %>" readonly>
                                     </td>
                                     <td><input type="text" class="form-control" value="<%= option.price %>" readonly>
                                     </td>
-
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <button class="btn btn-primary" style="margin-right: 10px;"
+                                            <form method="post" action="/admin/removeOption" >
+                                                <input type="hidden" name="option" value="<%= option.option %>" >  
+                                                
+                                            <button type ='submit' class="btn btn-primary" style="margin-right: 10px;"
                                                 onclick="toggleReadOnly(this)">Edit</button>
-                                            <button class="btn btn-danger"
-                                                onclick="deleteOptionRow(this)">Delete</button>
+                                                <form method="post" action="/admin/removeOption" >
+                                                    <input type="hidden" name="option" value="<%= option.option %>" >
+                                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                                </form>
+                                            
                                         </div>
                                     </td>
+                                    
                                 </tr>
                                 <% }); %>
                         </tbody>

@@ -24,8 +24,8 @@ class Option {
     modifiedOption.id = record.id
     return modifiedOption
   }
-  static async remove(option){
-    await Option.crudInterface.remove(option,optionModel,"option") 
+  static async remove(id){
+    await Option.crudInterface.remove(id,optionModel,"id") 
     return null
   }
   static async get(option){
