@@ -37,7 +37,7 @@ function addGuestRow() {
     "</div>";
 
   // Show the Save button container
-  document.getElementById("saveButtonContainer").style.display = "block";
+  enableSaveButton();
 }
 
 function saveGuestRow() {
@@ -107,11 +107,17 @@ function saveGuestRow() {
     document.getElementById("errorMessage").innerHTML =
       "Please fill in all fields before saving.";
   }
+
+  // Show the Save button container
+  enableSaveButton();
 }
 
 function deleteGuestRow(button) {
   var row = button.closest("tr");
   row.parentNode.removeChild(row);
+
+  // Show the Save button container
+  enableSaveButton();
 }
 
 function toggleReadOnly(button) {
@@ -122,6 +128,9 @@ function toggleReadOnly(button) {
     var input = cells[i].querySelector("input");
     input.readOnly = !input.readOnly;
   }
+
+  // Show the Save button container
+  enableSaveButton();
 }
 
 function makeFieldsReadOnly(cells) {
@@ -129,4 +138,30 @@ function makeFieldsReadOnly(cells) {
     var input = cells[i].querySelector("input");
     input.readOnly = true;
   }
+}
+
+function enableSaveButton() {
+  var table = document.getElementById("guestTable");
+  var rows = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+  // Check if there is at least one editable field in any row
+  var enableSave = false;
+  for (var i = 0; i < rows.length; i++) {
+    var cells = rows[i].cells;
+    for (var j = 0; j < cells.length - 1; j++) {
+      var input = cells[j].querySelector("input");
+      if (!input.readOnly) {
+        enableSave = true;
+        break;
+      }
+    }
+    if (enableSave) {
+      break;
+    }
+  }
+
+  // Show or hide the Save button container based on the flag
+  document.getElementById("saveButtonContainer").style.display = enableSave
+    ? "block"
+    : "none";
 }

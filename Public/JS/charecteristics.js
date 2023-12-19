@@ -37,7 +37,19 @@ function saveCharacteristicRow() {
 
   var characteristic = lastRow.cells[0].querySelector("input").value;
   var iconInput = lastRow.cells[1].querySelector("input");
-  var icon = iconInput.value;
+  var icon = "";
+
+  if (iconInput) {
+    icon = iconInput.value;
+  } else {
+    // If the icon input is not found, it might have been dynamically created during editing
+    var iconElement = lastRow.cells[1].querySelector("i");
+    if (iconElement) {
+      // Extract the icon class from the dynamically created <i> element
+      var iconClasses = iconElement.className.split(" ");
+      icon = iconClasses.find((cls) => cls.startsWith("fa-")).substring(3);
+    }
+  }
 
   if (characteristic && icon) {
     document.getElementById("errorMessage").innerHTML = "";
@@ -83,4 +95,48 @@ function makeFieldsReadOnly(cells) {
     var input = cells[i].querySelector("input");
     input.readOnly = true;
   }
+}
+
+function toggleReadOnly(button) {
+  var row = button.closest("tr");
+  var cells = row.cells;
+
+  for (var i = 0; i < cells.length - 2; i++) {
+    var input = cells[i].querySelector("input");
+
+    if (input) {
+      input.readOnly = !input.readOnly;
+      console.log(
+        "Input field " + (i + 1) + " is now read-only: " + input.readOnly
+      );
+    } else {
+      console.log("No input field found in cell " + (i + 1));
+    }
+  }
+
+  // Toggle the read-only state for the icon input field
+  var iconCell = cells[1];
+  var iconInput = iconCell.querySelector("input");
+  if (iconInput) {
+    iconInput.readOnly = !iconInput.readOnly;
+    console.log("Icon field is now read-only: " + iconInput.readOnly);
+  } else {
+    // If no icon input field found, create one
+    var iconInput = document.createElement("input");
+    iconInput.type = "text";
+    iconInput.className = "form-control";
+    iconInput.style = "font-size: large;";
+    iconInput.placeholder = "Icon";
+    iconCell.innerHTML = "";
+    iconCell.appendChild(iconInput);
+  }
+
+  // Show the "Save" button container when fields are editable
+  var saveButtonContainer = document.getElementById("saveButtonContainer");
+  saveButtonContainer.style.display = Array.from(cells).some((cell) => {
+    var input = cell.querySelector("input");
+    return input && !input.readOnly;
+  })
+    ? "block"
+    : "none";
 }
